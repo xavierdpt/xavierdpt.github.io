@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 
-const RANDOM = true;
+const RANDOM = false;
 const WIDTH = 601;
 const HEIGHT = 601;
 const CELL_SIZE = 1;
@@ -9,7 +9,7 @@ const CELL_SIZE = 1;
 const directions = [
   [-1, 0], // right
   [0, 1], // down
-  [-1, 0], // left
+  [1, 0], // left
   [0, -1], // up
 ];
 
@@ -22,7 +22,7 @@ const DOWN = 1;
 const LEFT = 2;
 const UP = 3;
 
-const INSTRUCTIONS = 100;
+let INSTRUCTIONS = 1;
 const MAX_INSTRUCTION_COUNT = 100000;
 const PAUSE = 1;
 
@@ -42,24 +42,35 @@ const initializeProgramState = () => ({
   ),
 });
 
+let actionChoices = [];
+let currentActionChoice = null;
+
+const initializePossibleActions = () => {
+  const possibleActions = [];
+  for (const direction of [RIGHT, DOWN, LEFT, UP]) {
+    for (const color of [BLACK, WHITE]) {
+      for (let instruction = 0; instruction < INSTRUCTIONS; ++instruction) {
+        possibleActions.push({ direction, color, instruction });
+      }
+    }
+  }
+  actionChoices = [];
+  currentActionChoice = null;
+  return possibleActions;
+};
+
 let program = initializeProgram();
 let programState = initializeProgramState();
 
-const possibleActions = [];
-for (const direction of [RIGHT, DOWN, LEFT, UP]) {
-  for (const color of [BLACK, WHITE]) {
-    for (let instruction = 0; instruction < INSTRUCTIONS; ++instruction) {
-      possibleActions.push({ direction, color, instruction });
-    }
-  }
-}
-const actionChoices = [];
-let currentActionChoice = null;
+let possibleActions = initializePossibleActions();
+
 const previousGrids = [];
 const previousGridsColors = "123456789ABCDEF"
   .split("")
   .map((d) => `#${d}${d}${d}${d}${d}${d}`);
 let context = null;
+
+const INSTRUCTIONS_EXHAUSTED = "INSTRUCTIONS_EXHAUSTED";
 
 // This creates an action, reusing the choices done by the previous program
 const createAction = () => {
@@ -77,14 +88,27 @@ const createAction = () => {
   } else {
     // we increment this action choice only in all the next action choices are maxxed
     let maxxed = true;
-    for (let i = currentActionChoice + 1; i < actionChoices.length; ++i) {
-      if (actionChoices[i] !== possibleActions.length - 1) {
+    console.log(actionChoices);
+    if (currentActionChoice < actionChoices.length - 1) {
+      for (let i = currentActionChoice + 1; i < actionChoices.length; ++i) {
+        if (actionChoices[i] !== possibleActions.length - 1) {
+          maxxed = false;
+        }
+      }
+    } else {
+      if (actionChoices[currentActionChoice] !== possibleActions.length - 1) {
         maxxed = false;
       }
     }
     if (maxxed) {
+      if (currentActionChoice === 0) {
+        return INSTRUCTIONS_EXHAUSTED;
+      } else {
+        ++actionChoices[currentActionChoice];
+        actionChoices.splice(currentActionChoice + 1);
+      }
+    } else {
       ++actionChoices[currentActionChoice];
-      actionChoices.splice(currentActionChoice + 1);
     }
   }
   const action = possibleActions[actionChoices[currentActionChoice]];
@@ -121,6 +145,7 @@ class App extends React.Component {
   steps = (nsteps) => {
     let changedCells = {};
     let stopped = false;
+    let instructionsExhausted = false;
     for (let i = 0; i < nsteps; ++i) {
       const stepResult = this.step();
       if (stepResult.cell) {
@@ -129,6 +154,7 @@ class App extends React.Component {
       }
       if (stepResult.stopped) {
         stopped = true;
+        instructionsExhausted = stepResult.instructionsExhausted;
         break;
       }
     }
@@ -142,7 +168,7 @@ class App extends React.Component {
     if (stopped) {
       this.stop(() => {
         setTimeout(() => {
-          this.nextProgram();
+          this.nextProgram(instructionsExhausted);
           this.start();
         }, PAUSE);
       });
@@ -159,6 +185,9 @@ class App extends React.Component {
       action = createAction();
       program[instruction][currentColor] = action;
     }
+    if (action === INSTRUCTIONS_EXHAUSTED) {
+      return { stopped: true, cell: null, instructionsExhausted: true };
+    }
     const nextX = x + directions[action.direction][0];
     const nextY = y + directions[action.direction][1];
     if (
@@ -168,7 +197,7 @@ class App extends React.Component {
       nextY >= HEIGHT ||
       programState.count > MAX_INSTRUCTION_COUNT
     ) {
-      return { stopped: true, cell: null };
+      return { stopped: true, cell: null, instructionsExhausted: false };
     }
     const nextInstruction = action.instruction;
     const colorToWrite = action.color;
@@ -177,9 +206,13 @@ class App extends React.Component {
     programState.y = nextY;
     programState.instruction = nextInstruction;
     ++programState.count;
-    return { cell: { x, y, colorToWrite }, stopped: false };
+    return {
+      cell: { x, y, colorToWrite },
+      stopped: false,
+      instructionsExhausted: false,
+    };
   };
-  nextProgram = () => {
+  nextProgram = (instructionsExhausted) => {
     const previousGrid = programState.grid;
     const gridScore = computeScore(previousGrid, programState.count);
     let better = false;
@@ -225,6 +258,14 @@ class App extends React.Component {
         }
       }
     }
+    if (instructionsExhausted) {
+      ++INSTRUCTIONS;
+      console.log(
+        "Switching to program with " + INSTRUCTIONS + " instructions"
+      );
+      possibleActions = initializePossibleActions();
+    }
+
     program = initializeProgram();
     programState = initializeProgramState();
     currentActionChoice = 0;
