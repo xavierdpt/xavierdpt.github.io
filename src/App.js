@@ -1,9 +1,10 @@
 import React from "react";
 import "./App.css";
 
-const WIDTH = 401;
-const HEIGHT = 401;
-const CELL_SIZE = 2;
+const RANDOM = true;
+const WIDTH = 601;
+const HEIGHT = 601;
+const CELL_SIZE = 1;
 
 const directions = [
   [-1, 0], // right
@@ -12,19 +13,21 @@ const directions = [
   [0, -1], // up
 ];
 
-const WHITE = 0;
-const BLACK = 1;
+const BLANK = 0;
+const WHITE = 1;
+const BLACK = 2;
 
 const RIGHT = 0;
 const DOWN = 1;
 const LEFT = 2;
 const UP = 3;
 
-const INSTRUCTIONS = 5;
-const MAX_INSTRUCTION_COUNT = 1000;
+const INSTRUCTIONS = 100;
+const MAX_INSTRUCTION_COUNT = 100000;
+const PAUSE = 1;
 
 const initializeProgram = () =>
-  Array.from(Array({ length: INSTRUCTIONS }), () => ({
+  Array.from({ length: INSTRUCTIONS }, () => ({
     WHITE: undefined,
     BLACK: undefined,
   }));
@@ -35,7 +38,7 @@ const initializeProgramState = () => ({
   x: Math.floor(WIDTH / 2) + 1,
   y: Math.floor(HEIGHT / 2) + 1,
   grid: Array.from({ length: WIDTH }, () =>
-    Array.from({ length: HEIGHT }, () => 0)
+    Array.from({ length: HEIGHT }, () => BLANK)
   ),
 });
 
@@ -52,11 +55,19 @@ for (const direction of [RIGHT, DOWN, LEFT, UP]) {
 }
 const actionChoices = [];
 let currentActionChoice = null;
-
+const previousGrids = [];
+const previousGridsColors = "123456789ABCDEF"
+  .split("")
+  .map((d) => `#${d}${d}${d}${d}${d}${d}`);
 let context = null;
 
 // This creates an action, reusing the choices done by the previous program
 const createAction = () => {
+  if (RANDOM) {
+    const actionIndex = Math.floor(Math.random() * possibleActions.length);
+    const action = possibleActions[actionIndex];
+    return action;
+  }
   // TODO: handle boundary when everything is maxxed
   if (currentActionChoice === null) {
     currentActionChoice = 0;
@@ -81,31 +92,72 @@ const createAction = () => {
   return action;
 };
 
+const computeScore = (grid, count) => {
+  let score = 0;
+  for (let x = 0; x < WIDTH; ++x) {
+    for (let y = 0; y < HEIGHT; ++y) {
+      if (grid[x][y] !== 0) {
+        ++score;
+      }
+    }
+  }
+  score += 1 - count / MAX_INSTRUCTION_COUNT;
+  return score;
+};
+
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { intervalHandle: null };
   }
   start = () => {
-    this.setState({ intervalHandle: setInterval(this.step, 1) });
+    this.setState({ intervalHandle: setInterval(() => this.steps(1000), 1) });
   };
   stop = (nextFn) => {
     const { intervalHandle } = this.state;
     clearInterval(intervalHandle);
     this.setState({ intervalHandle: null }, nextFn);
   };
+  steps = (nsteps) => {
+    let changedCells = {};
+    let stopped = false;
+    for (let i = 0; i < nsteps; ++i) {
+      const stepResult = this.step();
+      if (stepResult.cell) {
+        changedCells[`${stepResult.cell.x}-${stepResult.cell.y}`] =
+          stepResult.cell;
+      }
+      if (stepResult.stopped) {
+        stopped = true;
+        break;
+      }
+    }
+    for (const k in changedCells) {
+      const x = changedCells[k].x;
+      const y = changedCells[k].y;
+      const colorToWrite = changedCells[k].colorToWrite;
+      context.fillStyle = colorToWrite === BLACK ? "black" : "white";
+      context.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+    }
+    if (stopped) {
+      this.stop(() => {
+        setTimeout(() => {
+          this.nextProgram();
+          this.start();
+        }, PAUSE);
+      });
+    }
+  };
   step = () => {
     const { instruction, x, y, grid } = programState;
-    const currentColor = grid[x][y];
-    let reRender = false;
+    let currentColor = grid[x][y];
+    if (currentColor === BLANK) {
+      currentColor = WHITE;
+    }
     let action = program[instruction][currentColor];
     if (action === undefined) {
       action = createAction();
       program[instruction][currentColor] = action;
-      if (program[action.instruction] === undefined) {
-        program.push({ [WHITE]: undefined, [BLACK]: undefined });
-      }
-      reRender = true;
     }
     const nextX = x + directions[action.direction][0];
     const nextY = y + directions[action.direction][1];
@@ -116,30 +168,63 @@ class App extends React.Component {
       nextY >= HEIGHT ||
       programState.count > MAX_INSTRUCTION_COUNT
     ) {
-      console.log("Stop (" + programState.count + ")");
-      this.stop(() => {
-        this.nextProgram();
-        this.start();
-      });
-      return;
+      return { stopped: true, cell: null };
     }
     const nextInstruction = action.instruction;
     const colorToWrite = action.color;
-    context.fillStyle = colorToWrite === WHITE ? "white" : "black";
-    context.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
     grid[x][y] = action.color;
     programState.x = nextX;
     programState.y = nextY;
     programState.instruction = nextInstruction;
     ++programState.count;
-    if (reRender) {
-      this.forceUpdate();
-    }
+    return { cell: { x, y, colorToWrite }, stopped: false };
   };
   nextProgram = () => {
-    console.log("Next");
+    const previousGrid = programState.grid;
+    const gridScore = computeScore(previousGrid, programState.count);
+    let better = false;
+    if (previousGrids.length === 0) {
+      better = true;
+    } else {
+      for (const previousGrid of previousGrids) {
+        if (previousGrid.score < gridScore) {
+          better = true;
+        }
+      }
+    }
+    if (better) {
+      console.log(JSON.stringify(program, null, 2));
+      if (previousGrids.length === previousGridsColors.length) {
+        previousGrids.splice(previousGrids.length - 1);
+      }
+      previousGrids.unshift({ grid: previousGrid, score: gridScore });
+      console.log("High scores");
+      console.group();
+      const hexdigits = "123456789ABCDEF".split("");
+      for (let gidx = 0; gidx < previousGrids.length; ++gidx) {
+        console.log(`${hexdigits[gidx]} - ${previousGrids[gidx].score}`);
+      }
+      console.groupEnd();
+    }
     context.fillStyle = "white";
     context.fillRect(0, 0, WIDTH * CELL_SIZE, HEIGHT * CELL_SIZE);
+    for (let gridIdx = previousGrids.length - 1; gridIdx >= 0; --gridIdx) {
+      const grid = previousGrids[gridIdx].grid;
+      const color = previousGridsColors[gridIdx];
+      context.fillStyle = color;
+      for (let x = 0; x < WIDTH; ++x) {
+        for (let y = 0; y < HEIGHT; ++y) {
+          if (grid[x][y]) {
+            context.fillRect(
+              x * CELL_SIZE,
+              y * CELL_SIZE,
+              CELL_SIZE,
+              CELL_SIZE
+            );
+          }
+        }
+      }
+    }
     program = initializeProgram();
     programState = initializeProgramState();
     currentActionChoice = 0;
@@ -152,7 +237,30 @@ class App extends React.Component {
     const { intervalHandle } = this.state;
     return (
       <div className="App">
-        <div>Welcome</div>
+        <p>
+          This is 2D Black and White Turing Machine simulator on a non-toroidal
+          grid
+        </p>
+        <p>
+          It randomly generates 2D Turing programs by choosing a random action
+          among the possible actions every time the machine does not know what
+          to do.
+        </p>
+        <p>Max number of instructions: {INSTRUCTIONS}</p>
+        <p>Max computation horizon: {MAX_INSTRUCTION_COUNT}</p>
+        <p>
+          Score: number of cells written on the grid, and speed at which these
+          cells were written in the fractional part
+        </p>
+        <p>
+          The last best computation shadows are displayed in shades of gray.
+        </p>
+        <p>
+          If you find a 2D Turing machine that grows in the center and gradually
+          fills the space, without going to the infinite left, right, top or
+          bottom, that would be a good one.
+        </p>
+        <p>Some info is dumped in the developer console</p>
         <div>
           <canvas
             id="canvas"
@@ -162,7 +270,7 @@ class App extends React.Component {
         </div>
         <div>
           <button disabled={!!intervalHandle} onClick={this.start}>
-            Draw canvas
+            Start
           </button>
           <button disabled={!intervalHandle} onClick={() => this.stop()}>
             Stop
@@ -170,7 +278,6 @@ class App extends React.Component {
           <button disabled={!!intervalHandle} onClick={this.nextProgram}>
             Next
           </button>
-          <pre>{JSON.stringify({ program, actionChoices }, null, 2)}</pre>
         </div>
       </div>
     );
