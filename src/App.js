@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 
-const RANDOM = false;
+const RANDOM = true;
 const WIDTH = 601;
 const HEIGHT = 601;
 const CELL_SIZE = 1;
@@ -22,7 +22,7 @@ const DOWN = 1;
 const LEFT = 2;
 const UP = 3;
 
-let INSTRUCTIONS = 1;
+let INSTRUCTIONS = 100;
 const MAX_INSTRUCTION_COUNT = 100000;
 const PAUSE = 1;
 
