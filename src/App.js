@@ -22,8 +22,8 @@ const DOWN = 1;
 const LEFT = 2;
 const UP = 3;
 
-let INSTRUCTIONS = 100;
-const MAX_INSTRUCTION_COUNT = 100000;
+let INSTRUCTIONS = 20;
+const MAX_INSTRUCTION_COUNT = 100_000;
 const PAUSE = 1;
 
 const initializeProgram = () =>
