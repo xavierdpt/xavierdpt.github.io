@@ -1,11 +1,6 @@
 import React from "react";
 import "./App.css";
 
-const RANDOM = true;
-const WIDTH = 601;
-const HEIGHT = 601;
-const CELL_SIZE = 1;
-
 const directions = [
   [-1, 0], // right
   [0, 1], // down
@@ -13,43 +8,59 @@ const directions = [
   [0, -1], // up
 ];
 
-const BLANK = 0;
-const WHITE = 1;
-const BLACK = 2;
+const WHITE = 0;
+const BLACK = 1;
 
 const RIGHT = 0;
 const DOWN = 1;
 const LEFT = 2;
 const UP = 3;
 
-let INSTRUCTIONS = 20;
-const MAX_INSTRUCTION_COUNT = 100_000;
-const PAUSE = 1;
-
-const initializeProgram = () =>
-  Array.from({ length: INSTRUCTIONS }, () => ({
+const initializeProgram = (instructions) =>
+  Array.from({ length: instructions }, () => ({
     WHITE: undefined,
     BLACK: undefined,
   }));
 
-const initializeProgramState = () => ({
-  instruction: 0,
-  count: 0,
-  x: Math.floor(WIDTH / 2) + 1,
-  y: Math.floor(HEIGHT / 2) + 1,
-  grid: Array.from({ length: WIDTH }, () =>
-    Array.from({ length: HEIGHT }, () => BLANK)
-  ),
+const getDimensions = (gridSize) => ({
+  width: gridSize * 2 + 1,
+  height: gridSize * 2 + 1,
 });
+
+const initializeProgramState = (gridSize, numberOfOuterWalls) => {
+  const { width, height } = getDimensions(gridSize);
+  const grid = Array.from({ length: width }, () =>
+    Array.from({ length: height }, () => ({ color: WHITE, pristine: true }))
+  );
+  for (let widx = 0; widx < numberOfOuterWalls; ++widx) {
+    // north and south
+    for (let x = 2 * widx; x < width - 2 * widx; ++x) {
+      grid[x][2 * widx].color = BLACK;
+      grid[x][height - 1 - 2 * widx].color = BLACK;
+    }
+    // east and west
+    for (let y = 2 * widx; y < height - 2 * widx; ++y) {
+      grid[2 * widx][y].color = BLACK;
+      grid[width - 1 - 2 * widx][y].color = BLACK;
+    }
+  }
+  return {
+    instruction: 0,
+    count: 0,
+    x: gridSize + 1,
+    y: gridSize + 1,
+    grid,
+  };
+};
 
 let actionChoices = [];
 let currentActionChoice = null;
 
-const initializePossibleActions = () => {
+const initializePossibleActions = (instructions) => {
   const possibleActions = [];
   for (const direction of [RIGHT, DOWN, LEFT, UP]) {
     for (const color of [BLACK, WHITE]) {
-      for (let instruction = 0; instruction < INSTRUCTIONS; ++instruction) {
+      for (let instruction = 0; instruction < instructions; ++instruction) {
         possibleActions.push({ direction, color, instruction });
       }
     }
@@ -59,22 +70,19 @@ const initializePossibleActions = () => {
   return possibleActions;
 };
 
-let program = initializeProgram();
-let programState = initializeProgramState();
-
-let possibleActions = initializePossibleActions();
+let program = null;
+let programState = null;
+let possibleActions = null;
 
 const previousGrids = [];
 const previousGridsColors = "123456789ABCDEF"
   .split("")
   .map((d) => `#${d}${d}${d}${d}${d}${d}`);
-let context = null;
 
 const INSTRUCTIONS_EXHAUSTED = "INSTRUCTIONS_EXHAUSTED";
 
-// This creates an action, reusing the choices done by the previous program
-const createAction = () => {
-  if (RANDOM) {
+const createAction = (random) => {
+  if (random) {
     const actionIndex = Math.floor(Math.random() * possibleActions.length);
     const action = possibleActions[actionIndex];
     return action;
@@ -86,7 +94,6 @@ const createAction = () => {
   if (actionChoices[currentActionChoice] === undefined) {
     actionChoices.push(0);
   } else {
-    // we increment this action choice only in all the next action choices are maxxed
     let maxxed = true;
     console.log(actionChoices);
     if (currentActionChoice < actionChoices.length - 1) {
@@ -116,33 +123,78 @@ const createAction = () => {
   return action;
 };
 
-const computeScore = (grid, count) => {
+const computeScore = (grid, count, width, height, maxInstructionCount) => {
   let score = 0;
-  for (let x = 0; x < WIDTH; ++x) {
-    for (let y = 0; y < HEIGHT; ++y) {
-      if (grid[x][y] !== 0) {
+  for (let x = 0; x < width; ++x) {
+    for (let y = 0; y < height; ++y) {
+      if (!grid[x][y].pristine) {
         ++score;
       }
     }
   }
-  score += 1 - count / MAX_INSTRUCTION_COUNT;
+  score += 1 - count / maxInstructionCount;
   return score;
 };
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { intervalHandle: null };
+    this.state = {
+      intervalHandle: null,
+      pauseHandle: null,
+      instructions: 10,
+      instructionsSteps: 1,
+      maxInstructionCount: 10_000,
+      pauseDuration: 1,
+      gridSize: 150,
+      cellSize: 2,
+      generateRandomActions: true,
+      numberOfOuterWalls: 15,
+      context: null,
+    };
   }
   start = () => {
-    this.setState({ intervalHandle: setInterval(() => this.steps(1000), 1) });
+    const {
+      gridSize,
+      instructions,
+      instructionsSteps,
+      numberOfOuterWalls,
+      cellSize,
+    } = this.state;
+
+    const { width, height } = getDimensions(gridSize);
+    program = initializeProgram(instructions);
+    programState = initializeProgramState(gridSize, numberOfOuterWalls);
+    possibleActions = initializePossibleActions(instructions);
+    // draw initial grid
+
+    const context = this.getContext();
+    context.fillStyle = "black";
+    for (let x = 0; x < width; ++x) {
+      for (let y = 0; y < height; ++y) {
+        if (programState.grid[x][y].color === BLACK) {
+          context.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
+        }
+      }
+    }
+    // start interval
+    this.setState({
+      context,
+      intervalHandle: setInterval(() => this.steps(instructionsSteps), 1),
+    });
   };
   stop = (nextFn) => {
-    const { intervalHandle } = this.state;
-    clearInterval(intervalHandle);
-    this.setState({ intervalHandle: null }, nextFn);
+    const { intervalHandle, pauseHandle } = this.state;
+    if (intervalHandle) {
+      clearInterval(intervalHandle);
+      this.setState({ intervalHandle: null }, nextFn);
+    } else if (pauseHandle) {
+      clearTimeout(pauseHandle);
+      this.setState({ pauseHandle: null });
+    }
   };
   steps = (nsteps) => {
+    const { cellSize, pauseDuration, context } = this.state;
     let changedCells = {};
     let stopped = false;
     let instructionsExhausted = false;
@@ -163,26 +215,30 @@ class App extends React.Component {
       const y = changedCells[k].y;
       const colorToWrite = changedCells[k].colorToWrite;
       context.fillStyle = colorToWrite === BLACK ? "black" : "white";
-      context.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+      context.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
     }
     if (stopped) {
       this.stop(() => {
-        setTimeout(() => {
-          this.nextProgram(instructionsExhausted);
-          this.start();
-        }, PAUSE);
+        this.setState({
+          pauseHandle: setTimeout(() => {
+            this.setState({ pauseHande: null }, () => {
+              this.nextProgram(instructionsExhausted);
+              this.start();
+            });
+          }, pauseDuration),
+        });
       });
     }
   };
   step = () => {
+    const { generateRandomActions, gridSize, maxInstructionCount } = this.state;
     const { instruction, x, y, grid } = programState;
-    let currentColor = grid[x][y];
-    if (currentColor === BLANK) {
-      currentColor = WHITE;
-    }
+    const { width, height } = getDimensions(gridSize);
+    debugger;
+    let currentColor = grid[x][y].color;
     let action = program[instruction][currentColor];
     if (action === undefined) {
-      action = createAction();
+      action = createAction(generateRandomActions);
       program[instruction][currentColor] = action;
     }
     if (action === INSTRUCTIONS_EXHAUSTED) {
@@ -192,16 +248,17 @@ class App extends React.Component {
     const nextY = y + directions[action.direction][1];
     if (
       nextX < 0 ||
-      nextX >= WIDTH ||
+      nextX >= width ||
       nextY < 0 ||
-      nextY >= HEIGHT ||
-      programState.count > MAX_INSTRUCTION_COUNT
+      nextY >= height ||
+      programState.count > maxInstructionCount
     ) {
       return { stopped: true, cell: null, instructionsExhausted: false };
     }
     const nextInstruction = action.instruction;
     const colorToWrite = action.color;
-    grid[x][y] = action.color;
+    grid[x][y].color = colorToWrite;
+    grid[x][y].pristine = false;
     programState.x = nextX;
     programState.y = nextY;
     programState.instruction = nextInstruction;
@@ -213,8 +270,23 @@ class App extends React.Component {
     };
   };
   nextProgram = (instructionsExhausted) => {
+    const {
+      gridSize,
+      cellSize,
+      instructions,
+      maxInstructionCount,
+      numberOfOuterWalls,
+      context,
+    } = this.state;
+    const { width, height } = getDimensions(gridSize);
     const previousGrid = programState.grid;
-    const gridScore = computeScore(previousGrid, programState.count);
+    const gridScore = computeScore(
+      previousGrid,
+      programState.count,
+      width,
+      height,
+      maxInstructionCount
+    );
     let better = false;
     if (previousGrids.length === 0) {
       better = true;
@@ -227,10 +299,17 @@ class App extends React.Component {
     }
     if (better) {
       console.log(JSON.stringify(program, null, 2));
-      if (previousGrids.length === previousGridsColors.length) {
+      previousGrids.unshift({ grid: previousGrid, score: gridScore });
+      previousGrids.sort((g1, g2) => {
+        if (g1.score === g2.score) {
+          return 0;
+        } else {
+          return g1.score < g2.score ? 1 : -1;
+        }
+      });
+      if (previousGrids.length > previousGridsColors.length) {
         previousGrids.splice(previousGrids.length - 1);
       }
-      previousGrids.unshift({ grid: previousGrid, score: gridScore });
       console.log("High scores");
       console.group();
       const hexdigits = "123456789ABCDEF".split("");
@@ -240,85 +319,163 @@ class App extends React.Component {
       console.groupEnd();
     }
     context.fillStyle = "white";
-    context.fillRect(0, 0, WIDTH * CELL_SIZE, HEIGHT * CELL_SIZE);
+    context.fillRect(0, 0, width * cellSize, height * cellSize);
     for (let gridIdx = previousGrids.length - 1; gridIdx >= 0; --gridIdx) {
       const grid = previousGrids[gridIdx].grid;
       const color = previousGridsColors[gridIdx];
       context.fillStyle = color;
-      for (let x = 0; x < WIDTH; ++x) {
-        for (let y = 0; y < HEIGHT; ++y) {
-          if (grid[x][y]) {
-            context.fillRect(
-              x * CELL_SIZE,
-              y * CELL_SIZE,
-              CELL_SIZE,
-              CELL_SIZE
-            );
+      for (let x = 0; x < width; ++x) {
+        for (let y = 0; y < height; ++y) {
+          if (!grid[x][y].pristine) {
+            context.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
           }
         }
       }
     }
     if (instructionsExhausted) {
-      ++INSTRUCTIONS;
       console.log(
-        "Switching to program with " + INSTRUCTIONS + " instructions"
+        "Switching to program with " + (instructions + 1) + " instructions"
       );
-      possibleActions = initializePossibleActions();
+      this.setState({ instructions: instructions + 1 }, () => {
+        const { instructions, gridSize, numberOfOuterWalls } = this.state;
+        possibleActions = initializePossibleActions(instructions);
+        program = initializeProgram(instructions);
+        programState = initializeProgramState(gridSize, numberOfOuterWalls);
+        currentActionChoice = 0;
+      });
+    } else {
+      program = initializeProgram(instructions);
+      programState = initializeProgramState(gridSize, numberOfOuterWalls);
+      currentActionChoice = 0;
     }
-
-    program = initializeProgram();
-    programState = initializeProgramState();
-    currentActionChoice = 0;
   };
-  componentDidMount() {
+  getContext() {
     const canvas = document.querySelector("#canvas");
-    context = canvas.getContext("2d");
+    return canvas.getContext("2d");
   }
   render() {
-    const { intervalHandle } = this.state;
+    const {
+      intervalHandle,
+      pauseHandle,
+      instructions,
+      instructionsSteps,
+      maxInstructionCount,
+      pauseDuration,
+      gridSize,
+      cellSize,
+      generateRandomActions,
+      numberOfOuterWalls,
+    } = this.state;
+    const running = intervalHandle !== null || pauseHandle !== null;
+    const { width, height } = getDimensions(gridSize);
     return (
       <div className="App">
-        <p>
-          This is 2D Black and White Turing Machine simulator on a non-toroidal
-          grid
-        </p>
-        <p>
-          It randomly generates 2D Turing programs by choosing a random action
-          among the possible actions every time the machine does not know what
-          to do.
-        </p>
-        <p>Max number of instructions: {INSTRUCTIONS}</p>
-        <p>Max computation horizon: {MAX_INSTRUCTION_COUNT}</p>
-        <p>
-          Score: number of cells written on the grid, and speed at which these
-          cells were written in the fractional part
-        </p>
-        <p>
-          The last best computation shadows are displayed in shades of gray.
-        </p>
-        <p>
-          If you find a 2D Turing machine that grows in the center and gradually
-          fills the space, without going to the infinite left, right, top or
-          bottom, that would be a good one.
-        </p>
-        <p>Some info is dumped in the developer console</p>
         <div>
-          <canvas
-            id="canvas"
-            width={WIDTH * CELL_SIZE}
-            height={HEIGHT * CELL_SIZE}
+          <label htmlFor="instructions">Number of instructions</label>
+          <input
+            name="instructions"
+            type="number"
+            value={instructions}
+            disabled={running}
+            onChange={(e) =>
+              this.setState({ instructions: Number(e.target.value) })
+            }
           />
         </div>
         <div>
-          <button disabled={!!intervalHandle} onClick={this.start}>
+          <label htmlFor="maxInstructionCount">Max instruction count</label>
+          <input
+            name="maxInstructionCount"
+            type="number"
+            value={maxInstructionCount}
+            disabled={running}
+            onChange={(e) =>
+              this.setState({ maxInstructionCount: Number(e.target.value) })
+            }
+          />
+        </div>
+        <div>
+          <label htmlFor="instructionsSteps">Instructions per step</label>
+          <input
+            name="instructionsSteps"
+            type="number"
+            value={instructionsSteps}
+            disabled={running}
+            onChange={(e) =>
+              this.setState({ instructionsSteps: Number(e.target.value) })
+            }
+          />
+        </div>
+        <div>
+          <label htmlFor="pauseDuration">Pause between runs</label>
+          <input
+            name="pauseDuration"
+            type="number"
+            value={pauseDuration}
+            disabled={running}
+            onChange={(e) => this.setState({ pauseDuration: Number(e.target.value) })}
+          />
+        </div>
+        <div>
+          <label htmlFor="gridSize">Grid size</label>
+          <input
+            name="gridSize"
+            type="number"
+            value={gridSize}
+            disabled={running}
+            onChange={(e) => this.setState({ gridSize: Number(e.target.value) })}
+          />
+        </div>
+        <div>
+          <label htmlFor="cellSize">Cell size</label>
+          <input
+            name="cellSize"
+            type="number"
+            value={cellSize}
+            disabled={running}
+            onChange={(e) => this.setState({ cellSize: Number(e.target.value) })}
+          />
+        </div>
+        <div>
+          <input
+            type="checkbox"
+            name="generateRandomActions"
+            checked={generateRandomActions}
+            onChange={(e) =>
+              this.setState({ generateRandomActions: e.target.checked })
+            }
+          />
+          <label htmlFor="generateRandomActions">Generate random actions</label>
+        </div>
+        <div>
+          <label htmlFor="numberOfOuterWalls">Number of outer walls</label>
+          <input
+            name="numberOfOuterWalls"
+            type="number"
+            value={numberOfOuterWalls}
+            disabled={running}
+            onChange={(e) =>
+              this.setState({ numberOfOuterWalls: Number(e.target.value) })
+            }
+          />
+        </div>
+        <div>
+          <button disabled={running} onClick={this.start}>
             Start
           </button>
-          <button disabled={!intervalHandle} onClick={() => this.stop()}>
+          <button disabled={!running} onClick={() => this.stop()}>
             Stop
           </button>
-          <button disabled={!!intervalHandle} onClick={this.nextProgram}>
+          <button disabled={running} onClick={this.nextProgram}>
             Next
           </button>
+        </div>
+        <div>
+          <canvas
+            id="canvas"
+            width={width * cellSize}
+            height={height * cellSize}
+          />
         </div>
       </div>
     );
