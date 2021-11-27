@@ -161,20 +161,43 @@ const computeScore = (grid, count, width, height, maxInstructionCount) => {
   return score;
 };
 
+const isGood = (action) => {
+  if (action === undefined) {
+    return false;
+  }
+  if (action === INSTRUCTIONS_EXHAUSTED) {
+    return true;
+  }
+  if (action.instruction === 0) {
+    return true;
+  }
+  if (currentActionChoice < actionChoices.length) {
+    return true;
+  }
+  const previous = program[action.instruction - 1];
+  if (
+    previous === undefined ||
+    (previous[WHITE] === undefined && previous[BLACK] === undefined)
+  ) {
+    return false;
+  }
+  return true;
+};
+
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       intervalHandle: null,
       pauseHandle: null,
-      instructions: 10,
+      instructions: 3,
       instructionsSteps: 1,
       maxInstructionCount: 1_000_000,
       pauseDuration: 1,
       gridSize: 150,
       cellSize: 2,
       generateRandomActions: false,
-      numberOfOuterWalls: 1,
+      numberOfOuterWalls: 0,
       context: null,
       increaseSpeed: true,
       currentSpeed: null,
@@ -276,7 +299,9 @@ class App extends React.Component {
     let currentColor = grid[x][y].color;
     let action = program[instruction][currentColor];
     if (action === undefined) {
-      action = createAction(generateRandomActions);
+      while (!isGood(action)) {
+        action = createAction(generateRandomActions);
+      }
       program[instruction][currentColor] = action;
     }
     if (action === INSTRUCTIONS_EXHAUSTED) {
