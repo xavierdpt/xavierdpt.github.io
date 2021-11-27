@@ -56,14 +56,25 @@ const initializeProgramState = (gridSize, numberOfOuterWalls) => {
 let actionChoices = [];
 let currentActionChoice = 0;
 
-const initializePossibleActions = (instructions) => {
-  const possibleActions = [];
+const initializePossibleActions = (instructions, randomize) => {
+  let possibleActions = [];
   for (const direction of [RIGHT, DOWN, LEFT, UP]) {
     for (const color of [BLACK, WHITE]) {
       for (let instruction = 0; instruction < instructions; ++instruction) {
         possibleActions.push({ direction, color, instruction });
       }
     }
+  }
+  if (randomize) {
+    const randomized = [];
+    while (possibleActions.length > 0) {
+      const idx = Math.floor(Math.random() * possibleActions.length);
+      randomized.push(possibleActions[idx]);
+      possibleActions.splice(idx, 1);
+    }
+    possibleActions = randomized;
+    console.log("Randomized possible actions:");
+    console.log(JSON.stringify(possibleActions));
   }
   return possibleActions;
 };
@@ -116,9 +127,6 @@ const createAction = (random) => {
   }
   if (actionChoices[currentActionChoice] === undefined) {
     actionChoices[currentActionChoice] = 0;
-    const action = possibleActions[actionChoices[currentActionChoice]];
-    ++currentActionChoice;
-    return action;
   } else {
     // if all next actions are maxxed, increase this one and remove the remaining actions
     let maxxed = true;
@@ -136,16 +144,12 @@ const createAction = (random) => {
       } else {
         ++actionChoices[currentActionChoice];
         actionChoices.splice(currentActionChoice + 1);
-        const action = possibleActions[actionChoices[currentActionChoice]];
-        ++currentActionChoice;
-        return action;
       }
-    } else {
-      const action = possibleActions[actionChoices[currentActionChoice]];
-      ++currentActionChoice;
-      return action;
     }
   }
+  const action = possibleActions[actionChoices[currentActionChoice]];
+  ++currentActionChoice;
+  return action;
 };
 
 const computeScore = (grid, count, width, height, maxInstructionCount) => {
@@ -159,29 +163,6 @@ const computeScore = (grid, count, width, height, maxInstructionCount) => {
   }
   score += 1 - count / maxInstructionCount;
   return score;
-};
-
-const isGood = (action) => {
-  if (action === undefined) {
-    return false;
-  }
-  if (action === INSTRUCTIONS_EXHAUSTED) {
-    return true;
-  }
-  if (action.instruction === 0) {
-    return true;
-  }
-  if (currentActionChoice < actionChoices.length) {
-    return true;
-  }
-  const previous = program[action.instruction - 1];
-  if (
-    previous === undefined ||
-    (previous[WHITE] === undefined && previous[BLACK] === undefined)
-  ) {
-    return false;
-  }
-  return true;
 };
 
 class App extends React.Component {
@@ -202,9 +183,11 @@ class App extends React.Component {
       increaseSpeed: true,
       currentSpeed: null,
       historyLength: 1,
+      randomizePossibleActions: true,
+      awesome: false,
     };
   }
-  start = () => {
+  start = (isFreshStart) => {
     const {
       gridSize,
       instructions,
@@ -212,12 +195,18 @@ class App extends React.Component {
       cellSize,
       increaseSpeed,
       instructionsSteps,
+      randomizePossibleActions,
     } = this.state;
 
     const { width, height } = getDimensions(gridSize);
     program = initializeProgram(instructions);
     programState = initializeProgramState(gridSize, numberOfOuterWalls);
-    possibleActions = initializePossibleActions(instructions);
+    if (isFreshStart) {
+      possibleActions = initializePossibleActions(
+        instructions,
+        randomizePossibleActions
+      );
+    }
     const context = this.getContext();
     context.fillStyle = "darkgray";
     for (let x = 0; x < width; ++x) {
@@ -285,7 +274,7 @@ class App extends React.Component {
           pauseHandle: setTimeout(() => {
             this.setState({ pauseHande: null }, () => {
               this.nextProgram(instructionsExhausted);
-              this.start();
+              this.start(false);
             });
           }, pauseDuration),
         });
@@ -299,9 +288,7 @@ class App extends React.Component {
     let currentColor = grid[x][y].color;
     let action = program[instruction][currentColor];
     if (action === undefined) {
-      while (!isGood(action)) {
-        action = createAction(generateRandomActions);
-      }
+      action = createAction(generateRandomActions);
       program[instruction][currentColor] = action;
     }
     if (action === INSTRUCTIONS_EXHAUSTED) {
@@ -314,7 +301,7 @@ class App extends React.Component {
       nextX >= width ||
       nextY < 0 ||
       nextY >= height ||
-      programState.count > maxInstructionCount
+      (programState.count > maxInstructionCount && !this.state.awesome)
     ) {
       return { stopped: true, cell: null, instructionsExhausted: false };
     }
@@ -419,8 +406,16 @@ class App extends React.Component {
       this.setState(
         { instructions: instructions + 1, currentSpeed: instructionsSteps },
         () => {
-          const { instructions, gridSize, numberOfOuterWalls } = this.state;
-          possibleActions = initializePossibleActions(instructions);
+          const {
+            instructions,
+            gridSize,
+            numberOfOuterWalls,
+            randomizePossibleActions,
+          } = this.state;
+          possibleActions = initializePossibleActions(
+            instructions,
+            randomizePossibleActions
+          );
           program = initializeProgram(instructions);
           programState = initializeProgramState(gridSize, numberOfOuterWalls);
           actionChoices.splice(currentActionChoice);
@@ -449,6 +444,9 @@ class App extends React.Component {
       previousGrids.pop();
     }
   };
+  awesome = () => {
+    this.setState({ awesome: !this.state.awesome });
+  };
   render() {
     const {
       intervalHandle,
@@ -464,6 +462,7 @@ class App extends React.Component {
       increaseSpeed,
       currentSpeed,
       historyLength,
+      randomizePossibleActions,
     } = this.state;
     const running = intervalHandle !== null || pauseHandle !== null;
     const { width, height } = getDimensions(gridSize);
@@ -568,6 +567,19 @@ class App extends React.Component {
           <label htmlFor="generateRandomActions">Generate random actions</label>
         </div>
         <div>
+          <input
+            type="checkbox"
+            name="randomizePossibleActions"
+            checked={randomizePossibleActions}
+            onChange={(e) =>
+              this.setState({ randomizePossibleActions: e.target.checked })
+            }
+          />
+          <label htmlFor="randomizePossibleActions">
+            Randomize possible actions
+          </label>
+        </div>
+        <div>
           <label htmlFor="numberOfOuterWalls">Number of outer walls</label>
           <input
             min={0}
@@ -595,7 +607,7 @@ class App extends React.Component {
           />
         </div>
         <div>
-          <button disabled={running} onClick={this.start}>
+          <button disabled={running} onClick={() => this.start(true)}>
             Start
           </button>
           <button disabled={!running} onClick={() => this.stop()}>
@@ -605,6 +617,9 @@ class App extends React.Component {
             Skip to next
           </button>
           <button onClick={() => this.bestNotGood()}>Best is not good</button>
+          <button onClick={() => this.awesome()}>
+            Awesome{this.state.awesome ? " !" : ""}
+          </button>
         </div>
         <div>Current speed: {currentSpeed}</div>
         <div>Current count: {programState?.count}</div>
