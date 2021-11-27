@@ -190,7 +190,7 @@ class App extends React.Component {
     this.state = {
       intervalHandle: null,
       pauseHandle: null,
-      instructions: 3,
+      instructions: 10,
       instructionsSteps: 1,
       maxInstructionCount: 1_000_000,
       pauseDuration: 1,
