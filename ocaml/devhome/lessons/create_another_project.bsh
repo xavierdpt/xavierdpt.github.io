@@ -1,0 +1,27 @@
+#!/usr/bin/bash
+set -e
+newdir=`ls | md5sum | cut -f 1 -d' '`
+mkdir "$newdir"
+cd "$newdir"
+dune init exe main
+
+cat >build_project.bsh <<EOF
+#!/usr/bin/bash
+set -e
+dune build
+EOF
+chmod +x build_project.bsh
+
+cat >run_project.bsh <<EOF
+#!/usr/bin/bash
+set -e
+dune exec ./main.exe
+EOF
+chmod +x run_project.bsh
+
+cat >.gitignore <<EOF
+dune-project
+/_build/
+EOF
+
+echo "$newdir"
