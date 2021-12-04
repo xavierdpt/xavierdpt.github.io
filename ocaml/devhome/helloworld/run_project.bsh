@@ -1,0 +1,3 @@
+#!/usr/bin/bash
+set -e
+dune exec ./helloworld.exe "hello from the command line"

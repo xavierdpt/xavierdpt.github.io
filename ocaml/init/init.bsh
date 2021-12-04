@@ -1,0 +1,9 @@
+#!/usr/bin/bash
+echo "Setting up container"
+apt-get update
+apt-get install dialog
+apt-get upgrade -y
+apt-get install bash-completion opam pkg-config sudo vim -y
+echo "dev ALL=(ALL) NOPASSWD: ALL" >>/etc/sudoers
+echo "Any additional command ? Type exit to leave"
+bash

@@ -1,0 +1,16 @@
+#!/usr/bin/bash
+set -e
+echo "Removing omcal-dev container if it exists"
+docker rm -f ocaml-dev
+echo "Setting up new ocaml-dev container"
+docker run -it \
+    --name ocaml-dev \
+    -v $PWD/init:/init \
+    ubuntu /init/init.bsh
+echo "Committing ocaml-dev image"
+docker commit ocaml-dev ocaml-dev
+echo "Removing ocaml-dev container"
+docker rm ocaml-dev
+echo "Pruning images"
+docker image prune -f
+echo "All good"

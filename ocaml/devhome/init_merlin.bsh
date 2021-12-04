@@ -1,0 +1,3 @@
+#!/usr/bin/bash
+opam install merlin
+opam user-setup install

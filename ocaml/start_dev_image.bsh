@@ -1,0 +1,7 @@
+#!/usr/bin/bash
+set -e
+mkdir -p devhome
+docker run -it --rm \
+  -v $PWD/start:/start \
+  -v $PWD/devhome:/home/dev \
+  ocaml-dev /start/start.bsh `id -u` `id -g`

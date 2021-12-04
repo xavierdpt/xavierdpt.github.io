@@ -1,0 +1,5 @@
+#!/usr/bin/bash
+set -e
+mkdir helloworld
+cd helloworld
+dune init exe helloworld

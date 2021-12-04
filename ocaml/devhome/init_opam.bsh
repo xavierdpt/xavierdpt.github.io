@@ -1,0 +1,2 @@
+#!/usr/bin/bash
+opam init --disable-sandboxing -a

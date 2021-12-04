@@ -1,0 +1,7 @@
+#!/usr/bin/bash
+set -e
+groupadd -g $2 dev
+groupadd admin
+useradd -u $1 -g $2 -G admin -M -d /home/dev -s `which bash` dev
+cd /home/dev
+su -l dev

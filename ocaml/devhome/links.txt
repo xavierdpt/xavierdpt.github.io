@@ -1,0 +1,8 @@
+[ ] https://ocaml.org/learn/tutorials/
+[DONE] https://ocaml.org/learn/tutorials/up_and_running.html
+[DONE] https://ocaml.org/learn/tutorials/a_first_hour_with_ocaml.html
+[TODO] https://ocaml.org/learn/tutorials/guidelines.html
+[TODO] https://ocaml.org/learn/tutorials/compiling_ocaml_projects.html
+
+Manual
+https://ocaml.org/releases/4.13/htmlman/index.html
