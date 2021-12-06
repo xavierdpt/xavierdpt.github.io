@@ -1,2 +1,0 @@
-#!/usr/bin/bash
-opam switch create 4.11.1

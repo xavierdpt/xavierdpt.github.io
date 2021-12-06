@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 set -e
 echo "Removing omcal-dev container if it exists"
 docker rm -f ocaml-dev

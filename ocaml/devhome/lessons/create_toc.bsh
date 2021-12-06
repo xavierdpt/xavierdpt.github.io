@@ -1,0 +1,16 @@
+#!/bin/bash
+set -e
+echo >Readme.md
+num=1
+writelink() {
+	title=`head -n 1 $1/Readme.md | sed 's/^#*\s*//'`
+	echo "[Lesson $num: $title]($1)" >>Readme.md
+	num=$(($num + 1))
+}
+
+x=$(<start)
+while [ -e $x/next ] ; do
+	writelink "$x"
+	x=$(<$x/next)
+done
+writelink $x
