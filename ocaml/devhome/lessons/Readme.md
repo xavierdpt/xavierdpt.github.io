@@ -9,3 +9,6 @@
 * [Lesson 8: Functions for imperative programming](220689d2e664d7361543302213cd62e3)
 * [Lesson 9: For loop](45c459dca8314d9926338244c9690c77)
 * [Lesson 10: Command line arguments](7304045fd49c0d9543307b3a49a0432e)
+* [Lesson 11: Reading input](70f8b5317029bfd55d5deb10d3c8228a)
+* [Lesson 12: An excuse for currying](432f3e87404930c2a12fbbd740e208ea)
+* [Lesson 13: Be functional](84247f2db057c210bcf87e7356862a56)

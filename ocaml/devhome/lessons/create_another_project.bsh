@@ -15,7 +15,7 @@ chmod +x build_project.bsh
 cat >run_project.bsh <<EOF
 #!/bin/bash
 set -e
-dune exec ./main.exe
+dune exec ./main.exe "\$@"
 EOF
 chmod +x run_project.bsh
 
