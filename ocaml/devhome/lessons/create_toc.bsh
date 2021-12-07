@@ -4,7 +4,7 @@ echo >Readme.md
 num=1
 writelink() {
 	title=`head -n 1 $1/Readme.md | sed 's/^#*\s*//'`
-	echo "[Lesson $num: $title]($1)" >>Readme.md
+	echo "* [Lesson $num: $title]($1)" >>Readme.md
 	num=$(($num + 1))
 }
 
@@ -14,3 +14,4 @@ while [ -e $x/next ] ; do
 	x=$(<$x/next)
 done
 writelink $x
+cat Readme.md
