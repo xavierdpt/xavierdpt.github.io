@@ -12,3 +12,8 @@
 * [Lesson 11: Reading input](70f8b5317029bfd55d5deb10d3c8228a)
 * [Lesson 12: An excuse for currying](432f3e87404930c2a12fbbd740e208ea)
 * [Lesson 13: Be functional](84247f2db057c210bcf87e7356862a56)
+* [Lesson 14: Catching exceptions](f119b8b3bf8e56dd95b2dae57ef44af1)
+* [Lesson 15: Catching all exceptions](ed5be84f91591317bea45b1aa5f727e4)
+* [Lesson 16: Anonymous functions](1b82e9253896bd5c867a1a9b5ead1e2e)
+* [Lesson 17: Regular expressions (and conditionals)](74b766983268f36462eb72b7879745ce)
+* [Lesson 18: Validating input](f9c8c7ad2717ceaf9a9b42e5139f4316)

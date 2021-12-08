@@ -17,9 +17,9 @@ Then logout and log back in to access get the docker group permissions, or use t
 su `id -un`
 ```
 
-Use `create_dev_image.bsh` to create the docker image.
+Use `create.bsh` to create the docker image.
 
-Use `start_dev_image.bsh` to start the docker image and enter the development environment.
+Use `enter.bsh` to start the docker image and enter the development environment.
 
 # Development environment setup
 
