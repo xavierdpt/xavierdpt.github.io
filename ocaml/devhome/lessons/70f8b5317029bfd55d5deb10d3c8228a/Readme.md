@@ -2,11 +2,9 @@
 
 It is sometimes useful to gather user input.
 
-One function you can use for this is the `bscanf` function from the `Scanf` module.
+One function you can use for this is the `scanf` function from the `Scanf` module.
 
-It takes three arguments: the source of input, the format string, and a function to consume the input
-
-Here, the source of the input in `Scanf.Scanning.stdin`.
+It takes two arguments: the format string, and a function to consume the input
 
 The format string is `"%s"`, which denotes a string.
 

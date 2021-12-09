@@ -10,7 +10,7 @@ let () =
                 | _ -> print_endline "Invalid argument, setting number of iterations to default value 2" ; 2
         in
         print_endline "What is your name?" ;
-        let name = Scanf.bscanf Scanf.Scanning.stdin "%s" identity in
+        let name = Scanf.scanf "%s" identity in
         print_endline ("Hello " ^ name ^ "!") ;
         print_age !age ;
         for _ = 0 to niterations - 1 do

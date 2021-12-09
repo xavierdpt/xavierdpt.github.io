@@ -8,7 +8,7 @@ let () =
         and age : int ref = ref 33
         and niterations : int = int_of_string Sys.argv.(1) in
         print_endline "What is your name?" ;
-        let name = Scanf.bscanf Scanf.Scanning.stdin "%s" identity in
+        let name = Scanf.scanf "%s" identity in
         print_endline ("Hello " ^ name ^ "!") ;
         print_age !age ;
         for _ = 0 to niterations - 1 do

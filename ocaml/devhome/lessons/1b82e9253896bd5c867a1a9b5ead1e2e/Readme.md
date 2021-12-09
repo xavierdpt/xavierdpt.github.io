@@ -1,6 +1,6 @@
 # Anonymous functions
 
-We used a function named `identity` for `bscanf`, but we don't need to give such a function a name.
+We used a function named `identity` for `scanf`, but we don't need to give such a function a name.
 
 Here, we replace it with an anonymous function, using the `fun` keyword.
 
