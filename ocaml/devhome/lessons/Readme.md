@@ -1,9 +1,9 @@
 
 * [Lesson 1: How to print a message on the screen](6c9383c6108f8438c47e5841cea595c2)
-* [Lesson 2: String concatenation](659aa91d17d178fcd85efa66c1cb5bd5)
-* [Lesson 3: Variables](a39d458217b4b440b7566d92b190bfb7)
-* [Lesson 4: Typed variables](8fc2679761cbdef8829dcafbed937491)
-* [Lesson 5: Sequences](cfe0752f3325aa05c870f4f3b2c84318)
+* [Lesson 2: How to print two messages on the screen](00c8a6999f45bbcec57cf9b0777d5af2)
+* [Lesson 3: String concatenation](659aa91d17d178fcd85efa66c1cb5bd5)
+* [Lesson 4: Variables](a39d458217b4b440b7566d92b190bfb7)
+* [Lesson 5: Typed variables](8fc2679761cbdef8829dcafbed937491)
 * [Lesson 6: Declaring multiple variables](500aa18fcbf6744600aa02fe13e74357)
 * [Lesson 7: Reference variables for imperative programming](fe4c554998d47759827a7c4895b197a5)
 * [Lesson 8: Functions for imperative programming](220689d2e664d7361543302213cd62e3)
