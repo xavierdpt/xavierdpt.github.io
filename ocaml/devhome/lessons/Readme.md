@@ -110,7 +110,32 @@ let () = let niterations : int = try int_of_string Sys.argv.(1) with
                 print_endline ("You are " ^ (string_of_int !age) ^ ".")
         done
 ```
-* [Lesson 14: An excuse for currying](432f3e87404930c2a12fbbd740e208ea)
+* [Lesson 14: Regular expressions (and conditionals)](74b766983268f36462eb72b7879745ce)
+```
+let () =
+        let print_age (age : int) : unit =
+                print_endline ("You are " ^ (string_of_int age) ^ ".")
+        and increase_age (age : int ref) : unit = 
+                age := !age + 1 ;
+                print_endline ("One year passed...")
+        and age : int ref = ref 33
+        and niterations : int = try int_of_string Sys.argv.(1) with
+                | _ -> print_endline "Invalid argument, setting number of iterations to default value 2" ; 2
+        in
+        print_endline "What is your name?" ;
+        let name : string = Scanf.scanf "%s" (fun (input:string) : string -> input) in
+        print_endline ("Hello " ^ name ^ "!") ;
+        if Str.string_match (Str.regexp "^[A-Z][a-z]+$") name 0 then
+                print_endline ("That's a good name.")
+        else
+                print_endline ("I don't like that name.") ;
+        print_age !age ;
+        for _  = 0 to niterations - 1 do
+                increase_age age ;
+                print_age !age ;
+        done
+```
+* [Lesson 15: An excuse for currying](432f3e87404930c2a12fbbd740e208ea)
 ```
 let () =
         let assign (name : string ref) (input:string) : unit =
@@ -132,7 +157,7 @@ let () =
                 print_age !age ;
         done
 ```
-* [Lesson 15: Be functional](84247f2db057c210bcf87e7356862a56)
+* [Lesson 16: Be functional](84247f2db057c210bcf87e7356862a56)
 ```
 let () =
         let identity (input:string) : string = input
@@ -152,7 +177,7 @@ let () =
                 print_age !age ;
         done
 ```
-* [Lesson 16: Catching exceptions](f119b8b3bf8e56dd95b2dae57ef44af1)
+* [Lesson 17: Catching exceptions](f119b8b3bf8e56dd95b2dae57ef44af1)
 ```
 let () =
         let identity (input:string) : string = input
@@ -175,7 +200,7 @@ let () =
                 print_age !age ;
         done
 ```
-* [Lesson 17: Anonymous functions](1b82e9253896bd5c867a1a9b5ead1e2e)
+* [Lesson 18: Anonymous functions](1b82e9253896bd5c867a1a9b5ead1e2e)
 ```
 let () =
         let print_age (age : int) : unit =
@@ -190,31 +215,6 @@ let () =
         print_endline "What is your name?" ;
         let name : string = Scanf.scanf "%s" (fun (input:string) : string -> input) in
         print_endline ("Hello " ^ name ^ "!") ;
-        print_age !age ;
-        for _  = 0 to niterations - 1 do
-                increase_age age ;
-                print_age !age ;
-        done
-```
-* [Lesson 18: Regular expressions (and conditionals)](74b766983268f36462eb72b7879745ce)
-```
-let () =
-        let print_age (age : int) : unit =
-                print_endline ("You are " ^ (string_of_int age) ^ ".")
-        and increase_age (age : int ref) : unit = 
-                age := !age + 1 ;
-                print_endline ("One year passed...")
-        and age : int ref = ref 33
-        and niterations : int = try int_of_string Sys.argv.(1) with
-                | _ -> print_endline "Invalid argument, setting number of iterations to default value 2" ; 2
-        in
-        print_endline "What is your name?" ;
-        let name : string = Scanf.scanf "%s" (fun (input:string) : string -> input) in
-        print_endline ("Hello " ^ name ^ "!") ;
-        if Str.string_match (Str.regexp "^[A-Z][a-z]+$") name 0 then
-                print_endline ("That's a good name.")
-        else
-                print_endline ("I don't like that name.") ;
         print_age !age ;
         for _  = 0 to niterations - 1 do
                 increase_age age ;
