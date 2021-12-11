@@ -95,44 +95,22 @@ let () =
                 print_endline ("You are " ^ (string_of_int !age) ^ ".")
         done
 ```
-* [Lesson 13: Functions for imperative programming](220689d2e664d7361543302213cd62e3)
+* [Lesson 13: Reading input](70f8b5317029bfd55d5deb10d3c8228a)
 ```
-let () =
-        let print_age (age : int) : unit =
-                print_endline ("You are " ^ (string_of_int age) ^ ".")
-        and increase_age (age : int ref) : unit = 
-                age := !age + 1 ;
-                print_endline ("One year passed...")
-        and name : string = "user"
-        and age : (int ref) = ref 33 in
+let () = let niterations : int = try int_of_string Sys.argv.(1) with
+                | _ -> print_endline "Invalid argument, setting number of iterations to default value 2" ; 2
+        in print_endline "What is your name?" ;
+        let name : string = (Scanf.scanf "%s@\n" Fun.id)
+        and age : int ref = ref 33 in
         print_endline ("Hello " ^ name ^ "!") ;
-        print_age !age ;
-        increase_age age ;
-        print_age !age ;
-        increase_age age ;
-        print_age !age
-```
-* [Lesson 14: Reading input](70f8b5317029bfd55d5deb10d3c8228a)
-```
-let () = let name : string ref = ref "user" in
-        let assign_name (input:string) : unit = name := input
-        and print_age (age : int) : unit =
-                print_endline ("You are " ^ (string_of_int age) ^ ".")
-        and increase_age (age : int ref) : unit = 
-                age := !age + 1 ;
-                print_endline ("One year passed...")
-        and age : int ref = ref 33
-        and niterations : int = int_of_string Sys.argv.(1) in
-        print_endline "What is your name?" ;
-        Scanf.scanf "%s" assign_name ;
-        print_endline ("Hello " ^ !name ^ "!") ;
-        print_age !age ;
+        print_endline ("You are " ^ (string_of_int !age) ^ ".") ;
         for _ = 0 to niterations - 1 do
-                increase_age age ;
-                print_age !age ;
+                age := !age + 1 ;
+                print_endline ("One year passed...") ;
+                print_endline ("You are " ^ (string_of_int !age) ^ ".")
         done
 ```
-* [Lesson 15: An excuse for currying](432f3e87404930c2a12fbbd740e208ea)
+* [Lesson 14: An excuse for currying](432f3e87404930c2a12fbbd740e208ea)
 ```
 let () =
         let assign (name : string ref) (input:string) : unit =
@@ -154,7 +132,7 @@ let () =
                 print_age !age ;
         done
 ```
-* [Lesson 16: Be functional](84247f2db057c210bcf87e7356862a56)
+* [Lesson 15: Be functional](84247f2db057c210bcf87e7356862a56)
 ```
 let () =
         let identity (input:string) : string = input
@@ -174,7 +152,7 @@ let () =
                 print_age !age ;
         done
 ```
-* [Lesson 17: Catching exceptions](f119b8b3bf8e56dd95b2dae57ef44af1)
+* [Lesson 16: Catching exceptions](f119b8b3bf8e56dd95b2dae57ef44af1)
 ```
 let () =
         let identity (input:string) : string = input
@@ -197,7 +175,7 @@ let () =
                 print_age !age ;
         done
 ```
-* [Lesson 18: Anonymous functions](1b82e9253896bd5c867a1a9b5ead1e2e)
+* [Lesson 17: Anonymous functions](1b82e9253896bd5c867a1a9b5ead1e2e)
 ```
 let () =
         let print_age (age : int) : unit =
@@ -218,7 +196,7 @@ let () =
                 print_age !age ;
         done
 ```
-* [Lesson 19: Regular expressions (and conditionals)](74b766983268f36462eb72b7879745ce)
+* [Lesson 18: Regular expressions (and conditionals)](74b766983268f36462eb72b7879745ce)
 ```
 let () =
         let print_age (age : int) : unit =
@@ -243,7 +221,7 @@ let () =
                 print_age !age ;
         done
 ```
-* [Lesson 20: Validating input](f9c8c7ad2717ceaf9a9b42e5139f4316)
+* [Lesson 19: Validating input](f9c8c7ad2717ceaf9a9b42e5139f4316)
 ```
 let () =
         let print_age (age : int) : unit =
@@ -271,4 +249,21 @@ let () =
                 increase_age age ;
                 print_age !age ;
         done
+```
+* [Lesson 20: Functions for imperative programming](220689d2e664d7361543302213cd62e3)
+```
+let () =
+        let print_age (age : int) : unit =
+                print_endline ("You are " ^ (string_of_int age) ^ ".")
+        and increase_age (age : int ref) : unit = 
+                age := !age + 1 ;
+                print_endline ("One year passed...")
+        and name : string = "user"
+        and age : (int ref) = ref 33 in
+        print_endline ("Hello " ^ name ^ "!") ;
+        print_age !age ;
+        increase_age age ;
+        print_age !age ;
+        increase_age age ;
+        print_age !age
 ```

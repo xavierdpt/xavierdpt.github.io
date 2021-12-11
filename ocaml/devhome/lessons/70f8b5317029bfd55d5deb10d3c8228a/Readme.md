@@ -1,19 +1,9 @@
 # Reading input
 
-It is sometimes useful to gather user input.
+To read input from the standard input, we can use the `scanf` function from the `Scanf` module.
 
-One function you can use for this is the `scanf` function from the `Scanf` module.
+The first argument of `scan` is the format specifier. In this case, we want to read the input string until the end of the line, so we use `%s` to specify a string, and `@\n` to specified to stop at the end of the line.
 
-It takes two arguments: the format string, and a function to consume the input
+The second argument is a function that can be used to process the input. In this case, we are not interested to do anything with it, so we use the identity function `id` from the `Fun` module.
 
-The format string is `"%s"`, which denotes a string.
-
-And `assign_name` is a function which takes the supplied string and assigns it to the `name` variable.
-
-To do this, we converted the `name` from `string` to `string ref`, so that we `assign_name` can write into it.
-
-We also introduce a second `let ... in ...` binding, so that `assign_name` can refer to the `name` variable from the outer scope.
-
-This is not very robust and there is no error handling. As an exercise, you can try to make this program look better.
-
-
+We also reordered the instructions so that the "Invalid argument" warning, the question, the input and the rest of the program happen in this order.
