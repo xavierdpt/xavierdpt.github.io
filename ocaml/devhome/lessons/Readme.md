@@ -70,19 +70,14 @@ let () =
 * [Lesson 11: Command line arguments](7304045fd49c0d9543307b3a49a0432e)
 ```
 let () =
-        let print_age (age : int) : unit =
-                print_endline ("You are " ^ (string_of_int age) ^ ".")
-        and increase_age (age : int ref) : unit = 
-                age := !age + 1 ;
-                print_endline ("One year passed...")
-        and name : string = "user"
-        and age : int ref = ref 33
+        let name : string = "user" and age : int ref = ref 33
         and niterations : int = int_of_string Sys.argv.(1) in
         print_endline ("Hello " ^ name ^ "!") ;
-        print_age !age ;
+        print_endline ("You are " ^ (string_of_int !age) ^ ".") ;
         for _ = 0 to niterations - 1 do
-                increase_age age ;
-                print_age !age ;
+                age := !age + 1 ;
+                print_endline ("One year passed...") ;
+                print_endline ("You are " ^ (string_of_int !age) ^ ".")
         done
 ```
 * [Lesson 12: Functions for imperative programming](220689d2e664d7361543302213cd62e3)
