@@ -129,29 +129,7 @@ let () = let niterations : int = try int_of_string Sys.argv.(1) with
                 print_endline ("You are " ^ (string_of_int !age) ^ ".")
         done
 ```
-* [Lesson 15: An excuse for currying](432f3e87404930c2a12fbbd740e208ea)
-```
-let () =
-        let assign (name : string ref) (input:string) : unit =
-                name := input
-        and print_age (age : int) : unit =
-                print_endline ("You are " ^ (string_of_int age) ^ ".")
-        and increase_age (age : int ref) : unit = 
-                age := !age + 1 ;
-                print_endline ("One year passed...")
-        and name : string ref = ref "user"
-        and age : int ref = ref 33
-        and niterations : int = int_of_string Sys.argv.(1) in
-        print_endline "What is your name?" ;
-        Scanf.scanf "%s" (assign name) ;
-        print_endline ("Hello " ^ !name ^ "!") ;
-        print_age !age ;
-        for _ = 0 to niterations - 1 do
-                increase_age age ;
-                print_age !age ;
-        done
-```
-* [Lesson 16: Be functional](84247f2db057c210bcf87e7356862a56)
+* [Lesson 15: Be functional](84247f2db057c210bcf87e7356862a56)
 ```
 let () =
         let identity (input:string) : string = input
@@ -171,7 +149,7 @@ let () =
                 print_age !age ;
         done
 ```
-* [Lesson 17: Validating input](f9c8c7ad2717ceaf9a9b42e5139f4316)
+* [Lesson 16: Validating input](f9c8c7ad2717ceaf9a9b42e5139f4316)
 ```
 let () =
         let print_age (age : int) : unit =
