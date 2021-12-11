@@ -20,3 +20,4 @@
 19 84a4720ad77e0a0b6fb66b58e4ae9f79 Reading from a file
 20 2e80561be93d1129c8b90460bb33ee55 Options
 21 13ea12c1cb92cc9e385deb1d942d8556 Allowing preferences values to contain an '=' sign.
+22 ce7d422878df22b8fdbbb6caf9f779a0 Storing the preference in a hash table
