@@ -9,8 +9,8 @@
 8 f9092254c0124cd6546206095344c782 Reference variables
 9 fe4c554998d47759827a7c4895b197a5 Imperative programming with reference variables
 10 45c459dca8314d9926338244c9690c77 For loop
-11 220689d2e664d7361543302213cd62e3 Functions for imperative programming
-12 7304045fd49c0d9543307b3a49a0432e Command line arguments
+11 7304045fd49c0d9543307b3a49a0432e Command line arguments
+12 220689d2e664d7361543302213cd62e3 Functions for imperative programming
 13 70f8b5317029bfd55d5deb10d3c8228a Reading input
 14 432f3e87404930c2a12fbbd740e208ea An excuse for currying
 15 84247f2db057c210bcf87e7356862a56 Be functional
