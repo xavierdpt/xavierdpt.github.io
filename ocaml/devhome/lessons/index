@@ -19,3 +19,4 @@
 18 9db3a296fe6fbfbe81bdc79b6643c035 Writing to a file
 19 84a4720ad77e0a0b6fb66b58e4ae9f79 Reading from a file
 20 2e80561be93d1129c8b90460bb33ee55 Options
+21 13ea12c1cb92cc9e385deb1d942d8556 Allowing preferences values to contain an '=' sign.
