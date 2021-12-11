@@ -1,4 +1,4 @@
-# Regular expressions (and conditionals)
+# Regular expressions and conditionals
 
 In this lesson, we inspect the name supplied by the user to see if it is a good name.
 

@@ -110,7 +110,7 @@ let () = let niterations : int = try int_of_string Sys.argv.(1) with
                 print_endline ("You are " ^ (string_of_int !age) ^ ".")
         done
 ```
-* [Lesson 14: Regular expressions (and conditionals)](74b766983268f36462eb72b7879745ce)
+* [Lesson 14: Regular expressions and conditionals](74b766983268f36462eb72b7879745ce)
 ```
 let () = let niterations : int = try int_of_string Sys.argv.(1) with
                 | _ -> print_endline "Invalid argument, setting number of iterations to default value 2" ; 2
