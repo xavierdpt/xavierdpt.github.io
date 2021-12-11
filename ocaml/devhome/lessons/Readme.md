@@ -55,24 +55,7 @@ let () = let name : string = "user" and age : (int ref) = ref 33 in
         print_endline ("One year passed...") ;
         print_endline ("You are " ^ (string_of_int !age) ^ ".")
 ```
-* [Lesson 10: Functions for imperative programming](220689d2e664d7361543302213cd62e3)
-```
-let () =
-        let print_age (age : int) : unit =
-                print_endline ("You are " ^ (string_of_int age) ^ ".")
-        and increase_age (age : int ref) : unit = 
-                age := !age + 1 ;
-                print_endline ("One year passed...")
-        and name : string = "user"
-        and age : (int ref) = ref 33 in
-        print_endline ("Hello " ^ name ^ "!") ;
-        print_age !age ;
-        increase_age age ;
-        print_age !age ;
-        increase_age age ;
-        print_age !age
-```
-* [Lesson 11: For loop](45c459dca8314d9926338244c9690c77)
+* [Lesson 10: For loop](45c459dca8314d9926338244c9690c77)
 ```
 let () =
         let print_age (age : int) : unit =
@@ -88,6 +71,23 @@ let () =
                 increase_age age ;
                 print_age !age ;
         done
+```
+* [Lesson 11: Functions for imperative programming](220689d2e664d7361543302213cd62e3)
+```
+let () =
+        let print_age (age : int) : unit =
+                print_endline ("You are " ^ (string_of_int age) ^ ".")
+        and increase_age (age : int ref) : unit = 
+                age := !age + 1 ;
+                print_endline ("One year passed...")
+        and name : string = "user"
+        and age : (int ref) = ref 33 in
+        print_endline ("Hello " ^ name ^ "!") ;
+        print_age !age ;
+        increase_age age ;
+        print_age !age ;
+        increase_age age ;
+        print_age !age
 ```
 * [Lesson 12: Command line arguments](7304045fd49c0d9543307b3a49a0432e)
 ```
