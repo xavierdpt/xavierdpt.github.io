@@ -134,9 +134,9 @@ let () = let niterations : int = try int_of_string Sys.argv.(1) with
 let () = let niterations : int = try int_of_string Sys.argv.(1) with
                 | _ -> print_endline "Invalid argument, setting number of iterations to default value 2" ; 2
         in print_endline "What is your name?" ;
-        let name = (
-                let input = ref (Scanf.scanf "%s@\n" Fun.id)
-                and name_regexp = Str.regexp "^[A-Z][a-z]+$" in
+        let name : string = (
+                let input : string ref = ref (Scanf.scanf "%s@\n" Fun.id)
+                and name_regexp : Str.regexp = Str.regexp "^[A-Z][a-z]+$" in
                 while not (Str.string_match name_regexp  !input 0) do
                         print_endline ("I don't like that name, try again! What is your name?") ;
                         input := (Scanf.scanf "%s@\n" Fun.id)
@@ -144,10 +144,6 @@ let () = let niterations : int = try int_of_string Sys.argv.(1) with
         )
         and age : int ref = ref 33 in
         print_endline ("Hello " ^ name ^ "!") ;
-        if Str.string_match (Str.regexp "^[A-Z][a-z]+$") name 0 then
-                print_endline ("That's a good name.")
-        else
-                print_endline ("I don't like that name.") ;
         print_endline ("You are " ^ (string_of_int !age) ^ ".") ;
         for _ = 0 to niterations - 1 do
                 age := !age + 1 ;
