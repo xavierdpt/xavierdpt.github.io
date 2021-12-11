@@ -171,30 +171,7 @@ let () =
                 print_age !age ;
         done
 ```
-* [Lesson 17: Catching exceptions](f119b8b3bf8e56dd95b2dae57ef44af1)
-```
-let () =
-        let identity (input:string) : string = input
-        and print_age (age : int) : unit =
-                print_endline ("You are " ^ (string_of_int age) ^ ".")
-        and increase_age (age : int ref) : unit = 
-                age := !age + 1 ;
-                print_endline ("One year passed...")
-        and age : int ref = ref 33
-        and niterations : int = try int_of_string Sys.argv.(1) with
-                | Invalid_argument _ -> print_endline "Invalid argument, setting number of iterations to default value 2" ; 2
-                | Failure _ -> print_endline "Failure, setting number of iterations to default value 2" ; 2
-        in
-        print_endline "What is your name?" ;
-        let name = Scanf.scanf "%s" identity in
-        print_endline ("Hello " ^ name ^ "!") ;
-        print_age !age ;
-        for _ = 0 to niterations - 1 do
-                increase_age age ;
-                print_age !age ;
-        done
-```
-* [Lesson 18: Anonymous functions](1b82e9253896bd5c867a1a9b5ead1e2e)
+* [Lesson 17: Anonymous functions](1b82e9253896bd5c867a1a9b5ead1e2e)
 ```
 let () =
         let print_age (age : int) : unit =
@@ -215,7 +192,7 @@ let () =
                 print_age !age ;
         done
 ```
-* [Lesson 19: Validating input](f9c8c7ad2717ceaf9a9b42e5139f4316)
+* [Lesson 18: Validating input](f9c8c7ad2717ceaf9a9b42e5139f4316)
 ```
 let () =
         let print_age (age : int) : unit =
@@ -244,7 +221,7 @@ let () =
                 print_age !age ;
         done
 ```
-* [Lesson 20: Functions for imperative programming](220689d2e664d7361543302213cd62e3)
+* [Lesson 19: Functions for imperative programming](220689d2e664d7361543302213cd62e3)
 ```
 let () =
         let print_age (age : int) : unit =
