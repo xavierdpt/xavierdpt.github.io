@@ -31,9 +31,11 @@ let () = let name : string = "user" and age : string = "33" in
         print_endline ("Hello " ^ name ^ "!") ;
         print_endline ("You are " ^ age ^ ".")
 ```
-* [Lesson 7: TODO: Insert title here](97da4a0e1e41406c38d3683e962f4e75)
+* [Lesson 7: Integer variables](97da4a0e1e41406c38d3683e962f4e75)
 ```
-let () = print_endline "Hello, World!"
+let () = let name : string = "user" and age : int = 33 in
+        print_endline ("Hello " ^ name ^ "!") ;
+        print_endline ("You are " ^ (string_of_int age) ^ ".")
 ```
 * [Lesson 8: Reference variables for imperative programming](fe4c554998d47759827a7c4895b197a5)
 ```
