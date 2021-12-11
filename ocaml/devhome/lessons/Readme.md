@@ -43,7 +43,7 @@ let () = let name : string = "user" and age : (int ref) = ref 33 in
         print_endline ("Hello " ^ name ^ "!") ;
         print_endline ("You are " ^ (string_of_int !age) ^ ".")
 ```
-* [Lesson 9: Reference variables for imperative programming](fe4c554998d47759827a7c4895b197a5)
+* [Lesson 9: Imperative programming with reference variables](fe4c554998d47759827a7c4895b197a5)
 ```
 let () = let name : string = "user" and age : (int ref) = ref 33 in
         print_endline ("Hello " ^ name ^ "!") ;
