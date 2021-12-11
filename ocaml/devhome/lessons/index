@@ -5,15 +5,16 @@
 4 a39d458217b4b440b7566d92b190bfb7 Variables
 5 8fc2679761cbdef8829dcafbed937491 Typed variables
 6 500aa18fcbf6744600aa02fe13e74357 Declaring multiple variables
-7 fe4c554998d47759827a7c4895b197a5 Reference variables for imperative programming
-8 220689d2e664d7361543302213cd62e3 Functions for imperative programming
-9 45c459dca8314d9926338244c9690c77 For loop
-10 7304045fd49c0d9543307b3a49a0432e Command line arguments
-11 70f8b5317029bfd55d5deb10d3c8228a Reading input
-12 432f3e87404930c2a12fbbd740e208ea An excuse for currying
-13 84247f2db057c210bcf87e7356862a56 Be functional
-14 f119b8b3bf8e56dd95b2dae57ef44af1 Catching exceptions
-15 ed5be84f91591317bea45b1aa5f727e4 Catching all exceptions
-16 1b82e9253896bd5c867a1a9b5ead1e2e Anonymous functions
-17 74b766983268f36462eb72b7879745ce Regular expressions (and conditionals)
-18 f9c8c7ad2717ceaf9a9b42e5139f4316 Validating input
+7 97da4a0e1e41406c38d3683e962f4e75 TODO: Insert title here
+8 fe4c554998d47759827a7c4895b197a5 Reference variables for imperative programming
+9 220689d2e664d7361543302213cd62e3 Functions for imperative programming
+10 45c459dca8314d9926338244c9690c77 For loop
+11 7304045fd49c0d9543307b3a49a0432e Command line arguments
+12 70f8b5317029bfd55d5deb10d3c8228a Reading input
+13 432f3e87404930c2a12fbbd740e208ea An excuse for currying
+14 84247f2db057c210bcf87e7356862a56 Be functional
+15 f119b8b3bf8e56dd95b2dae57ef44af1 Catching exceptions
+16 ed5be84f91591317bea45b1aa5f727e4 Catching all exceptions
+17 1b82e9253896bd5c867a1a9b5ead1e2e Anonymous functions
+18 74b766983268f36462eb72b7879745ce Regular expressions (and conditionals)
+19 f9c8c7ad2717ceaf9a9b42e5139f4316 Validating input

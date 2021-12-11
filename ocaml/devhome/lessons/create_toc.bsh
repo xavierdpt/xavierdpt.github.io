@@ -19,4 +19,4 @@ while [ -e $x/next ] ; do
 	x=$(<$x/next)
 done
 writelink $x
-cat Readme.md
+cat index
