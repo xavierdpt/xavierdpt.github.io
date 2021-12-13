@@ -1,0 +1,14 @@
+#!/bin/bash
+set -e
+echo >Readme.md
+num=1
+cut -d' ' -f1 index | while read id ; do
+	title=`head -n 1 $id/Readme.md | sed 's/^#*\s*//'`
+	echo "$id $num $title" 
+	echo "* [Lesson $num: $title]($id)" >>Readme.md
+	echo '```' >>Readme.md
+	cat "$id/main.ml" >>Readme.md
+	echo '```' >>Readme.md
+	num=$(($num + 1))
+done >index.new
+mv index.new index

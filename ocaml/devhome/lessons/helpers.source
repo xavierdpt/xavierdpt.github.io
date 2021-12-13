@@ -1,1 +1,0 @@
-gotolesson() { cd `grep '^'"$1" $HOME/lessons/index | cut -f 2 -d' '` ; }

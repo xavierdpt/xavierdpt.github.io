@@ -1,23 +1,22 @@
-
-1 6c9383c6108f8438c47e5841cea595c2 How to print a message on the screen
-2 00c8a6999f45bbcec57cf9b0777d5af2 How to print two messages on the screen
-3 659aa91d17d178fcd85efa66c1cb5bd5 String concatenation
-4 a39d458217b4b440b7566d92b190bfb7 Variables
-5 8fc2679761cbdef8829dcafbed937491 Typed variables
-6 500aa18fcbf6744600aa02fe13e74357 Declaring multiple variables
-7 97da4a0e1e41406c38d3683e962f4e75 Integer variables
-8 f9092254c0124cd6546206095344c782 Reference variables
-9 fe4c554998d47759827a7c4895b197a5 Imperative programming with reference variables
-10 45c459dca8314d9926338244c9690c77 For loop
-11 7304045fd49c0d9543307b3a49a0432e Command line arguments
-12 ed5be84f91591317bea45b1aa5f727e4 Catching exceptions
-13 70f8b5317029bfd55d5deb10d3c8228a Reading input
-14 74b766983268f36462eb72b7879745ce Regular expressions and conditionals
-15 f9c8c7ad2717ceaf9a9b42e5139f4316 Validating input
-16 eaade4d4ae7bf75e7b7ea81647e16cb6 Checking if a file exists
-17 f1c41846f4852e15fe2894aebbcd9c53 Creating an empty file
-18 9db3a296fe6fbfbe81bdc79b6643c035 Writing to a file
-19 84a4720ad77e0a0b6fb66b58e4ae9f79 Reading from a file
-20 2e80561be93d1129c8b90460bb33ee55 Options
-21 13ea12c1cb92cc9e385deb1d942d8556 Allowing preferences values to contain an '=' sign.
-22 ce7d422878df22b8fdbbb6caf9f779a0 Storing the preference in a hash table
+6c9383c6108f8438c47e5841cea595c2 1 How to print a message on the screen
+00c8a6999f45bbcec57cf9b0777d5af2 2 How to print two messages on the screen
+659aa91d17d178fcd85efa66c1cb5bd5 3 String concatenation
+a39d458217b4b440b7566d92b190bfb7 4 Variables
+8fc2679761cbdef8829dcafbed937491 5 Typed variables
+500aa18fcbf6744600aa02fe13e74357 6 Declaring multiple variables
+97da4a0e1e41406c38d3683e962f4e75 7 Integer variables
+f9092254c0124cd6546206095344c782 8 Reference variables
+fe4c554998d47759827a7c4895b197a5 9 Imperative programming with reference variables
+45c459dca8314d9926338244c9690c77 10 For loop
+7304045fd49c0d9543307b3a49a0432e 11 Command line arguments
+ed5be84f91591317bea45b1aa5f727e4 12 Catching exceptions
+70f8b5317029bfd55d5deb10d3c8228a 13 Reading input
+74b766983268f36462eb72b7879745ce 14 Regular expressions and conditionals
+f9c8c7ad2717ceaf9a9b42e5139f4316 15 Validating input
+eaade4d4ae7bf75e7b7ea81647e16cb6 16 Checking if a file exists
+f1c41846f4852e15fe2894aebbcd9c53 17 Creating an empty file
+9db3a296fe6fbfbe81bdc79b6643c035 18 Writing to a file
+84a4720ad77e0a0b6fb66b58e4ae9f79 19 Reading from a file
+2e80561be93d1129c8b90460bb33ee55 20 Options
+13ea12c1cb92cc9e385deb1d942d8556 21 Allowing preferences values to contain an '=' sign.
+ce7d422878df22b8fdbbb6caf9f779a0 22 Storing the preference in a hash table
