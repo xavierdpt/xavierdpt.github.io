@@ -1,0 +1,1 @@
+COLUMNS=$COLUMNS LINES=$LINES java -cp 'target/*' pm.M

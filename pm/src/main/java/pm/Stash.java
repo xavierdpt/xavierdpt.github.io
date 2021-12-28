@@ -3,12 +3,17 @@ package pm;
 public class Stash {
     public static final String TEXT;
 
+    public static final Bag BAG_1 = new Bag(Number.PLURAL, T.PRACTICE, T.PRINCIPLE, T.PROCESS, T.TOOL, T.TECHNIQUE);
+
+    public static final Bag BAG_2 = new Bag(Number.PLURAL, T.KNOWLEDGE, T.SKILL, T.TOOL, T.TECHNIQUE);
+
+    public static final Bag BAG_3 = new Bag(Number.PLURAL, T.PROCESS, T.INPUT, T.TOOL, T.TECHNIQUE, T.OUTCOME, T.LIFE_CYCLE_PHASE);
+
+    public static final Bag BAG_4 = new Bag(Number.PLURAL, T.PRACTICE, T.TECHNIQUE, T.PROCEDURE, T.RULE);
+
+    public static final Bag BAG_5 = new Bag(Number.PLURAL, T.METHODOLOGY, T.POLICY, T.PROCEDURE, T.RULE, T.TOOL, T.TECHNIQUE, T.LIFE_CYCLE_PHASE);
+
     static {
-        Bag bag1 = new Bag(Number.PLURAL, T.PRACTICE, T.PRINCIPLE, T.PROCESS, T.TOOL, T.TECHNIQUE);
-        Bag bag2 = new Bag(Number.PLURAL, T.KNOWLEDGE, T.SKILL, T.TOOL, T.TECHNIQUE);
-        Bag bag3 = new Bag(Number.PLURAL, T.PROCESS, T.INPUT, T.TOOL, T.TECHNIQUE, T.OUTCOME, T.LIFE_CYCLE_PHASE);
-        Bag bag4 = new Bag(Number.PLURAL, T.PRACTICE, T.TECHNIQUE, T.PROCEDURE, T.RULE);
-        Bag bag5 = new Bag(Number.PLURAL, T.METHODOLOGY, T.POLICY, T.PROCEDURE, T.RULE, T.TOOL, T.TECHNIQUE, T.LIFE_CYCLE_PHASE);
         TEXT = T.PROJECT_MANAGEMENT.s() + " is not new. Examples of " +
                 T.PROJECT.s() + " " + T.OUTCOME.p() +
                 " include:\n" +
@@ -24,7 +29,7 @@ public class Stash {
                 " applying " +
                 T.PROJECT_MANAGEMENT.s() +
                 " " +
-                bag1 +
+                BAG_1 +
                 " to their work. The " +
                 T.MANAGER.p() +
                 " of these " +
@@ -124,7 +129,7 @@ public class Stash {
                 " that the " +
                 "application" +
                 " of the " +
-                bag2 +
+                BAG_2 +
                 " to " +
                 T.PROJECT_MANAGEMENT_PROCESS.p() +
                 " can enhance the " +
@@ -154,7 +159,7 @@ public class Stash {
                 " for each " +
                 T.PROJECT.s() +
                 ". Determining the appropriate combination of " +
-                bag3 +
+                BAG_3 +
                 " to manage a " +
                 T.PROJECT.s() +
                 " is referred to as “" +
@@ -174,7 +179,7 @@ public class Stash {
                 " is a " +
                 T.SYSTEM.s() +
                 " of " +
-                bag4 +
+                BAG_4 +
                 " used by those who work in a " +
                 T.DISCIPLINE.s() +
                 ". This PMBOK® Guide is a " +
@@ -182,7 +187,7 @@ public class Stash {
                 " upon which " +
                 T.ORGANIZATION.p() +
                 " can build " +
-                bag5 +
+                BAG_5 +
                 " needed to practice " +
                 T.PROJECT_MANAGEMENT.s() +
                 ".";
