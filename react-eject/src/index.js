@@ -65,6 +65,17 @@ const animateDisappear = (ml, supplier) => {
     });
 };
 
+const animateMove = (supplier) => {
+  anime.timeline({ loop: false }).add({
+    targets: "#root",
+    left: [0, 100],
+    top: [0, 50],
+    easing: "linear",
+    duration: 100,
+    complete: () => foo(supplier),
+  });
+};
+
 const sleep = (duration, supplier) => {
   setTimeout(() => foo(supplier), duration);
 };
@@ -84,6 +95,8 @@ function* sequence() {
   yield (supplier) => sleep(1000, supplier);
   yield (supplier) => createText(ml2, "...is not new", supplier);
   yield (supplier) => animateAppear(ml2, supplier);
+  yield (supplier) => sleep(1000, supplier);
+  yield (supplier) => animateMove(supplier);
   yield (supplier) => sleep(1000, supplier);
   yield (supplier) => animateDisappear(ml2, supplier);
   yield (supplier) => console.log("finished");
