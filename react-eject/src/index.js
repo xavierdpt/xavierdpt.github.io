@@ -1,42 +1,13 @@
+import { belowleft, rightof, topleft, mergeBoundingRects } from "./geometry";
+import _, { isArray } from "underscore";
 import "./index.css";
+import { useCallback } from "react";
 const anime = window.anime;
-const debug = true;
+const debug = false;
+const speedFactor = .01;
 const DEBUG_OPACITY = 0.3;
 
 const u = (x, d) => (x === undefined || x === null ? d : x);
-
-const mergeBoundingRects = (...elements) => {
-  let first = true;
-  let right = null;
-  let top = null;
-  let left = null;
-  let bottom = null;
-  for (const e of elements) {
-    const r = e.getBoundingClientRect();
-    if (first) {
-      right = r.right;
-      top = r.top;
-      left = r.left;
-      bottom = r.bottom;
-    } else {
-      right = r.right > right ? r.right : right;
-      top = r.top < top ? r.top : top;
-      left = r.left < left ? r.left : left;
-      bottom = r.bottom > r.bottom ? r.bottom : bottom;
-    }
-    first = false;
-  }
-  return {
-    right,
-    top,
-    left,
-    bottom,
-    width: right - left,
-    height: bottom - top,
-    x: left,
-    y: top,
-  };
-};
 
 const foo = (supplier) => {
   if (!supplier) {
@@ -62,7 +33,7 @@ const foo = (supplier) => {
 
 const SIZES = { normal: "div", big: "h1" };
 
-const createText = (text, options = {}) => {
+const createText = (text, root, options = {}) => {
   const h1 = document.createElement(SIZES[u(options.size, "big")]);
   h1.style.display = "inline-block";
   h1.style.position = "absolute";
@@ -78,25 +49,25 @@ const createText = (text, options = {}) => {
   }
   span.appendChild(letters);
   h1.appendChild(span);
-  document.getElementById("root").appendChild(h1);
+  root.appendChild(h1);
   return { node: h1, letterNodes };
 };
 
 const animateAppear = (elements, supplier, options = {}) => {
-  anime
-    .timeline({
-      loop: false,
-      duration: 10000,
-    })
-    .add({
-      targets: elements,
-      opacity: [0, 1],
-      easing: "easeOutExpo",
-      duration: 1,
-      delay: (el, i) =>
-        u(options.elementDelay, 30) * (i + 1) + u(options.delay, 0),
-      complete: () => foo(supplier),
-    });
+  anime.timeline().add({
+    targets: elements,
+    opacity: [0, 1],
+    easing: "easeOutExpo",
+    duration: 1,
+    delay: (el, i) =>
+      (u(options.elementDelay, 30) * (i + 1) + u(options.delay, 0)) *
+      speedFactor,
+    complete: () => foo(supplier),
+  });
+};
+
+const animateAppearText = (text, supplier) => {
+  animateAppear(text.letterNodes, supplier);
 };
 
 const animateDisappear = (elements, supplier) => {
@@ -144,7 +115,7 @@ const centerOn = (elements, root, supplier) => {
     left: Math.floor(r.left + d.x),
     top: Math.floor(r.top + d.y),
     easing: "linear",
-    duration: 200,
+    duration: 200 * speedFactor,
     complete: () => foo(supplier),
   });
 };
@@ -154,7 +125,7 @@ const animatePath = (path, pathLength, supplier, options = {}) => {
     targets: path,
     strokeDashoffset: [pathLength, 0],
     easing: "linear",
-    duration: u(options.duration, 1000),
+    duration: u(options.duration, 1000) * speedFactor,
     complete: () => foo(supplier),
   });
 };
@@ -164,27 +135,6 @@ const sleep = (duration, supplier) => {
 };
 
 const pause = (supplier) => sleep(1000, supplier);
-
-const center = (el, root) => {
-  el.style.position = "absolute";
-  el.style.left = Math.floor((root.offsetWidth - el.offsetWidth) / 2) + "px";
-  el.style.top = Math.floor((root.offsetHeight - el.offsetHeight) / 2) + "px";
-};
-
-const below = (el1, el2, root) => {
-  el2.style.position = "absolute";
-  const r = el1.getBoundingClientRect();
-  const rr = root.getBoundingClientRect();
-  el2.style.left = r.x - rr.x + "px";
-  el2.style.top = r.y - rr.y + "px";
-};
-
-const topleft = (target, anchor, root) => {
-  const r = anchor.getBoundingClientRect();
-  const rr = root.getBoundingClientRect();
-  target.style.left = r.left - rr.x + "px";
-  target.style.top = r.top - rr.y + "px";
-};
 
 const parallel = (total, supplier) => {
   let current = 0;
@@ -270,16 +220,6 @@ const createTableComplete = (words) => {
   return { table, lines, svg, path, pathLength };
 };
 
-const rightof = (target, anchor, root) => {
-  const r = anchor.getBoundingClientRect();
-  const t = target.getBoundingClientRect();
-  const rr = root.getBoundingClientRect();
-  target.style.position = "absolute";
-  target.style.left = Math.floor(r.right - rr.x) + "px";
-  target.style.top =
-    Math.floor(r.top + r.height / 2 - t.height / 2 - rr.y) + "px";
-};
-
 const animateAppearTable = (table2, supplier) => {
   const proceed = parallel(table2.lines.length + 1, supplier);
   for (let i = 0; i < table2.lines.length; ++i) {
@@ -291,73 +231,197 @@ const animateAppearTable = (table2, supplier) => {
   });
 };
 
-const belowleft = (targets, anchors, root) => {
-  const targetsRect = mergeBoundingRects(...targets);
-  const anchorsRect = mergeBoundingRects(...anchors);
-  const rr = root.getBoundingClientRect();
-  const delta = {
-    x: targetsRect.left - anchorsRect.left,
-    y:
-      -(targetsRect.top - anchorsRect.top) +
-      anchorsRect.height +
-      anchorsRect.height,
-  };
-  for (const t of targets) {
-    const r = t.getBoundingClientRect();
-    t.style.position = "absolute";
-    t.style.top = Math.floor(r.top + delta.y - rr.x) + "px";
-    t.style.left = Math.floor(r.left + delta.x - rr.y) + "px";
+const animateAppearAny = (any, supplier) => {
+  if (any.table) {
+    animateAppearTable(any, supplier);
+  } else if (any.letterNodes) {
+    animateAppearText(any, supplier);
   }
 };
 
-function* sequence() {
-  const root = document.querySelector("#root");
+const textAndArrays = (root, anchor, ...elements) => {
+  const result = [];
+  const group = [];
+  let previous = null;
+  for (const element of elements) {
+    if (isArray(element)) {
+      const table = createTableComplete(element);
+      result.push(table);
+      if (previous) {
+        if (previous.node) {
+          rightof([table.table], [previous.node], root);
+        } else if (previous.table) {
+          rightof([table.table], [previous.table], root);
+        }
+        topleft([table.svg], [table.table], root);
+      }
+      group.push(table.table);
+      group.push(table.svg);
+    } else {
+      const text = createText(element, root, { size: "normal" });
+      result.push(text);
+      if (previous) {
+        if (previous.node) {
+          rightof([text.node], [previous.node], root);
+        } else if (previous.table) {
+          rightof([text.node], [previous.table], root);
+        }
+      }
+      group.push(text.node);
+    }
+    previous = result[result.length - 1];
+  }
+  belowleft(group, anchor, root);
+  return { parts: result, group };
+};
 
-  const text1 = createText("Project management ...");
-  yield (supplier) => centerOn([text1.node], root, supplier);
-  yield (supplier) => animateAppear(text1.letterNodes, supplier);
+function* addNewLine(text, root, previousText) {
+  const textn = createText(text, root, { size: "normal" });
+  belowleft([textn.node], [previousText.node], root);
+  yield (supplier) => centerOn([textn.node], root, supplier);
+  yield (supplier) => animateAppearAny(textn, supplier);
+  return textn;
+}
 
-  yield pause;
-  const text2 = createText("...is not new");
-  below(text1.node, text2.node, root);
-  yield (supplier) => centerOn([text2.node], root, supplier);
-  yield (supplier) => animateAppear(text2.letterNodes, supplier);
-  yield pause;
+function collectMainNodes(...elements) {
+  const nodes = [];
+  for (const e of elements) {
+    if (e.node) {
+      nodes.push(e.node);
+    } else if (e.table) {
+      nodes.push(e.table);
+      nodes.push(e.svg);
+    }
+  }
+  return nodes;
+}
 
-  const table2 = createTableComplete(["leaders", "managers"]);
-  topleft(table2.table, text2.node, root);
-  topleft(table2.svg, table2.table, root);
+const adds = (structure, id, value) => {
+  if (structure[id] !== undefined) {
+    throw Error(id + " is already set");
+  }
+  structure[id] = value;
+};
 
-  const text3 = createText("apply", { size: "normal" });
-  rightof(text3.node, table2.table, root);
+function* addNewLine(text, previousGroup, root) {
+  const currentGroup = [
+    createText(text, root, {
+      size: "normal",
+    }),
+  ];
+  if (previousGroup) {
+    belowleft(
+      collectMainNodes(...currentGroup),
+      collectMainNodes(...previousGroup),
+      root
+    );
+  }
+  yield (supplier) =>
+    centerOn(collectMainNodes(...currentGroup), root, supplier);
+  for (const element of currentGroup) {
+    yield (supplier) => animateAppearAny(element, supplier);
+  }
+  return { previousGroup, currentGroup };
+}
 
-  const table = createTableComplete([
+function* animateAppearGroup(elements, root) {
+  yield (supplier) => centerOn(collectMainNodes(...elements), root, supplier);
+  for (const e of elements) {
+    yield (supplier) => animateAppearAny(e, supplier);
+  }
+}
+
+function* bablam(root, previousGroup) {
+  const barResult = textAndArrays(
+    root,
+    collectMainNodes(...previousGroup),
+    "Project managers use",
+    ["skills", "applied knowledge"],
+    "to satisfy",
+    [
+      "customers",
+      "other people involved in the projects",
+      "other people affected by the projects",
+    ]
+  );
+  yield (supplier) => centerOn(barResult.group, root, supplier);
+  for (const part of barResult.parts) {
+    yield (supplier) => animateAppearAny(part, supplier);
+  }
+  const currentGroup = barResult.parts;
+  console.log({ fn: "bablam", previousGroup, currentGroup });
+  return { previousGroup, currentGroup };
+}
+
+function* biboum(root, previousGroup) {
+  const table1 = createTableComplete(["leaders", "managers"]);
+  const text2 = createText("apply", root, { size: "normal" });
+  const table3 = createTableComplete([
     "practices",
     "principles",
     "processes",
     "tools",
     "techniques",
   ]);
-  rightof(table.table, text3.node, root);
-  topleft(table.svg, table.table, root);
+  const text4 = createText("=> outcomes", root, { size: "normal" });
+  const currentGroup = [table1, text2, table3, text4];
 
-  const text4 = createText("=> outcomes", { size: "normal" });
-  rightof(text4.node, table.table, root);
+  topleft([table1.svg], [table1.table], root);
+  rightof(collectMainNodes(text2), collectMainNodes(table1), root);
+  rightof(collectMainNodes(table3), collectMainNodes(text2), root);
+  topleft([table3.svg], [table3.table], root);
+  rightof(collectMainNodes(text4), collectMainNodes(table3), root);
+  belowleft(
+    collectMainNodes(...currentGroup),
+    collectMainNodes(...previousGroup),
+    root
+  );
+  yield* animateAppearGroup([table1, text2, table3, text4], root);
+  console.log({ fn: "biboum", previousGroup, currentGroup });
+  return { previousGroup, currentGroup };
+}
 
-  const group1 = [
-    table2.table,
-    text3.node,
-    table.table,
-    text4.node,
-    table2.svg,
-    table.svg,
-  ];
-  belowleft(group1, [text2.node], root);
-  yield (supplier) => centerOn(group1, root, supplier);
-  yield (supplier) => animateAppearTable(table2, supplier);
-  yield (supplier) => animateAppear(text3.letterNodes, supplier);
-  yield (supplier) => animateAppearTable(table, supplier);
-  yield (supplier) => animateAppear(text4.letterNodes, supplier);
+function* sequence() {
+  const root = document.querySelector("#root");
+
+  let previousGroup = null;
+  let currentGroup = null;
+
+  ({ currentGroup, previousGroup } = yield* addNewLine(
+    "Project management ...",
+    currentGroup,
+    root
+  ));
+
+  ({ currentGroup, previousGroup } = yield* addNewLine(
+    "...is not new",
+    currentGroup,
+    root
+  ));
+
+  ({ currentGroup, previousGroup } = yield* bablam(root, currentGroup));
+
+  ({ currentGroup, previousGroup } = yield* biboum(root, currentGroup));
+
+  ({ currentGroup, previousGroup } = yield* addNewLine(
+    "Mid-20th century: seek recognition for project management as a profession",
+    currentGroup,
+    root
+  ));
+
+  ({ currentGroup, previousGroup } = yield* addNewLine(
+    "Implied requirement: Agreement on the content of the project management body of knowledge",
+    currentGroup,
+    root
+  ));
+
+  ({ currentGroup, previousGroup } = yield* addNewLine(
+    "PMI: Project Management Institute",
+    currentGroup,
+    root
+  ));
+
   yield (supplier) => console.log("finished");
 }
+
 foo(sequence());
