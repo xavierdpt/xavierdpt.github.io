@@ -1,0 +1,128 @@
+https://docs.wildfly.org/26/#installation-guides
+- https://docs.wildfly.org/26/WildFly_and_WildFly_Preview.html
+  - WildFly Preview : Technical preview which targets Java EE 9 (javax.* => jakarta.*)
+  - Wilfly has an embedded messaging broker. This will be removed and made optional for better support to cloud native environments.
+- https://docs.wildfly.org/26/Installation_Guide.html
+  - standalone operation mode
+  - managed domain operating mode
+  - Galleon:
+    - provision only what is necessary
+	- standalone operation mode (with or without H/A)
+  - bootable JAR
+- https://docs.wildfly.org/26/Bootable_Guide.html
+  - Maven
+  - wildfly-jar-maven-plugin
+  - Galleon
+  - Wildfly Layers
+    - datasources-web-server
+	- jaxrs-server
+	- cloud-server
+	- core-server
+	- base-server
+	- batch-jberet
+	- bean-validation
+	- cdi
+	- cloud-profile
+	- core-management
+	- core-tools
+	- datasources
+	- deployment-scanner
+	- discovery
+	- ee
+	- ee-security
+	- ejb-http-invoker
+	- ejb
+	- ejb-dist-cache
+	- ejb-lite
+	- ejb-local-cache
+	- elytron
+	- git-history
+	- h2-datasource
+	- h2-default-datasource
+	- h2-driver
+	- iiop-openjdk
+	- io
+	- jaxrs
+	- jdr
+	- jms-activemq
+	- jmx
+	- jmx-remoting
+	- jpa
+	- jpa-distributed
+	- jsf
+	- jsonb
+	- jsonp
+	- logging
+	- mail
+	- management
+	- messaging-activemq
+	- microprofile-config
+	- microprofile-fault-tolerance
+	- microprofile-health
+	- microprofile-jwt
+	- microprofile-metrics
+	- microprofile-openapi
+	- microprofile-opentracing
+	- microprofile-platform
+	- microprofile-rest-client
+	- microprofile-reactive-messaging
+	- microprofile-reactive-messaging-kafka
+	- microprofile-reactive-streams-operators
+	- naming
+	- observability
+	- open-tracing
+	- pojo
+	- remote-activemq
+	- remoting
+	- request-controller
+	- resource-adapters
+	- sar
+	- security-manager
+	- transactions
+	- undertow
+	- undertow-https
+	- undertow-load-balancer
+	- web-clustering
+	- web-console
+	- web-passivation
+	- web-server
+	- webservices
+- https://docs.wildfly.org/26/Galleon_Guide.html
+  https://docs.wildfly.org/galleon/
+  - Galleon CLI
+    galleon.sh install wildfly:current --dir=my-wildfly-server
+	galleon.sh install wildfly:current --dir=my-wildfly-server --default-configs=standalone/standalone.xml
+	galleon.sh install wildfly:current --dir=my-wildfly-server --default-configs=standalone/standalone.xml,domain/domain.xml
+    galleon.sh install wildfly:current --dir=my-wildfly-server --layers=cdi,jaxrs
+    galleon.sh install wildfly:current --dir=my-wildfly-server --layers=cdi,jaxrs,-bean-validation
+	Recipes:
+	  cloud-server
+	  cloud-server with support for https
+	  cloud-server and Jakarta Enterprise Beans with ejb-dist-cache as an alternative to ejb-local-cache
+	  jaxrs-server with jpa-distributed as an alternative to jpa
+	  jaxrs, cdi, elytron and logging
+	  servlet container with main core functionalities
+	  servlet container with support for https
+	  core server
+https://docs.wildfly.org/26/#administrator-guides
+- https://docs.wildfly.org/26/Getting_Started_Guide.html
+
+- https://docs.wildfly.org/26/Admin_Guide.html
+- https://docs.wildfly.org/26/High_Availability_Guide.html
+https://docs.wildfly.org/26/#developer-guides
+- https://docs.wildfly.org/26/Getting_Started_Developing_Applications_Guide.html
+- https://docs.wildfly.org/26/Developer_Guide.html
+- https://docs.wildfly.org/26/Extending_WildFly.html
+- https://docs.wildfly.org/26/Testsuite.html
+- https://docs.wildfly.org/26/Hacking_On_WildFly.html
+https://docs.wildfly.org/26/#migration-guide
+- https://docs.wildfly.org/26/Migration_Guide.html
+https://docs.wildfly.org/26/#model-reference
+- https://docs.wildfly.org/26/wildscribe/
+https://docs.wildfly.org/26/#security-guide
+- https://docs.wildfly.org/26/WildFly_Elytron_Security.html
+https://docs.wildfly.org/26/#client-guide
+- https://docs.wildfly.org/26/Client_Guide.html
+https://docs.wildfly.org/26/#quickstarts
+- https://docs.wildfly.org/26/Quickstarts.html
+https://docs.wildfly.org/26/#more-resources

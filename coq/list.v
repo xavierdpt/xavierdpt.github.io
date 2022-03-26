@@ -1697,7 +1697,7 @@ Section ListOps.
   Lemma rev_length : forall l, length (rev l) = length l.
   Proof.
     intro l.
-    induction l as [|head tail].
+    induction l as [|head tail ih].
     {
       simpl.
       reflexivity.
@@ -1708,7 +1708,7 @@ Section ListOps.
       simpl.
       rewrite Nat.add_comm.
       simpl.
-      rewrite IHtail.
+      rewrite ih.
       reflexivity.
     }
   Qed.
@@ -2231,40 +2231,97 @@ induction l as [|head tail ih].
   Qed.
 
 
-xxx
+
 
   Lemma map_nth : forall l d n,
     nth n (map l) (f d) = f (nth n l d).
   Proof.
-    induction l; simpl map; destruct n; firstorder.
+intro l.
+induction l as [|head tail ih].
+{
+intros d n.
+destruct n as [|n].
+{ simpl. reflexivity. }
+{ simpl. reflexivity. }
+}
+{
+intros d n.
+destruct n as [|n].
+{ simpl. reflexivity. }
+{ simpl. specialize (ih d). rewrite ih. reflexivity. }
+}
   Qed.
+
+
+
 
   Lemma map_nth_error : forall n l d,
     nth_error l n = Some d -> nth_error (map l) n = Some (f d).
   Proof.
-    induction n; intros [ | ] ? Heq; simpl in *; inversion Heq; auto.
+intros n l d.
+generalize dependent n.
+induction l as [|head tail ih].
+{
+intro n.
+destruct n as [|n].
+{ simpl. intro i. inversion i. }
+{ simpl. intro i. inversion i. }
+}
+{
+intro n.
+destruct n as [|n].
+{ simpl. intro h. inversion h. subst d. reflexivity. }
+{ simpl. intro h. specialize (ih n). specialize (ih h). rewrite ih. reflexivity. }
+}
   Qed.
 
   Lemma map_app : forall l l',
     map (l++l') = (map l)++(map l').
   Proof.
-    induction l; simpl; auto.
-    intros; rewrite IHl; auto.
+intro l.
+induction l as [|head tail ih].
+{ intro l'. simpl. reflexivity. }
+{ intro l'. simpl. rewrite ih. reflexivity. }
   Qed.
 
   Lemma map_rev : forall l, map (rev l) = rev (map l).
   Proof.
-    induction l; simpl; auto.
-    rewrite map_app.
-    rewrite IHl; auto.
+    intro l.
+    induction l as [|head tail ih].
+    { simpl. reflexivity. }
+    { simpl. rewrite map_app. simpl. rewrite ih. reflexivity. }
   Qed.
 
+  Definition involutive {A:Type} (f:A->A) := forall x, f (f x) = x.
+  Definition idempotent {A:Type} (f:A->A) := forall x, f (f x) = f x.
+  Definition identity {A:Type} (f:A->A) := forall x, f x = x.
+
+Theorem involutive_idempotent_identity:
+  forall (A:Type) (f:A->A),
+  (involutive f /\ idempotent f) -> identity f.
+Proof.
+  clear A B f.
+  intros A f h.
+  destruct h as [hin hid].
+  unfold involutive in hin.
+  unfold idempotent in hid.
+  unfold identity.
+  intro x.
+  specialize (hin x).
+  specialize (hid x).
+  rewrite <- hid.
+  rewrite hin.
+  reflexivity.
+Qed.
+
+  
   Lemma map_eq_nil : forall l, map l = [] -> l = [].
   Proof.
-    destruct l; simpl; reflexivity || discriminate.
+intro l.
+destruct l as [|head tail].
+{ simpl. intros _. reflexivity. }
+{ simpl. intro h. inversion h. }
   Qed.
-
-  (** [map] and count of occurrences *)
 
   Hypothesis decA: forall x1 x2 : A, {x1 = x2} + {x1 <> x2}.
   Hypothesis decB: forall y1 y2 : B, {y1 = y2} + {y1 <> y2}.
@@ -2273,17 +2330,34 @@ xxx
   Theorem count_occ_map x l:
     count_occ decA l x = count_occ decB (map l) (f x).
   Proof.
-    revert x. induction l as [| a l' Hrec]; intro x; simpl.
-    - reflexivity.
-    - specialize (Hrec x).
-      destruct (decA a x) as [H1|H1], (decB (f a) (f x)) as [H2|H2].
-      * rewrite Hrec. reflexivity.
-      * contradiction H2. rewrite H1. reflexivity.
-      * specialize (Hfinjective H2). contradiction H1.
-      * assumption.
+induction l as [|head tail ih].
+{ simpl. reflexivity. }
+{
+simpl.
+destruct (decA head x) as [hla|hra] eqn:eqna.
+{
+  subst x.
+  rewrite ih. clear ih.
+  destruct (decB (f head) (f head)) as [hlb|hrb].
+  { reflexivity. }
+  { exfalso. apply hrb. reflexivity. }
+}
+{
+destruct (decB (f head) (f x)) as [hlb|hrb] eqn:heqb.
+{
+specialize (Hfinjective hlb).
+subst x.
+exfalso.
+apply hra.
+reflexivity.
+}
+{
+rewrite ih.
+reflexivity.
+}
+}
+}
   Qed.
-
-  (** [flat_map] *)
 
   Definition flat_map (f:A -> list B) :=
     fix flat_map (l:list A) : list B :=
@@ -2294,20 +2368,54 @@ xxx
 
   Lemma in_flat_map : forall (f:A->list B)(l:list A)(y:B),
     In y (flat_map f l) <-> exists x, In x l /\ In y (f x).
-  Proof using A B.
+  Proof.
     clear Hfinjective.
-    induction l; simpl; split; intros.
-    contradiction.
-    destruct H as (x,(H,_)); contradiction.
-    destruct (in_app_or _ _ _ H).
-    exists a; auto.
-    destruct (IHl y) as (H1,_); destruct (H1 H0) as (x,(H2,H3)).
-    exists x; auto.
-    apply in_or_app.
-    destruct H as (x,(H0,H1)); destruct H0.
-    subst; auto.
-    right; destruct (IHl y) as (_,H2); apply H2.
-    exists x; auto.
+intro f'.
+intro l.
+intro y.
+split.
+{
+induction l as [|head tail ih].
+{
+simpl.
+intro i.
+inversion i.
+}
+{
+simpl.
+intro h.
+apply in_app_or in h.
+destruct h as [hl|hr].
+{
+exists head.
+split.
+{ left. reflexivity. }
+{ exact hl. }
+}
+{
+specialize (ih hr).
+destruct ih as [x [hel her]].
+exists x.
+split.
+{ right. exact hel. }
+{ exact her. }
+}
+}
+}
+{
+intro h.
+destruct h as [x [hl hr]].
+induction l as [|head tail ih].
+{ simpl. simpl in hl. exact hl. }
+{
+simpl.
+apply in_or_app.
+simpl in hl.
+destruct hl as [hl'|hr'].
+{ subst x. left. exact hr. }
+{ right. apply ih. exact hr'. }
+}
+}
   Qed.
 
 End Map.
@@ -2315,60 +2423,105 @@ End Map.
 Lemma flat_map_concat_map : forall A B (f : A -> list B) l,
   flat_map f l = concat (map f l).
 Proof.
-intros A B f l; induction l as [|x l IH]; simpl.
-+ reflexivity.
-+ rewrite IH; reflexivity.
+intros A B f.
+intro l.
+induction l as [|head tail ih].
+{ simpl. reflexivity. }
+{ simpl. rewrite ih. reflexivity. }
 Qed.
 
 Lemma concat_map : forall A B (f : A -> B) l, map f (concat l) = concat (map (map f) l).
 Proof.
-intros A B f l; induction l as [|x l IH]; simpl.
-+ reflexivity.
-+ rewrite map_app, IH; reflexivity.
+intros A B f l.
+induction l as [|head tail ih].
+{ simpl. reflexivity. }
+{
+simpl.
+rewrite map_app.
+rewrite ih.
+reflexivity.
+}
 Qed.
 
 Lemma map_id : forall (A :Type) (l : list A),
   map (fun x => x) l = l.
 Proof.
-  induction l; simpl; auto; rewrite IHl; auto.
+intros A l.
+induction l as [|head tail ih].
+{ simpl. reflexivity. }
+{ simpl. rewrite ih. reflexivity. }
 Qed.
 
 Lemma map_map : forall (A B C:Type)(f:A->B)(g:B->C) l,
   map g (map f l) = map (fun x => g (f x)) l.
 Proof.
-  induction l; simpl; auto.
-  rewrite IHl; auto.
+  intros A B C f g l.
+  induction l as [|head tail ih].
+ { simpl. reflexivity. }
+{ simpl. rewrite ih. reflexivity. }
 Qed.
+
+
 
 Lemma map_ext_in :
   forall (A B : Type)(f g:A->B) l, (forall a, In a l -> f a = g a) -> map f l = map g l.
 Proof.
-  induction l; simpl; auto.
-  intros; rewrite H by intuition; rewrite IHl; auto.
+intros A B f g l.
+induction l as [|head tail ih].
+{ simpl. intros _. reflexivity. }
+{
+simpl.
+intro h.
+rewrite ih. rewrite h. reflexivity.
+{ left. reflexivity. }
+{ intro a. intro hin. apply h. right. exact hin. }
+}
 Qed.
 
 Lemma ext_in_map :
   forall (A B : Type)(f g:A->B) l, map f l = map g l -> forall a, In a l -> f a = g a.
-Proof. induction l; intros [=] ? []; subst; auto. Qed.
+Proof.
+intros A B f g l.
+induction l as [|head tail ih].
+{ simpl. intros _. intro a. intro i. contradiction i. }
+{
+simpl.
+intro h.
+intro a.
+intros [hl|hr].
+{ subst a. inversion h. reflexivity. }
+{
+apply ih.
+{ inversion h. reflexivity. }
+{ exact hr. }
+}
+}
+Qed.
 
 Arguments ext_in_map [A B f g l].
 
 Lemma map_ext_in_iff :
    forall (A B : Type)(f g:A->B) l, map f l = map g l <-> forall a, In a l -> f a = g a.
-Proof. split; [apply ext_in_map | apply map_ext_in]. Qed.
+Proof.
+intros A B f g l.
+split.
+{ apply ext_in_map. }
+{ apply map_ext_in. }
+Qed.
 
 Arguments map_ext_in_iff {A B f g l}.
 
 Lemma map_ext :
   forall (A B : Type)(f g:A->B), (forall a, f a = g a) -> forall l, map f l = map g l.
 Proof.
-  intros; apply map_ext_in; auto.
+intros A B f g.
+intro h.
+intro l.
+apply map_ext_in.
+intro a.
+intro hin.
+apply h.
 Qed.
-
-
-(************************************)
-(** Left-to-right iterator on lists *)
-(************************************)
 
 Section Fold_Left_Recursor.
   Variables (A : Type) (B : Type).
@@ -2383,11 +2536,20 @@ Section Fold_Left_Recursor.
   Lemma fold_left_app : forall (l l':list B)(i:A),
     fold_left (l++l') i = fold_left l' (fold_left l i).
   Proof.
-    induction l.
-    simpl; auto.
-    intros.
-    simpl.
-    auto.
+
+intro l.
+induction l as [|head tail ih].
+{
+simpl.
+intros.
+reflexivity.
+}
+{
+simpl.
+intros l' i.
+rewrite ih.
+reflexivity.
+}
   Qed.
 
 End Fold_Left_Recursor.
@@ -2395,11 +2557,24 @@ End Fold_Left_Recursor.
 Lemma fold_left_length :
   forall (A:Type)(l:list A), fold_left (fun x _ => S x) l 0 = length l.
 Proof.
-  intros A l.
-  enough (H : forall n, fold_left (fun x _ => S x) l n = n + length l) by exact (H 0).
-  induction l; simpl; auto.
-  intros; rewrite IHl.
-  simpl; auto with arith.
+intros A l.
+assert (hl':exists l', l = rev l').
+{ exists (rev l). rewrite rev_involutive. reflexivity. }
+destruct hl' as [l' heq].
+subst l.
+rename l' into l.
+induction l as [|head tail ih].
+{ simpl. reflexivity. }
+{
+simpl.
+rewrite app_length.
+simpl.
+rewrite <- ih.
+rewrite Nat.add_1_r.
+rewrite fold_left_app.
+simpl.
+reflexivity.
+}
 Qed.
 
 (************************************)
@@ -2422,36 +2597,69 @@ End Fold_Right_Recursor.
   Lemma fold_right_app : forall (A B:Type)(f:A->B->B) l l' i,
     fold_right f i (l++l') = fold_right f (fold_right f i l') l.
   Proof.
-    induction l.
-    simpl; auto.
-    simpl; intros.
-    f_equal; auto.
+intros A B f l l' i.
+induction l as [|head tail ih].
+{ simpl. reflexivity. }
+{
+simpl.
+rewrite ih.
+reflexivity.
+}
   Qed.
 
   Lemma fold_left_rev_right : forall (A B:Type)(f:A->B->B) l i,
     fold_right f i (rev l) = fold_left (fun x y => f y x) l i.
   Proof.
-    induction l.
-    simpl; auto.
-    intros.
-    simpl.
-    rewrite fold_right_app; simpl; auto.
+intros A B f l.
+induction l as [|head tail ih].
+{ simpl. reflexivity. }
+{
+intro i.
+simpl.
+rewrite fold_right_app.
+simpl.
+specialize (ih (f head i)).
+rewrite ih.
+reflexivity.
+}
   Qed.
+
+  Definition associative {A:Type} (f : A -> A -> A) :=  forall x y z : A, f x (f y z) = f (f x y) z.
+  Definition commutative {A B:Type} (f : A -> A -> B) :=  forall x y : A, f x y = f y x.
 
   Theorem fold_symmetric :
     forall (A : Type) (f : A -> A -> A),
-    (forall x y z : A, f x (f y z) = f (f x y) z) ->
-    forall (a0 : A), (forall y : A, f a0 y = f y a0) ->
-    forall (l : list A), fold_left f l a0 = fold_right f a0 l.
+    associative f ->commutative f ->
+forall (a : A),
+    forall (l : list A), fold_left f l a = fold_right f a l.
   Proof.
-    intros A f assoc a0 comma0 l.
-    induction l as [ | a1 l ]; [ simpl; reflexivity | ].
-    simpl. rewrite <- IHl. clear IHl. revert a1. induction l; [ auto | ].
-    simpl. intro. rewrite <- assoc. rewrite IHl. rewrite IHl. auto.
-  Qed.
-
-  (** [(list_power x y)] is [y^x], or the set of sequences of elts of [y]
-      indexed by elts of [x], sorted in lexicographic order. *)
+intros A f hassoc hcomm.
+unfold associative in hassoc.
+unfold commutative in hcomm.
+intros a l.
+generalize dependent a.
+induction l as [|head tail ih].
+{ intro a. simpl. reflexivity. }
+{
+intro a.
+simpl.
+rewrite ih.
+clear ih.
+generalize dependent a.
+induction tail as [|th tt ih].
+{ intro a. simpl. rewrite hcomm. reflexivity. }
+{
+intro a.
+simpl.
+rewrite ih.
+set (fr:=fold_right f a tt).
+rewrite (hassoc th head fr).
+rewrite (hcomm th head).
+rewrite <- (hassoc head th fr).
+reflexivity.
+}
+}
+Qed.
 
   Fixpoint list_power (A B:Type)(l:list A) (l':list B) :
     list (list (A * B)) :=
@@ -2463,16 +2671,9 @@ End Fold_Right_Recursor.
     end.
 
 
-  (*************************************)
-  (** ** Boolean operations over lists *)
-  (*************************************)
-
   Section Bool.
     Variable A : Type.
     Variable f : A -> bool.
-
-  (** find whether a boolean function can be satisfied by an
-       elements of the list. *)
 
     Fixpoint existsb (l:list A) : bool :=
       match l with
@@ -2483,36 +2684,64 @@ End Fold_Right_Recursor.
     Lemma existsb_exists :
       forall l, existsb l = true <-> exists x, In x l /\ f x = true.
     Proof.
-      induction l; simpl; intuition.
-      inversion H.
-      firstorder.
-      destruct (orb_prop _ _ H1); firstorder.
-      firstorder.
-      subst.
-      rewrite H2; auto.
+intro l.
+split.
+{
+induction l as [|head tail ih].
+{ simpl. intro i. inversion i. }
+{ simpl. intro h.
+destruct (f head) eqn:heqhead.
+{ simpl in h. clear h. exists head. split. left. reflexivity. exact heqhead. }
+{ simpl in h. specialize (ih h). clear h. destruct ih as [x h]. destruct h as [hin hfx]. exists x. split. right. exact hin. exact hfx. }
+}
+}
+{
+intro he.
+destruct he as [x [hin hfx]].
+generalize dependent x.
+induction l as [|head tail ih].
+{ simpl. intros x i. inversion i. }
+{ simpl. intros x h. destruct h as [hl|hr].
+{ subst x. intro heq. rewrite heq. simpl. reflexivity. }
+{ intro heq. specialize (ih x). specialize (ih hr). specialize (ih heq). rewrite ih. rewrite orb_comm. simpl. reflexivity. }
+}
+}
     Qed.
+
+
 
     Lemma existsb_nth : forall l n d, n < length l ->
       existsb l = false -> f (nth n l d) = false.
     Proof.
-      induction l.
-      inversion 1.
-      simpl; intros.
-      destruct (orb_false_elim _ _ H0); clear H0; auto.
-      destruct n ; auto.
-      rewrite IHl; auto with arith.
+intro l.
+induction l as [|head tail ih].
+{ intros n d i. simpl in i. unfold lt in i. inversion i. }
+{ intros n d h. simpl in h. unfold lt in h. apply le_S_n in h.
+intro he. simpl in he.
+apply orb_false_elim in he.
+destruct he as [hel her].
+simpl.
+destruct n as [|n].
+{ exact hel. }
+{
+apply ih.
+unfold lt. exact h. exact her.
+}
+}
     Qed.
 
     Lemma existsb_app : forall l1 l2,
       existsb (l1++l2) = existsb l1 || existsb l2.
     Proof.
-      induction l1; intros l2; simpl.
-        solve[auto].
-      case (f a); simpl; solve[auto].
+intro l.
+induction l as [|head tail ih].
+{ intro l'. simpl. reflexivity. }
+{ intro l'. simpl.
+rewrite <- orb_assoc.
+rewrite ih.
+reflexivity.
+}
     Qed.
-
-  (** find whether a boolean function is satisfied by
-    all the elements of a list. *)
 
     Fixpoint forallb (l:list A) : bool :=
       match l with
@@ -2523,6 +2752,32 @@ End Fold_Right_Recursor.
     Lemma forallb_forall :
       forall l, forallb l = true <-> (forall x, In x l -> f x = true).
     Proof.
+intro l.
+induction l as [|head tail ih].
+{
+ simpl. split. intros _. intros x i. inversion i.
+intros _. reflexivity.
+}
+{
+simpl.
+destruct ih as [ihl ihr].
+split.
+{ intro h.
+apply andb_prop in h.
+destruct h as [hl hr].
+intros x [h|h].
+{ subst x. exact hl. }
+{ apply ihl. exact hr. exact h. }
+}
+{
+intro h.
+apply andb_true_intro.
+split.
+{
+apply ihl.
+
+(* xxx *)
+
       induction l; simpl; intuition.
       destruct (andb_prop _ _ H1).
       congruence.
