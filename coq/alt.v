@@ -1,29 +1,30 @@
 
 (* I like to name properties *)
-Definition commutative (A:Type) (f:A->A->A) := forall x y, f x y = f y x.
-Definition associative (A:Type) (f:A->A->A) := forall x y z, f (f x y) z = f x (f y z).
+Definition commutative {A:Type} (f:A->A->A) := forall x y, f x y = f y x.
+Definition associative {A:Type} (f:A->A->A) := forall x y z, f (f x y) z = f x (f y z).
+
 
 (* That's the classic definition of a list *)
-Inductive List (A:Type) : Type :=
-| nil : List A
-| cons : A -> List A -> List A
+Inductive List {A:Type} : Type :=
+| nil : List
+| cons : A -> List -> List
 .
 
-Definition singleton (A:Type) (a:A) := cons _ a (nil _).
+Definition singleton (A:Type) (a:A) := cons a nil.
 
 (* The syntax for expliciting implicit types is quickly verbose, these make it easier *)
 (* LO is a list of A, LOLO is a list of lists of A *)
-Definition LO (A:Type) := List A.
-Definition LOLO (A:Type) := List (LO A).
+Definition LO (A:Type) := List (A:=A).
+Definition LOLO (A:Type) := List (A:=(LO A)).
 
 (* Classic fixpoint definition of append *)
-Fixpoint append (A:Type) (l l' : LO A) : (LO A) := match l, l' with
-| nil _, _ => l'
-| cons _ head tail, _ => cons _ head (append _ tail l')
+Fixpoint append {A:Type} (l l' : LO A) : (LO A) := match l, l' with
+| nil, _ => l'
+| cons head tail, _ => cons head (append tail l')
 end.
 
 (* Simplification lemma to remove empty lists on the right *)
-Lemma append_nil (A:Type) : forall l : LO A, append _ l (nil _) = l.
+Lemma append_nil {A:Type} : forall l : LO A, append l nil = l.
 Proof.
   intro l.
   induction l as [| head tail ih].
@@ -32,7 +33,7 @@ Proof.
 Qed.
 
 (* Associativity of append *)
-Lemma append_assoc (A:Type) : associative _ (append A).
+Lemma append_assoc {A:Type} : associative (append (A:=A)) .
 Proof.
   red.
   intro x.
@@ -41,14 +42,14 @@ Proof.
   { intros y z. simpl. rewrite ih. reflexivity. }
 Qed.
 
-Lemma append_intro_l (A:Type) : forall (l m n: LO A), m = n -> append _ l m = append _ l n.
+Lemma append_intro_l {A:Type} : forall (l m n: LO A), m = n -> append l m = append l n.
 Proof.
   intros l m n heq.
   subst m.
   reflexivity.
 Qed.
 
-Lemma append_intro_r (A:Type) : forall (l m n: LO A), m = n -> append _ m l = append _ n l.
+Lemma append_intro_r (A:Type) : forall (l m n: LO A), m = n -> append m l = append n l.
 Proof.
   intros l m n heq.
   subst m.
@@ -56,24 +57,24 @@ Proof.
 Qed.
 
 (* A predicate that asserts whether a list is empty *)
-Definition isnil (A:Type) (l:LO A) := l = (nil _).
+Definition isnil {A:Type} (l:LO A) := l = nil.
 
 (* The empty list is empty *)
 (* It's trivial, but it comes up often in proofs *)
-Lemma isnil_nil (A:Type) : isnil _ (nil A).
+Lemma isnil_nil {A:Type} : isnil (nil (A:=A)).
 Proof.
   red.
   reflexivity.
 Qed.
 
 (* Predicate that asserts that all elements in a list satisfy a given property *)
-Fixpoint allmatch (A:Type) (l:List A) (P:A->Prop) := match l with
-| nil _ => True
-| cons _ x l' => P x /\ allmatch _ l' P
+Fixpoint allmatch {A:Type} (l:List) (P:A->Prop) := match l with
+| nil => True
+| cons x l' => P x /\ allmatch l' P
 end.
 
 Theorem allmatch_append {A:Type} : forall (l m:LO A) (P:A->Prop),
-  allmatch _ l P -> allmatch _ m P -> allmatch _ (append _ l m) P.
+  allmatch l P -> allmatch m P -> allmatch (append l m) P.
 Proof.
 intro l.
 induction l as [|head tail ih].
@@ -100,23 +101,23 @@ exact hm.
 Qed.
 
 (* Map function over lists *)
-Fixpoint map (A B:Type) (f:A->B) (x:LO A) := match x with
-| nil _ => nil _
-| cons _ head tail => cons _ (f head) (map _ _ f tail)
+Fixpoint map {A B:Type} (f:A->B) (x:LO A) := match x with
+| nil => nil
+| cons head tail => cons (f head) (map f tail)
 end.
 
 (* Flattens a list of lists *)
-Fixpoint flatten (A:Type) (l:LOLO A) := match l with
-| nil _ => nil _
-| cons _ head tail => append _ head (flatten _ tail)
+Fixpoint flatten {A:Type} (l:LOLO A) := match l with
+| nil => nil
+| cons head tail => append head (flatten tail)
 end.
 
 (* Predicate that asserts tha all elements in a list of lists are empty *)
-Definition allnil (A:Type) (l:LOLO A) := allmatch _ l (isnil _).
+Definition allnil {A:Type} (l:LOLO A) := allmatch l isnil.
 
 (* In an empty list of lists, all elements are empty *)
 (* Also trivial, but comes up often in proofs *)
-Lemma allnil_nil (A:Type) : allnil A (nil _).
+Lemma allnil_nil {A:Type} : allnil (nil (A:=LOLO A)).
 Proof.
   red.
   simpl.
@@ -124,7 +125,7 @@ Proof.
 Qed.
 
 (* In a list of lists, if all elements are the empty list, then append commutes for these two lists *)
-Lemma allnil_append_comm (A:Type) : forall (l m : LOLO A), allnil _ l -> allnil _ m -> append _ l m = append _ m l.
+Lemma allnil_append_comm {A:Type} : forall (l m : LOLO A), allnil l -> allnil m -> append l m = append m l.
 Proof.
   (* The proof uses induction and rewriting *)
   intro l.
@@ -186,12 +187,12 @@ Module Natural.
   Definition Level2 := LO Level1.
 
   (* A list of lists is natural if all its elements are empty lists *)
-  Definition isnatural (l:Level2) := allnil _ l.
+  Definition isnatural (l:Level2) := allnil l.
 
   (* Zero is the empty list of empty lists *)
-  Definition zero := nil Level1.
+  Definition zero := nil (A:=Level1).
   (* The successor function adds an empty list to any lists of list *)
-  Definition next (n:Level2) : Level2 := cons _ (nil _) n.
+  Definition next (n:Level2) : Level2 := cons nil n.
 
   (* We can show that zero is natural *)
   Theorem  zero_natural : isnatural zero.
@@ -317,7 +318,7 @@ Module Natural.
   Qed.
 
   (* Here's is another helper lemma, that proves that constructs the predecessor number *)
-  Lemma predecessor_exists : forall (nT:T) head tail, number nT = cons _ head tail -> exists mT:T, number mT = tail.
+  Lemma predecessor_exists : forall (nT:T) head tail, number nT = cons head tail -> exists mT:T, number mT = tail.
   Proof.
     intros nT head tail heq.
     (* We explode nT into it's content and it's hypothese, then get rid of the equality *)
@@ -395,7 +396,7 @@ Module Natural.
       (* Simplification will use what it know about nT *)
       simpl in hm.
       (* We use the head and tail that we already have *)
-      specialize (hm (nil _)).
+      specialize (hm nil).
       specialize (hm tail).
       (* And that makes equality *)
       specialize (hm (eq_refl _)).
@@ -451,7 +452,7 @@ Module Natural.
   Qed.
 
   (* This little lemma show that isnatural is conserved by append *)
-  Lemma append_natural : forall l m, isnatural l -> isnatural m -> isnatural (append _ l m).
+  Lemma append_natural : forall l m, isnatural l -> isnatural m -> isnatural (append l m).
   Proof.
     intros l.
     unfold isnatural.
@@ -478,12 +479,12 @@ Module Natural.
     let (n, hn) := nT in
     let (m, hm) := mT in
     (* Construct the result *)
-    let result := append _ n m in
+    let result := append n m in
     (* And binds the proof using the proof above *)
     exist _ result (append_natural n m hn hm).
 
   (* Proof that plus is commutative *)
-  Theorem plus_comm : commutative _ plus.
+  Theorem plus_comm : commutative plus.
   Proof.
     red.
       intros xT yT.
@@ -502,7 +503,7 @@ Module Natural.
   Qed.
 
   (* Proof that plus is associative *)
-  Theorem plus_assoc : associative _ plus.
+  Theorem plus_assoc : associative plus.
   Proof.
     (* Expand the definition *)
     red.
@@ -525,11 +526,11 @@ Module Natural.
   Qed.
 
   Fixpoint multl (x y:Level2) : Level2 := match x with
-  | nil _ => nil _
-  | cons _ head tail => append _ y (multl tail y)
+  | nil => nil
+  | cons head tail => append y (multl tail y)
   end.
 
-  Lemma multl_nil : forall x, multl x (nil _) = nil _.
+  Lemma multl_nil : forall x, multl x nil  = nil.
   Proof.
     intro x.
     induction x as [|head tail ih].
@@ -570,14 +571,14 @@ Module Natural.
     let result := multl n m in
     exist _ result (multl_natural n m hn hm).
 
-Theorem mult_comm : commutative _ mult.
+Theorem mult_comm : commutative mult.
 Proof.
-unfold commutative.
+red.
 intros xT yT.
 destruct xT as [x hx];
-destruct yT as [y hy].
-simpl.
-apply proof_irrelevance.
+destruct yT as [y hy];
+simpl;
+apply proof_irrelevance;
 simpl.
 unfold isnatural in *.
 unfold allnil in *.
@@ -623,8 +624,8 @@ rewrite <- ihy.
 red in hnily.
 subst heady.
 repeat rewrite <- append_assoc.
-assert (heq:=allnil_append_comm _ taily tailx).
-pattern (append _ taily tailx).
+assert (heq:=allnil_append_comm taily tailx).
+pattern (append taily tailx).
 rewrite heq.
 reflexivity.
 unfold allnil. exact hmatchy.
@@ -645,7 +646,7 @@ Proof.
   reflexivity.
 Qed.
 
-Theorem mult_assoc : associative _ mult.
+Theorem mult_assoc : associative mult.
 Proof.
   red.
   intros xT yT zT.
@@ -695,9 +696,9 @@ Proof.
         red in a. subst l.
         assert (hcomm:=multl_comm).
         specialize (hcomm tailx).
-        specialize (hcomm (cons _ (nil _) taily)).
+        specialize (hcomm (cons  nil  taily)).
         unfold isnatural in hcomm.
         unfold allnil in hcomm.
-        specialize (hcomm hmatchx).
+        specialize (hcomm hmatchx). 
         (* Stuck !( *)
 Abort.
