@@ -1,14 +1,21 @@
 
+Declare Scope alt.
+Open Scope alt.
+
 (* I like to name properties *)
 Definition commutative {A:Type} (f:A->A->A) := forall x y, f x y = f y x.
 Definition associative {A:Type} (f:A->A->A) := forall x y z, f (f x y) z = f x (f y z).
-
 
 (* That's the classic definition of a list *)
 Inductive List {A:Type} : Type :=
 | nil : List
 | cons : A -> List -> List
 .
+
+Notation "'_'" := nil (only printing) : alt.
+Notation "[ x ]" := (cons x nil) (only printing) : alt.
+Notation "[ x ; y ; .. ; z ]" :=  (cons x (cons y .. (cons z nil) ..)) (only printing) : alt.
+Notation "x ∘ y" := (cons x y) (only printing, at level 60) : alt. 
 
 Definition singleton (A:Type) (a:A) := cons a nil.
 
@@ -22,6 +29,7 @@ Fixpoint append {A:Type} (l l' : LO A) : (LO A) := match l, l' with
 | nil, _ => l'
 | cons head tail, _ => cons head (append tail l')
 end.
+Notation "x ⋄ y" := (append x y) (only printing, at level 60) : alt. 
 
 (* Simplification lemma to remove empty lists on the right *)
 Lemma append_nil {A:Type} : forall l : LO A, append l nil = l.
@@ -264,6 +272,7 @@ Module Natural.
   (* Here we define the strong zero *)
   (* This uses the "exist" constructor from "sig" with zero and a proof that zero is natural. *)
   Definition zeroT := exist _ zero zero_natural.
+  Notation "0i" := zeroT (only printing) : alt. 
 
   (*
     Same idea for the strong next function, although it is maybe a bit more difficult to follow,
@@ -272,6 +281,7 @@ Module Natural.
   Definition nextT (n:T) := exist _
     (next (number n))
     (next_natural (number n) (hyp n)).
+  Notation "+i x" := (nextT x) (only printing, at level 60) : alt. 
 
   (*
     Here's a first usage of proof irrelevance to prove that a number is the "strong" zero
@@ -482,6 +492,7 @@ Module Natural.
     let result := append n m in
     (* And binds the proof using the proof above *)
     exist _ result (append_natural n m hn hm).
+  Notation "x +i y" := (plus x y) (only printing, at level 60) : alt. 
 
   (* Proof that plus is commutative *)
   Theorem plus_comm : commutative plus.
@@ -529,6 +540,7 @@ Module Natural.
   | nil => nil
   | cons head tail => append y (multl tail y)
   end.
+  Notation "x *i_ y" := (multl x y) (only printing, at level 60) : alt. 
 
   Lemma multl_nil : forall x, multl x nil  = nil.
   Proof.
@@ -570,6 +582,7 @@ Module Natural.
     let (m, hm) := mT in
     let result := multl n m in
     exist _ result (multl_natural n m hn hm).
+  Notation "x *i y" := (mult x y) (only printing, at level 60) : alt. 
 
 Theorem mult_comm : commutative mult.
 Proof.
@@ -643,8 +656,47 @@ Proof.
   specialize (hcomm (exist _ y hy)).
   simpl in hcomm.
   inversion hcomm as [h].
+  clear hcomm.
   reflexivity.
 Qed.
+
+Theorem plus_mult_distribute_left : forall x y z, mult x (plus y z) = plus (mult x y) (mult x z).
+Proof.
+  intros xT yT zT.
+  destruct xT as [x hx];
+  destruct yT as [y hy];
+  destruct zT as [z hz].
+  simpl.
+  apply proof_irrelevance.
+  simpl.
+  unfold isnatural in *.
+  unfold allnil in *.
+  induction x as [|headx tailx ihx].
+  { simpl. reflexivity. }
+  {
+    simpl in *.
+    destruct hx as [hnilx hmatchx].
+    red in hnilx.
+    subst headx.
+    specialize (ihx hmatchx).
+    rewrite ihx.
+    clear ihx.
+    repeat rewrite append_assoc.
+    apply append_intro_l.
+    repeat rewrite <- append_assoc.
+    apply append_intro_r.
+    rewrite (allnil_append_comm z).
+    { reflexivity. }
+    { red. exact hz. }
+    {
+      red.
+      apply multl_natural.
+      { apply hmatchx. }
+      { red. unfold allnil. exact hy. }
+    }
+  }
+Qed.
+
 
 Theorem mult_assoc : associative mult.
 Proof.
@@ -674,6 +726,7 @@ Proof.
     specialize (ihx z hz).
     rewrite <- ihx.
     clear ihx.
+    rename tailx into x.
     generalize dependent z.
     induction y as [|heady taily ihy].
     { simpl. intros z hz. reflexivity. }
@@ -688,17 +741,5 @@ Proof.
       apply append_intro_l.
       specialize (ihy hmatchy).
       specialize (ihy z hz).
-      destruct z.
-      { repeat rewrite multl_nil. simpl. reflexivity. }
-      {
-        simpl in hz.
-        destruct hz as [a b].
-        red in a. subst l.
-        assert (hcomm:=multl_comm).
-        specialize (hcomm tailx).
-        specialize (hcomm (cons  nil  taily)).
-        unfold isnatural in hcomm.
-        unfold allnil in hcomm.
-        specialize (hcomm hmatchx). 
-        (* Stuck !( *)
+
 Abort.
