@@ -188,10 +188,10 @@ Qed.
 Module Natural.
 
   (* The actual type does not matter *)
-  Parameter Tfn : Type.
+  Parameter TypeForNat : Type.
 
   (* And we define two typing levels *)
-  Definition Level1 := LO Tfn.
+  Definition Level1 := LO TypeForNat.
   Definition Level2 := LO Level1.
 
   (* A list of lists is natural if all its elements are empty lists *)
@@ -282,6 +282,12 @@ Module Natural.
     (next (number n))
     (next_natural (number n) (hyp n)).
   Notation "+i x" := (nextT x) (only printing, at level 60) : alt. 
+
+  Definition oneT := nextT zeroT.
+  Notation "1i" := oneT (only printing) : alt.
+
+  Definition twoT := nextT oneT.
+  Notation "2i" := twoT (only printing) : alt.
 
   (*
     Here's a first usage of proof irrelevance to prove that a number is the "strong" zero
@@ -493,7 +499,7 @@ Module Natural.
     (* And binds the proof using the proof above *)
     exist _ result (append_natural n m hn hm).
   Notation "x +i y" := (plus x y) (only printing, at level 60) : alt. 
-
+ 
   (* Proof that plus is commutative *)
   Theorem plus_comm : commutative plus.
   Proof.
@@ -511,6 +517,23 @@ Module Natural.
     apply allnil_append_comm.
     { exact hx. }
     { exact hy. }
+  Qed.
+
+  Theorem plus_zero_l : forall n, plus zeroT n = n.
+  Proof.
+    intro nT.
+    destruct nT as [n hn].
+    simpl.
+    apply proof_irrelevance.
+    simpl.
+    reflexivity.
+  Qed.
+
+  Theorem plus_zero_r : forall n, plus n zeroT = n.
+  Proof.
+    intro n.
+    rewrite plus_comm.
+    apply plus_zero_l.
   Qed.
 
   (* Proof that plus is associative *)
@@ -584,162 +607,275 @@ Module Natural.
     exist _ result (multl_natural n m hn hm).
   Notation "x *i y" := (mult x y) (only printing, at level 60) : alt. 
 
-Theorem mult_comm : commutative mult.
-Proof.
-red.
-intros xT yT.
-destruct xT as [x hx];
-destruct yT as [y hy];
-simpl;
-apply proof_irrelevance;
-simpl.
-unfold isnatural in *.
-unfold allnil in *.
-generalize dependent y.
-induction x as [|headx tailx ihx].
-{
-intros.
-simpl.
-induction y as [|heady taily ihy].
-{
-simpl. reflexivity.
-}
-{
-simpl.
-simpl in hy.
-destruct hy as [hnily hmatchy].
-specialize (ihy hmatchy).
-exact ihy.
-}
-}
-{
-intros y hy.
-simpl.
-simpl in hx.
-destruct hx as [hnilx hmatchx].
-specialize (ihx hmatchx).
-red in hnilx.
-subst headx.
-specialize (ihx y).
-specialize (ihx hy).
-rewrite ihx.
-clear ihx.
-induction y as [|heady taily ihy].
-{
-simpl. reflexivity.
-}
-{
-simpl.
-simpl in hy.
-destruct hy as [hnily hmatchy].
-specialize (ihy hmatchy).
-rewrite <- ihy.
-red in hnily.
-subst heady.
-repeat rewrite <- append_assoc.
-assert (heq:=allnil_append_comm taily tailx).
-pattern (append taily tailx).
-rewrite heq.
-reflexivity.
-unfold allnil. exact hmatchy.
-unfold allnil. exact hmatchx.
-}
-}
-Qed.
-
-Theorem multl_comm : forall x y, isnatural x -> isnatural y -> multl x y = multl y x.
-Proof.
-  intros x y hx hy.
-  assert (hcomm := mult_comm).
-  unfold commutative in hcomm.
-  specialize (hcomm (exist _ x hx)).
-  specialize (hcomm (exist _ y hy)).
-  simpl in hcomm.
-  inversion hcomm as [h].
-  clear hcomm.
-  reflexivity.
-Qed.
-
-Theorem plus_mult_distribute_left : forall x y z, mult x (plus y z) = plus (mult x y) (mult x z).
-Proof.
-  intros xT yT zT.
-  destruct xT as [x hx];
-  destruct yT as [y hy];
-  destruct zT as [z hz].
-  simpl.
-  apply proof_irrelevance.
-  simpl.
-  unfold isnatural in *.
-  unfold allnil in *.
-  induction x as [|headx tailx ihx].
-  { simpl. reflexivity. }
-  {
-    simpl in *.
-    destruct hx as [hnilx hmatchx].
-    red in hnilx.
-    subst headx.
-    specialize (ihx hmatchx).
-    rewrite ihx.
-    clear ihx.
-    repeat rewrite append_assoc.
-    apply append_intro_l.
-    repeat rewrite <- append_assoc.
-    apply append_intro_r.
-    rewrite (allnil_append_comm z).
-    { reflexivity. }
-    { red. exact hz. }
-    {
-      red.
-      apply multl_natural.
-      { apply hmatchx. }
-      { red. unfold allnil. exact hy. }
-    }
-  }
-Qed.
-
-
-Theorem mult_assoc : associative mult.
-Proof.
-  red.
-  intros xT yT zT.
-  destruct xT as [x hx];
-  destruct yT as [y hy];
-  destruct zT as [z hz].
-  simpl.
-  apply proof_irrelevance.
-  simpl.
-  unfold isnatural in *.
-  unfold allnil in *.
-  generalize dependent z.
-  generalize dependent y.
-  induction x as [|headx tailx ihx].
-  { intros y hy z hz. simpl. reflexivity. }
-  {
+  Theorem mult_one_l : forall n, mult oneT n = n.
+  Proof.
+    intro nT.
+    destruct nT as [n hn].
     simpl.
-    intros y hy z hz.
-    simpl in hx.
-    destruct hx as [hnilx hmatchx].
-    red in hnilx.
-    subst headx.
-    specialize (ihx hmatchx).
-    specialize (ihx y hy).
-    specialize (ihx z hz).
-    rewrite <- ihx.
-    clear ihx.
-    rename tailx into x.
+    apply proof_irrelevance.
+    simpl.
+    rewrite append_nil.
+    reflexivity.
+  Qed.
+
+  Theorem mult_comm : commutative mult.
+  Proof.
+    red.
+    intros xT yT.
+    destruct xT as [x hx];
+    destruct yT as [y hy];
+    simpl;
+    apply proof_irrelevance;
+    simpl.
+    unfold isnatural in *.
+    unfold allnil in *.
+    generalize dependent y.
+    induction x as [|headx tailx ihx].
+    {
+      intros.
+      simpl.
+      induction y as [|heady taily ihy].
+      { simpl. reflexivity. }
+      {
+        simpl.
+        simpl in hy.
+        destruct hy as [hnily hmatchy].
+        specialize (ihy hmatchy).
+        exact ihy.
+      }
+    }
+    {
+      intros y hy.
+      simpl.
+      simpl in hx.
+      destruct hx as [hnilx hmatchx].
+      specialize (ihx hmatchx).
+      red in hnilx.
+      subst headx.
+      specialize (ihx y).
+      specialize (ihx hy).
+      rewrite ihx.
+      clear ihx.
+      induction y as [|heady taily ihy].
+      { simpl. reflexivity. }
+      {
+        simpl.
+        simpl in hy.
+        destruct hy as [hnily hmatchy].
+        specialize (ihy hmatchy).
+        rewrite <- ihy.
+        red in hnily.
+        subst heady.
+        repeat rewrite <- append_assoc.
+        assert (heq:=allnil_append_comm taily tailx).
+        pattern (append taily tailx).
+        rewrite heq.
+        reflexivity.
+        unfold allnil. exact hmatchy.
+        unfold allnil. exact hmatchx.
+      }
+    }
+  Qed.
+
+  Theorem mult_one_r : forall n, mult n oneT = n.
+  Proof.
+    intro n.
+    rewrite mult_comm.
+    apply mult_one_l.
+  Qed.
+
+  Theorem multl_comm : forall x y, isnatural x -> isnatural y -> multl x y = multl y x.
+  Proof.
+    intros x y hx hy.
+    assert (hcomm := mult_comm).
+    unfold commutative in hcomm.
+    specialize (hcomm (exist _ x hx)).
+    specialize (hcomm (exist _ y hy)).
+    simpl in hcomm.
+    inversion hcomm as [h].
+    clear hcomm.
+    reflexivity.
+  Qed.
+
+  Theorem plus_mult_distribute_left : forall x y z, mult x (plus y z) = plus (mult x y) (mult x z).
+  Proof.
+    intros xT yT zT.
+    destruct xT as [x hx];
+    destruct yT as [y hy];
+    destruct zT as [z hz].
+    simpl.
+    apply proof_irrelevance.
+    simpl.
+    unfold isnatural in *.
+    unfold allnil in *.
+    induction x as [|headx tailx ihx].
+    { simpl. reflexivity. }
+    {
+      simpl in *.
+      destruct hx as [hnilx hmatchx].
+      red in hnilx.
+      subst headx.
+      specialize (ihx hmatchx).
+      rewrite ihx.
+      clear ihx.
+      repeat rewrite append_assoc.
+      apply append_intro_l.
+      repeat rewrite <- append_assoc.
+      apply append_intro_r.
+      rewrite (allnil_append_comm z).
+      { reflexivity. }
+      { red. exact hz. }
+      {
+        red.
+        apply multl_natural.
+        { apply hmatchx. }
+        { red. unfold allnil. exact hy. }
+      }
+    }
+  Qed.
+
+  Theorem plus_mult_distribute_leftl : forall x y z,
+    isnatural x -> isnatural y -> isnatural z
+    -> multl x (append y z) = append (multl x y) (multl x z).
+  Proof.
+    intros x y z hx hy hz.
+    assert (h := plus_mult_distribute_left).
+    specialize (h (exist _ x hx)).
+    specialize (h (exist _ y hy)).
+    specialize (h (exist _ z hz)).
+    simpl in h.
+    inversion h as [h']. clear h. rename h' into h.
+    reflexivity.
+  Qed.
+
+  Theorem plus_mult_distribute_right : forall x y z, mult (plus x y) z  = plus (mult x z) (mult y z).
+  Proof.
+    intros x y z.
+    repeat rewrite (mult_comm _ z).
+    rewrite plus_mult_distribute_left.
+    reflexivity.
+  Qed.
+
+  Theorem plus_mult_distribute_rightl : forall x y z,
+    isnatural x -> isnatural y -> isnatural z
+    -> multl (append x y) z  = append (multl x z) (multl y z).
+  Proof.
+    intros x y z hx hy hz.
+    assert (h := plus_mult_distribute_right).
+    specialize (h (exist _ x hx)).
+    specialize (h (exist _ y hy)).
+    specialize (h (exist _ z hz)).
+    simpl in h.
+    inversion h as [h']. clear h. rename h' into h.
+    reflexivity.
+  Qed.
+
+  Theorem mult_assoc : associative mult.
+  Proof.
+    red.
+    intros xT yT zT.
+    destruct xT as [x hx];
+    destruct yT as [y hy];
+    destruct zT as [z hz].
+    simpl.
+    apply proof_irrelevance.
+    simpl.
+    unfold isnatural in *.
+    unfold allnil in *.
     generalize dependent z.
-    induction y as [|heady taily ihy].
-    { simpl. intros z hz. reflexivity. }
+    generalize dependent y.
+    induction x as [|headx tailx ihx].
+    { intros y hy z hz. simpl. reflexivity. }
     {
       simpl.
-      intros z hz.
-      simpl in hy.
-      destruct hy as [hnily hmatchy].
-      red in hnily.
-      subst heady.
-      rewrite append_assoc.
-      apply append_intro_l.
-      specialize (ihy hmatchy).
-      specialize (ihy z hz).
+      intros y hy z hz.
+      simpl in hx.
+      destruct hx as [hnilx hmatchx].
+      red in hnilx.
+      subst headx.
+      specialize (ihx hmatchx).
+      specialize (ihx y hy).
+      specialize (ihx z hz).
+      rewrite <- ihx.
+      clear ihx.
+      rename tailx into x.
+      rewrite plus_mult_distribute_rightl.
+      { reflexivity. }
+      { unfold isnatural. unfold allnil. exact hy. }
+      { apply multl_natural.
+        { unfold isnatural. unfold allnil. exact hmatchx. }
+        { unfold isnatural. unfold allnil. exact hy. }
+      }
+      { unfold isnatural. unfold allnil. exact hz. }
+    }
+  Qed.
 
-Abort.
+  Definition commutative_monoid (T:Type) (op:T->T->T) :=
+    associative op /\ commutative op /\ (exists e, forall a, op e a = a /\ op a e = a).
+
+  Theorem Natural_plus_commutative_monoid : commutative_monoid T plus /\ commutative_monoid T mult.
+  Proof.
+    split.
+    {
+      red.
+      repeat split.
+      { apply plus_assoc. }
+      { apply plus_comm. }
+      { exists zeroT.
+        intro a.
+        split.
+        { rewrite plus_zero_l. reflexivity. }
+        { rewrite plus_zero_r. reflexivity. }
+      }
+    }
+      red.
+      repeat split.
+      { apply mult_assoc. }
+      { apply mult_comm. }
+      { exists oneT.
+        intro a.
+        split.
+        { rewrite mult_one_l. reflexivity. }
+        { rewrite mult_one_r. reflexivity. }
+      }
+  Qed.
+
+  Fixpoint length {A:Type} (l : LO A) : T := match l with
+  | nil => zeroT
+  | cons _ tail => nextT (length tail)
+  end.
+
+  Definition Pair {A:Type} := { l : LO A | length(l) = twoT }.
+  Definition PairOf (A:Type) := Pair (A:=A).
+
+  Definition first {A:Type} (p : PairOf A) : A.
+  Proof.
+  destruct p as [l h].
+  destruct l as [|first rest].
+  { simpl in h. inversion h. }
+  { exact first. }
+  Defined.
+
+  Definition second {A:Type} (p:PairOf A) : A.
+  Proof.
+  destruct p as [l h].
+  destruct l as [|first rest].
+  { simpl in h. inversion h. }
+  {
+    destruct rest as [|second rest].
+    { simpl in h. inversion h. }
+    { exact second. }
+  }
+  Qed.
+
+  Theorem pair_eq {A:Type} : forall (p q: PairOf A), first p = first q -> second p = second q -> p = q.
+  Proof.
+    intros pP qP hf hs.
+    destruct pP as [p hp].
+    destruct qP as [q hq].
+    simpl in *.
+    
+      
+
+  
+ 
