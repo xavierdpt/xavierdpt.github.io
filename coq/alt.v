@@ -860,67 +860,67 @@ Module Natural.
   Fixpoint longerOrEqualThan {A:Type} (l m:LO A) := match l, m with
   | nil , nil => True
   | nil , cons _ _ => False
-  | cons _ _ , nil  => False
+  | cons _ _ , nil  => True
   | cons _ ltail, cons _ mtail => longerOrEqualThan ltail mtail
   end.
 
-  Definition natural_le (n m:T) := longerOrEqualThan (number m) (number n).
+  Definition le_n (n m:T) := longerOrEqualThan (number m) (number n).
+
+  Definition lt_n (n m:T) := le_n (nextT n) m.
 
   Fixpoint sum (l:LO T) := match l with
   | nil => zeroT
   | cons head tail => plus head (sum tail)
   end.
 
-  Lemma plus_one_next : forall n, plus oneT n = nextT n.
-  intro n.
-pattern n;apply I.
-{ rewrite plus_zero_r. fold oneT. reflexivity. }
-{ clear n. intro n. intro ih.
+  Lemma cons_append {A:Type} : forall (head:A) (tail:LO A), cons head tail = append (cons head nil) tail.
+  Proof.
+    intros head tail.
+    simpl.
+    reflexivity.
+  Qed.
 
+  Lemma plus_next: forall (n m:T), plus (nextT n) m = plus n (nextT m).
+  Proof.
+    intros nT mT.
+    destruct nT as [n hn];
+    destruct mT as [m hm].
+    simpl. apply proof_irrelevance. simpl.
+    unfold next.
+    rewrite cons_append.
+    rewrite (cons_append _ m).
+    repeat rewrite <- append_assoc.
+    apply append_intro_r.
+    Search append.
+    rewrite (allnil_append_comm n _).
+    { reflexivity. }
+    { unfold isnatural in hn. exact hn. }
+    { clear. red. simpl. split. apply isnil_nil. trivial. }
+  Qed.
 
-  Lemma plus_one_next : forall n, plus n oneT = nextT n.
+  Lemma plus_zero_zero_eq_zero : forall (n m:T), plus n m = zeroT -> n = zeroT /\ m = zeroT.
   Proof.
     intro n.
     pattern n.
     apply I.
     {
-      rewrite plus_zero_l.
-      fold oneT.
-      reflexivity.
+      intros m heq.
+      rewrite plus_zero_l in heq.
+      subst m.
+      split;reflexivity.
     }
     {
-      clear n. intro n. intro ih.
-Print nextT.
-
-  Lemma plus_next: forall (n m:T), plus (nextT n) m = plus n (nextT m).
-  Proof.
-    intro n.
-    pattern n;apply I.
-    {
-      intro m.
-      rewrite plus_zero_l.
-      fold oneT.
-      rewrite plus_comm.
-
-
-  Lemma plus_zz_eq_z : forall (n m:T), plus n m = zeroT -> n = zeroT /\ m = zeroT.
-  Proof.
-  intro n.
-  pattern n.
-  apply I.
-  {
-    intros m heq.
-    rewrite plus_zero_l in heq.
-    subst m.
-    split;reflexivity.
-  }
-  {
-    clear n.
-    intro n.
-    intro ih.
-    intros m heq.
-    specialize (ih (nextT m)).
-Search (plus (nextT _ ) _).
+      clear n.
+      intro n.
+      intro ih.
+      intros m heq.
+      specialize (ih (nextT m)).
+      rewrite plus_next in heq.
+      specialize (ih heq).
+      destruct ih as [ hl hr ].
+      inversion hr.
+    }
+  Qed.
   
 
   Lemma sum_zero : forall (l:LO T), sum l = zeroT -> forall a, inlist l a -> a = zeroT.
@@ -936,9 +936,320 @@ Search (plus (nextT _ ) _).
     {
       simpl.
       intro heq.
-      
+      apply plus_zero_zero_eq_zero in heq.
+      destruct heq as [hl hr].
+      subst head.
+      specialize (ih hr).
+      intro a.
+      specialize (ih a).
+      intro h.
+      clear hr.
+      destruct h as [hr | hl].
+      { exact hr. }
+      { specialize (ih hl). exact ih. }
+    }
+  Qed.
 
 
+  Lemma next_injective : forall n m, nextT n = nextT m -> n = m.
+  Proof.
+    intros nT mT.
+    intro hnext.
+    inversion hnext as [heq].
+    apply proof_irrelevance in heq. 
+    exact heq.
+  Qed.
+
+  Lemma next_out : forall n m, plus (nextT n) m = nextT (plus n m).
+  Proof.
+    intros nT mT.
+    destruct nT as [n hn];
+    destruct mT as [m hm].
+    simpl.
+    apply proof_irrelevance.
+    simpl.
+    unfold next.
+    reflexivity.
+  Qed.
+
+  Lemma plus_elim_zero_l : forall n m, plus n m = n -> m = zeroT.
+  Proof.
+  intro n.
+  pattern n;apply I.
+  { intro m. intro h. rewrite plus_zero_l in h. exact h. }
+  {
+    clear n.
+    intro n.
+    intro ih.
+    intro m.
+    intro h.
+    apply ih.
+    clear ih.
+    apply next_injective.
+    rewrite next_out in h.
+    exact h.
+  }
+  Qed.
+
+  Lemma le_n_next : forall n m, le_n n m -> le_n (nextT n) (nextT m).
+  Proof.
+  intros nT mT.
+    unfold le_n.
+  destruct nT as [n hn];
+  destruct mT as [m hm].
+  simpl.
+  generalize dependent m.
+  induction n as [|head tail ih].
+  {
+    intro m.
+    destruct m as [|headm tailm].
+    { simpl. intros _ _. trivial. }
+    { simpl. intros _ f. exact f. }
+  }
+  {
+    red in hn. unfold allnil in hn. simpl in hn. destruct hn as [hnil hmatch].
+    unfold isnatural in ih. unfold allnil in ih. specialize (ih hmatch).
+    intros m hm.
+    destruct m as [|headm tailm].
+    { simpl. intro f. exact f. }
+    { simpl. intro h.
+      unfold isnatural in hm. unfold allnil in hm. simpl in hm. destruct hm as [hnilm hmatchm].
+      specialize (ih _ hmatchm).
+      specialize (ih h).
+      exact ih.
+    }
+  }
+  Qed.
+
+  Lemma le_n_n : forall n m, le_n n (plus n m).
+  Proof.
+    intros nT mT.
+    unfold le_n.
+    destruct nT as [n hn];
+    destruct mT as [m hm].
+    simpl. clear hn hm.
+    induction n as [|headn tailn ih].
+    { simpl.
+      destruct m as [|headm tailm].
+      { simpl. trivial. }
+      { simpl. trivial. }
+    }
+    { simpl. exact ih. }
+  Qed.
+
+  Lemma le_trans : forall n m k, le_n n m -> le_n m k -> le_n n k.
+  Proof.
+  intros nT mT kT.
+  unfold le_n.
+  destruct nT as [n hn];
+  destruct mT as [m hm];
+  destruct kT as [k hk].
+  simpl.
+  clear hn hm hk.
+  generalize dependent m.
+  generalize dependent n.
+  induction k as [|headk tailk ih].
+  {
+    simpl.
+    intros n m h.
+    destruct m as [|headm tailm].
+    {
+      destruct n as [|headn tailn].
+      { intros _. trivial. }
+      { simpl in h. inversion h. }
+    }
+    { intro f. inversion f. }
+  }
+  {
+    intros n m ha hb.
+    simpl.
+    destruct n as [|headn tailn].
+    { trivial. }
+    { simpl in *.
+      destruct m as [|headm tailm].
+      { simpl in *. inversion ha. }
+      {
+        simpl in *.
+        eapply ih.
+        { apply ha. }
+        { apply hb. }
+      }
+    }
+  }
+  Qed.
+
+  Lemma le_next_self : forall a, le_n a (nextT a).
+  Proof.
+    intro aT.
+    destruct aT as [a ha].
+    unfold le_n.
+    simpl.
+    clear ha.
+    induction a as [|head tail ih].
+    { trivial. }
+    { simpl. apply ih. }
+  Qed.
+
+  Lemma le_n_next_intro : forall n m, le_n (nextT n) (nextT m) -> le_n n m.
+  Proof.
+    intros nT mT.
+    unfold le_n.
+    destruct nT as [n hn];
+    destruct mT as [m hm].
+    simpl.
+    clear hn hm.
+    intro h.
+    exact h.
+  Qed.
+
+  Lemma next_oneT : forall n, nextT n = plus n oneT.
+  Proof.
+    intro n.
+    unfold oneT.
+    rewrite plus_comm.
+    rewrite next_out.
+    rewrite plus_zero_l.
+    reflexivity.
+  Qed.
+
+  Lemma sum_lt : forall (l:LO T), forall a, inlist l a -> lt_n a (plus (sum l) oneT).
+  Proof.
+  induction l as [|head tail ih].
+  { intros a h. simpl in h. inversion h. }
+  {
+    intros a h.
+    simpl in h.
+    destruct h as [hl|hr].
+    {
+      subst a. simpl.
+      unfold lt_n.
+      unfold oneT.
+      rewrite plus_comm.
+      rewrite next_out.
+      apply le_n_next.
+      rewrite plus_zero_l.
+      apply le_n_n.
+    }
+    specialize (ih _ hr).
+    unfold lt_n.
+    unfold oneT.
+    rewrite plus_comm.
+    rewrite next_out.
+    apply le_n_next.
+    rewrite plus_zero_l.
+    unfold lt_n in ih.
+    apply le_n_next_intro.
+    rewrite (next_oneT (sum (cons head tail))).
+    simpl.
+    rewrite plus_assoc.
+    apply le_trans with (plus (sum tail) oneT).
+    { exact ih. }
+    {
+      rewrite (plus_comm head).
+      apply le_n_n.
+    }
+  }
+  Qed.
+
+  Lemma lt_irrefl : forall n, lt_n n n -> False.
+  Proof.
+    intro nT.
+    unfold lt_n.
+    unfold le_n.
+    destruct nT as [n hn].
+    simpl.
+    induction n as [|head tail ih].
+    { simpl. intro f. exact f. }
+    {
+      simpl.
+      unfold isnatural in *.
+      unfold allnil in *.
+      simpl in *.
+      destruct hn as [hnil hmatch].
+      specialize (ih hmatch).
+      clear hmatch.
+      red in hnil.
+      subst head.
+      unfold next in ih.
+      exact ih.
+    }
+  Qed.
+
+  Lemma lt_notin_list : forall (l:LO T) (a:T), (forall x, inlist l x -> lt_n a x) -> not (inlist l a).
+  Proof.
+    intro l.
+    induction l as [|head tail ih].
+    {
+      simpl.
+      intros _ _.
+      unfold not.
+      intro f. exact f.
+    }
+    {
+      intros a h.
+      unfold not.
+      intro hin.
+      unfold not in ih.
+      specialize (h _ hin).
+      apply lt_irrefl in h.
+      inversion h.
+    }
+  Qed.
+
+  Lemma lt_le: forall n m, le_n (nextT n) m -> lt_n n m.
+  Proof.
+    intros n m h.
+    unfold lt_n.
+    exact h.
+  Qed.
+
+  Lemma sum_not_in_list : forall (l:LO T), not (inlist l (plus (sum l) oneT)).
+  Proof.
+    assert (thm1:=lt_notin_list).
+    assert(thm2:=sum_lt).
+    intro l.
+    induction l as [|head tail ih].
+    { simpl. intro f. exact f. }
+    {
+      unfold not in *.
+      intro hin.
+      simpl in hin.
+      destruct hin as [hl|hr].
+      {
+        rewrite plus_assoc in hl.
+        apply plus_elim_zero_l in hl.
+        apply plus_zero_zero_eq_zero in hl.
+        destruct hl as [_ i].
+        inversion i.
+      }
+      {
+specialize (thm1 tail).
+specialize (thm2 tail).
+eapply thm1.
+2:{ apply hr. }
+intros x hx.
+(* To be continued ... *)
+
+
+    apply thm1.
+    intros x h.
+    apply 
+    induction l as [|head tail ih].
+    { simpl. intro f. exact f. }
+    {
+      unfold not in ih.
+      unfold not.
+      intro h.
+      simpl in h.
+      destruct h as [hl | hr].
+      {
+        rewrite plus_assoc in hl.
+        apply plus_elim_zero_l in hl.
+        apply plus_zero_zero_eq_zero in hl.
+        destruct hl as [htail i].
+        inversion i.
+      }
+      {
 
 
 
