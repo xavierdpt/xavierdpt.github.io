@@ -6,6 +6,10 @@ Open Scope alt.
 Definition commutative {A:Type} (f:A->A->A) := forall x y, f x y = f y x.
 Definition associative {A:Type} (f:A->A->A) := forall x y z, f (f x y) z = f x (f y z).
 
+Definition commutative_monoid (T:Type) (op:T->T->T) :=
+  associative op /\ commutative op /\
+  (exists e, forall a, op e a = a /\ op a e = a).
+
 (* That's the classic definition of a list *)
 Inductive List {A:Type} : Type :=
 | nil : List
@@ -15,7 +19,7 @@ Inductive List {A:Type} : Type :=
 Notation "'_'" := nil (only printing) : alt.
 Notation "[ x ]" := (cons x nil) (only printing) : alt.
 Notation "[ x ; y ; .. ; z ]" :=  (cons x (cons y .. (cons z nil) ..)) (only printing) : alt.
-Notation "x ∘ y" := (cons x y) (only printing, at level 60) : alt. 
+Notation "x ∘l y" := (cons x y) (only printing, at level 60) : alt. 
 
 Definition singleton (A:Type) (a:A) := cons a nil.
 
@@ -29,7 +33,7 @@ Fixpoint append {A:Type} (l l' : LO A) : (LO A) := match l, l' with
 | nil, _ => l'
 | cons head tail, _ => cons head (append tail l')
 end.
-Notation "x ⋄ y" := (append x y) (only printing, at level 60) : alt. 
+Notation "x ⋄l y" := (append x y) (only printing, at level 60) : alt. 
 
 (* Simplification lemma to remove empty lists on the right *)
 Lemma append_nil {A:Type} : forall l : LO A, append l nil = l.
@@ -281,7 +285,7 @@ Module Natural.
   Definition nextT (n:T) := exist _
     (next (number n))
     (next_natural (number n) (hyp n)).
-  Notation "+i x" := (nextT x) (only printing, at level 60) : alt. 
+  Notation "]i x" := (nextT x) (only printing, at level 60) : alt. 
 
   Definition oneT := nextT zeroT.
   Notation "1i" := oneT (only printing) : alt.
@@ -563,7 +567,7 @@ Module Natural.
   | nil => nil
   | cons head tail => append y (multl tail y)
   end.
-  Notation "x *i_ y" := (multl x y) (only printing, at level 60) : alt. 
+  Notation "x *l y" := (multl x y) (only printing, at level 60) : alt. 
 
   Lemma multl_nil : forall x, multl x nil  = nil.
   Proof.
@@ -810,10 +814,9 @@ Module Natural.
     }
   Qed.
 
-  Definition commutative_monoid (T:Type) (op:T->T->T) :=
-    associative op /\ commutative op /\ (exists e, forall a, op e a = a /\ op a e = a).
 
-  Theorem Natural_plus_commutative_monoid : commutative_monoid T plus /\ commutative_monoid T mult.
+
+  Theorem Natural_commutative_monoid : commutative_monoid T plus /\ commutative_monoid T mult.
   Proof.
     split.
     {
@@ -845,10 +848,115 @@ Module Natural.
   | cons _ tail => nextT (length tail)
   end.
 
+  Fixpoint inlist {A:Type} (l:LO A) (a:A) := match l with
+  | nil => False
+  | cons head tail => a=head \/ inlist tail a
+  end.
+
+  Definition is_infinite (A:Type) := forall (l:LO A), exists (a:A), not (inlist l a).
+
+
+  (* True when l is longer or equal than m *)
+  Fixpoint longerOrEqualThan {A:Type} (l m:LO A) := match l, m with
+  | nil , nil => True
+  | nil , cons _ _ => False
+  | cons _ _ , nil  => False
+  | cons _ ltail, cons _ mtail => longerOrEqualThan ltail mtail
+  end.
+
+  Definition natural_le (n m:T) := longerOrEqualThan (number m) (number n).
+
+  Fixpoint sum (l:LO T) := match l with
+  | nil => zeroT
+  | cons head tail => plus head (sum tail)
+  end.
+
+  Lemma plus_one_next : forall n, plus oneT n = nextT n.
+  intro n.
+pattern n;apply I.
+{ rewrite plus_zero_r. fold oneT. reflexivity. }
+{ clear n. intro n. intro ih.
+
+
+  Lemma plus_one_next : forall n, plus n oneT = nextT n.
+  Proof.
+    intro n.
+    pattern n.
+    apply I.
+    {
+      rewrite plus_zero_l.
+      fold oneT.
+      reflexivity.
+    }
+    {
+      clear n. intro n. intro ih.
+Print nextT.
+
+  Lemma plus_next: forall (n m:T), plus (nextT n) m = plus n (nextT m).
+  Proof.
+    intro n.
+    pattern n;apply I.
+    {
+      intro m.
+      rewrite plus_zero_l.
+      fold oneT.
+      rewrite plus_comm.
+
+
+  Lemma plus_zz_eq_z : forall (n m:T), plus n m = zeroT -> n = zeroT /\ m = zeroT.
+  Proof.
+  intro n.
+  pattern n.
+  apply I.
+  {
+    intros m heq.
+    rewrite plus_zero_l in heq.
+    subst m.
+    split;reflexivity.
+  }
+  {
+    clear n.
+    intro n.
+    intro ih.
+    intros m heq.
+    specialize (ih (nextT m)).
+Search (plus (nextT _ ) _).
+  
+
+  Lemma sum_zero : forall (l:LO T), sum l = zeroT -> forall a, inlist l a -> a = zeroT.
+  Proof.
+    intro l.
+    induction l as [|head tail ih].
+    {
+      simpl.
+      intros _.
+      intros a f.
+      inversion f.
+    }
+    {
+      simpl.
+      intro heq.
+      
+
+
+
+
+
+  Theorem Natural_infinite : is_infinite T.
+  Proof.
+    red.
+    intro l.
+    exists (plus oneT (sum l)).
+    unfold not.
+
+
+      
+
   Definition Pair {A:Type} := { l : LO A | length(l) = twoT }.
   Definition PairOf (A:Type) := Pair (A:=A).
 
   Definition first {A:Type} (p : PairOf A) : A.
+
   Proof.
   destruct p as [l h].
   destruct l as [|first rest].
