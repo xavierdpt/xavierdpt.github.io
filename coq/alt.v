@@ -276,7 +276,7 @@ Module Natural.
   (* Here we define the strong zero *)
   (* This uses the "exist" constructor from "sig" with zero and a proof that zero is natural. *)
   Definition zeroT := exist _ zero zero_natural.
-  Notation "0i" := zeroT (only printing) : alt. 
+  Notation "0n" := zeroT (only printing) : alt. 
 
   (*
     Same idea for the strong next function, although it is maybe a bit more difficult to follow,
@@ -285,13 +285,13 @@ Module Natural.
   Definition nextT (n:T) := exist _
     (next (number n))
     (next_natural (number n) (hyp n)).
-  Notation "]i x" := (nextT x) (only printing, at level 60) : alt. 
+  Notation "]n x" := (nextT x) (only printing, at level 60) : alt. 
 
   Definition oneT := nextT zeroT.
-  Notation "1i" := oneT (only printing) : alt.
+  Notation "1n" := oneT (only printing) : alt.
 
   Definition twoT := nextT oneT.
-  Notation "2i" := twoT (only printing) : alt.
+  Notation "2n" := twoT (only printing) : alt.
 
   (*
     Here's a first usage of proof irrelevance to prove that a number is the "strong" zero
@@ -502,7 +502,7 @@ Module Natural.
     let result := append n m in
     (* And binds the proof using the proof above *)
     exist _ result (append_natural n m hn hm).
-  Notation "x +i y" := (plus x y) (only printing, at level 60) : alt. 
+  Notation "x +n y" := (plus x y) (only printing, at level 60) : alt. 
  
   (* Proof that plus is commutative *)
   Theorem plus_comm : commutative plus.
@@ -609,7 +609,7 @@ Module Natural.
     let (m, hm) := mT in
     let result := multl n m in
     exist _ result (multl_natural n m hn hm).
-  Notation "x *i y" := (mult x y) (only printing, at level 60) : alt. 
+  Notation "x *n y" := (mult x y) (only printing, at level 60) : alt. 
 
   Theorem mult_one_l : forall n, mult oneT n = n.
   Proof.
@@ -865,8 +865,10 @@ Module Natural.
   end.
 
   Definition le_n (n m:T) := longerOrEqualThan (number m) (number n).
+  Notation "x <=n y" := (le_n x y) (only printing, at level 60) : alt. 
 
   Definition lt_n (n m:T) := le_n (nextT n) m.
+  Notation "x <n y" := (lt_n x y) (only printing, at level 60) : alt. 
 
   Fixpoint sum (l:LO T) := match l with
   | nil => zeroT
@@ -1203,42 +1205,140 @@ Module Natural.
     exact h.
   Qed.
 
-  Lemma sum_not_in_list : forall (l:LO T), not (inlist l (plus (sum l) oneT)).
+  (* The sum of the elements of a list + 1 is not in the list *)
+  Lemma sum1_not_in_list : forall (l:LO T), not (inlist l (plus (sum l) oneT)).
   Proof.
-    assert (thm1:=lt_notin_list).
-    assert(thm2:=sum_lt).
+
+    (* The sum + 1 of a list is bigger than any elements of the list *)
+    assert(thm:=sum_lt).
+
+    (* We will work on that list *)
     intro l.
-    unfold not in *.
-    intro h.
+    specialize (thm l).
+
+    (* Let's call the sum 'S' *)
     set (S:=plus (sum l) oneT). 
-    fold S in h.
-    apply (thm1 l S);clear thm1.
-    2:{ exact h. }
-    exfalso.
+    fold S in thm.
+
+    (* Negation means proving False *)
+    unfold not in *.
+
+    (* We assume that S in in the list, then derive a contradiction *)
+    intro h.
+
+    (*
+       A common contradiction to look for with inequalities is something
+       of the form x < x.
+      Here, the natural candidate is S < S, that was proved earlier.
+    *)
     apply (lt_irrefl S).
-    apply thm2.
-    exact h.
+
+    (* We can apply thm2 on S *)
+    specialize (thm S).
+
+    (* Is S in the least ? Yes by assumption *)
+    specialize (thm h).
+    clear h.
+
+    (* And we got our contradiction *)
+    exact thm.    
   Qed.
 
-
+  (* The set of naturals is infinite *)
   Theorem Natural_infinite : is_infinite T.
   Proof.
+    (* Being infinite means that for any finite list l of elements of type T,
+       we can find an element of type T that is not in the list *)
     red.
+    (* We will work on that list *)
     intro l.
+    (* And in particular, the sum of the list + 1 is not in the list *)
     exists (plus (sum l) oneT).
-    apply sum_not_in_list.
+    (* This it what we proved just above *)
+    apply sum1_not_in_list.
   Qed.
+
+
+  Definition divides d n := exists d', mult d d' = n.
+
+  Definition isprime n := n <> zeroT /\ (forall d, divides d n -> d = oneT).
+
+  Lemma next_zeroT : nextT zeroT = oneT.
+  Proof. unfold oneT. reflexivity. Qed.
+
+
+  Lemma mult_zero_l : forall n:T, mult zeroT n = zeroT.
+    Proof.
+    intro nT.
+    destruct zeroT as [z hz] eqn:heqz;
+    destruct nT as [n hn].
+    simpl. apply proof_irrelevance. simpl.
+    inversion heqz as [heq]. clear heqz.
+    unfold zero in *. subst z.
+    simpl.
+    reflexivity.
+  Qed.
+
+
+  Lemma isprime_one : isprime oneT.
+  Proof.
+  red.
+split.
+{ red. intro heq. inversion heq. }
+{ intro d.
+pattern d;apply I.
+{
+intro h. red in h. destruct h as [d' heq]. rewrite mult_zero_l in heq. inversion heq. }
+{ intros n ih. intro hn.
+red in hn.
+destruct hn as [d' hn].
+
+
+
+  Lemma xxx : forall n:T, n = zeroT \/ isprime n \/ exists d, lt_n oneT d /\ divides d n.
+  Proof.
+  intro n.
+  pattern n;apply I.
+  {
+    left.
+    reflexivity.
+  }
+  {
+    clear n. intro n.
+    intro ih.
+    destruct ih as [heqz | [hprime | hmult]].
+    {
+      subst n.
+      rewrite next_zeroT.
+      right. left.
+      red.
+      split.
+      { unfold not. intro heq. inversion heq. }
+      {
+        
+
+
+  Lemma zero_neq_two : zeroT = twoT -> False.
+  Proof.
+    intro i. inversion i.
+  Qed.
+
+  Lemma one_neq_two : oneT = twoT -> False.
+  Proof.
+    intro h.
+    inversion h.
+  Qed.
+
 
 
   Definition Pair {A:Type} := { l : LO A | length(l) = twoT }.
   Definition PairOf (A:Type) := Pair (A:=A).
 
   Definition first {A:Type} (p : PairOf A) : A.
-
   Proof.
   destruct p as [l h].
   destruct l as [|first rest].
-  { simpl in h. inversion h. }
+  { simpl in h. exfalso. apply zero_neq_two. exact h. }
   { exact first. }
   Defined.
 
@@ -1246,10 +1346,10 @@ Module Natural.
   Proof.
   destruct p as [l h].
   destruct l as [|first rest].
-  { simpl in h. inversion h. }
+  { simpl in h. exfalso. apply zero_neq_two. exact h. }
   {
     destruct rest as [|second rest].
-    { simpl in h. inversion h. }
+    { simpl in h. rewrite next_zeroT in h. exfalso. apply one_neq_two. exact h. }
     { exact second. }
   }
   Qed.
