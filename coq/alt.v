@@ -1208,60 +1208,27 @@ Module Natural.
     assert (thm1:=lt_notin_list).
     assert(thm2:=sum_lt).
     intro l.
-    induction l as [|head tail ih].
-    { simpl. intro f. exact f. }
-    {
-      unfold not in *.
-      intro hin.
-      simpl in hin.
-      destruct hin as [hl|hr].
-      {
-        rewrite plus_assoc in hl.
-        apply plus_elim_zero_l in hl.
-        apply plus_zero_zero_eq_zero in hl.
-        destruct hl as [_ i].
-        inversion i.
-      }
-      {
-specialize (thm1 tail).
-specialize (thm2 tail).
-eapply thm1.
-2:{ apply hr. }
-intros x hx.
-(* To be continued ... *)
-
-
-    apply thm1.
-    intros x h.
-    apply 
-    induction l as [|head tail ih].
-    { simpl. intro f. exact f. }
-    {
-      unfold not in ih.
-      unfold not.
-      intro h.
-      simpl in h.
-      destruct h as [hl | hr].
-      {
-        rewrite plus_assoc in hl.
-        apply plus_elim_zero_l in hl.
-        apply plus_zero_zero_eq_zero in hl.
-        destruct hl as [htail i].
-        inversion i.
-      }
-      {
-
+    unfold not in *.
+    intro h.
+    set (S:=plus (sum l) oneT). 
+    fold S in h.
+    apply (thm1 l S);clear thm1.
+    2:{ exact h. }
+    exfalso.
+    apply (lt_irrefl S).
+    apply thm2.
+    exact h.
+  Qed.
 
 
   Theorem Natural_infinite : is_infinite T.
   Proof.
     red.
     intro l.
-    exists (plus oneT (sum l)).
-    unfold not.
+    exists (plus (sum l) oneT).
+    apply sum_not_in_list.
+  Qed.
 
-
-      
 
   Definition Pair {A:Type} := { l : LO A | length(l) = twoT }.
   Definition PairOf (A:Type) := Pair (A:=A).
