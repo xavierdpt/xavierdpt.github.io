@@ -3078,16 +3078,282 @@
     }
   Qed.
 
+  Lemma Z_plus_zero_r : forall x:Z, Z_plus zero_Z x = x.
+  Proof.
+    intros (x,hx).
+    apply proof_irrelevance.
+    simpl.
+    red in hx.
+    destruct x as [xf xs].
+    simpl in hx.
+    simpl.
+    destruct hx as [ hx | hx ].
+    {
+      subst xf. simpl.
+      destruct xs as [xs hxs].
+      destruct xs as [|xshead xstail].
+      { simpl. apply f_eq. apply proof_irrelevance. simpl. reflexivity. }
+      { simpl. apply f_eq. apply proof_irrelevance. simpl. reflexivity. }
+    }
+    {
+      subst xs. simpl.
+      destruct xf as [xf hxf]. simpl.
+      destruct xf as [|xfhead xftail].
+      { simpl. apply f_equal2.
+        { apply proof_irrelevance. simpl. unfold zero_l. reflexivity. }
+        { apply proof_irrelevance. simpl. unfold zero_l. reflexivity. }
+      }
+      { simpl. apply f_equal2.
+        { apply proof_irrelevance. simpl. reflexivity. }
+        { reflexivity. }
+      }
+    }
+  Qed.
 
+  Lemma Z_plus_comm : forall x y, Z_plus x y = Z_plus y x.
+  Proof.
+    intros (x,hx) (y,hy).
+    apply proof_irrelevance.
+    simpl.
+    destruct x as [xf xs].
+    destruct y as [yf ys].
+    unfold ZCond in hx, hy.
+    simpl in *.
+    destruct hx as [hx|hx];
+    destruct hy as [hy|hy].
+    {
+      subst xf. subst yf.
+      rewrite plus_zero_l.
+      rewrite min_zero_l.
+      rewrite min_zero_l.
+      rewrite minus_zero_l.
+      rewrite minus_zero_l.
+      rewrite minus_zero_r.
+      rewrite minus_zero_r.
+      repeat rewrite (plus_comm ys).
+      reflexivity.
+    }
+    {
+      subst xf. subst ys.
+      rewrite plus_zero_l.
+      rewrite plus_zero_r.
+      rewrite plus_zero_r.
+      rewrite plus_zero_l.
+      reflexivity.
+    }
+    {
+      subst xs.
+      subst yf.
+      rewrite plus_zero_r.
+      rewrite plus_zero_l.
+      rewrite plus_zero_l.
+      rewrite plus_zero_r.
+      reflexivity.
+    }
+    {
+      subst xs.
+      subst ys.
+      rewrite plus_zero_l.
+      rewrite min_zero_r.
+      rewrite min_zero_r.
+      rewrite minus_zero_l.
+      rewrite minus_zero_l.
+      repeat rewrite (plus_comm yf).
+      reflexivity.
+    }
+  Qed.
 
+  Lemma zero_eq : forall (h:isnatural zero_l), exist _ zero_l h = zero.
+  Proof.
+    intro h.
+    apply proof_irrelevance.
+    simpl. reflexivity.
+  Qed.
 
+  Lemma Z_plus_assoc : forall x y z:Z, Z_plus (Z_plus x y) z = Z_plus x (Z_plus y z).
+  Proof.
+  intros x y z.
+  destruct x as [x hx];
+  destruct y as [y hy];
+  destruct z as [z hz].
+  destruct x as [xf xs].
+  destruct y as [yf ys].
+  destruct z as [zf zs].
+  apply proof_irrelevance.
+  unfold ZCond in hx, hy, hz.
+  simpl in hx, hy, hz.
+  simpl.
+  remember (plus xf yf) as e00 eqn:heq00.
+  remember (plus xs ys) as e01 eqn:heq01.
+  remember (minus e01 e00) as e02 eqn:heq02.
+  remember (minus e00 e01) as e03 eqn:heq03.
+  remember (min e00 e01) as e04 eqn:heq04.
+  remember (eq_dec e04 e00) as e05 eqn:heq05.
+  remember (pair zero e02) as e06 eqn:heq06.
+  remember (pair e03 zero) as e07 eqn:heq07.
+  remember (if e05 then e06 else e07) as e08 eqn:heq08.
+  remember (first e08) as e09 eqn:heq09.
+  remember (plus e09 zf) as e10 eqn:heq10.
+  remember (second e08) as e11 eqn:heq11.
+  remember ( plus e11 zs) as e12 eqn:heq12.
+  remember (min e10 e12) as e13 eqn:heq13.
+  remember (eq_dec e13 e10) as e14 eqn:heq14.
+  remember (minus e12 e10) as e15 eqn:heq15.
+  remember (pair zero e15) as e16 eqn:heq16.
+  remember (minus e10 e12) as e17 eqn:heq17.
+  remember (pair e17 zero) as e18 eqn:heq18.
+  remember ( if e14 then e16 else e18) as e19 eqn:heq19.
+  remember (plus yf zf) as e20 eqn:heq20.
+  remember (plus ys zs) as e21 eqn:heq21.
+  remember (min e20 e21) as e22 eqn:heq22.
+  remember (eq_dec e22 e20) as e23 eqn:heq23.
+  remember (minus e21 e20) as e24 eqn:heq24.
+  remember (pair zero e24) as e25 eqn:heq25.
+  remember (minus e20 e21) as e26 eqn:heq26.
+  remember (pair e26 zero) as e27 eqn:heq27.
+  remember (if e23 then e25 else e27) as e28 eqn:heq28.
+  remember (first e28) as e29 eqn:heq29.
+  remember (plus xf e29) as e30 eqn:heq30.
+  remember (second e28) as e31 eqn:heq31.
+  remember (plus xs e31) as e32 eqn:heq32.
+  remember (min e30 e32) as e33 eqn:heq33.
+  remember (minus e32 e30) as e34 eqn:heq34.
+  remember (eq_dec e33 e30) as e35 eqn:heq35.
+  remember (pair zero e34) as e36 eqn:heq36.
+  remember (minus e30 e32) as e37 eqn:heq37.
+  remember (pair e37 zero) as e38 eqn:heq38.
+  remember (if e35 then e36 else e38) as e39 eqn:heq39.
+  destruct hx as [hx|hx];
+  destruct hy as [hy|hy];
+  destruct hz as [hz|hz].
+  { subst xf. subst yf. subst zf.
+    rewrite plus_zero_l in *.
+    subst e00. subst e20.
+    rewrite min_zero_l in *.
+    subst e22.
+    subst e23.
+    simpl in heq28.
+    subst e28.
+    subst e25.
+    simpl in heq29, heq31.
+    subst e29 e31.
+    subst e30.
+    rewrite min_zero_l in *.
+    subst e33.
+    simpl in heq35. subst e35.
+    subst e39.
+    rewrite plus_zero_r in *.
+    subst e10.
+    subst e04. simpl in heq05. subst e05. subst e08.
+    rewrite minus_zero_r in *.
+    subst e02.
+    subst e01.
+    rewrite minus_zero_l in *.
+    subst e03.
+    subst e06.
+    simpl in heq09, heq11.
+    subst e09.
+    rewrite min_zero_l in *.
+    subst e13.
+    simpl in heq14.
+    subst e14.
+    subst e19.
+    subst e16.
+    subst e15.
+    rewrite minus_zero_r.
+    subst e12.
+    subst e11.
+    subst.
+    rewrite plus_assoc.
+    reflexivity.
+  }
+  {
+    subst xf yf zs.
+    rewrite plus_zero_l in * ; rewrite plus_zero_r in *.
+    subst e00 e12 e20 e21 e30.
+    rewrite minus_zero_r in * ; rewrite minus_zero_l in * ; rewrite min_zero_l in *.
+    subst e02 e03 e04.
+    simpl in heq05. subst e05.
+    subst e08.
+    subst e06. simpl in heq09, heq11.
+    subst e09 e11.
+    rewrite plus_zero_l in heq10.
+    subst e10.
+    destruct e14 as [h14|h14];
+    destruct e23 as [h23|h23];
+    destruct e35 as [h35|h35].
+    {
+      subst e13 e22 e33.    
+      clear heq14 heq23.
+      subst e19.
+      subst e39.
+      subst e28.
+      subst e25.
+      simpl in heq29, heq31.
+      subst e29.
+      rewrite minus_zero_r in * ; rewrite minus_zero_l in *.
+      subst e34 e37.
+      clear heq35 h35.
+      subst.
+      rewrite heq22 in heq13. clear heq22.
+      apply f_eq.
+      rename xs into a.
+      rename ys into b.
+      rename zf into c.
 
+      assert (le_n_zero_n:forall n, le_n zero n).
+      {
+        clear. intros (n, hn). unfold le_n. simpl.
+        clear hn. destruct n. simpl. trivial. simpl. trivial.
+      }
+      assert (min_le_n:forall x y, x = min x y -> le_n x y).
+      {
+        clear -le_n_zero_n.
+        intro x.
+        pattern x;apply I;clear x.
+        {
+          intros y h.
+          apply le_n_zero_n.
+        }
+        {
+          intros n ih.
+          intros y h.
+          destruct (destruct_n y).
+          { subst y. rewrite min_zero_r in h. inversion h. }
+          { destruct H. subst y. rewrite min_next in h. apply next_injective in h.
+            apply le_n_next. apply ih. exact h.
+          }
+        }
+      }
+      apply min_le_n in heq13.
+Search le_n.
 
+          apply le_n_zero.
+      generalize dependent c.
+      generalize dependent b.
+      pattern a;apply I;clear a.
+      {
+        intros b c _.
+        rewrite plus_zero_l.
+        rewrite plus_zero_l.
+        reflexivity.
+      }
+      {
+        intros a ih.
+        intros b c h.
+        rewrite plus_next_r.
+        rewrite <- plus_next_l.
+        specialize (ih (next b)).
+        specialize (ih c).
 
-
-
-
-
-
-
-
+        rewrite ih.
+        clear ih.
+        rewrite plus_next_r.
+        rewrite <- plus_next_l.
+        apply f_eq.
+        pattern b;apply I;clear b.
+        {
+          rewrite minus_zero_l.
+          destruct (destruct_n c).
+          { subst c. rewrite minus_zero_r. reflexivity. }
+          { destruct H. subst c. rename x into c. rewrite minus_next. rewrite minus_zero_l.
