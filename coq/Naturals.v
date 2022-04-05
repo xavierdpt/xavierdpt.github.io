@@ -3,35 +3,35 @@
   Require Export XD.List.
 
   (* The actual type does not matter *)
-  Parameter TypeForNat : Type.
+  Parameter _NType : Type.
 
   (* And we define two levels of lists *)
-  Definition Level1 := LO TypeForNat.
-  Definition Level2 := LO Level1.
+  Definition _NLevel1 := LO _NType.
+  Definition _NLevel2 := LO _NLevel1.
 
   (* A list of lists is "natural" if all its elements are empty lists *)
-  Definition isnatural (l:Level2) := allnil l.
+  Definition isnatural (l:_NLevel2) := allnil l.
 
   (* We define Zero as the empty list of empty lists *)
-  Definition zero_l := nil (A:=Level1).
+  Definition _Nzero := nil (A:=_NLevel1).
 
   (* The "successor" function adds an empty list to any lists of list *)
-  Definition next_l (n:Level2) : Level2 := cons nil n.
+  Definition _Nnext (n:_NLevel2) : _NLevel2 := cons nil n.
 
   (* zero-l is a "natural" list *)
-  Theorem  zero_l_natural : isnatural zero_l.
+  Theorem  _Nzero_natural : isnatural _Nzero.
   Proof.
     (* Unfold the definitions *)
     unfold isnatural.
     unfold allnil.
-    unfold zero_l.
+    unfold _Nzero.
     (* allmatch on empty lists is always true anyway *)
     simpl.
     trivial.
   Qed.
 
   (* Using next_l on a "natural" list yields another "natural" list *)
-  Lemma next_l_natural : forall (l:Level2), (isnatural l) -> isnatural (next_l l).
+  Lemma _Nnext_natural : forall (l:_NLevel2), (isnatural l) -> isnatural (_Nnext l).
   Proof.
     (* We first unfold terms to a more convenient level *)
     unfold isnatural. unfold allnil.
@@ -70,35 +70,35 @@
     We use "T" as the type with the expectation that we will later introduce a "Natural" module so that we can write
     Natural.T for the type
   *)
-  Definition T := { l | isnatural l }.
+  Definition NN := { l | isnatural l }.
 
   (* There are two projection functions which retrive the content and the hypothese *)
-  Definition number (t:T) := proj1_sig t.
-  Definition hyp (t:T) := proj2_sig t.
+  Definition Nnumber (t:NN) := proj1_sig t.
+  Definition Nhyp (t:NN) := proj2_sig t.
 
   (* Here we define the strong zero *)
   (* This uses the "exist" constructor from "sig" with zero and a proof that zero is natural. *)
-  Definition zero := exist _ zero_l zero_l_natural.
-  Notation "0n" := zero (only printing) : maths. 
+  Definition Nzero := exist _ _Nzero _Nzero_natural.
+  Notation "0n" := Nzero (only printing) : maths. 
 
   (*
     Same idea for the strong next function, although it is maybe a bit more difficult to follow,
     since it use the proof that n is natural to construct the proof that the next number is natural
   *)
-  Definition next (n:T) := exist _
-    (next_l (number n))
-    (next_l_natural (number n) (hyp n)).
-  Notation "]n x" := (next x) (only printing, at level 60) : maths. 
+  Definition Nnext (n:NN) := exist _
+    (_Nnext (Nnumber n))
+    (_Nnext_natural (Nnumber n) (Nhyp n)).
+  Notation "]n x" := (Nnext x) (only printing, at level 60) : maths. 
 
   (* Here are one and two *)
-  Definition one := next zero.
-  Notation "1n" := one (only printing) : maths.
+  Definition None := Nnext Nzero.
+  Notation "1n" := None (only printing) : maths.
 
-  Definition two := next one.
-  Notation "2n" := two (only printing) : maths.
+  Definition Ntwo := Nnext None.
+  Notation "2n" := Ntwo (only printing) : maths.
 
   (* next is injective *)
-  Lemma next_injective : forall n m, next n = next m -> n = m.
+  Lemma Nnext_elim : forall n m, Nnext n = Nnext m -> n = m.
   Proof.
     intros nT mT.
     intro hnext.
@@ -108,7 +108,7 @@
   Qed.
 
   (* If the "number" of a natural is zero_l, then that number is zero *)
-  Lemma number_nil_zero : forall (n:T), number n = zero_l -> n = zero.
+  Lemma _Nnumber_nil_zero : forall (n:NN), Nnumber n = _Nzero -> n = Nzero.
   Proof.
     (* intro n as "nT" *)
     intro nT.
@@ -116,7 +116,7 @@
     intro heq.
     (* Explode the things of type T into their corresponding lists and hypotheses *)
     destruct nT as [n hn];
-    destruct zero as [z hz] eqn:heqz.
+    destruct Nzero as [z hz] eqn:heqz.
     (* Simplify in heq *)
     simpl in heq.
     (* Apply proof irrelevance to get to n=z *)
@@ -130,7 +130,7 @@
   Qed.
 
   (* This lemma proves that the predecessor exists when the "number" of a natural is a non-empty list *)
-  Lemma predecessor_exists : forall (nT:T) head tail, number nT = cons head tail -> exists mT:T, number mT = tail.
+  Lemma _Npredecessor_exists : forall (nT:NN) head tail, Nnumber nT = cons head tail -> exists mT:NN, Nnumber mT = tail.
   Proof.
     intros nT head tail heq.
     destruct nT as [n hn].
@@ -159,9 +159,9 @@
   Qed.
 
   (* Now we are ready to prove the induction principle on T *)
-  Theorem I : forall (P: T -> Prop),
-    (P zero) ->  
-    (forall n, P n -> P (next n)) -> 
+  Theorem Ninduction : forall (P: NN -> Prop),
+    (P Nzero) ->  
+    (forall n, P n -> P (Nnext n)) -> 
     (forall n, P n).
   Proof.
     intros P hzero hnext.
@@ -177,12 +177,12 @@
       (* For this case, we only need hzero *)
       clear hnext.
       (* We prove that nT = zeroT using number_nil_zero*)
-      assert(hnz:=number_nil_zero).
+      assert(hnz:=_Nnumber_nil_zero).
       specialize (hnz nT).
       (* number nT is nil by definition of nT *)
       simpl in hnz.
       (* and zero_l is nil too *)
-      unfold zero_l in hnz.
+      unfold _Nzero in hnz.
       (* reflexexivity is actually an application of eq_refl *)
       specialize (hnz (eq_refl _)).
       (* Now we have our equality *)
@@ -202,7 +202,7 @@
       unfold isnil in hnil.
       subst head.
       (* Here we want to construct the predecessor of nT *)
-      assert (hm:=predecessor_exists).
+      assert (hm:=_Npredecessor_exists).
       specialize (hm nT).
       (* Simplification will use what it know about nT *)
       simpl in hm.
@@ -216,13 +216,13 @@
       (* We plug that predecessor in the induction hypothese of our induction principle *)
       specialize (hnext mT).
       (* And now we want to prove that the successor of that predecessor is nT itself *)
-      assert (hmn:nT = next mT).
+      assert (hmn:nT = Nnext mT).
       {
         apply proof_irrelevance.
         (* We know what's inside nT, and a little about what's inside (nextT mT) *)
         simpl.
         (* Here we are down the "next_l" function *)
-        unfold next_l.
+        unfold _Nnext.
         (* We can use hm for the right part *)
         rewrite hm.
         (* And there we are *)
@@ -250,7 +250,7 @@
       apply ih.
       (* To prove the equality, we can use proof irrelevance *)
       apply proof_irrelevance;simpl.
-      unfold number in hm.
+      unfold Nnumber in hm.
       rewrite hm.
       reflexivity.
     }
@@ -279,7 +279,7 @@
   Qed.
 
   (* We define addition as concatenation of empty lists *)
-  Definition plus (nT mT : T) : T :=
+  Definition Nplus (nT mT : NN) : NN :=
     (* Extract the parts from n and m *)
     let (n, hn) := nT in
     let (m, hm) := mT in
@@ -287,10 +287,10 @@
     let result := append n m in
     (* And binds the proof using the proof above *)
     exist _ result (append_natural n m hn hm).
-  Notation "x +n y" := (plus x y) (only printing, at level 60) : maths. 
+  Notation "x +n y" := (Nplus x y) (only printing, at level 60) : maths. 
  
   (* Proof that plus is commutative *)
-  Theorem plus_comm : commutative plus.
+  Theorem Nplus_comm : commutative Nplus.
   Proof.
     (* Expand the definition *)
     red.
@@ -310,7 +310,7 @@
   Qed.
 
   (* 0 + n = n *)
-  Theorem plus_zero_l : forall n, plus zero n = n.
+  Theorem Nplus_zero_l : forall n, Nplus Nzero n = n.
   Proof.
     intro nT.
     destruct nT as [n hn].
@@ -322,16 +322,16 @@
   Qed.
 
   (* n + 0 = n *)
-  Theorem plus_zero_r : forall n, plus n zero = n.
+  Theorem Nplus_zero_r : forall n, Nplus n Nzero = n.
   Proof.
     intro n.
     (* We can use commutativity of addition *)
-    rewrite plus_comm.
-    apply plus_zero_l.
+    rewrite Nplus_comm.
+    apply Nplus_zero_l.
   Qed.
 
   (* (next n) + m = next(n+m) *)
-  Lemma plus_next_r : forall n m, plus (next n) m = next (plus n m).
+  Lemma Nplus_next_l : forall n m, Nplus (Nnext n) m = Nnext (Nplus n m).
   Proof.
     intros nT mT.
     destruct nT as [n hn];
@@ -339,22 +339,22 @@
     simpl.
     apply proof_irrelevance.
     simpl.
-    unfold next.
+    unfold Nnext.
     reflexivity.
   Qed.
 
   (* n + (next m) = next(n+m) *)
-  Lemma plus_next_l : forall n m, plus n (next m) = next (plus n m).
+  Lemma Nplus_next_r : forall n m, Nplus n (Nnext m) = Nnext (Nplus n m).
   Proof.
     intros n m.
-    rewrite plus_comm.
-    rewrite plus_next_r.
-    rewrite (plus_comm m).
+    rewrite Nplus_comm.
+    rewrite Nplus_next_l.
+    rewrite (Nplus_comm m).
     reflexivity.
   Qed.
 
   (* Proof that plus is associative *)
-  Theorem plus_assoc : associative plus.
+  Theorem Nplus_assoc : associative Nplus.
   Proof.
     (* Expand the definition *)
     red.
@@ -375,11 +375,11 @@
   Qed.
 
   (* n + m = n -> m = 0 *)
-  Lemma plus_elim_zero_l : forall n m, plus n m = n -> m = zero.
+  Lemma Nplus_elim_zero_l : forall n m, Nplus n m = n -> m = Nzero.
   Proof.
   intro n.
-  pattern n;apply I.
-  { intro m. intro h. rewrite plus_zero_l in h. exact h. }
+  pattern n;apply Ninduction.
+  { intro m. intro h. rewrite Nplus_zero_l in h. exact h. }
   {
     clear n.
     intro n.
@@ -388,52 +388,43 @@
     intro h.
     apply ih.
     clear ih.
-    apply next_injective.
-    rewrite plus_next_r in h.
+    apply Nnext_elim.
+    rewrite Nplus_next_l in h.
     exact h.
   }
   Qed.
 
   (* n + m = m -> n = 0 *)
-  Lemma plus_elim_zero_r : forall n m, plus n m = m -> n = zero.
+  Lemma Nplus_elim_zero_r : forall n m, Nplus n m = m -> n = Nzero.
   Proof.
     intros n m h.
-    apply plus_elim_zero_l with m.
-    rewrite plus_comm.
+    apply Nplus_elim_zero_l with m.
+    rewrite Nplus_comm.
     exact h.
   Qed.
 
   (* next n = n + 1 *)
-  Lemma next_eq_plus_one : forall n, next n = plus n one.
+  Lemma Nnext_eq : forall n, Nnext n = Nplus n None.
   Proof.
     intro n.
-    unfold one.
-    rewrite plus_comm.
-    rewrite plus_next_r.
-    rewrite plus_zero_l.
+    unfold None.
+    rewrite Nplus_comm.
+    rewrite Nplus_next_l.
+    rewrite Nplus_zero_l.
     reflexivity.
   Qed.
 
   (* "multiplication" of two list repeatitivly applies append on the second list *)
   (* What happens in this function does not really matter as long as
      length (x*y)=length(x)*length(y) *)
-  Fixpoint mult_l (x y:Level2) : Level2 := match x with
+  Fixpoint _Nmult (x y:_NLevel2) : _NLevel2 := match x with
   | nil => nil
-  | cons head tail => append y (mult_l tail y)
+  | cons head tail => append y (_Nmult tail y)
   end.
-  Notation "x *l y" := (mult_l x y) (only printing, at level 60) : maths. 
-
-  (* Helper lemma that show that "multiplying" by nil on the right yields nil *)
-  Lemma mult_l_nil : forall x, mult_l x nil  = nil.
-  Proof.
-    intro x.
-    induction x as [|head tail ih].
-    { simpl. reflexivity. }
-    { simpl. rewrite ih. reflexivity. }
-  Qed.
+  Notation "x *l y" := (_Nmult x y) (only printing, at level 60) : maths. 
 
   (* "Multiplying" two "natural" lists yields a "natural" list *)
-  Lemma mult_l_natural : forall (n m:Level2), isnatural n -> isnatural m -> isnatural (mult_l n m).
+  Lemma _Nmult_natural : forall (n m:_NLevel2), isnatural n -> isnatural m -> isnatural (_Nmult n m).
   Proof.
     unfold isnatural.
     unfold allnil.
@@ -464,15 +455,15 @@
 
 
   (* Now we can define multiplication on T *)
-  Definition mult (nT mT : T) : T :=
+  Definition Nmult (nT mT : NN) : NN :=
     let (n, hn) := nT in
     let (m, hm) := mT in
-    let result := mult_l n m in
-    exist _ result (mult_l_natural n m hn hm).
+    let result := _Nmult n m in
+    exist _ result (_Nmult_natural n m hn hm).
   Notation "x *n y" := (mult x y) (only printing, at level 60) : maths. 
 
   (* Multiplication is commutative *)
-  Theorem mult_comm : commutative mult.
+  Theorem Nmult_comm : commutative Nmult.
   Proof.
     red.
     (* Explode x and y into their list parts and use proof irrelevance *)
@@ -547,7 +538,7 @@
   Qed.
 
   (* 1 * n = n *)
-  Theorem mult_one_l : forall n, mult one n = n.
+  Theorem Nmult_one_l : forall n, Nmult None n = n.
   Proof.
     intro nT.
     destruct nT as [n hn].
@@ -559,29 +550,15 @@
   Qed.
 
   (* n * 1 = n *)
-  Theorem mult_one_r : forall n, mult n one = n.
+  Theorem Nmult_one_r : forall n, Nmult n None = n.
   Proof.
     intro n.
-    rewrite mult_comm.
-    apply mult_one_l.
-  Qed.
-
-  (* Here we prove commutativity of multl_l using the commutativity of mult *)
-  Theorem multl_comm : forall x y, isnatural x -> isnatural y -> mult_l x y = mult_l y x.
-  Proof.
-    intros x y hx hy.
-    assert (hcomm := mult_comm).
-    unfold commutative in hcomm.
-    specialize (hcomm (exist _ x hx)).
-    specialize (hcomm (exist _ y hy)).
-    simpl in hcomm.
-    inversion hcomm as [h].
-    clear hcomm.
-    reflexivity.
+    rewrite Nmult_comm.
+    apply Nmult_one_l.
   Qed.
 
   (* x*(y+z) = x*y + x*z *)
-  Theorem plus_mult_distribute_left : forall x y z, mult x (plus y z) = plus (mult x y) (mult x z).
+  Theorem Nplus_mult_distr_l : forall x y z, Nmult x (Nplus y z) = Nplus (Nmult x y) (Nmult x z).
   Proof.
     intros xT yT zT.
     (* We explode all three numbers into their parts *)
@@ -616,42 +593,29 @@
       { red. exact hz. }
       {
         red.
-        apply mult_l_natural.
+        apply _Nmult_natural.
         { apply hmatchx. }
         { red. unfold allnil. exact hy. }
       }
     }
   Qed.
 
-  Theorem plus_mult_distribute_leftl : forall x y z,
-    isnatural x -> isnatural y -> isnatural z
-    -> mult_l x (append y z) = append (mult_l x y) (mult_l x z).
-  Proof.
-    intros x y z hx hy hz.
-    assert (h := plus_mult_distribute_left).
-    specialize (h (exist _ x hx)).
-    specialize (h (exist _ y hy)).
-    specialize (h (exist _ z hz)).
-    simpl in h.
-    inversion h as [h']. clear h. rename h' into h.
-    reflexivity.
-  Qed.
-
   (* (x+y)*z = x*z + y*z *)
-  Theorem plus_mult_distribute_right : forall x y z, mult (plus x y) z  = plus (mult x z) (mult y z).
+  Theorem Nplus_mult_distr_r : forall x y z, Nmult (Nplus x y) z  = Nplus (Nmult x z) (Nmult y z).
   Proof.
     intros x y z.
-    repeat rewrite (mult_comm _ z).
-    rewrite plus_mult_distribute_left.
+    repeat rewrite (Nmult_comm _ z).
+    rewrite Nplus_mult_distr_l.
     reflexivity.
   Qed.
 
-  Theorem plus_mult_distribute_rightl : forall x y z,
+
+  Theorem _Nplus_mult_dist_r : forall x y z,
     isnatural x -> isnatural y -> isnatural z
-    -> mult_l (append x y) z  = append (mult_l x z) (mult_l y z).
+    -> _Nmult (append x y) z  = append (_Nmult x z) (_Nmult y z).
   Proof.
     intros x y z hx hy hz.
-    assert (h := plus_mult_distribute_right).
+    assert (h := Nplus_mult_distr_r).
     specialize (h (exist _ x hx)).
     specialize (h (exist _ y hy)).
     specialize (h (exist _ z hz)).
@@ -661,7 +625,7 @@
   Qed.
 
   (* Multiplication is associative *)
-  Theorem mult_assoc : associative mult.
+  Theorem Nmult_assoc : associative Nmult.
   Proof.
     red.
     (* Destruct x, y and z into their parts *)
@@ -694,10 +658,10 @@
       rewrite <- ihx.
       clear ihx.
       rename tailx into x.
-      rewrite plus_mult_distribute_rightl.
+      rewrite _Nplus_mult_dist_r.
       { reflexivity. }
       { unfold isnatural. unfold allnil. exact hy. }
-      { apply mult_l_natural.
+      { apply _Nmult_natural.
         { unfold isnatural. unfold allnil. exact hmatchx. }
         { unfold isnatural. unfold allnil. exact hy. }
       }
@@ -705,85 +669,74 @@
     }
   Qed.
 
-  Lemma mult_zero_l : forall n:T, mult zero n = zero.
+  Lemma Nmult_zero_l : forall n:NN, Nmult Nzero n = Nzero.
     Proof.
     intro nT.
-    destruct zero as [z hz] eqn:heqz;
+    destruct Nzero as [z hz] eqn:heqz;
     destruct nT as [n hn].
     simpl. apply proof_irrelevance. simpl.
     inversion heqz as [heq]. clear heqz.
-    unfold zero in *. subst z.
+    unfold Nzero in *. subst z.
     simpl.
     reflexivity.
   Qed.
 
-  Lemma mult_zero_r : forall n:T, mult n zero = zero.
+  Lemma Nmult_zero_r : forall n:NN, Nmult n Nzero = Nzero.
     Proof.
     intro nT.
-    rewrite mult_comm.
-    rewrite mult_zero_l.
+    rewrite Nmult_comm.
+    rewrite Nmult_zero_l.
     reflexivity.
   Qed.
 
   (* The set of natural numbers is a commutative monoid for addition and multiplication *)
-  Theorem Natural_commutative_monoid : commutative_monoid T plus /\ commutative_monoid T mult.
+  Theorem N_commutative_monoid : commutative_monoid NN Nplus /\ commutative_monoid NN Nmult.
   Proof.
     split.
     {
       red.
       repeat split.
-      { apply plus_assoc. }
-      { apply plus_comm. }
-      { exists zero.
+      { apply Nplus_assoc. }
+      { apply Nplus_comm. }
+      { exists Nzero.
         intro a.
         split.
-        { rewrite plus_zero_l. reflexivity. }
-        { rewrite plus_zero_r. reflexivity. }
+        { rewrite Nplus_zero_l. reflexivity. }
+        { rewrite Nplus_zero_r. reflexivity. }
       }
     }
       red.
       repeat split.
-      { apply mult_assoc. }
-      { apply mult_comm. }
-      { exists one.
+      { apply Nmult_assoc. }
+      { apply Nmult_comm. }
+      { exists None.
         intro a.
         split.
-        { rewrite mult_one_l. reflexivity. }
-        { rewrite mult_one_r. reflexivity. }
+        { rewrite Nmult_one_l. reflexivity. }
+        { rewrite Nmult_one_r. reflexivity. }
       }
   Qed.
 
   (* (next n) + m = n + (next m) *)
-  (* TODO: This can be rewritten without destruction *)
-  Lemma plus_next: forall (n m:T), plus (next n) m = plus n (next m).
+  Lemma Nplus_next: forall (n m:NN), Nplus (Nnext n) m = Nplus n (Nnext m).
   Proof.
-    intros nT mT.
-    destruct nT as [n hn];
-    destruct mT as [m hm].
-    simpl. apply proof_irrelevance. simpl.
-    unfold next_l.
-    rewrite cons_append.
-    rewrite (cons_append _ m).
-    repeat rewrite <- append_assoc.
-    apply append_intro_r.
-    Search append.
-    rewrite (allnil_append_comm n _).
-    { reflexivity. }
-    { unfold isnatural in hn. exact hn. }
-    { clear. red. simpl. split. apply isnil_nil. trivial. }
+    intros n m.
+    rewrite Nplus_next_l.
+    rewrite Nplus_next_r.
+    reflexivity.
   Qed.
 
 
   (* If n + m = 0, then n = 0 and m = 0 *)
-  Lemma plus_zero_zero_eq_zero : forall (n m:T), plus n m = zero -> n = zero /\ m = zero.
+  Lemma Nplus_zero : forall (n m:NN), Nplus n m = Nzero -> n = Nzero /\ m = Nzero.
   Proof.
     intro n.
     (* We apply our custom induction principle *)
-    pattern n;apply I.
+    pattern n;apply Ninduction.
     (* Base case *)
     {
       intros m heq.
-      rewrite plus_zero_l in heq.
+      rewrite Nplus_zero_l in heq.
       subst m.
       split;reflexivity.
     }
@@ -791,8 +744,8 @@
     {
       clear n. intro n. intro ih.
       intros m heq.
-      specialize (ih (next m)).
-      rewrite plus_next in heq.
+      specialize (ih (Nnext m)).
+      rewrite Nplus_next in heq.
       specialize (ih heq).
       destruct ih as [ _ hr ].
       (* We can have next m = 0 *)
@@ -801,19 +754,19 @@
   Qed.
 
   (* Definition of "less than or equal to" *)
-  Definition le_n (n m:T) := longerOrEqualThan (number m) (number n).
-  Notation "x <=n y" := (le_n x y) (only printing, at level 60) : maths. 
+  Definition Nle (n m:NN) := longerOrEqualThan (Nnumber m) (Nnumber n).
+  Notation "x <=n y" := (Nle x y) (only printing, at level 60) : maths. 
 
   (* Definition of "less than" *)
-  Definition lt_n (n m:T) := le_n (next n) m.
-  Notation "x <n y" := (lt_n x y) (only printing, at level 60) : maths. 
+  Definition Nlt (n m:NN) := Nle (Nnext n) m.
+  Notation "x <n y" := (Nlt x y) (only printing, at level 60) : maths. 
 
   (* If n <= m, then next n <= next m *)
-  Lemma le_n_next : forall n m, le_n n m -> le_n (next n) (next m).
+  Lemma Nle_next_intro : forall n m, Nle n m -> Nle (Nnext n) (Nnext m).
   Proof.
     (* Destruct n and m into their parts *)
     intros nT mT.
-    unfold le_n.
+    unfold Nle.
     destruct nT as [n hn];
     destruct mT as [m hm].
     simpl.
@@ -853,11 +806,11 @@
   Qed.
 
   (* n <= n + m *)
-  Lemma le_n_n : forall n m, le_n n (plus n m).
+  Lemma Nle_plus_l : forall n m, Nle n (Nplus n m).
   Proof.
     (* Destruct n and m into their parts *)
     intros nT mT.
-    unfold le_n.
+    unfold Nle.
     destruct nT as [n hn];
     destruct mT as [m hm].
     simpl. clear hn hm.
@@ -876,11 +829,11 @@
   Qed.
 
   (* "<=" is transitive *)
-  Lemma le_trans : forall n m k, le_n n m -> le_n m k -> le_n n k.
+  Lemma Nle_trans : forall n m k, Nle n m -> Nle m k -> Nle n k.
   Proof.
     (* Destruct n, m and k into their parts *)
     intros nT mT kT.
-    unfold le_n.
+    unfold Nle.
     destruct nT as [n hn];
     destruct mT as [m hm];
     destruct kT as [k hk].
@@ -942,11 +895,11 @@
   Qed.
 
   (* a <= next a *)
-  Lemma le_next_self : forall a, le_n a (next a).
+  Lemma Nle_next : forall a, Nle a (Nnext a).
   Proof.
     intro aT.
     destruct aT as [a ha].
-    unfold le_n.
+    unfold Nle.
     simpl.
     clear ha.
     induction a as [|head tail ih].
@@ -955,10 +908,10 @@
   Qed.
 
   (* next n <= next m => n <= m *)
-  Lemma le_n_next_intro : forall n m, le_n (next n) (next m) -> le_n n m.
+  Lemma Nle_next_elim : forall n m, Nle (Nnext n) (Nnext m) -> Nle n m.
   Proof.
     intros nT mT.
-    unfold le_n.
+    unfold Nle.
     destruct nT as [n hn];
     destruct mT as [m hm].
     simpl.
@@ -969,11 +922,11 @@
   Qed.
 
   (* "<" is irreflexive *)
-  Lemma lt_irrefl : forall n, lt_n n n -> False.
+  Lemma Nlt_irrefl : forall n, Nlt n n -> False.
   Proof.
     intro nT.
-    unfold lt_n.
-    unfold le_n.
+    unfold Nlt.
+    unfold Nle.
     destruct nT as [n hn].
     simpl.
     induction n as [|head tail ih].
@@ -992,24 +945,24 @@
       clear hmatch.
       red in hnil.
       subst head.
-      unfold next_l in ih.
+      unfold _Nnext in ih.
       exact ih.
     }
   Qed.
 
   (* To converts "<" back to "<=" in proofs *)
-  Lemma lt_le: forall n m, le_n (next n) m -> lt_n n m.
+  Lemma Nlt_le: forall n m, Nle (Nnext n) m -> Nlt n m.
   Proof.
     intros n m h.
-    unfold lt_n.
+    unfold Nlt.
     exact h.
   Qed.
 
 
   (* Length of a list *)
-  Fixpoint length {A:Type} (l : LO A) : T := match l with
-  | nil => zero
-  | cons _ tail => next (length tail)
+  Fixpoint length {A:Type} (l : LO A) : NN := match l with
+  | nil => Nzero
+  | cons _ tail => Nnext (length tail)
   end.
 
   (* A type is infinite if for any (finite) list of elements of that type,
@@ -1018,13 +971,13 @@
 
 
   (* Sum of a list *)
-  Fixpoint sum (l:LO T) := match l with
-  | nil => zero
-  | cons head tail => plus head (sum tail)
+  Fixpoint Nsum (l:LO NN) := match l with
+  | nil => Nzero
+  | cons head tail => Nplus head (Nsum tail)
   end.
 
   (* If the sum of a list is zero, then all its elements are zero *)
-  Lemma sum_zero : forall (l:LO T), sum l = zero -> forall a, inlist l a -> a = zero.
+  Lemma sum_zero : forall (l:LO NN), Nsum l = Nzero -> forall a, inlist l a -> a = Nzero.
   Proof.
     intro l.
     induction l as [|head tail ih].
@@ -1040,7 +993,7 @@
       simpl.
       intro heq.
       (* head = 0 and sum tail = 0 *)
-      apply plus_zero_zero_eq_zero in heq.
+      apply Nplus_zero in heq.
       destruct heq as [hl hr].
       subst head.
       specialize (ih hr).
@@ -1065,7 +1018,7 @@
   Qed.
 
   (* Any element in a list is less than their sum *)
-  Lemma sum_lt : forall (l:LO T), forall a, inlist l a -> le_n a (sum l).
+  Lemma sum_lt : forall (l:LO NN), forall a, inlist l a -> Nle a (Nsum l).
   Proof.
   intro l.
   induction l as [|head tail ih].
@@ -1081,17 +1034,17 @@
     (* a is the head *)
     {
       subst a. simpl.
-      apply le_n_n.
+      apply Nle_plus_l.
     }
     (* a is in the tail *)
     {
       specialize (ih _ hr).
-      apply le_trans with (sum tail).
+      apply Nle_trans with (Nsum tail).
       { exact ih. }
       {
         simpl.
-        rewrite plus_comm.
-        apply le_n_n.
+        rewrite Nplus_comm.
+        apply Nle_plus_l.
       }
     }
   }
@@ -1099,7 +1052,7 @@
 
 
   (* If an element is bigger than any element of the list, then it is not in the list *)
-  Lemma lt_notin_list : forall (l:LO T) (a:T), (forall x, inlist l x -> lt_n a x) -> not (inlist l a).
+  Lemma lt_notin_list : forall (l:LO NN) (a:NN), (forall x, inlist l x -> Nlt a x) -> not (inlist l a).
   Proof.
     intro l.
     induction l as [|head tail ih].
@@ -1117,13 +1070,13 @@
       intro hin.
       unfold not in ih.
       specialize (h _ hin).
-      apply lt_irrefl in h.
+      apply Nlt_irrefl in h.
       inversion h.
     }
   Qed.
 
   (* The sum of the elements of a list + 1 is not in the list *)
-  Lemma sum1_not_in_list : forall (l:LO T), not (inlist l (plus (sum l) one)).
+  Lemma sum1_not_in_list : forall (l:LO NN), not (inlist l (Nplus (Nsum l) None)).
   Proof.
 
     (* The sum + 1 of a list is bigger than any elements of the list *)
@@ -1134,7 +1087,7 @@
     specialize (thm l).
 
     (* Let's call the sum 'S' *)
-    set (S:=plus (sum l) one). 
+    set (S:=Nplus (Nsum l) None). 
 
     (* Negation means proving False *)
     unfold not in *.
@@ -1148,17 +1101,17 @@
     clear h.
 
     (* Now we can use irreflexivity of "<" to derive a contradiction *)
-    eapply lt_irrefl with S.
+    eapply Nlt_irrefl with S.
     subst S.
-    unfold lt_n.
-    rewrite <- next_eq_plus_one.
-    apply le_n_next.
-    rewrite <- next_eq_plus_one in thm.
+    unfold Nlt.
+    rewrite <- Nnext_eq.
+    apply Nle_next_intro.
+    rewrite <- Nnext_eq in thm.
     exact thm.
   Qed.
 
   (* The set of naturals is infinite *)
-  Theorem Natural_infinite : is_infinite T.
+  Theorem Ninfinite : is_infinite NN.
   Proof.
     (* Being infinite means that for any finite list l of elements of type T,
        we can find an element of type T that is not in the list *)
@@ -1166,27 +1119,27 @@
     (* We will work on that list *)
     intro l.
     (* And in particular, the sum of the list + 1 is not in the list *)
-    exists (plus (sum l) one).
+    exists (Nplus (Nsum l) None).
     (* This it what we proved just above *)
     apply sum1_not_in_list.
   Qed.
 
 
-  Definition divides d n := exists d', mult d d' = n.
+  Definition divides d n := exists d', Nmult d d' = n.
 
-  Lemma divides_zero_n : forall n:T, divides n zero.
+  Lemma divides_zero_n : forall n:NN, divides n Nzero.
   Proof.
     intro n.
     red.
-    exists zero.
-    rewrite mult_zero_r.
+    exists Nzero.
+    rewrite Nmult_zero_r.
     reflexivity.
   Qed.
 
-  Lemma divides_n_zero : forall n:T, divides zero n -> n = zero.
+  Lemma divides_n_zero : forall n:NN, divides Nzero n -> n = Nzero.
   Proof.
     intro n.
-    pattern n;apply I.
+    pattern n;apply Ninduction.
     (* n = 0 *)
     { intros _. reflexivity. }
     (* n > 0 => impossible *)
@@ -1196,32 +1149,32 @@
       intro h.
       unfold divides in *.
       destruct h as [d h].
-      rewrite mult_zero_l in h.
+      rewrite Nmult_zero_l in h.
       (* inversion is kind of magic here, but it will try to match nil against cons head tail and find it can't *)
       inversion h.
     }
   Qed.
 
-  Lemma divides_one_n : forall n:T, divides one n.
+  Lemma divides_one_n : forall n:NN, divides None n.
   Proof.
     intro n.
     unfold divides.
     exists n.
-    rewrite mult_one_l.
+    rewrite Nmult_one_l.
     reflexivity.
   Qed.
 
   (* n + m = 1 -> (n = 1 and m = 0) or (n = 0 and m = 1) *)
-  Lemma plus_eq_one : forall (n m:T), plus n m = one -> n = one /\ m = zero \/ n = zero /\ m = one.
+  Lemma plus_eq_one : forall (n m:NN), Nplus n m = None -> n = None /\ m = Nzero \/ n = Nzero /\ m = None.
   Proof.
     (* Induction on n *)
     intro n.
-    pattern n;apply I.
+    pattern n;apply Ninduction.
     (* Base case *)
     {
       (* n = 0 -> m = 1 *)
       intros m h.
-      rewrite plus_zero_l in h.
+      rewrite Nplus_zero_l in h.
       subst m.
       (* The right part of the disjunction applies *)
       right.
@@ -1236,16 +1189,16 @@
       (* m and equality hypothesis *)
       intro m. intro h.
       (* We can deduce n = 0 and m = 0 *)
-      rewrite plus_next_r in h.
-      unfold one in h.
-      apply next_injective in h.
-      apply plus_zero_zero_eq_zero in h.
+      rewrite Nplus_next_l in h.
+      unfold None in h.
+      apply Nnext_elim in h.
+      apply Nplus_zero in h.
       destruct h as [ hl hr ].
       (* Substitute n and m with zero *)
       subst n. subst m.
       (* Prepare the induction hypothesis *)
-      specialize (ih one).
-      rewrite plus_zero_l in ih.
+      specialize (ih None).
+      rewrite Nplus_zero_l in ih.
       specialize (ih (eq_refl _)).
       (* Examine each "possibility" *)
       destruct ih as [hl | hr].
@@ -1259,23 +1212,23 @@
         clear hr.
         left.
         split.
-        { unfold one. reflexivity. }
+        { unfold None. reflexivity. }
         { reflexivity. }
       }
     }
   Qed.
 
   (* n * m = 1 -> n = 1 and m = 1 *)
-  Theorem mult_one_one_eq_one : forall n m : T, mult n m = one -> n = one /\ m = one.
+  Theorem Nmult_one : forall n m : NN, Nmult n m = None -> n = None /\ m = None.
   Proof.
     (* Induction over n *)
     intro n.
-    pattern n;apply I.
+    pattern n;apply Ninduction.
     (* Base case *)
     {
       (* n = 0 -> impossible *)
       intros m h.
-      rewrite mult_zero_l in h.
+      rewrite Nmult_zero_l in h.
       inversion h.
     }
     (* Induction case *)
@@ -1284,16 +1237,16 @@
       clear n. intro n'. intro ih. clear ih.
       intro m. intro  h.
       (* We can deduce that m = 0 or m = 1 *)
-      rewrite next_eq_plus_one in h.
-      rewrite plus_mult_distribute_right in h.
-      rewrite mult_one_l in h.
+      rewrite Nnext_eq in h.
+      rewrite Nplus_mult_distr_r in h.
+      rewrite Nmult_one_l in h.
       apply plus_eq_one in h.
       destruct h as [hl | hr ].
       (* m = 0 -> impossible *)
       {
         destruct hl as [hl hr].
         subst m.
-        rewrite mult_zero_r in hl.
+        rewrite Nmult_zero_r in hl.
         inversion hl.
       }
       (* m = 1 *)
@@ -1301,28 +1254,28 @@
         (* so n' must be zero *)
         destruct hr as [hl hr].
         subst m.
-        rewrite mult_one_r in hl.
+        rewrite Nmult_one_r in hl.
         subst n'.
         (* And now it's obvious *)
         split.
-        { unfold one. reflexivity . }
+        { unfold None. reflexivity . }
         { reflexivity. }
       }
     }
   Qed.
 
-  Lemma divides_n_one : forall n:T, divides n one -> n = one.
+  Lemma divides_n_one : forall n:NN, divides n None -> n = None.
   Proof.
   intros n h.
   unfold divides in h.
   destruct h as [d h].
   generalize dependent d.
   (* Induction over n *)
-  pattern n;apply I.
+  pattern n;apply Ninduction.
   (* Base case *)
   {
     intros d h.
-    rewrite mult_zero_l in h.
+    rewrite Nmult_zero_l in h.
     inversion h.
   }
   (* Induction case *)
@@ -1331,13 +1284,13 @@
     clear n. intro n'. intro ih. clear ih.
     intro d. intro h.
     (* From h, we can deduce that n' = zero, and therefore n = 1 *)
-    apply mult_one_one_eq_one in h.
+    apply Nmult_one in h.
     destruct h as [hl hr].
     subst d.
-    unfold one in hl.
-    apply next_injective in hl.
+    unfold None in hl.
+    apply Nnext_elim in hl.
     subst n'.
-    unfold one.
+    unfold None.
     reflexivity.
   }
   Qed.
@@ -1346,34 +1299,34 @@
   Proof.
     intro n.
     unfold divides.
-    exists one.
-    rewrite mult_one_r.
+    exists None.
+    rewrite Nmult_one_r.
     reflexivity.
   Qed.
 
-  Definition isprime n := forall d, divides d n -> d<>n -> d = one.
+  Definition isprime n := forall d, divides d n -> d<>n -> d = None.
 
-  Lemma zero_not_eq_one : zero = one -> False.
+  Lemma zero_not_eq_one : Nzero = None -> False.
   Proof.
     intro h.
     inversion h.
   Qed.
 
-  Lemma two_not_eq_one : two = one -> False.
+  Lemma two_not_eq_one : Ntwo = None -> False.
   Proof.
     intro h.
     inversion h.
   Qed.
 
-  Lemma next_zero : next zero = one.
-  Proof. unfold one. reflexivity. Qed.
+  Lemma next_zero : Nnext Nzero = None.
+  Proof. unfold None. reflexivity. Qed.
 
-  Lemma zero_not_prime : not (isprime zero).
+  Lemma zero_not_prime : not (isprime Nzero).
   Proof.
     unfold not. intro h.
     unfold isprime in h.
     (* For d = zero, we would prove 0 = 1, which is impossible *)
-    specialize (h two).
+    specialize (h Ntwo).
     apply two_not_eq_one.
     apply h.
     (* Two divides zero indeed *)
@@ -1382,57 +1335,57 @@
     unfold not. intro heq. inversion heq.
   Qed.
 
-  Lemma isprime_one : isprime one.
+  Lemma isprime_one : isprime None.
   Proof.
     unfold isprime.
     intro d.
     intro h.
     unfold divides in h.
     destruct h as [d' heq].
-    apply mult_one_one_eq_one in heq.
+    apply Nmult_one in heq.
     destruct heq as [hl _].
     subst d.
     intros _.
     reflexivity.
   Qed.
 
-  Lemma plus_elim_l : forall n m p, plus n m = plus n p -> m = p.
+  Lemma Nplus_elim_l : forall n m p, Nplus n m = Nplus n p -> m = p.
   Proof.
     intro n.
-    pattern n;apply I.
+    pattern n;apply Ninduction.
     {
     intro m. intro p.
     intro heq.
-    repeat rewrite plus_zero_l in heq.
+    repeat rewrite Nplus_zero_l in heq.
     exact heq.
     }
     { 
     clear n. intro n'. intro ih.
     intro m. intro p. intro heq.
-    rewrite plus_next_r in heq.
-    rewrite plus_next_r in heq.
-    apply next_injective in heq.
+    rewrite Nplus_next_l in heq.
+    rewrite Nplus_next_l in heq.
+    apply Nnext_elim in heq.
     apply ih.
     exact heq.
     }
   Qed.
 
-  Lemma plus_elim_r : forall n m p, plus m n = plus p n -> m = p.
+  Lemma Nplus_elim_r : forall n m p, Nplus m n = Nplus p n -> m = p.
   Proof.
     intros n m p heq.
-    apply plus_elim_l with n.
-    rewrite (plus_comm n).
-    rewrite (plus_comm n).
+    apply Nplus_elim_l with n.
+    rewrite (Nplus_comm n).
+    rewrite (Nplus_comm n).
     exact heq.
   Qed.
 
-  Lemma plus_eq_two : forall (n m:T), plus n m = two -> (n = zero /\ m = two) \/ (n = one /\ m = one) \/ (n = two /\ m = zero).
+  Lemma plus_eq_two : forall (n m:NN), Nplus n m = Ntwo -> (n = Nzero /\ m = Ntwo) \/ (n = None /\ m = None) \/ (n = Ntwo /\ m = Nzero).
   Proof.
   intro n.
-  pattern n;apply I.
+  pattern n;apply Ninduction.
   {
     intros m h.
-    rewrite plus_zero_l in h.
+    rewrite Nplus_zero_l in h.
     subst m.
     left. split.
     { reflexivity. }
@@ -1441,12 +1394,12 @@
   {
     intros n' ih. clear ih.
     intros m heq.
-    rewrite next_eq_plus_one in heq.
-    unfold two in heq.
-    rewrite next_eq_plus_one in heq.
-    rewrite (plus_comm n') in heq.
-    repeat rewrite plus_assoc in heq.
-    apply plus_elim_l in heq.
+    rewrite Nnext_eq in heq.
+    unfold Ntwo in heq.
+    rewrite Nnext_eq in heq.
+    rewrite (Nplus_comm n') in heq.
+    repeat rewrite Nplus_assoc in heq.
+    apply Nplus_elim_l in heq.
     apply plus_eq_one in heq.
     destruct heq as [heql | heqr].
     {
@@ -1455,23 +1408,23 @@
       subst n'.
       right. right.
       split.
-      { unfold two. reflexivity. }
+      { unfold Ntwo. reflexivity. }
       { reflexivity. }
     }
     {
       destruct heqr as [hn hm].
       subst n'. subst m.
       right. left. split.
-      { unfold one. reflexivity. }
+      { unfold None. reflexivity. }
       { reflexivity. }
     }
   }
   Qed.
 
-  Lemma mult_eq_zero : forall n m, mult n m = zero -> n = zero \/ m = zero.
+  Lemma Nmult_zero : forall n m, Nmult n m = Nzero -> n = Nzero \/ m = Nzero.
   Proof.
   intro n.
-  pattern n;apply I.
+  pattern n;apply Ninduction.
   {
     intro m. intro heq. clear heq.
     left. reflexivity.
@@ -1479,10 +1432,10 @@
   {
     clear n. intro n'. intro ih. clear ih.
     intro m. intro heq.
-    rewrite next_eq_plus_one in heq.
-    rewrite plus_mult_distribute_right in heq.
-    rewrite mult_one_l in heq.
-    apply plus_zero_zero_eq_zero in heq.
+    rewrite Nnext_eq in heq.
+    rewrite Nplus_mult_distr_r in heq.
+    rewrite Nmult_one_l in heq.
+    apply Nplus_zero in heq.
     destruct heq as [hl hr].
     subst m.
     right.
@@ -1490,7 +1443,7 @@
   }
   Qed.
 
-  Lemma isprime_two : isprime two.
+  Lemma isprime_two : isprime Ntwo.
   Proof.
     unfold isprime.
     intro d.
@@ -1500,28 +1453,28 @@
     destruct h as [d' heq].
     generalize dependent d'.
     generalize dependent hneq.
-    pattern d;apply I.
+    pattern d;apply Ninduction.
     {
       intros hneq d' heq.
-      rewrite mult_zero_l in heq.
+      rewrite Nmult_zero_l in heq.
       inversion heq.
     }
     {
       clear d. intro d. intro ih.
       intro hneq. intro d'. intro heq.
-      rewrite next_eq_plus_one in heq.
-      rewrite plus_mult_distribute_right in heq.
-      rewrite mult_one_l in heq.
+      rewrite Nnext_eq in heq.
+      rewrite Nplus_mult_distr_r in heq.
+      rewrite Nmult_one_l in heq.
       apply plus_eq_two in heq.
       destruct heq as [h02 | [h11 | h20]].
       {
         destruct h02 as [hl hr].
         subst d'.
-        apply mult_eq_zero in hl.
+        apply Nmult_zero in hl.
         destruct hl as [hl | hr].
         {
           subst d.
-          unfold one.
+          unfold None.
           reflexivity.
         }
         { inversion hr. }
@@ -1529,75 +1482,75 @@
       {
         destruct h11 as [hl hr].
         subst d'.
-        rewrite mult_one_r in hl.
+        rewrite Nmult_one_r in hl.
         subst d.
         clear ih.
         exfalso.
         apply hneq.
-        unfold two.
+        unfold Ntwo.
         reflexivity.
       }
       {
         destruct h20 as [hl hr].
         subst d'.
-        rewrite mult_zero_r in hl.
+        rewrite Nmult_zero_r in hl.
         inversion hl.
       }
     }
   Qed.
 
-  Lemma zero_neq_two : zero = two -> False.
+  Lemma zero_neq_two : Nzero = Ntwo -> False.
   Proof.
     intro i. inversion i.
   Qed.
 
-  Lemma one_neq_two : one = two -> False.
+  Lemma one_neq_two : None = Ntwo -> False.
   Proof.
     intro h.
     inversion h.
   Qed.
 
-  Lemma plus_eq_plus_1 : forall n m p:T, plus n m = plus p one ->
-    (exists n', plus n' m=p) \/
-    (exists m', plus n m' = p).
+  Lemma Nplus_elim_one_r : forall n m p:NN, Nplus n m = Nplus p None ->
+    (exists n', Nplus n' m  = p) \/
+    (exists m', Nplus n  m' = p).
   Proof.
     intro n.
-    pattern n;apply I.
+    pattern n;apply Ninduction.
     {
       intro m.
       intro p.
       intro heq.
-      rewrite plus_zero_l in heq.
+      rewrite Nplus_zero_l in heq.
       subst m.
       right.
       exists p.
-      rewrite plus_zero_l.
+      rewrite Nplus_zero_l.
       reflexivity.
     }
     {
       clear n. intro n'. intro ih.
       intro m. intro p. intro heq.
-      specialize (ih (next m)).
+      specialize (ih (Nnext m)).
       specialize (ih p).
-      rewrite plus_next_r in heq.
-      rewrite <- plus_next_l in heq.
+      rewrite Nplus_next_l in heq.
+      rewrite <- Nplus_next_r in heq.
       specialize (ih heq).
       destruct ih as [hl | hr].
       {
         destruct hl as [z hz].
         left.
-        exists (next z).
-        rewrite plus_next_r.
-        rewrite <- plus_next_l.
+        exists (Nnext z).
+        rewrite Nplus_next_l.
+        rewrite <- Nplus_next_r.
         exact hz.
       }
       {
         destruct hr as [z hz].
-        rewrite plus_next_l in heq.
-        rewrite <- next_eq_plus_one in heq.
-        apply next_injective in heq.
+        rewrite Nplus_next_r in heq.
+        rewrite <- Nnext_eq in heq.
+        apply Nnext_elim in heq.
         rewrite <- heq in hz.
-        apply plus_elim_l in hz.
+        apply Nplus_elim_l in hz.
         subst z.
         left.
         exists n'.
@@ -1606,20 +1559,20 @@
     }
   Qed.
 
-  Definition three := next two.
+  Definition three := Nnext Ntwo.
 
   Lemma isprime_three : isprime three.
   Proof.
     unfold isprime.
     intro d.
-    pattern d;apply I.
+    pattern d;apply Ninduction.
     (* d = 0 *)
     {
       intro h.
       intro hneq.
       unfold divides in h.
       destruct h as [d' heq].
-      rewrite mult_zero_l in heq.
+      rewrite Nmult_zero_l in heq.
       inversion heq.
     }
     {
@@ -1631,13 +1584,13 @@
       intro hneq.
       unfold divides in h.
       destruct h as [q heq].
-      rewrite next_eq_plus_one in heq.
-      rewrite plus_mult_distribute_right in heq.
-      rewrite mult_one_l in heq.
+      rewrite Nnext_eq in heq.
+      rewrite Nplus_mult_distr_r in heq.
+      rewrite Nmult_one_l in heq.
       unfold three in heq.
-      rewrite next_eq_plus_one in heq.
+      rewrite Nnext_eq in heq.
       assert(kept:=heq).
-      apply plus_eq_plus_1 in heq.
+      apply Nplus_elim_one_r in heq.
       destruct heq as [hl | hr ].
       {
         destruct hl as [d'' heq].
@@ -1647,17 +1600,17 @@
           destruct heq as [h'' h].
           subst d''.
           subst q.
-          rewrite (plus_comm two) in kept.
-          apply plus_elim_r in kept.
-          apply mult_one_one_eq_one in kept.
+          rewrite (Nplus_comm Ntwo) in kept.
+          apply Nplus_elim_r in kept.
+          apply Nmult_one in kept.
           destruct kept as [_ i].
           inversion i.
         }
         {
           destruct heq as [hl hr].
           subst q. subst d''.
-          rewrite mult_one_r in kept.
-          apply plus_elim_r in kept.
+          rewrite Nmult_one_r in kept.
+          apply Nplus_elim_r in kept.
           subst d'.
           unfold three in hneq.
           exfalso.
@@ -1668,9 +1621,9 @@
           destruct heq as [hl hr].
           subst q.
           subst d''.
-          rewrite mult_zero_r in kept.
-          rewrite plus_zero_l in kept.
-          rewrite <- next_eq_plus_one in kept.
+          rewrite Nmult_zero_r in kept.
+          rewrite Nplus_zero_l in kept.
+          rewrite <- Nnext_eq in kept.
           inversion kept.
         }
       }
@@ -1681,29 +1634,29 @@
         {
           destruct h as [ hl hr ].
           subst u.
-          apply mult_eq_zero in hl.
+          apply Nmult_zero in hl.
           destruct hl as [h | h].
           {
             subst d'.
-            unfold one.
+            unfold None.
             reflexivity.
           }
           {
             subst q.
-            rewrite mult_zero_r in kept.
-            rewrite plus_zero_l in kept.
-            rewrite <- next_eq_plus_one in kept.
+            rewrite Nmult_zero_r in kept.
+            rewrite Nplus_zero_l in kept.
+            rewrite <- Nnext_eq in kept.
             inversion kept.
           }
         }
         {
           destruct h as [hl hr].
           subst u.
-          apply mult_one_one_eq_one in hl.
+          apply Nmult_one in hl.
           destruct hl as [hl hr].
           subst d'.
           subst q.
-          rewrite mult_one_r in kept.
+          rewrite Nmult_one_r in kept.
           repeat rewrite <- next_eq_plus_one in kept.
           inversion kept.
         }
@@ -1712,9 +1665,9 @@
           subst u.
           assert(heq:=kept).
           rewrite hl in heq.
-          apply plus_elim_l in heq.
+          apply Nplus_elim_l in heq.
           subst q.
-          rewrite mult_one_r in hl.
+          rewrite Nmult_one_r in hl.
           subst d'.
           exfalso.
           apply hneq.
@@ -1725,57 +1678,54 @@
     }
   Qed.
 
-  Definition even (n:T) := divides two n.
-  Definition odd (n:T) := not (even n).
+  Definition Neven (n:NN) := divides Ntwo n.
+  Definition Nodd (n:NN) := not (Neven n).
 
-  Lemma f_eq {A B:Type} : forall (f:A->B) (x y:A), x = y ->f x  = f y.
-  Proof. intros f x y heq. subst y. reflexivity. Qed.
-
-  Lemma mult_two_r : forall n, mult n two = plus n n.
+  Lemma mult_two_r : forall n, Nmult n Ntwo = Nplus n n.
   Proof.
     intro n.
-    unfold two.
-    rewrite next_eq_plus_one.
-    rewrite plus_mult_distribute_left.
-    repeat rewrite mult_one_r.
+    unfold Ntwo.
+    rewrite Nnext_eq.
+    rewrite Nplus_mult_distr_l.
+    repeat rewrite Nmult_one_r.
     reflexivity.
   Qed.
 
-  Lemma mult_two_l : forall n, mult two n = plus n n.
+  Lemma mult_two_l : forall n, Nmult Ntwo n = Nplus n n.
   Proof.
     intro n.
-    rewrite mult_comm.
+    rewrite Nmult_comm.
     apply mult_two_r.
   Qed.
 
-  Lemma not_even_odd : forall (n:T), not (even n /\ odd n).
+  Lemma not_even_odd : forall (n:NN), not (Neven n /\ Nodd n).
   Proof.
     intro n.
     unfold not.
     intros [heven hodd].
-    unfold odd in hodd.
+    unfold Nodd in hodd.
     apply hodd.
     exact heven.
   Qed.
 
-  Lemma even_2k : forall (k:T), even (mult two k).
+  Lemma Neven_2k : forall (k:NN), Neven (Nmult Ntwo k).
   Proof.
   intro k.
-  pattern k;apply I.
-  { unfold even. rewrite mult_zero_r. apply divides_zero_n. }
+  pattern k;apply Ninduction.
+  { unfold Neven. rewrite Nmult_zero_r. apply divides_zero_n. }
   {
     clear k. intro k'. intro ih. clear ih.
-    unfold even.
+    unfold Neven.
     unfold divides.
-    exists (next k').
+    exists (Nnext k').
     reflexivity.
   }
   Qed.
   
-  Lemma destruct_n : forall n:T, n = zero \/ exists n', n = next n'.
+  Lemma Ndestruct : forall n:NN, n = Nzero \/ exists n', n = Nnext n'.
   Proof.
     intro n.
-    pattern n;apply I.
+    pattern n;apply Ninduction.
     { left. reflexivity. }
     {
       clear n. intro n'. intro ih.
@@ -1783,44 +1733,44 @@
       {
         subst n'.
         right.
-        exists zero.
+        exists Nzero.
         reflexivity.
       }
       {
         destruct hr as [n'' heq].
         subst n'.
         right.
-        exists (next n'').
+        exists (Nnext n'').
         reflexivity.
       }
     }
   Qed.
     
 
-  Lemma odd_2k1 : forall (k:T), odd (next (mult two k)).
+  Lemma Nodd_2k1 : forall (k:NN), Nodd (Nnext (Nmult Ntwo k)).
   Proof.
   intro k.
-  pattern k;apply I.
+  pattern k;apply Ninduction.
   {
-    rewrite mult_zero_r.
-    unfold odd.
+    rewrite Nmult_zero_r.
+    unfold Nodd.
     unfold not.
     intro heven.
-    unfold even in heven.
+    unfold Neven in heven.
     unfold divides in heven.
     destruct heven as [e he].
     clear k.
     generalize dependent he.
-    pattern e;apply I.
+    pattern e;apply Ninduction.
     {
       intro h.
-      rewrite mult_zero_r in h.
+      rewrite Nmult_zero_r in h.
       inversion h.
     }
     {
       clear e. intro e'. intro hi. clear hi. intro h.
       rewrite mult_two_l in h.
-      fold one in h.
+      fold None in h.
       apply plus_eq_one in h.
       destruct h as [h | h].
       { destruct h as [hl hr]. rewrite hr in hl. inversion hl. }
@@ -1829,33 +1779,33 @@
   }
   {
     clear k. intro k'. intro ih.
-    unfold odd.
+    unfold Nodd.
     unfold not.
     intro heq.
-    unfold even in heq.
+    unfold Neven in heq.
     unfold divides in heq.
     destruct heq as [d heq].
-    unfold odd in ih.
+    unfold Nodd in ih.
     unfold not in ih.
     apply ih.
     clear ih.
-    unfold even.
+    unfold Neven.
     unfold divides.
     rewrite mult_two_l in heq.
-    rewrite mult_two_l in heq.    
-    rewrite plus_next_l in heq.
-    rewrite plus_next_r in heq.
+    rewrite mult_two_l in heq.
+    rewrite Nplus_next_r in heq.
+    rewrite Nplus_next_l in heq.
     rewrite mult_two_l.
-    assert (hd:=destruct_n d).
+    assert (hd:=Ndestruct d).
     {
       destruct hd as [hz | he].
-      { subst d. rewrite plus_zero_l in heq. inversion heq. }
+      { subst d. rewrite Nplus_zero_l in heq. inversion heq. }
       {
         destruct he as [d' heq']. subst d.
-        rewrite plus_next_l in heq.
-        rewrite plus_next_r in heq.
-        apply next_injective in heq.
-        apply next_injective in heq.
+        rewrite Nplus_next_r in heq.
+        rewrite Nplus_next_l in heq.
+        apply Nnext_elim in heq.
+        apply Nnext_elim in heq.
         exists d'.
         rewrite mult_two_l.
         exact heq.
@@ -1864,14 +1814,14 @@
   }
   Qed.
 
-  Lemma n_destruct_odd_even : forall n:T, (exists k, n = mult two k) \/ (exists k, n = next (mult two k)).
+  Lemma Ndestruct_odd_even : forall n:NN, (exists k, n = Nmult Ntwo k) \/ (exists k, n = Nnext (Nmult Ntwo k)).
   Proof.
   intro n.
-  pattern n;apply I.
+  pattern n;apply Ninduction.
   {
     left.
-    exists zero.
-    rewrite mult_zero_r.
+    exists Nzero.
+    rewrite Nmult_zero_r.
     reflexivity.
   }
   {
@@ -1888,39 +1838,39 @@
       destruct h as [k h].
       subst n'.
       left.
-      exists (next k).
+      exists (Nnext k).
       rewrite mult_two_l.
       rewrite mult_two_l.
-      rewrite plus_next_l.
-      rewrite plus_next_r.
+      rewrite Nplus_next_r.
+      rewrite Nplus_next_l.
       reflexivity.
     }
   }
   Qed.
 
-  Lemma next_not_eq : forall n:T, n = next n -> False.
+  Lemma next_not_eq : forall n:NN, n = Nnext n -> False.
   Proof.
     intro n.
-    pattern n;apply I.
+    pattern n;apply Ninduction.
     { intro heq. inversion heq. }
     {
       clear n. intro n'. intro ih.
       intro hneq.
-      apply next_injective in hneq.
+      apply Nnext_elim in hneq.
       apply ih.
       exact hneq.
     }
   Qed.
 
-  Lemma even_or_odd : forall (n:T), even n \/ odd n.
+  Lemma even_or_odd : forall (n:NN), Neven n \/ Nodd n.
   Proof.
     intro n.
-    assert (h:=n_destruct_odd_even n).
+    assert (h:=Ndestruct_odd_even n).
     destruct h as [h | h].
     {
       destruct h as [k h].
       left.
-      unfold even.
+      unfold Neven.
       unfold divides.
       exists k.
       subst n.
@@ -1929,10 +1879,10 @@
     {
       destruct h as [k h].
       right.
-      unfold odd.
+      unfold Nodd.
       unfold not.
       intro heven.
-      unfold even in heven.
+      unfold Neven in heven.
       unfold divides in heven.
       destruct heven as [k' h'].
       rewrite <- h' in h.
@@ -1941,40 +1891,40 @@
       rename k' into n.
       repeat rewrite mult_two_l in h.
       generalize dependent m.
-      pattern n;apply I.
+      pattern n;apply Ninduction.
       {
         intro m.
-        rewrite plus_zero_l.
+        rewrite Nplus_zero_l.
         intro h.
         inversion h.
       }
       {
         clear n. intros n' ih. intros m heq.
-        rewrite plus_next_l in heq.
-        rewrite plus_next_r in heq.
-        apply next_injective in heq.
-        assert (dm:=destruct_n m).
+        rewrite Nplus_next_r in heq.
+        rewrite Nplus_next_l in heq.
+        apply Nnext_elim in heq.
+        assert (dm:=Ndestruct m).
         destruct dm as [hl | hr].
-        { subst m. rewrite plus_zero_l in heq. inversion heq. }
+        { subst m. rewrite Nplus_zero_l in heq. inversion heq. }
         {
           destruct hr as [m' heq'].
           subst m.
           specialize (ih m').
           apply ih.
-          rewrite plus_next_l in heq.
-          rewrite plus_next_r in heq.
-          apply next_injective in heq.
+          rewrite Nplus_next_r in heq.
+          rewrite Nplus_next_l in heq.
+          apply Nnext_elim in heq.
           exact heq.
         }
       }
     }
   Qed.
 
-  Theorem le_refl : forall n:T, le_n n n.
+  Theorem Nle_refl : forall n:NN, Nle n n.
   Proof.
     intro nT.
     destruct nT as [n hn].
-    unfold le_n.
+    unfold Nle.
     simpl.
     clear hn.
     induction n as [|head tail ih].
@@ -1982,11 +1932,11 @@
     { simpl. exact ih. }
   Qed.
 
-  Definition le_n_dec n m : sumbool (le_n n m) (le_n m n).
+  Definition Nle_dec n m : sumbool (Nle n m) (Nle m n).
   Proof.
     destruct n as [n hn];
     destruct m as [m hm].
-    unfold le_n.
+    unfold Nle.
     simpl.
     clear hn.
     generalize dependent m.
@@ -2011,7 +1961,7 @@
     }
   Defined.
 
-  Definition eq_dec (n m:T) : sumbool (n = m) (n <> m).
+  Definition Neq_dec (n m:NN) : sumbool (n = m) (n <> m).
   Proof.
     destruct n as [n hn];
     destruct m as [m hm].
@@ -2062,43 +2012,43 @@
     }
   Defined.
 
-  Definition min n m := match le_n_dec n m with
+  Definition Nmin n m := match Nle_dec n m with
   | left _ => n
   | right _ => m
   end.
 
-  Definition max n m := match le_n_dec n m with
+  Definition Nmax n m := match Nle_dec n m with
   | left _ => m
   | right _ => n
   end.
 
-  Lemma min_nm : forall n m, le_n (min n m) n /\ le_n (min n m) m.
+  Lemma min_nm : forall n m, Nle (Nmin n m) n /\ Nle (Nmin n m) m.
   Proof.
     intros n m.
     split.
     {
-      unfold min.
-      destruct (le_n_dec n m).
-      { apply le_refl. }
-      { exact l. }
+      unfold Nmin.
+      destruct (Nle_dec n m).
+      { apply Nle_refl. }
+      { exact n0. }
     }
     {
-      unfold min.
-      destruct (le_n_dec n m).
-      { exact l. }
-      { apply le_refl. }
+      unfold Nmin.
+      destruct (Nle_dec n m).
+      { exact n0. }
+      { apply Nle_refl. }
     }
   Qed.
 
 
-  Fixpoint list_minus {A:Type} (l m: LO A) : (LO A) := match l, m with
+  Fixpoint _Nrest {A:Type} (l m: LO A) : (LO A) := match l, m with
   | nil, nil => nil
   | nil, cons _ _ =>  m
   | cons _ _, nil =>  l
-  | cons _ tailn, cons _ tailm =>  list_minus tailn tailm
+  | cons _ tailn, cons _ tailm =>  _Nrest tailn tailm
   end.
 
-  Lemma list_minus_natural : forall l m, isnatural l -> isnatural m -> isnatural (list_minus l m).
+  Lemma _Nrest_natural : forall l m, isnatural l -> isnatural m -> isnatural (_Nrest l m).
   Proof.
     intro l.
     induction l as [|headl taill ih].
@@ -2120,42 +2070,42 @@
   }
   Qed.
 
-  Definition minus (nT mT:T) := 
+  Definition Nrest (nT mT:NN) := 
     let (n, hn) := nT in
     let (m, hm) := mT in
-    let r := list_minus n m in
-    exist _ r (list_minus_natural n m hn hm).
+    let r := _Nrest n m in
+    exist _ r (_Nrest_natural n m hn hm).
 
 
-  Lemma minus_n : forall n, minus n n = zero.
+  Lemma Nrest_cancel : forall n, Nrest n n = Nzero.
   Proof.
     intros (n, hn).
     simpl.
     generalize dependent hn.
     induction n as [|head tail ih].
-    { simpl. intro hn. unfold zero. apply proof_irrelevance. simpl. unfold zero_l. reflexivity. }
+    { simpl. intro hn. unfold Nzero. apply proof_irrelevance. simpl. unfold _Nzero. reflexivity. }
     {
       intro hn.
       simpl in *.
       unfold isnatural in *.
       unfold allnil in *.
       simpl in *.
-      unfold zero. unfold zero_l.
+      unfold Nzero. unfold _Nzero.
       apply proof_irrelevance.
       simpl.
       destruct hn as [hhead htail].
       unfold isnil in hhead.
       subst head.
       specialize (ih htail).
-      unfold zero in ih.
+      unfold Nzero in ih.
       inversion ih.
       rewrite H0.
-      unfold zero_l.
+      unfold _Nzero.
       reflexivity.
     }
   Qed.
 
-  Lemma minus_zero_r : forall n, minus n zero = n.
+  Lemma Nrest_zero_r : forall n, Nrest n Nzero = n.
   Proof.
     intros (n, hn).
     induction n as [|head tail ih].
@@ -2163,7 +2113,7 @@
     simpl. apply proof_irrelevance. simpl. reflexivity.
   Qed.
 
-  Lemma minus_comm : forall n m, minus n m = minus m n.
+  Lemma Nrest_comm : forall n m, Nrest n m = Nrest m n.
   Proof.
   intros (n,hn) (m,hm).
   generalize dependent m.
@@ -2197,12 +2147,12 @@
   }
   Qed.
 
-  Lemma minus_zero_l : forall n, minus zero n = n.
+  Lemma Nrest_zero_l : forall n, Nrest Nzero n = n.
   Proof.
-    intro n. rewrite minus_comm. apply minus_zero_r.
+    intro n. rewrite Nrest_comm. apply Nrest_zero_r.
   Qed.
 
-  Lemma min_zero_l : forall n, min zero n = zero.
+  Lemma Nmin_zero_l : forall n, Nmin Nzero n = Nzero.
   Proof.
     intros (n, hn).
     induction n as [|head tail ih].
@@ -2210,19 +2160,19 @@
     { unfold min. simpl. reflexivity. }
   Qed.
 
-  Lemma le_n_zero : forall n, le_n n zero -> n = zero.
+  Lemma Nle_zero_l : forall n, Nle n Nzero -> n = Nzero.
   Proof.
     intros (n,hn).
-    unfold le_n.
+    unfold Nle.
     induction n as [|head tail ih].
     { simpl. intros _. apply proof_irrelevance. simpl. reflexivity. }
     { simpl. intro f. inversion f. }
   Qed.
 
-  Lemma le_n_antisym : forall n m, le_n n m -> le_n m n -> n = m.
+  Lemma Nle_antisym : forall n m, Nle n m -> Nle m n -> n = m.
   Proof.
     intros (n,hn) (m,hm).
-    unfold le_n.
+    unfold Nle.
     simpl.
     generalize dependent m.
     induction n as [|headn tailn ih].
@@ -2257,31 +2207,31 @@
   Qed.
 
 
-  Lemma min_comm : forall n m, min n m = min m n.
+  Lemma Nmin_comm : forall n m, Nmin n m = Nmin m n.
   Proof.
     intro n.
-    pattern n;apply I;clear n.
+    pattern n;apply Ninduction;clear n.
     {
-      intro m. rewrite min_zero_l.
-      pattern m;apply I;clear m.
+      intro m. rewrite Nmin_zero_l.
+      pattern m;apply Ninduction;clear m.
       { unfold min. simpl. reflexivity. }
       {
         intros m ih.
         unfold min.
-        destruct (le_n_dec (next m) zero).
-        { apply le_n_zero in l. inversion l. }
+        destruct (Nle_dec (Nnext m) Nzero).
+        { apply Nle_zero_l in n. inversion n. }
         { reflexivity. }
       }
     }
     {
       intros n ih.
       intro m.
-      assert (hd:=destruct_n m).
+      assert (hd:=Ndestruct m).
       destruct hd as [heq|hnext].
       {
-        subst m. rewrite min_zero_l. unfold min.
-        destruct (le_n_dec (next n) zero).
-        { apply le_n_zero in l. inversion l. }
+        subst m. rewrite Nmin_zero_l. unfold min.
+        destruct (Nle_dec (Nnext n) Nzero).
+        { apply Nle_zero_l in n0. inversion n0. }
         { reflexivity. }
       }
       {
@@ -2289,40 +2239,40 @@
         subst m.
         rename n' into m.
         specialize (ih m).
-        unfold min.
-        destruct (le_n_dec (next n) (next m)).
+        unfold Nmin.
+        destruct (Nle_dec (Nnext n) (Nnext m)).
         {
-          destruct (le_n_dec (next m) (next n)).
-          { apply le_n_antisym.
-          { exact l. }
-          { exact l0. }
+          destruct (Nle_dec (Nnext m) (Nnext n)).
+          { apply Nle_antisym.
+          { exact n0. }
+          { exact n1. }
         }
         { reflexivity. }
       }
       {
-        destruct (le_n_dec (next m) (next n)).
+        destruct (Nle_dec (Nnext m) (Nnext n)).
         { reflexivity. }
         {
-          apply le_n_antisym.
-          { exact l. }
-          { exact l0. }
+          apply Nle_antisym.
+          { exact n0. }
+          { exact n1. }
         }
       }
     }
   }
   Qed.
 
-  Lemma min_zero_r : forall n, min n zero = zero.
+  Lemma Nmin_zero_r : forall n, Nmin n Nzero = Nzero.
   Proof.
     intro n.
-    rewrite min_comm.
-    apply min_zero_l.
+    rewrite Nmin_comm.
+    apply Nmin_zero_l.
   Qed.
 
-  Lemma max_zero_l : forall n, max zero n = n.
+  Lemma Nmax_zero_l : forall n, Nmax Nzero n = n.
   Proof.
     intro n.
-    pattern n;apply I;clear n.
+    pattern n;apply Ninduction;clear n.
     { unfold max. simpl. reflexivity. }
     {
       intros n' ih.
@@ -2330,10 +2280,10 @@
     }
   Qed.
 
-  Lemma max_zero_r : forall n, max n zero = n.
+  Lemma Nmax_zero_r : forall n, Nmax n Nzero = n.
     Proof.
     intro n.
-    pattern n;apply I;clear n.
+    pattern n;apply Ninduction;clear n.
     { unfold max. simpl. reflexivity. }
     {
       intros n ih.
@@ -2343,57 +2293,57 @@
     }
   Qed.
 
-  Lemma max_comm : forall n m, max n m = max m n.
+  Lemma Nmax_comm : forall n m, Nmax n m = Nmax m n.
   Proof.
     intro n.
-    pattern n;apply I;clear n.
-    { intro m. rewrite max_zero_l. rewrite max_zero_r. reflexivity. }
+    pattern n;apply Ninduction;clear n.
+    { intro m. rewrite Nmax_zero_l. rewrite Nmax_zero_r. reflexivity. }
     {
       intros n' ih.
       intros m.
-      unfold max.
-      destruct (le_n_dec (next n') m);destruct (le_n_dec m (next n')).
-      { apply le_n_antisym. exact l0. exact l. }
+      unfold Nmax.
+      destruct (Nle_dec (Nnext n') m);destruct (Nle_dec m (Nnext n')).
+      { apply Nle_antisym. exact n0. exact n. }
       { reflexivity. }
       { reflexivity. }
-      { apply le_n_antisym. exact l0. exact l. }
+      { apply Nle_antisym. exact n0. exact n. }
     }
   Qed.
 
-  Lemma min_next : forall n m, min (next n) (next m) = next (min n m).
+  Lemma Nmin_next : forall n m, Nmin (Nnext n) (Nnext m) = Nnext (Nmin n m).
   Proof.
     intro n.
-    pattern n;apply I;clear n.
+    pattern n;apply Ninduction;clear n.
     {
-      intro m. rewrite min_zero_l.
-      unfold min. destruct (le_n_dec (next zero) (next m)).
+      intro m. rewrite Nmin_zero_l.
+      unfold Nmin. destruct (Nle_dec (Nnext Nzero) (Nnext m)).
       { reflexivity. }
-      { apply le_n_zero in l. subst m. reflexivity. }
+      { apply Nle_zero_l in n. subst m. reflexivity. }
     }
     {
       intros n ih.
       intro m.
-      set (nnn:=next (next n)).
-      set (nm:=next m).
-      set (nn:=next n).
-      unfold min.
-      destruct (le_n_dec nnn nm);destruct (le_n_dec nn m).
+      set (nnn:=Nnext (Nnext n)).
+      set (nm:=Nnext m).
+      set (nn:=Nnext n).
+      unfold Nmin.
+      destruct (Nle_dec nnn nm);destruct (Nle_dec nn m).
       { subst nnn. subst nn. reflexivity. }
       { subst nnn. subst nn. subst nm.
-        apply le_n_antisym.
-        { exact l. }
-        { apply le_n_next. exact l0. }
+        apply Nle_antisym.
+        { exact n0. }
+        { apply Nle_next_intro. exact n1. }
       }
       { subst nnn. subst nn. subst nm.
-        apply le_n_antisym.
-        { exact l. }
-        { apply le_n_next. exact l0. }
+        apply Nle_antisym.
+        { exact n0. }
+        { apply Nle_next_intro. exact n1. }
       }
       { subst nm. reflexivity. }
     }
   Qed.
 
-  Lemma minus_next : forall n m, minus (next n) (next m) = minus n m.
+  Lemma Nrest_next : forall n m, Nrest (Nnext n) (Nnext m) = Nrest n m.
   Proof.
     intros (n, hn) (m, hm).
     generalize dependent m.
@@ -2410,68 +2360,68 @@
     }
   Qed.
 
-  Lemma max_next : forall n m, max (next n) (next m) = next (max n m).
+  Lemma Nmax_next : forall n m, Nmax (Nnext n) (Nnext m) = Nnext (Nmax n m).
   Proof.
-    intros n. pattern n;apply I;clear n.
+    intros n. pattern n;apply Ninduction;clear n.
     {
       intro m.
-      rewrite max_zero_l.
-      unfold max.
-      destruct (le_n_dec (next zero) (next m)).
+      rewrite Nmax_zero_l.
+      unfold Nmax.
+      destruct (Nle_dec (Nnext Nzero) (Nnext m)).
       { reflexivity. }
-      { apply le_n_zero in l. subst m. reflexivity. }
+      { apply Nle_zero_l in n. subst m. reflexivity. }
     }
     {
       intros n' ih.
       intro m.
-      unfold max.
-      destruct (le_n_dec (next (next n')) (next m));
-      destruct (le_n_dec (next n') m).
+      unfold Nmax.
+      destruct (Nle_dec (Nnext (Nnext n')) (Nnext m));
+      destruct (Nle_dec (Nnext n') m).
       { reflexivity. }
-      { apply le_n_antisym. apply le_n_next. exact l0. exact l. }
-      { apply le_n_antisym. apply le_n_next. exact l0. exact l. }
+      { apply Nle_antisym. apply Nle_next_intro. exact n0. exact n. }
+      { apply Nle_antisym. apply Nle_next_intro. exact n0. exact n. }
       { reflexivity. }
     }
   Qed.
 
-  Lemma plus_min_minus_max : forall n m, plus (min n m) (minus n m) = max n m.
+  Lemma plus_min_minus_max : forall n m, Nplus (Nmin n m) (Nrest n m) = Nmax n m.
   
   Proof.
     intro n.
-    pattern n;apply I;clear n.
+    pattern n;apply Ninduction;clear n.
     {
       intro m.
-      rewrite min_zero_l.
-      rewrite minus_zero_l.
-      rewrite plus_zero_l.
-      rewrite max_zero_l.
+      rewrite Nmin_zero_l.
+      rewrite Nrest_zero_l.
+      rewrite Nplus_zero_l.
+      rewrite Nmax_zero_l.
       reflexivity.
     }
     {
       intros n' ih.
       intro m.
-      destruct (destruct_n m).
+      destruct (Ndestruct m).
       {
         subst m.
-        rewrite min_zero_r.
-        rewrite minus_zero_r.
-        rewrite max_zero_r.
-        rewrite plus_zero_l.
+        rewrite Nmin_zero_r.
+        rewrite Nrest_zero_r.
+        rewrite Nmax_zero_r.
+        rewrite Nplus_zero_l.
         reflexivity.
       }
       {
         destruct H. subst m. rename x into m.
-        rewrite min_next.
-        rewrite minus_next.
-        rewrite max_next.
-        rewrite plus_next_r.
+        rewrite Nmin_next.
+        rewrite Nrest_next.
+        rewrite Nmax_next.
+        rewrite Nplus_next_l.
         apply f_eq.
         apply ih.
       }
     }
   Qed.
 
-  Lemma zero_eq : forall (h:isnatural zero_l), exist _ zero_l h = zero.
+  Lemma zero_eq : forall (h:isnatural _Nzero), exist _ _Nzero h = Nzero.
   Proof.
     intro h.
     apply proof_irrelevance.
@@ -2479,167 +2429,167 @@
   Qed.
 
 
-  Lemma le_n_zero_n : forall n, le_n zero n.
+  Lemma Nle_zero_r : forall n, Nle Nzero n.
   Proof.
-    intros (n, hn). unfold le_n. simpl.
+    intros (n, hn). unfold Nle. simpl.
     clear hn. destruct n.
     { simpl. trivial. }
     { simpl. trivial. }
   Qed.
 
-  Lemma min_le_n : forall x y, x = min x y -> le_n x y.
+  Lemma Nmin_le : forall x y, x = Nmin x y -> Nle x y.
   Proof.
     intro x.
-    pattern x;apply I;clear x.
-    { intros y h. apply le_n_zero_n. }
+    pattern x;apply Ninduction;clear x.
+    { intros y h. apply Nle_zero_r. }
     {
       intros n ih.
       intros y h.
-      destruct (destruct_n y).
-      { subst y. rewrite min_zero_r in h. inversion h. }
+      destruct (Ndestruct y).
+      { subst y. rewrite Nmin_zero_r in h. inversion h. }
       {
-        destruct H. subst y. rewrite min_next in h. apply next_injective in h.
-        apply le_n_next. apply ih. exact h.
+        destruct H. subst y. rewrite Nmin_next in h. apply Nnext_elim in h.
+        apply Nle_next_intro. apply ih. exact h.
       }
     }
   Qed.
 
-  Lemma destruct_min_le_n : forall n m, (le_n n m /\ min n m = n) \/ (le_n m n /\ min n m = m).
+  Lemma destruct_min_le_n : forall n m, (Nle n m /\ Nmin n m = n) \/ (Nle m n /\ Nmin n m = m).
   Proof.
     intro n.
-    pattern n;apply I;clear n.
+    pattern n;apply Ninduction;clear n.
     {
       intro m.
-      rewrite min_zero_l.
+      rewrite Nmin_zero_l.
       left.
       split.
-      { apply le_n_zero_n. }
+      { apply Nle_zero_r. }
       { reflexivity. }
     }
     {
       intros n' ih.
       intro m.
-      destruct (destruct_n m).
+      destruct (Ndestruct m).
       {
-        subst m. rewrite min_zero_r. right. split.
-        { apply le_n_zero_n. }
+        subst m. rewrite Nmin_zero_r. right. split.
+        { apply Nle_zero_r. }
         { reflexivity. }
       }
       {
         destruct H. subst m. rename x into m'.
-        rewrite min_next.
+        rewrite Nmin_next.
         specialize (ih m').
         destruct ih as [ih|ih].
         {
           destruct ih as [hle heq]. left. split.
-          { apply le_n_next. exact hle. }
+          { apply Nle_next_intro. exact hle. }
           { apply f_eq. exact heq. }
         }
         {
           destruct ih as [hle heq]. right. split.
-          { apply le_n_next. exact hle. }
+          { apply Nle_next_intro. exact hle. }
           { apply f_eq. exact heq. }
         }
       }
     }
   Qed.
 
-  Lemma le_n_nmk : forall n m, le_n n m -> exists k, plus n k = m.
+  Lemma Nle_nmk : forall n m, Nle n m -> exists k, Nplus n k = m.
   Proof.
     intro n.
-    pattern n;apply I;clear n.
-    { intros m h. exists m. rewrite plus_zero_l. reflexivity. }
+    pattern n;apply Ninduction;clear n.
+    { intros m h. exists m. rewrite Nplus_zero_l. reflexivity. }
     {
       intros n ih.
       intros m h.
-      destruct (destruct_n m).
+      destruct (Ndestruct m).
       { subst m. inversion h. }
       {
         destruct H. subst m. rename x into m'.
-        apply le_n_next_intro in h.
+        apply Nle_next_elim in h.
         specialize (ih m'). specialize (ih h). destruct ih. exists x.
-        rewrite plus_next_r. rewrite H. reflexivity.
+        rewrite Nplus_next_l. rewrite H. reflexivity.
       }
     }
   Qed.
 
-  Lemma minus_plus_nmm : forall n m, minus (plus n m) m = n.
+  Lemma Nrest_plus_nmm : forall n m, Nrest (Nplus n m) m = n.
   Proof.
     intros n m.
     generalize dependent n.
-    pattern m;apply I;clear m.
-    { intro n. rewrite plus_zero_r. rewrite minus_zero_r. reflexivity. }
+    pattern m;apply Ninduction;clear m.
+    { intro n. rewrite Nplus_zero_r. rewrite Nrest_zero_r. reflexivity. }
     {
       intros m' ih. intro n.
-      rewrite plus_next_l.
-      rewrite minus_next.
+      rewrite Nplus_next_r.
+      rewrite Nrest_next.
       specialize (ih n).
       exact ih.
     }
   Qed.
 
-  Lemma min_nm_neq_n : forall n m, min n m <> n -> min n m = m.
+  Lemma min_nm_neq_n : forall n m, Nmin n m <> n -> Nmin n m = m.
   Proof.
     intro n.
-    pattern n;apply I;clear n.
-    { intro m. rewrite min_zero_l. intro h. exfalso. apply h. reflexivity. }
+    pattern n;apply Ninduction;clear n.
+    { intro m. rewrite Nmin_zero_l. intro h. exfalso. apply h. reflexivity. }
     {
     intros n' ih m h.
-    destruct (destruct_n m).
-    { subst m. rewrite min_zero_r. reflexivity. }
+    destruct (Ndestruct m).
+    { subst m. rewrite Nmin_zero_r. reflexivity. }
     {
     destruct H. subst m. rename x into m'.
-    rewrite min_next.
+    rewrite Nmin_next.
     apply f_eq.
     specialize (ih m').
     apply ih.
     intro heq.
     apply h.
-    rewrite min_next.
+    rewrite Nmin_next.
     apply f_eq.
     exact heq.
     }
     }
 Qed.
 
-Lemma min_neq_le : forall n m, min n m <> n -> le_n m n.
-Proof.
-intro n.
-pattern n;apply I;clear n.
-{ intros. rewrite min_zero_l in *. exfalso. apply H. reflexivity. }
-{ intros. destruct (destruct_n m).
-subst m. rewrite min_zero_r in *. apply le_n_zero_n.
-destruct H1. subst m. rewrite min_next in H0. apply le_n_next.
-apply H. intro heq. apply H0. apply f_eq. assumption.
-}
-Qed.
+  Lemma Nmin_neq_le : forall n m, Nmin n m <> n -> Nle m n.
+  Proof.
+    intro n.
+    pattern n;apply Ninduction;clear n.
+    { intros. rewrite Nmin_zero_l in *. exfalso. apply H. reflexivity. }
+    { intros. destruct (Ndestruct m).
+    subst m. rewrite Nmin_zero_r in *. apply Nle_zero_r.
+    destruct H1. subst m. rewrite Nmin_next in H0. apply Nle_next_intro.
+    apply H. intro heq. apply H0. apply f_eq. assumption.
+    }
+  Qed.
 
-Lemma le_n_plus_l : forall n m k, le_n (plus n m) (plus n k) -> le_n m k.
+Lemma le_n_plus_l : forall n m k, Nle (Nplus n m) (Nplus n k) -> Nle m k.
 Proof.
 intro n.
-pattern n;apply I;clear n.
-{ intros. repeat rewrite plus_zero_l in *. assumption. }
+pattern n;apply Ninduction;clear n.
+{ intros. repeat rewrite Nplus_zero_l in *. assumption. }
 {
 intros.
-repeat rewrite plus_next_r in H0.
-apply le_n_next_intro in H0.
+repeat rewrite Nplus_next_l in H0.
+apply Nle_next_elim in H0.
 specialize (H _ _ H0). assumption.
 }
 Qed.
 
-Lemma le_n_plus_r : forall n m k, le_n (plus m n) (plus k n) -> le_n m k.
+Lemma le_n_plus_r : forall n m k, Nle (Nplus m n) (Nplus k n) -> Nle m k.
 Proof.
 intros.
-repeat rewrite (plus_comm _ n) in H.
+repeat rewrite (Nplus_comm _ n) in H.
 apply le_n_plus_l in H.
 assumption.
 Qed.
 
-Lemma le_n_plus_l_zero : forall n m, le_n (plus m n) n -> m = zero.
+Lemma le_n_plus_l_zero : forall n m, Nle (Nplus m n) n -> m = Nzero.
 Proof.
 intros n m h.
-rewrite <- plus_zero_l in h.
+rewrite <- Nplus_zero_l in h.
 apply le_n_plus_r in h.
-apply le_n_zero in h.
+apply Nle_zero_l in h.
 assumption.
 Qed.

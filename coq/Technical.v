@@ -15,6 +15,9 @@
   (* Coq does not make this assumption *)
   Axiom proof_irrelevance : forall {A:Type} {P:A->Prop} (x y :sig P), proj1_sig x = proj1_sig y -> x = y.
 
+  Lemma f_eq {A B:Type} : forall (f:A->B) (x y:A), x = y ->f x  = f y.
+  Proof. intros f x y heq. subst y. reflexivity. Qed.
+
   Lemma feq_l {A B C:Type} : forall (f:A->B->C) n m k, n = m -> f k n = f k m.
   Proof.
     intro f.
@@ -22,3 +25,4 @@
     intro heq. subst m.
     reflexivity.
   Qed.
+
