@@ -20,10 +20,10 @@
   | pair _ r => r
   end.
 
-  Definition ZRel (x y:PairOf NN) := Nplus (first x) (second y) = Nplus (second x) (first y).
+  Definition _ZRel (x y:PairOf NN) := Nplus (first x) (second y) = Nplus (second x) (first y).
 
 
-  Theorem ZRel_equivalence : equivalence ZRel.
+  Theorem _ZRel_equivalence : equivalence _ZRel.
   Proof.
     red.
     split.
@@ -51,7 +51,7 @@
     {
       red.
       intros x y z.
-      unfold ZRel.
+      unfold _ZRel.
       set (fx:=first x).
       set (fy:=first y).
       set (fz:=first z).
@@ -76,19 +76,19 @@
 
 
   (* Membership condition for a class equivalence representative *)
-  Definition ZCond p := first p = Nzero \/ second p = Nzero.
+  Definition _ZCond p := first p = Nzero \/ second p = Nzero.
   (* Set of representatives *)
-  Definition Z := { p | ZCond p }.
+  Definition ZZ := { p | _ZCond p }.
 
   (* We prove that all pairs of naturals are represented by at least one representative *)
-  Lemma Z_representation : forall (p:PairOf NN), exists (z:Z), ZRel p (proj1_sig z).
+  Lemma _Z_representation : forall (p:PairOf NN), exists (z:ZZ), _ZRel p (proj1_sig z).
   Proof.
     (* We work on that pair *)
     intro p.
     (* It's made of two parts *)
     destruct p as [pf ps].
     (* Let's recall what ZRel is *)
-    unfold ZRel.
+    unfold _ZRel.
     simpl.
     (* We'll proceed by induction over pf *)
     pattern pf;apply Ninduction;clear pf.
@@ -97,7 +97,7 @@
       (* The representative is (0,ps) *)
       set(zp:=pair Nzero ps).
       (* Proving that it satisfies the representative condition is simple *)
-      assert(zh:ZCond zp).
+      assert(zh:_ZCond zp).
       { red. left. simpl. reflexivity. }
       (* So here it comes *)
       exists (exist _ zp zh).
@@ -152,7 +152,7 @@
           subst zf.
           (* Answer is (1,0) *)
           set(zp:=pair None Nzero).
-          assert (zh:ZCond zp).
+          assert (zh:_ZCond zp).
           { red. simpl. right. reflexivity. }
           exists (exist _ zp zh).        
           rewrite Nplus_zero_r.
@@ -172,7 +172,7 @@
           subst ps.
           (* answer is (0, pred(zs)) *)
           set(zp:=pair Nzero zs').
-          assert (zh:ZCond zp).
+          assert (zh:_ZCond zp).
           { red. simpl. left. reflexivity. }
           exists (exist _ zp zh).
           unfold proj1_sig.
@@ -194,7 +194,7 @@
         subst pf'.
         (* answer is (zf+1,0) *)
         set(zp:=pair (Nnext zf) Nzero).
-        assert (zh:ZCond zp).
+        assert (zh:_ZCond zp).
         { red. simpl. right. reflexivity. }
         exists (exist _ zp zh).
         subst zp.
@@ -207,7 +207,7 @@
     }
   Qed.
 
-  Definition Z_representative (p:PairOf NN) :=
+  Definition _Z_representative (p:PairOf NN) :=
     match p with
     | pair pf ps => let m := Nmin pf ps in
       match (Neq_dec m pf) with
@@ -216,12 +216,12 @@
       end
     end.
 
-  Lemma Z_representative_ok : forall (p:PairOf NN), ZCond (Z_representative p).
+  Lemma _Z_representative_ok : forall (p:PairOf NN), _ZCond (_Z_representative p).
   Proof.
     intro p.
     destruct p as [pf ps].
-    unfold ZCond.
-    unfold Z_representative.
+    unfold _ZCond.
+    unfold _Z_representative.
     pattern pf;apply Ninduction;clear pf.
     { rewrite Nmin_zero_l. rewrite Nrest_zero_r. rewrite Nrest_zero_l. simpl. left. reflexivity. }
     {
@@ -237,10 +237,10 @@
     }
   Qed.
 
-  Lemma Z_uniqueness : forall (zx zy:Z),
+  Lemma _Z_uniqueness : forall (zx zy:ZZ),
     let zxp := proj1_sig zx in
     let zyp := proj1_sig zy in
-    ZRel zxp zyp -> zxp = zyp.
+    _ZRel zxp zyp -> zxp = zyp.
   Proof.
     intros zx zy.
     simpl.
@@ -265,10 +265,10 @@
     destruct tech as [techtmp techeq]. subst ys. rename techtmp into ys.
     (* End technical *)
 
-    unfold ZRel in heqv.
+    unfold _ZRel in heqv.
     unfold proj1_sig, first, second in heqv.
     simpl.
-    unfold ZCond in hx, hy.
+    unfold _ZCond in hx, hy.
     unfold first, second in hx, hy.
     destruct hx as [ hx | hx ];
     destruct hy as [ hy | hy ].
@@ -286,11 +286,11 @@
      that Z defines a partitions on equivalences classes *)
 
 
-  Definition Z_plus_p (x y : PairOf NN) : (PairOf NN) := match x, y with
+  Definition _Zplus (x y : PairOf NN) : (PairOf NN) := match x, y with
   | pair xf xs, pair yf ys => pair (Nplus xf yf) (Nplus xs ys)
   end.
 
-  Lemma Z_plus_p_comm : commutative Z_plus_p.
+  Lemma _Zplus_comm : commutative _Zplus.
   Proof.
     red. intros x y.
     destruct x as [xf xs];
@@ -301,34 +301,48 @@
     reflexivity.
   Qed.
 
-  Lemma Z_plus_p_assoc : associative Z_plus_p.
+  Lemma _Zplus_assoc : associative _Zplus.
   Proof.
     red.
     intros x y z.
     destruct x as [xf xs].
     destruct y as [yf ys].
     destruct z as [zf zs].
-    unfold Z_plus_p.
+    unfold _Zplus.
     repeat rewrite Nplus_assoc.
     reflexivity.
   Qed.
 
 
-  Definition makeZ (x : PairOf NN) := exist _ (Z_representative x) (Z_representative_ok x).
+  Definition Zmake (x : PairOf NN) := exist _ (_Z_representative x) (_Z_representative_ok x).
 
-  Definition Z_plus (x y : Z) : Z :=
+  Definition Zplus (x y : ZZ) : ZZ :=
     let (xp, hx) := x in
     let (yp, hy) := y in
-    makeZ (Z_plus_p xp yp).
+    Zmake (_Zplus xp yp).
 
-  Lemma zero_Zh : ZCond (pair Nzero Nzero).
+  Lemma _Zzero_ok : _ZCond (pair Nzero Nzero).
   Proof.
-    unfold ZCond. left. simpl. reflexivity.
+    unfold _ZCond. simpl. left. reflexivity.
   Qed.
 
-  Definition zero_Z := exist _ (pair Nzero Nzero) zero_Zh.
+  Lemma _Zone_ok : _ZCond (pair Nzero None).
+  Proof.
+    unfold _ZCond. simpl. left. reflexivity.
+  Qed.
 
-  Lemma Z_plus_zero_l : forall x:Z, Z_plus x zero_Z = x.
+  Lemma _Zone_opp_ok : _ZCond (pair None Nzero).
+  Proof.
+    unfold _ZCond. simpl. right. reflexivity.
+  Qed.
+
+  Definition Zzero := exist _ (pair Nzero Nzero) _Zzero_ok.
+  Definition Zone := exist _ (pair Nzero None) _Zone_ok.
+  Definition Zone_opp := exist _ (pair None Nzero) _Zone_opp_ok.
+
+
+
+  Lemma Zplus_zero_l : forall x:ZZ, Zplus x Zzero = x.
   Proof.
     intro x.
     destruct x as [x hx].
@@ -349,7 +363,7 @@
     }
   Qed.
 
-  Lemma Z_plus_zero_r : forall x:Z, Z_plus zero_Z x = x.
+  Lemma Zplus_zero_r : forall x:ZZ, Zplus Zzero x = x.
   Proof.
     intros (x,hx).
     apply proof_irrelevance.
@@ -381,20 +395,20 @@
     }
   Qed.
 
-  Lemma Z_plus_comm : forall x y, Z_plus x y = Z_plus y x.
+  Lemma Zplus_comm : forall x y, Zplus x y = Zplus y x.
   Proof.
     intros (x,hx) (y,hy).
     apply proof_irrelevance.
     simpl.
     apply f_eq.
-    rewrite Z_plus_p_comm.
+    rewrite _Zplus_comm.
     reflexivity.
   Qed.
 
-  Lemma Z_plus_repr : forall x y, Z_representative (Z_plus_p x y) = Z_representative (Z_plus_p x (Z_representative y)).
+  Lemma _Zplus_repr : forall x y, _Z_representative (_Zplus x y) = _Z_representative (_Zplus x (_Z_representative y)).
   Proof.
     intros [xf xs] [ys yf].
-    unfold Z_representative. unfold Z_plus_p.
+    unfold _Z_representative. unfold _Zplus.
     destruct (Neq_dec (Nmin (Nplus xf ys) (Nplus xs yf)) (Nplus xf ys)).
     {
       symmetry in e.
@@ -543,41 +557,263 @@
   Qed.
 
 
-  Lemma Z_plus_assoc : forall x y z:Z, Z_plus (Z_plus x y) z = Z_plus x (Z_plus y z).
+  Lemma Z_plus_assoc : forall x y z:ZZ, Zplus (Zplus x y) z = Zplus x (Zplus y z).
   Proof.
     intros x y z.
     destruct x as [x hx];
     destruct y as [y hy];
     destruct z as [z hz].
-    unfold Z_plus.
+    unfold Zplus.
     apply proof_irrelevance.
     simpl.
-    rewrite <- Z_plus_repr.
-    rewrite (Z_plus_p_comm (Z_representative _)).
-    rewrite <- Z_plus_repr.
-    rewrite (Z_plus_p_comm z).
-    rewrite Z_plus_p_assoc.
+    rewrite <- _Zplus_repr.
+    rewrite (_Zplus_comm (_Z_representative _)).
+    rewrite <- _Zplus_repr.
+    rewrite (_Zplus_comm z).
+    rewrite _Zplus_assoc.
     reflexivity.
   Qed.
 
+  Lemma Zplus_one_opp : Zplus Zone Zone_opp = Zzero.
+  Proof.
+    destruct Zone as [x hx] eqn:heqx.
+    destruct Zone_opp as [y hy] eqn:heqy.
+    destruct Zzero as [z hz] eqn:heqz.
+    destruct x as [xf xs] eqn:heqxp.
+    destruct y as [yf ys] eqn:heqyp.
+    destruct z as [zf zs] eqn:heqzp.
+    apply proof_irrelevance.
+    simpl.
+    remember (Neq_dec _ _) as d eqn:heqd.
+    unfold Zone, Zone_opp, Zzero in heqx, heqy, heqz.
+    inversion heqx;inversion heqy;inversion heqz.
+    subst xf xs yf ys zf zs.
+    destruct d.
+    { rewrite Nplus_zero_l. rewrite Nplus_zero_r. rewrite Nrest_cancel. reflexivity. }
+    { rewrite Nplus_zero_l. rewrite Nplus_zero_r. rewrite Nrest_cancel. reflexivity. }
+  Qed.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  (*
+    Let P be a predicate on the integers.
+    If P is hold for 0,
+      and for any z, when P holds for z, then P holds for z+1
+      and for any z, when P holds for z, then P holds for z-1
+    then P holds for any z
+  *)
+  Lemma Zinduction : forall (P:ZZ->Prop),
+    (P Zzero) ->
+    (forall z, P z -> P (Zplus z Zone)) ->
+    (forall z, P z -> P (Zplus z Zone_opp)) ->
+    forall z, P z.
+  Proof.
+    (* The predicate *)
+    intros P.
+    (* Predicate is true for zero *)
+    intro hz.
+    (* P z -> P (z+1) *)
+    intro hip.
+    (* P z -> P (z-1) *)
+    intro him.
+    (* We want to prove that P applies to any z, such as that one *)
+    intro z.
+    (* z consists of a pair of natural numbers with a proof that it is a representative of its equivalence class *)
+    destruct z as [x hx] eqn:heqz.
+    (* Here's the condition *)
+    unfold _ZCond in hx.
+    (* The pair itself is made of two natural integers *)
+    destruct x as [xf xs ] eqn:heqx.
+    (* The condition is more readable now *)
+    simpl in hx.
+    (* We can look at the two possibilites *)
+    destruct hx as [hx|hx].
+    (* Here's when the left number is zero *)
+    {
+      subst xf.
+      (* We fold z to ease proving what z is equal to later *)
+      rewrite <- heqz.
+      (* Some renaming *)
+      rename z into xz.
+      rename x into xp.
+      rename xs into x.
+      rename heqx into heqxp.
+      rename heqz into heqxz.
+      (* Prepare the induction *)
+      generalize dependent x. intro x.
+      generalize dependent xp.
+      generalize dependent xz.
+      (* We're doing induction on x *)
+      pattern x;apply Ninduction; clear x.
+      (* x = 0 *)
+      {
+        intros.
+        (* To prove that xz is equal to Zzero, we have to deal with proof irrelevance *)
+        assert (H:xz = Zzero).
+        {
+          (* Unfold the values *)
+          subst xz. unfold Zzero.
+          (*
+            Apply proof irrelevance to get rid of the hidden two proofs of the same thing.
+            They are not shown, but they are there.
+          *)
+          apply proof_irrelevance.
+          (* Simplify to focus on the payload *)
+          simpl.
+          (* And we have equality *)
+          reflexivity.
+        }
+        (* We are now free to substitute xz with Zzero *)
+        rewrite H.
+        (* And that hz *)
+        exact hz.
+      }
+      (* Induction case *)
+      {
+        (* x' and induction hypothesis *)
+        intro x'.
+        intro ih.
+        (* We want to prove that P holds for (0, x' + 1) *)
+        intro.
+        intro.
+        intro.
+        intro.
+        (* We will use hip, but will feed (0, x') to our induction hypothesis *)
+        remember (pair Nzero x') as yp.
+        (* yp is the representative of an equivalence class *)
+        assert (hy:_ZCond yp).
+        {
+          (* The condition to be a representative is to have the left or the right of the pair at zero. *)
+          unfold _ZCond.
+          (* Substitute with the value and simplify *)
+          rewrite Heqyp. simpl.
+          (* And we can make that true *)
+         left. reflexivity.
+        }
+        (* Now we can create the corresponding integer yz *)
+        remember (exist _ yp hy) as yz.
+        (* And we use that in our induction *)
+        specialize (ih yz).
+        specialize (ih yp).
+        specialize (ih Heqyp).
+        (* So by induction, P holds for (0, x'), we will give that to hip *)
+        specialize (hip yz).
+        (* Now we need to prove that xz = yz + 1, and that's messy *)
+        assert (Zplus yz Zone = xz).
+        {
+          (* Start we some substitutions *)
+          subst xz.
+          subst yz.
+          (* Unfold the value of Zone *)
+          unfold Zone.
+          (* Unfold some functions *)
+          unfold Zplus.
+          unfold _Zplus.
+          (* Here we have a match, the correct thing to do is usually to break it intos its parts *)
+          destruct yp.
+          (* This introduced an equality in Heqyp, we can use it to retrieve the corresponding values *)
+          inversion Heqyp.
+          (* An substitute those *)
+          subst s. subst n.
+          (* Some easy rewriting *)
+          rewrite Nplus_zero_l.
+          (* Now we unfold the rest and get a big mess *)
+          unfold Zmake.
+          simpl.
+          (* And we apply proof irrelevance on that mess *)
+          apply proof_irrelevance.
+          simpl.
+          (* Some more rewriting *)
+          rewrite Nmin_zero_l.
+          (* Nice, Neq_dec should simplify now *)
+          simpl.
+          (* More rewriting *)
+          rewrite Nrest_zero_r.
+          rewrite Nnext_eq.
+          (* And we have equality! *)
+          reflexivity.
+        }
+        (* Now we can identify xz with yz + 1 *)
+        rewrite <- H.
+        (* apply hip to get to yz *)
+        apply hip.
+        (* apply ih to get to the equality requirement *)
+        apply ih.
+        (* and another round of proof irrelevance *)
+        subst yz.
+        subst yp.
+        apply proof_irrelevance.
+        simpl.
+        (* And we have equality *)
+        reflexivity.
+      }
+    }
+    (* Here's when the right number is zero *)
+    {
+      (* It's almost an exact copy of the other case, but using 'him' instead of 'hip' *)
+      subst xs.
+      rewrite <- heqz.
+      rename z into xz.
+      rename x into xp.
+      rename xf into x.
+      rename heqx into heqxp.
+      rename heqz into heqxz.
+      generalize dependent x. intro x.
+      generalize dependent xp.
+      generalize dependent xz.
+      (* Induction *)
+      pattern x;apply Ninduction; clear x.
+      (* x = zero *)
+      {
+        intros.
+        assert (xz=Zzero).
+        { subst xz. unfold Zzero. apply proof_irrelevance. simpl. reflexivity. }
+        rewrite H. exact hz.
+      }
+      (* Induction case *)
+      {
+        intros x' ih.
+        intros xz xp.
+        intro heqxp.
+        intro heqxz.
+        clear hz hip.
+        (* We're going to use (x', 0) here *)
+        remember (pair x' Nzero) as yp.
+        assert (hy:_ZCond yp).
+        { unfold _ZCond. rewrite Heqyp. simpl. right. reflexivity. }
+        remember (exist _ yp hy) as yz.
+        specialize (ih yz).
+        specialize (ih yp).
+        specialize (ih Heqyp).
+        specialize (him yz).
+        (* Here we show that xz = yz + (-1) *)
+        assert (xz = Zplus yz Zone_opp).
+        {
+          subst xz. subst yz. subst yp. unfold Zone_opp.
+          unfold Zplus.
+          unfold _Zplus.
+          rewrite Nplus_zero_r.
+          unfold Zmake.
+          unfold _Z_representative.
+          apply proof_irrelevance.
+          simpl.
+          rewrite Nmin_zero_r.
+          (* This time, the Neq_dec does not simplify very easily *)
+          destruct (Neq_dec Nzero (Nplus x' None)).
+          {
+            (* 0 = x' + 1 has no solution, so that's not the right branch *)
+            rewrite <- Nnext_eq in e. inversion e.
+          }
+          {
+            (* That's the right branch *)
+            rewrite Nrest_zero_r. rewrite Nnext_eq. reflexivity.
+          }
+        }
+        (* No we can complete this second part *)
+        rewrite H. apply him.
+        apply ih.
+        subst yz. subst yp. apply proof_irrelevance. simpl. reflexivity.
+      }
+    }
+  Qed.
 
 
 
