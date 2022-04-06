@@ -816,15 +816,453 @@
   Qed.
 
 
+  Definition _Zmult (x y : PairOf NN) : (PairOf NN) := match x, y with
+  | pair xf xs, pair yf ys => pair
+    (Nplus(Nmult xf yf) (Nmult xs ys))
+    (Nplus(Nmult xf ys) (Nmult xs yf))
+  end.
 
+  Definition Zmult (x y : ZZ) : ZZ :=
+    let (xp, hx) := x in
+    let (yp, hy) := y in
+    Zmake (_Zmult xp yp).
 
+  Lemma _Zmult_comm : commutative _Zmult.
+  Proof.
+    red.
+    intros x y.
+    destruct x as [a b] eqn:heqx.
+    destruct y as [c d] eqn:heqy.
+    unfold _Zmult.
+    f_equal.
+    { rewrite (Nmult_comm c). rewrite (Nmult_comm d). reflexivity. }
+    { rewrite (Nmult_comm c). rewrite (Nmult_comm d). rewrite Nplus_comm. reflexivity. }
+  Qed.
 
+  Lemma Zmult_comm : commutative Zmult.
+  Proof.
+    red.
+    intros x.
+    apply Zinduction.
+    {
+      unfold Zmult.
+      apply proof_irrelevance.
+      unfold _Zmult.
+      destruct x as (xp, xph) eqn:heqx.
+      destruct Zzero as (zp, zph) eqn:heqz.
+      destruct xp as [xf xs] eqn:hexp.
+      destruct zp as [zf zs] eqn:heqzp.
+      inversion heqz.
+      subst zf. subst zs.
+      rewrite Nmult_zero_r.
+      rewrite Nplus_zero_l.
+      rewrite Nmult_zero_r.
+      rewrite Nmult_zero_l.
+      rewrite Nplus_zero_l.
+      rewrite Nmult_zero_l.
+      rewrite Nplus_zero_r.
+      reflexivity.
+    }
+    {
+      intros z h.
+      unfold Zmult.
+      apply proof_irrelevance.
+      unfold Zplus.
+      unfold _Zmult.
+      unfold _Zplus.
+      destruct x as (xp, xph) eqn:heqx.
+      destruct z as (zp, zph) eqn:heqz.
+      destruct Zone as (op, oph) eqn:heqo.
+      destruct zp as [zpf zps] eqn:heqzp.
+      destruct op as [opf ops] eqn:heqop.
+      destruct xp as [xpf xps] eqn:heqxp.
+      remember (Zmake (pair (Nplus zpf opf) (Nplus zps ops))) as u.
+      destruct u as [up uh] eqn:hequ.
+      destruct up as [upf ups] eqn:hequp.
+      unfold _ZCond in *.
+      simpl in xph, zph, oph, uh.
+      rewrite (Nmult_comm upf).
+      rewrite (Nmult_comm ups).
+      rewrite (Nmult_comm upf).
+      rename xpf into a.
+      rename ups into b.
+      rename xps into c.
+      rename upf into d.
+      rewrite (Nplus_comm (Nmult a b)).
+      rewrite (Nmult_comm b).
+      reflexivity.
+    }
+    {
+      intros z h.
+      unfold Zmult.
+      apply proof_irrelevance.
+      unfold Zplus.
+      unfold _Zmult.
+      unfold _Zplus.
+      destruct x as (xp, xph) eqn:heqx.
+      destruct z as (zp, zph) eqn:heqz.
+      destruct Zone_opp as (op, oph) eqn:heqo.
+      destruct zp as [zpf zps] eqn:heqzp.
+      destruct op as [opf ops] eqn:heqop.
+      destruct xp as [xpf xps] eqn:heqxp.
+      remember (Zmake (pair (Nplus zpf opf) (Nplus zps ops))) as u.
+      destruct u as [up uh] eqn:hequ.
+      destruct up as [upf ups] eqn:hequp.
+      unfold _ZCond in *.
+      simpl in xph, zph, oph, uh.
+      rename xpf into a.
+      rename upf into b.
+      rename xps into c.
+      rename ups into d.
+      repeat rewrite (Nmult_comm b).
+      repeat rewrite (Nmult_comm d).
+      rewrite (Nplus_comm (Nmult c b)).
+      reflexivity.
+    }
+  Qed.
 
+  Lemma _Zmult_assoc : associative _Zmult.
+  Proof.
+    red.
+    intros [a b] [c d] [e f].
+    simpl.
+    f_equal.
+    {
+      repeat rewrite Nplus_mult_distr_l.
+      repeat rewrite Nplus_mult_distr_r.
+      repeat rewrite Nmult_assoc.
+      repeat rewrite Nplus_assoc.
+      apply f_eq.
+      rewrite Nplus_comm.
+      repeat rewrite Nplus_assoc.
+      reflexivity.
+    }
+    {
+      repeat rewrite Nplus_mult_distr_l.
+      repeat rewrite Nplus_mult_distr_r.
+      repeat rewrite Nmult_assoc.
+      repeat rewrite Nplus_assoc.
+      apply f_eq.
+      rewrite Nplus_comm.
+      repeat rewrite Nplus_assoc.
+      reflexivity.
+    }
+  Qed.
 
+  Lemma _Zmult_repr : forall x y, _Z_representative (_Zmult x (_Z_representative y)) = _Z_representative (_Zmult x y).
+  Proof.
+    intros x y.
+    destruct x as [a b].
+    destruct y as [c d].
+    simpl.
+    destruct (Neq_dec _) as [d1l|d1r].
+    {
+      symmetry in d1l. apply Nmin_le in d1l.
+      simpl.
+      destruct (Neq_dec _) as [d2l|d2r].
+      {
+        symmetry in d2l. apply Nmin_le in d2l.
+        destruct (Neq_dec ) as [d3l|d3r].
+        {
+          symmetry in d3l. apply Nmin_le in d3l.
+          rewrite Nmult_zero_r in *.
+          rewrite Nplus_zero_l in *.
+          rewrite Nmult_zero_r in *.
+          rewrite Nplus_zero_r in *.
+          rewrite Nplus_zero_l in *.
+          apply f_eq.
+          remember (Nrest d c) as dc.
+          apply Nle_nmk in d1l. destruct d1l. subst d.
+          rewrite Nplus_comm in Heqdc. rewrite Nrest_plus_nmm in Heqdc.
+          subst dc.
+          remember (Nmult b x) as g.
+          apply Nle_nmk in d2l.
+          destruct d2l.
+          subst g.
+          rename x into d.
+          rename x0 into e.
+          rewrite Nplus_mult_distr_l in d3l.
+          rewrite Nplus_mult_distr_l in d3l.
+          repeat rewrite Nplus_assoc in d3l.
+          apply le_n_plus_l in d3l.
+          apply Nle_nmk in d3l. destruct d3l.
+          rename x into f.
+          rewrite Nplus_mult_distr_l.
+          rewrite Nplus_mult_distr_l.
+          remember (Nmult a d) as ad.
+          rewrite <- H in H0.
+          rewrite <- H.
+          remember (Nmult b d) as bd.
+          rewrite (Nplus_comm bd).
+          rewrite Nrest_plus_nmm.
+          subst bd.
+          remember (Nmult b c) as bc.
+          rewrite (Nplus_comm bc) in H0.
+          repeat rewrite Nplus_assoc in H0.
+          apply Nplus_elim_l in H0.
+          rewrite (Nplus_comm bc) in H0.
+          apply Nplus_elim_r in H0.
+          subst f.
+          remember (Nmult a c) as ac.
+          remember (Nmult b d) as bd.
+          repeat rewrite Nplus_assoc.
+          rewrite (Nplus_comm ac).
+          repeat rewrite Nplus_assoc.
+          rewrite (Nplus_comm bd).
+          repeat rewrite Nplus_assoc.
+          rewrite (Nplus_comm bc).
+          repeat rewrite Nplus_assoc.
+          rewrite (Nplus_comm bd).
+          rewrite Nrest_plus_nmm.
+          reflexivity.
+        }
+        {
+          apply Nmin_neq_le in d3r.
+          apply Nle_nmk in d1l. destruct d1l.
+          rewrite Nmult_zero_r in *.
+          rewrite Nplus_zero_l in *.
+          rewrite Nmult_zero_r in *.
+          rewrite Nplus_zero_r in *.
+          rewrite Nplus_zero_l in *.
+          subst d.
+          rewrite (Nplus_comm c) in*.
+          rewrite Nrest_plus_nmm in *.
+          repeat rewrite Nplus_mult_distr_l in d3r.
+          remember (Nmult a c) as ac.
+          remember (Nmult a x) as ax.
+          remember (Nmult b c) as bc.
+          remember (Nmult b x) as bx.
+          rewrite (Nplus_comm _ ac) in d3r.
+          repeat rewrite Nplus_assoc in d3r.
+          apply le_n_plus_l in d3r.
+          apply le_n_plus_r in d3r.
+          assert (h:=Nle_antisym).
+          specialize (h _ _ d3r d2l).
+          clear d3r d2l.
+          subst ac ax bc bx.
+          repeat rewrite Nplus_mult_distr_l.
+          rewrite <- h.
+          clear h.
+          rewrite Nrest_cancel.
+          remember (Nmult a c) as ac.
+          remember (Nmult a x) as ax.
+          remember (Nmult b c) as bc.
+          repeat rewrite <- Nplus_assoc.
+          rewrite (Nplus_comm ac).
+          repeat rewrite Nplus_assoc.
+          rewrite Nrest_cancel.
+          reflexivity.
+        }
+      }
+      {
+        apply Nmin_neq_le in d2r.
+        repeat rewrite Nmult_zero_r in *.
+        repeat rewrite Nplus_zero_l in *.
+        repeat rewrite Nplus_zero_r in *.
+        destruct (Neq_dec _) as [d3l|d3r].
+        {
+          symmetry in d3l. apply Nmin_le in d3l.
+          apply Nle_nmk in d1l. destruct d1l. subst d.
+          rewrite (Nplus_comm c) in *.
+          rewrite Nrest_plus_nmm in *.
+          repeat rewrite Nplus_mult_distr_l in *.
+          remember (Nmult a c) as ac.
+          remember (Nmult b x) as bx.
+          remember (Nmult b c) as bc.
+          remember (Nmult a x) as ax.
+          repeat rewrite <- Nplus_assoc in d3l.
+          apply le_n_plus_r in d3l.
+          rewrite Nplus_comm in d3l.
+          apply le_n_plus_r in d3l.
+          assert (ha:=Nle_antisym).
+          specialize (ha _ _ d3l d2r).
+          rewrite ha.
+          rewrite Nrest_cancel.
+          rewrite (Nplus_comm ax).
+          repeat rewrite Nplus_assoc.
+          rewrite Nrest_cancel.
+          reflexivity.
+        }
+        {
+          apply Nmin_neq_le in d3r.
+          apply Nle_nmk in d1l. destruct d1l. subst d.
+          rewrite (Nplus_comm c) in *.
+          rewrite Nrest_plus_nmm in *.
+          repeat rewrite Nplus_mult_distr_l in *.
+          repeat rewrite <- Nplus_assoc in *.
+          apply le_n_plus_r in d3r.
+          remember (Nmult a x) as ax.
+          remember (Nmult a c) as ac.
+          remember (Nmult b x) as bx.
+          remember (Nmult b c) as bc.
+          rewrite (Nplus_comm ax) in d3r.
+          apply le_n_plus_l in d3r.
+          clear d2r.
+          apply Nle_nmk in d3r.
+          destruct d3r.
+          rewrite <- H.
+          rewrite (Nplus_comm ax).
+          rewrite Nrest_plus_nmm.
+          repeat rewrite <- Nplus_assoc.
+          rewrite (Nplus_comm _ x0).
+          repeat rewrite Nplus_assoc.
+          rewrite (Nplus_comm ac).
+          repeat rewrite Nplus_assoc.
+          rewrite (Nplus_comm bc).
+          rewrite Nrest_plus_nmm.
+          reflexivity.
+        }
+      }
+    }
+    {
+      apply Nmin_neq_le in d1r.
+      destruct (Neq_dec _) as [d2l|d2r].
+      {
+        symmetry in d2l. apply Nmin_le in d2l.
+        repeat rewrite Nmult_zero_r in *.
+        repeat rewrite Nplus_zero_l in *.
+        repeat rewrite Nplus_zero_r in *.
+        simpl.
+        destruct (Neq_dec _) as [d3l|d3r].
+        {
+          symmetry in d3l. apply Nmin_le in d3l.
+          apply Nle_nmk in d1r. destruct d1r. subst c.
+          rewrite (Nplus_comm d) in *. rewrite Nrest_plus_nmm in *.
+          repeat rewrite Nplus_mult_distr_l in *.
+          remember (Nmult a x) as ax.
+          remember (Nmult b x) as ac.
+          remember (Nmult a d) as bx.
+          remember (Nmult b d) as bd.
+          repeat rewrite <- Nplus_assoc in d2l.
+          apply le_n_plus_r in d2l.
+          rewrite (Nplus_comm bx) in d2l.
+          apply le_n_plus_r in d2l.
+          apply Nle_nmk in d2l. destruct d2l. rewrite <- H.
+          rewrite (Nplus_comm ax). rewrite Nrest_plus_nmm.
+          repeat rewrite Nplus_assoc.
+          rewrite (Nplus_comm bx).
+          repeat rewrite Nplus_assoc.
+          rewrite (Nplus_comm bd).
+          rewrite Nrest_plus_nmm.
+          reflexivity.
+        }
+        {
+          apply Nmin_neq_le in d3r.
+          apply Nle_nmk in d1r. destruct d1r. subst c.
+          rewrite (Nplus_comm d) in *.
+          rewrite Nrest_plus_nmm in *.
+          repeat rewrite Nplus_mult_distr_l in *.
+          remember (Nmult a x) as ax.
+          remember (Nmult a d) as ad.
+          remember (Nmult b d) as bd.
+          remember (Nmult b x) as bx.
+          repeat rewrite <- Nplus_assoc in d2l.
+          apply le_n_plus_r in d2l.
+          rewrite Nplus_comm in d2l.
+          apply le_n_plus_l in d2l.
+          apply Nle_nmk in d2l. destruct d2l. rewrite <- H.
+          rewrite (Nrest_comm ax).
+          rewrite (Nplus_comm ax).
+          rewrite Nrest_plus_nmm.
+          repeat rewrite Nplus_assoc.
+          rewrite (Nplus_comm x0).
+          repeat rewrite Nplus_assoc.
+          rewrite (Nplus_comm ad).
+          repeat rewrite Nplus_assoc.
+          rewrite (Nplus_comm ax).
+          repeat rewrite Nplus_assoc.
+          rewrite (Nplus_comm bd).
+          repeat rewrite Nplus_assoc.
+          rewrite (Nplus_comm ad).
+          repeat rewrite Nplus_assoc.
+          rewrite (Nplus_comm bd).
+          rewrite Nrest_plus_nmm.
+          subst ax bx ad bd.
+          rewrite <- H in d3r.
+          rewrite Nplus_comm in d3r.
+          apply le_n_plus_l_zero in d3r.
+          subst x0.
+          reflexivity.
+        }
+      }
+      {
+        apply Nmin_neq_le in d2r.
+        simpl.
+        repeat rewrite Nmult_zero_r in *.
+        repeat rewrite Nplus_zero_l in *.
+        repeat rewrite Nplus_zero_r in *.
+        destruct (Neq_dec _) as [d3l | d3r].
+        {
+          symmetry in d3l. apply Nmin_le in d3l.
+          simpl.
+          apply Nle_nmk in d1r. destruct d1r. subst c.
+          rewrite (Nplus_comm d) in *. rewrite Nrest_plus_nmm in *.
+          repeat rewrite Nplus_mult_distr_l in *.
+          remember (Nmult a x) as ax.
+          remember (Nmult b d) as bd.
+          remember (Nmult a d) as ad.
+          remember (Nmult b x) as bx.
+          repeat rewrite <- Nplus_assoc in d2r.
+          apply le_n_plus_r in d2r.
+          rewrite Nplus_comm in d2r.
+          apply le_n_plus_r in d2r.
+          assert(ha:=Nle_antisym  _ _ d3l d2r).
+          rewrite <- ha.
+          rewrite Nrest_cancel.
+          rewrite (Nplus_comm ad).
+          repeat rewrite Nplus_assoc.
+          rewrite (Nplus_comm ad).
+          rewrite Nrest_cancel.
+          reflexivity.
+        }
+        {
+          apply Nmin_neq_le in d3r.
+          apply Nle_nmk in d1r. destruct d1r as [x d1r]. subst c.
+          rewrite (Nplus_comm d) in *.
+          rewrite Nrest_plus_nmm in *.
+          repeat rewrite Nplus_mult_distr_l in *.
+          remember (Nmult a x) as ax.
+          remember (Nmult b x) as bx.
+          remember (Nmult a d) as ad.
+          remember (Nmult b d) as bd.
+          repeat rewrite <- Nplus_assoc in d2r.
+          apply le_n_plus_r in d2r.
+          rewrite Nplus_comm in d2r.
+          apply le_n_plus_r in d2r.
+          clear d2r.
+          apply Nle_nmk in d3r. destruct d3r. rewrite <- H.
+          rewrite (Nplus_comm bx). rewrite Nrest_plus_nmm.
+          repeat rewrite Nplus_assoc.
+          rewrite (Nplus_comm bx).
+          repeat rewrite Nplus_assoc.
+          rewrite (Nplus_comm bd).
+          rewrite Nrest_plus_nmm.
+          reflexivity.
+        }
+      }
+    }
+  Qed.
 
-
-
-
+  Lemma Zmult_assoc : associative Zmult.
+  Proof.
+    red.
+    intros x y z.
+    unfold Zmult.
+    unfold Zmake.
+    apply proof_irrelevance.
+    simpl.
+    destruct x as [xp xh] eqn:hex.
+    destruct y as [yp yh] eqn:hey.
+    destruct z as [zp zh] eqn:hez.
+    simpl.
+    assert (R:=_Zmult_repr).
+    rewrite R.
+    rewrite (_Zmult_comm).
+    rewrite R.
+    rewrite (_Zmult_comm).
+    repeat rewrite _Zmult_assoc.
+    reflexivity.
+  Qed.
 
 
 
