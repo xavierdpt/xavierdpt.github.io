@@ -88,7 +88,7 @@
   Definition Nnext (n:NN) := exist _
     (_Nnext (Nnumber n))
     (_Nnext_natural (Nnumber n) (Nhyp n)).
-  Notation "]n x" := (Nnext x) (only printing, at level 60) : maths. 
+  Notation "\n x" := (Nnext x) (only printing, at level 60) : maths. 
 
   (* Here are one and two *)
   Definition None := Nnext Nzero.
@@ -287,7 +287,7 @@
     let result := append n m in
     (* And binds the proof using the proof above *)
     exist _ result (append_natural n m hn hm).
-  Notation "x +n y" := (Nplus x y) (only printing, at level 60) : maths. 
+  Notation "x +n y" := (Nplus x y) (only printing, at level 50) : maths. 
  
   (* Proof that plus is commutative *)
   Theorem Nplus_comm : commutative Nplus.
@@ -421,7 +421,7 @@
   | nil => nil
   | cons head tail => append y (_Nmult tail y)
   end.
-  Notation "x *l y" := (_Nmult x y) (only printing, at level 60) : maths. 
+  Notation "x _*n y" := (_Nmult x y) (only printing, at level 60) : maths. 
 
   (* "Multiplying" two "natural" lists yields a "natural" list *)
   Lemma _Nmult_natural : forall (n m:_NLevel2), isnatural n -> isnatural m -> isnatural (_Nmult n m).
@@ -460,7 +460,7 @@
     let (m, hm) := mT in
     let result := _Nmult n m in
     exist _ result (_Nmult_natural n m hn hm).
-  Notation "x *n y" := (mult x y) (only printing, at level 60) : maths. 
+    Notation "x *n y" := (Nmult x y) (only printing, at level 60) : maths. 
 
   (* Multiplication is commutative *)
   Theorem Nmult_comm : commutative Nmult.
@@ -2564,32 +2564,39 @@ Qed.
     }
   Qed.
 
-Lemma le_n_plus_l : forall n m k, Nle (Nplus n m) (Nplus n k) -> Nle m k.
-Proof.
-intro n.
-pattern n;apply Ninduction;clear n.
-{ intros. repeat rewrite Nplus_zero_l in *. assumption. }
-{
-intros.
-repeat rewrite Nplus_next_l in H0.
-apply Nle_next_elim in H0.
-specialize (H _ _ H0). assumption.
-}
-Qed.
+  Lemma Nle_plus_elim_l : forall n m k, Nle (Nplus n m) (Nplus n k) -> Nle m k.
+  Proof.
+    intro n.
+    pattern n;apply Ninduction;clear n.
+    { intros. repeat rewrite Nplus_zero_l in *. assumption. }
+    {
+      intros.
+      repeat rewrite Nplus_next_l in H0.
+      apply Nle_next_elim in H0.
+      specialize (H _ _ H0). assumption.
+    }
+  Qed.
 
-Lemma le_n_plus_r : forall n m k, Nle (Nplus m n) (Nplus k n) -> Nle m k.
-Proof.
-intros.
-repeat rewrite (Nplus_comm _ n) in H.
-apply le_n_plus_l in H.
-assumption.
-Qed.
+  Lemma Nle_plus_elim_r : forall n m k, Nle (Nplus m n) (Nplus k n) -> Nle m k.
+  Proof.
+    intros.
+    repeat rewrite (Nplus_comm _ n) in H.
+    apply Nle_plus_elim_l in H.
+    assumption.
+  Qed.
 
-Lemma le_n_plus_l_zero : forall n m, Nle (Nplus m n) n -> m = Nzero.
-Proof.
-intros n m h.
-rewrite <- Nplus_zero_l in h.
-apply le_n_plus_r in h.
-apply Nle_zero_l in h.
-assumption.
-Qed.
+  Lemma Nle_plus_elim_zero_l : forall n m, Nle (Nplus m n) n -> m = Nzero.
+  Proof.
+    intros n m h.
+    rewrite <- Nplus_zero_l in h.
+    apply Nle_plus_elim_r in h.
+    apply Nle_zero_l in h.
+    assumption.
+  Qed.
+
+  Lemma Nle_plus_elim_zero_r : forall n m, Nle (Nplus n m) n -> m = Nzero.
+  Proof.
+    intros n m.
+    rewrite Nplus_comm.
+    apply Nle_plus_elim_zero_l.
+  Qed.

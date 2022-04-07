@@ -76,9 +76,9 @@
 
 
   (* Membership condition for a class equivalence representative *)
-  Definition _ZCond p := first p = Nzero \/ second p = Nzero.
+  Definition _Zcond p := first p = Nzero \/ second p = Nzero.
   (* Set of representatives *)
-  Definition ZZ := { p | _ZCond p }.
+  Definition ZZ := { p | _Zcond p }.
 
   (* We prove that all pairs of naturals are represented by at least one representative *)
   Lemma _Z_representation : forall (p:PairOf NN), exists (z:ZZ), _ZRel p (proj1_sig z).
@@ -97,7 +97,7 @@
       (* The representative is (0,ps) *)
       set(zp:=pair Nzero ps).
       (* Proving that it satisfies the representative condition is simple *)
-      assert(zh:_ZCond zp).
+      assert(zh:_Zcond zp).
       { red. left. simpl. reflexivity. }
       (* So here it comes *)
       exists (exist _ zp zh).
@@ -152,7 +152,7 @@
           subst zf.
           (* Answer is (1,0) *)
           set(zp:=pair None Nzero).
-          assert (zh:_ZCond zp).
+          assert (zh:_Zcond zp).
           { red. simpl. right. reflexivity. }
           exists (exist _ zp zh).        
           rewrite Nplus_zero_r.
@@ -172,7 +172,7 @@
           subst ps.
           (* answer is (0, pred(zs)) *)
           set(zp:=pair Nzero zs').
-          assert (zh:_ZCond zp).
+          assert (zh:_Zcond zp).
           { red. simpl. left. reflexivity. }
           exists (exist _ zp zh).
           unfold proj1_sig.
@@ -194,7 +194,7 @@
         subst pf'.
         (* answer is (zf+1,0) *)
         set(zp:=pair (Nnext zf) Nzero).
-        assert (zh:_ZCond zp).
+        assert (zh:_Zcond zp).
         { red. simpl. right. reflexivity. }
         exists (exist _ zp zh).
         subst zp.
@@ -216,11 +216,11 @@
       end
     end.
 
-  Lemma _Z_representative_ok : forall (p:PairOf NN), _ZCond (_Z_representative p).
+  Lemma _Z_representative_ok : forall (p:PairOf NN), _Zcond (_Z_representative p).
   Proof.
     intro p.
     destruct p as [pf ps].
-    unfold _ZCond.
+    unfold _Zcond.
     unfold _Z_representative.
     pattern pf;apply Ninduction;clear pf.
     { rewrite Nmin_zero_l. rewrite Nrest_zero_r. rewrite Nrest_zero_l. simpl. left. reflexivity. }
@@ -268,7 +268,7 @@
     unfold _ZRel in heqv.
     unfold proj1_sig, first, second in heqv.
     simpl.
-    unfold _ZCond in hx, hy.
+    unfold _Zcond in hx, hy.
     unfold first, second in hx, hy.
     destruct hx as [ hx | hx ];
     destruct hy as [ hy | hy ].
@@ -289,6 +289,7 @@
   Definition _Zplus (x y : PairOf NN) : (PairOf NN) := match x, y with
   | pair xf xs, pair yf ys => pair (Nplus xf yf) (Nplus xs ys)
   end.
+  Notation "x _+z y" := (_Zplus x y) (only printing, at level 50) : maths. 
 
   Lemma _Zplus_comm : commutative _Zplus.
   Proof.
@@ -320,29 +321,43 @@
     let (xp, hx) := x in
     let (yp, hy) := y in
     Zmake (_Zplus xp yp).
+  Notation "x +z y" := (Zplus x y) (only printing, at level 50) : maths. 
 
-  Lemma _Zzero_ok : _ZCond (pair Nzero Nzero).
+  Lemma _Zzero_ok : _Zcond (pair Nzero Nzero).
   Proof.
-    unfold _ZCond. simpl. left. reflexivity.
+    unfold _Zcond. simpl. left. reflexivity.
   Qed.
 
-  Lemma _Zone_ok : _ZCond (pair Nzero None).
+  Lemma _Zone_ok : _Zcond (pair None Nzero).
   Proof.
-    unfold _ZCond. simpl. left. reflexivity.
+    unfold _Zcond. simpl. right. reflexivity.
   Qed.
 
-  Lemma _Zone_opp_ok : _ZCond (pair None Nzero).
+  Lemma _Zone_opp_ok : _Zcond (pair Nzero None).
   Proof.
-    unfold _ZCond. simpl. right. reflexivity.
+    unfold _Zcond. simpl. left. reflexivity.
   Qed.
 
   Definition Zzero := exist _ (pair Nzero Nzero) _Zzero_ok.
-  Definition Zone := exist _ (pair Nzero None) _Zone_ok.
-  Definition Zone_opp := exist _ (pair None Nzero) _Zone_opp_ok.
+  Notation "0z" := Zzero (only printing) : maths. 
 
+  Definition Zone := exist _ (pair None Nzero) _Zone_ok.
+  Notation "1z" := Zone (only printing) : maths. 
 
+  Definition Zone_opp := exist _ (pair Nzero None) _Zone_opp_ok.
+  Notation "-1z" := Zone_opp (only printing) : maths. 
 
-  Lemma Zplus_zero_l : forall x:ZZ, Zplus x Zzero = x.
+  Lemma Zplus_comm : forall x y, Zplus x y = Zplus y x.
+  Proof.
+    intros (x,hx) (y,hy).
+    apply proof_irrelevance.
+    simpl.
+    apply f_eq.
+    rewrite _Zplus_comm.
+    reflexivity.
+  Qed.
+
+  Lemma Zplus_zero_r : forall x:ZZ, Zplus x Zzero = x.
   Proof.
     intro x.
     destruct x as [x hx].
@@ -363,47 +378,14 @@
     }
   Qed.
 
-  Lemma Zplus_zero_r : forall x:ZZ, Zplus Zzero x = x.
+  Lemma Zplus_zero_l : forall x:ZZ, Zplus Zzero x = x.
   Proof.
-    intros (x,hx).
-    apply proof_irrelevance.
-    simpl.
-    red in hx.
-    destruct x as [xf xs].
-    simpl in hx.
-    simpl.
-    destruct hx as [ hx | hx ].
-    {
-      subst xf. simpl.
-      destruct xs as [xs hxs].
-      destruct xs as [|xshead xstail].
-      { simpl. apply f_eq. apply proof_irrelevance. simpl. reflexivity. }
-      { simpl. apply f_eq. apply proof_irrelevance. simpl. reflexivity. }
-    }
-    {
-      subst xs. simpl.
-      destruct xf as [xf hxf]. simpl.
-      destruct xf as [|xfhead xftail].
-      { simpl. apply f_equal2.
-        { apply proof_irrelevance. simpl. unfold _Nzero. reflexivity. }
-        { apply proof_irrelevance. simpl. unfold _Nzero. reflexivity. }
-      }
-      { simpl. apply f_equal2.
-        { apply proof_irrelevance. simpl. reflexivity. }
-        { reflexivity. }
-      }
-    }
-  Qed.
-
-  Lemma Zplus_comm : forall x y, Zplus x y = Zplus y x.
-  Proof.
-    intros (x,hx) (y,hy).
-    apply proof_irrelevance.
-    simpl.
-    apply f_eq.
-    rewrite _Zplus_comm.
+    intro x.
+    rewrite Zplus_comm.
+    rewrite Zplus_zero_r.
     reflexivity.
   Qed.
+
 
   Lemma _Zplus_repr : forall x y, _Z_representative (_Zplus x y) = _Z_representative (_Zplus x (_Z_representative y)).
   Proof.
@@ -422,7 +404,7 @@
         subst yf.
         rewrite (Nplus_comm ys) in e.
         rewrite <- Nplus_assoc in e.
-        apply le_n_plus_r in e.
+        apply Nle_plus_elim_r in e.
         rewrite (Nplus_comm ys).
         rewrite Nrest_plus_nmm.
         apply Nle_nmk in e. destruct e.
@@ -438,7 +420,7 @@
         { reflexivity. }
         {
           apply Nmin_neq_le in n.
-          apply le_n_plus_l_zero in n.
+          apply Nle_plus_elim_zero_l in n.
           subst x0. reflexivity.
         }
       }
@@ -452,7 +434,7 @@
         rename x into d.
         rewrite (Nplus_comm c) in e.
         rewrite <- Nplus_assoc in e.
-        apply le_n_plus_r in e.
+        apply Nle_plus_elim_r in e.
         rewrite (Nplus_comm c).
         rewrite Nrest_plus_nmm.
         destruct (Neq_dec (Nmin (Nplus a d) b) (Nplus a d)).
@@ -489,7 +471,7 @@
         symmetry in e. apply Nmin_le in e.
         apply Nle_nmk in e. destruct e. subst d.
         rewrite (Nplus_comm c) in n. rewrite <- Nplus_assoc in n.
-        apply le_n_plus_r in n.
+        apply Nle_plus_elim_r in n.
         rewrite Nplus_zero_r.
         rewrite (Nplus_comm c).
         rewrite Nrest_plus_nmm.
@@ -535,11 +517,11 @@
           rewrite Nrest_plus_nmm.
           rewrite (Nplus_comm d) in n.
           repeat rewrite <- Nplus_assoc in n.
-          apply le_n_plus_r in n.
+          apply Nle_plus_elim_r in n.
           rewrite Nplus_assoc in n.
-          apply le_n_plus_l in n.
+          apply Nle_plus_elim_l in n.
           rewrite Nplus_comm in n.
-          apply le_n_plus_l_zero in n.
+          apply Nle_plus_elim_zero_l in n.
           subst x0.
           reflexivity.
         }
@@ -619,7 +601,7 @@
     (* z consists of a pair of natural numbers with a proof that it is a representative of its equivalence class *)
     destruct z as [x hx] eqn:heqz.
     (* Here's the condition *)
-    unfold _ZCond in hx.
+    unfold _Zcond in hx.
     (* The pair itself is made of two natural integers *)
     destruct x as [xf xs ] eqn:heqx.
     (* The condition is more readable now *)
@@ -676,13 +658,13 @@
         intro.
         intro.
         intro.
-        (* We will use hip, but will feed (0, x') to our induction hypothesis *)
+        (* We will use him, but will feed (x', 0) to our induction hypothesis *)
         remember (pair Nzero x') as yp.
         (* yp is the representative of an equivalence class *)
-        assert (hy:_ZCond yp).
+        assert (hy:_Zcond yp).
         {
           (* The condition to be a representative is to have the left or the right of the pair at zero. *)
-          unfold _ZCond.
+          unfold _Zcond.
           (* Substitute with the value and simplify *)
           rewrite Heqyp. simpl.
           (* And we can make that true *)
@@ -695,15 +677,15 @@
         specialize (ih yp).
         specialize (ih Heqyp).
         (* So by induction, P holds for (0, x'), we will give that to hip *)
-        specialize (hip yz).
-        (* Now we need to prove that xz = yz + 1, and that's messy *)
-        assert (Zplus yz Zone = xz).
+        specialize (him yz).
+        (* Now we need to prove that xz = yz + -1, and that's messy *)
+        assert (Zplus yz Zone_opp = xz).
         {
           (* Start we some substitutions *)
           subst xz.
           subst yz.
           (* Unfold the value of Zone *)
-          unfold Zone.
+          unfold Zone_opp.
           (* Unfold some functions *)
           unfold Zplus.
           unfold _Zplus.
@@ -734,7 +716,7 @@
         (* Now we can identify xz with yz + 1 *)
         rewrite <- H.
         (* apply hip to get to yz *)
-        apply hip.
+        apply him.
         (* apply ih to get to the equality requirement *)
         apply ih.
         (* and another round of proof irrelevance *)
@@ -748,7 +730,7 @@
     }
     (* Here's when the right number is zero *)
     {
-      (* It's almost an exact copy of the other case, but using 'him' instead of 'hip' *)
+      (* It's almost an exact copy of the other case, but using 'hip' instead of 'him' *)
       subst xs.
       rewrite <- heqz.
       rename z into xz.
@@ -774,20 +756,20 @@
         intros xz xp.
         intro heqxp.
         intro heqxz.
-        clear hz hip.
+        clear hz him.
         (* We're going to use (x', 0) here *)
         remember (pair x' Nzero) as yp.
-        assert (hy:_ZCond yp).
-        { unfold _ZCond. rewrite Heqyp. simpl. right. reflexivity. }
+        assert (hy:_Zcond yp).
+        { unfold _Zcond. rewrite Heqyp. simpl. right. reflexivity. }
         remember (exist _ yp hy) as yz.
         specialize (ih yz).
         specialize (ih yp).
         specialize (ih Heqyp).
-        specialize (him yz).
+        specialize (hip yz).
         (* Here we show that xz = yz + (-1) *)
-        assert (xz = Zplus yz Zone_opp).
+        assert (xz = Zplus yz Zone).
         {
-          subst xz. subst yz. subst yp. unfold Zone_opp.
+          subst xz. subst yz. subst yp. unfold Zone.
           unfold Zplus.
           unfold _Zplus.
           rewrite Nplus_zero_r.
@@ -795,12 +777,13 @@
           unfold _Z_representative.
           apply proof_irrelevance.
           simpl.
-          rewrite Nmin_zero_r.
           (* This time, the Neq_dec does not simplify very easily *)
-          destruct (Neq_dec Nzero (Nplus x' None)).
+          destruct (Neq_dec _).
           {
+            rewrite Nmin_zero_r in e.
             (* 0 = x' + 1 has no solution, so that's not the right branch *)
-            rewrite <- Nnext_eq in e. inversion e.
+            rewrite <- Nnext_eq in e.
+            inversion e.
           }
           {
             (* That's the right branch *)
@@ -808,7 +791,7 @@
           }
         }
         (* No we can complete this second part *)
-        rewrite H. apply him.
+        rewrite H. apply hip.
         apply ih.
         subst yz. subst yp. apply proof_irrelevance. simpl. reflexivity.
       }
@@ -817,15 +800,38 @@
 
 
   Definition _Zmult (x y : PairOf NN) : (PairOf NN) := match x, y with
-  | pair xf xs, pair yf ys => pair
-    (Nplus(Nmult xf yf) (Nmult xs ys))
-    (Nplus(Nmult xf ys) (Nmult xs yf))
+  | pair a b, pair c d => pair
+    (Nplus(Nmult a c) (Nmult b d))
+    (Nplus(Nmult a d) (Nmult b c))
   end.
+  Notation "x _*z y" := (_Zmult x y) (only printing, at level 50) : maths. 
 
   Definition Zmult (x y : ZZ) : ZZ :=
     let (xp, hx) := x in
     let (yp, hy) := y in
     Zmake (_Zmult xp yp).
+  Notation "x *z y" := (Zmult x y) (only printing, at level 50) : maths. 
+
+  Lemma Zmult_oneopp_oneopp : Zmult Zone_opp Zone_opp = Zone.
+  Proof.
+    destruct Zone_opp as [xp xh] eqn:heqx.
+    destruct xp as [a b].
+    inversion heqx.
+    destruct Zone as [yp yh] eqn:heqy.
+    destruct yp as [c d].
+    inversion heqy.
+    subst a b c d.
+    simpl.
+    unfold Zmake.
+    apply proof_irrelevance.
+    simpl.
+    f_equal.
+    apply proof_irrelevance.
+    simpl.
+    unfold _Nnext.
+    unfold _Nzero.
+    reflexivity.
+  Qed.
 
   Lemma _Zmult_comm : commutative _Zmult.
   Proof.
@@ -879,7 +885,7 @@
       remember (Zmake (pair (Nplus zpf opf) (Nplus zps ops))) as u.
       destruct u as [up uh] eqn:hequ.
       destruct up as [upf ups] eqn:hequp.
-      unfold _ZCond in *.
+      unfold _Zcond in *.
       simpl in xph, zph, oph, uh.
       rewrite (Nmult_comm upf).
       rewrite (Nmult_comm ups).
@@ -908,7 +914,7 @@
       remember (Zmake (pair (Nplus zpf opf) (Nplus zps ops))) as u.
       destruct u as [up uh] eqn:hequ.
       destruct up as [upf ups] eqn:hequp.
-      unfold _ZCond in *.
+      unfold _Zcond in *.
       simpl in xph, zph, oph, uh.
       rename xpf into a.
       rename upf into b.
@@ -955,70 +961,50 @@
     destruct x as [a b].
     destruct y as [c d].
     simpl.
-    destruct (Neq_dec _) as [d1l|d1r].
+    destruct (Neq_dec _) as [d1|d1].
     {
-      symmetry in d1l. apply Nmin_le in d1l.
+      symmetry in d1. apply Nmin_le in d1.
+      apply Nle_nmk in d1. destruct d1 as [e heqe].
       simpl.
-      destruct (Neq_dec _) as [d2l|d2r].
+      destruct (Neq_dec _) as [d2|d2].
       {
-        symmetry in d2l. apply Nmin_le in d2l.
-        destruct (Neq_dec ) as [d3l|d3r].
+        symmetry in d2. apply Nmin_le in d2.
+        destruct (Neq_dec ) as [d3|d3].
         {
-          symmetry in d3l. apply Nmin_le in d3l.
+          symmetry in d3. apply Nmin_le in d3.
           rewrite Nmult_zero_r in *.
           rewrite Nplus_zero_l in *.
           rewrite Nmult_zero_r in *.
           rewrite Nplus_zero_r in *.
           rewrite Nplus_zero_l in *.
           apply f_eq.
-          remember (Nrest d c) as dc.
-          apply Nle_nmk in d1l. destruct d1l. subst d.
-          rewrite Nplus_comm in Heqdc. rewrite Nrest_plus_nmm in Heqdc.
-          subst dc.
-          remember (Nmult b x) as g.
-          apply Nle_nmk in d2l.
-          destruct d2l.
-          subst g.
-          rename x into d.
-          rename x0 into e.
-          rewrite Nplus_mult_distr_l in d3l.
-          rewrite Nplus_mult_distr_l in d3l.
-          repeat rewrite Nplus_assoc in d3l.
-          apply le_n_plus_l in d3l.
-          apply Nle_nmk in d3l. destruct d3l.
-          rename x into f.
-          rewrite Nplus_mult_distr_l.
-          rewrite Nplus_mult_distr_l.
-          remember (Nmult a d) as ad.
-          rewrite <- H in H0.
-          rewrite <- H.
-          remember (Nmult b d) as bd.
-          rewrite (Nplus_comm bd).
-          rewrite Nrest_plus_nmm.
-          subst bd.
-          remember (Nmult b c) as bc.
-          rewrite (Nplus_comm bc) in H0.
-          repeat rewrite Nplus_assoc in H0.
-          apply Nplus_elim_l in H0.
-          rewrite (Nplus_comm bc) in H0.
-          apply Nplus_elim_r in H0.
-          subst f.
+          subst d.
+          rewrite (Nplus_comm c) in *.
+          rewrite Nrest_plus_nmm in *.
+          repeat rewrite Nplus_mult_distr_l in *.
           remember (Nmult a c) as ac.
-          remember (Nmult b d) as bd.
+          remember (Nmult b e) as be.
+          remember (Nmult b c) as bc.
+          remember (Nmult a e) as ae.
+          repeat rewrite <- Nplus_assoc in d3.
+          apply Nle_plus_elim_r in d3.
+          rewrite Nplus_comm in d3.
+          apply Nle_plus_elim_r in d3.
+          clear d2.
+          apply Nle_nmk in d3.
+          destruct d3 as [f heqf].
+          rewrite <- heqf.
+          rewrite (Nplus_comm be).
+          rewrite Nrest_plus_nmm.
           repeat rewrite Nplus_assoc.
-          rewrite (Nplus_comm ac).
-          repeat rewrite Nplus_assoc.
-          rewrite (Nplus_comm bd).
+          rewrite (Nplus_comm be).
           repeat rewrite Nplus_assoc.
           rewrite (Nplus_comm bc).
-          repeat rewrite Nplus_assoc.
-          rewrite (Nplus_comm bd).
           rewrite Nrest_plus_nmm.
           reflexivity.
         }
         {
-          apply Nmin_neq_le in d3r.
-          apply Nle_nmk in d1l. destruct d1l.
+          apply Nmin_neq_le in d3.
           rewrite Nmult_zero_r in *.
           rewrite Nplus_zero_l in *.
           rewrite Nmult_zero_r in *.
@@ -1027,26 +1013,20 @@
           subst d.
           rewrite (Nplus_comm c) in*.
           rewrite Nrest_plus_nmm in *.
-          repeat rewrite Nplus_mult_distr_l in d3r.
-          remember (Nmult a c) as ac.
-          remember (Nmult a x) as ax.
-          remember (Nmult b c) as bc.
-          remember (Nmult b x) as bx.
-          rewrite (Nplus_comm _ ac) in d3r.
-          repeat rewrite Nplus_assoc in d3r.
-          apply le_n_plus_l in d3r.
-          apply le_n_plus_r in d3r.
-          assert (h:=Nle_antisym).
-          specialize (h _ _ d3r d2l).
-          clear d3r d2l.
-          subst ac ax bc bx.
+          repeat rewrite Nplus_mult_distr_l in d3.
           repeat rewrite Nplus_mult_distr_l.
-          rewrite <- h.
-          clear h.
-          rewrite Nrest_cancel.
+          remember (Nmult a e) as ae.
           remember (Nmult a c) as ac.
-          remember (Nmult a x) as ax.
           remember (Nmult b c) as bc.
+          remember (Nmult b e) as be.
+          rewrite (Nplus_comm _ ac) in d3.
+          repeat rewrite Nplus_assoc in d3.
+          apply Nle_plus_elim_l in d3.
+          apply Nle_plus_elim_r in d3.
+          assert(heq:=Nle_antisym _ _ d2 d3).
+          clear d2 d3.
+          rewrite <- heq.
+          rewrite Nrest_cancel.
           repeat rewrite <- Nplus_assoc.
           rewrite (Nplus_comm ac).
           repeat rewrite Nplus_assoc.
@@ -1055,56 +1035,55 @@
         }
       }
       {
-        apply Nmin_neq_le in d2r.
+        apply Nmin_neq_le in d2.
         repeat rewrite Nmult_zero_r in *.
         repeat rewrite Nplus_zero_l in *.
         repeat rewrite Nplus_zero_r in *.
-        destruct (Neq_dec _) as [d3l|d3r].
+        destruct (Neq_dec _) as [d3|d3].
         {
-          symmetry in d3l. apply Nmin_le in d3l.
-          apply Nle_nmk in d1l. destruct d1l. subst d.
+          symmetry in d3. apply Nmin_le in d3.
+          subst d.
           rewrite (Nplus_comm c) in *.
           rewrite Nrest_plus_nmm in *.
           repeat rewrite Nplus_mult_distr_l in *.
           remember (Nmult a c) as ac.
-          remember (Nmult b x) as bx.
+          remember (Nmult b e) as be.
           remember (Nmult b c) as bc.
-          remember (Nmult a x) as ax.
-          repeat rewrite <- Nplus_assoc in d3l.
-          apply le_n_plus_r in d3l.
-          rewrite Nplus_comm in d3l.
-          apply le_n_plus_r in d3l.
-          assert (ha:=Nle_antisym).
-          specialize (ha _ _ d3l d2r).
-          rewrite ha.
+          remember (Nmult a e) as ae.
+          repeat rewrite <- Nplus_assoc in d3.
+          apply Nle_plus_elim_r in d3.
+          rewrite Nplus_comm in d3.
+          apply Nle_plus_elim_r in d3.
+          assert (heq:=Nle_antisym _ _ d2 d3).
+          rewrite heq.
           rewrite Nrest_cancel.
-          rewrite (Nplus_comm ax).
+          rewrite (Nplus_comm be).
           repeat rewrite Nplus_assoc.
           rewrite Nrest_cancel.
           reflexivity.
         }
         {
-          apply Nmin_neq_le in d3r.
-          apply Nle_nmk in d1l. destruct d1l. subst d.
+          apply Nmin_neq_le in d3.
+          subst d.
           rewrite (Nplus_comm c) in *.
           rewrite Nrest_plus_nmm in *.
           repeat rewrite Nplus_mult_distr_l in *.
           repeat rewrite <- Nplus_assoc in *.
-          apply le_n_plus_r in d3r.
-          remember (Nmult a x) as ax.
+          apply Nle_plus_elim_r in d3.
+          remember (Nmult a e) as ae.
           remember (Nmult a c) as ac.
-          remember (Nmult b x) as bx.
+          remember (Nmult b e) as be.
           remember (Nmult b c) as bc.
-          rewrite (Nplus_comm ax) in d3r.
-          apply le_n_plus_l in d3r.
-          clear d2r.
-          apply Nle_nmk in d3r.
-          destruct d3r.
-          rewrite <- H.
-          rewrite (Nplus_comm ax).
+          rewrite (Nplus_comm ae) in d3.
+          apply Nle_plus_elim_l in d3.
+          clear d2.
+          apply Nle_nmk in d3.
+          destruct d3 as [f heqf].
+          rewrite <- heqf.
+          rewrite (Nplus_comm ae).
           rewrite Nrest_plus_nmm.
           repeat rewrite <- Nplus_assoc.
-          rewrite (Nplus_comm _ x0).
+          rewrite (Nplus_comm _ f).
           repeat rewrite Nplus_assoc.
           rewrite (Nplus_comm ac).
           repeat rewrite Nplus_assoc.
@@ -1115,98 +1094,92 @@
       }
     }
     {
-      apply Nmin_neq_le in d1r.
-      destruct (Neq_dec _) as [d2l|d2r].
+      apply Nmin_neq_le in d1.
+      apply Nle_nmk in d1.
+      destruct d1 as [e heqe].
+      destruct (Neq_dec _) as [d2|d2].
       {
-        symmetry in d2l. apply Nmin_le in d2l.
+        symmetry in d2. apply Nmin_le in d2.
         repeat rewrite Nmult_zero_r in *.
         repeat rewrite Nplus_zero_l in *.
         repeat rewrite Nplus_zero_r in *.
         simpl.
-        destruct (Neq_dec _) as [d3l|d3r].
+        destruct (Neq_dec _) as [d3|d3].
         {
-          symmetry in d3l. apply Nmin_le in d3l.
-          apply Nle_nmk in d1r. destruct d1r. subst c.
+          symmetry in d3. apply Nmin_le in d3.
+          subst c.
           rewrite (Nplus_comm d) in *. rewrite Nrest_plus_nmm in *.
           repeat rewrite Nplus_mult_distr_l in *.
-          remember (Nmult a x) as ax.
-          remember (Nmult b x) as ac.
-          remember (Nmult a d) as bx.
+          remember (Nmult a e) as ae.
+          remember (Nmult b e) as ac.
+          remember (Nmult a d) as be.
           remember (Nmult b d) as bd.
-          repeat rewrite <- Nplus_assoc in d2l.
-          apply le_n_plus_r in d2l.
-          rewrite (Nplus_comm bx) in d2l.
-          apply le_n_plus_r in d2l.
-          apply Nle_nmk in d2l. destruct d2l. rewrite <- H.
-          rewrite (Nplus_comm ax). rewrite Nrest_plus_nmm.
+          repeat rewrite <- Nplus_assoc in d2.
+          apply Nle_plus_elim_r in d2.
+          rewrite (Nplus_comm be) in d2.
+          apply Nle_plus_elim_r in d2.
+          apply Nle_nmk in d2. destruct d2. rewrite <- H.
+          rewrite (Nplus_comm ae). rewrite Nrest_plus_nmm.
           repeat rewrite Nplus_assoc.
-          rewrite (Nplus_comm bx).
+          rewrite (Nplus_comm be).
           repeat rewrite Nplus_assoc.
           rewrite (Nplus_comm bd).
           rewrite Nrest_plus_nmm.
           reflexivity.
         }
         {
-          apply Nmin_neq_le in d3r.
-          apply Nle_nmk in d1r. destruct d1r. subst c.
+          apply Nmin_neq_le in d3.
+          subst c.
           rewrite (Nplus_comm d) in *.
           rewrite Nrest_plus_nmm in *.
           repeat rewrite Nplus_mult_distr_l in *.
-          remember (Nmult a x) as ax.
+          remember (Nmult a e) as ae.
           remember (Nmult a d) as ad.
           remember (Nmult b d) as bd.
-          remember (Nmult b x) as bx.
-          repeat rewrite <- Nplus_assoc in d2l.
-          apply le_n_plus_r in d2l.
-          rewrite Nplus_comm in d2l.
-          apply le_n_plus_l in d2l.
-          apply Nle_nmk in d2l. destruct d2l. rewrite <- H.
-          rewrite (Nrest_comm ax).
-          rewrite (Nplus_comm ax).
+          remember (Nmult b e) as be.
+          repeat rewrite <- Nplus_assoc in d2.
+          apply Nle_plus_elim_r in d2.
+          rewrite Nplus_comm in d2.
+          apply Nle_plus_elim_l in d2.
+          apply Nle_nmk in d2. destruct d2 as [f heqf].
+          rewrite <- heqf.
+          repeat rewrite (Nrest_comm ae).
+          rewrite (Nplus_comm ae).
           rewrite Nrest_plus_nmm.
-          repeat rewrite Nplus_assoc.
-          rewrite (Nplus_comm x0).
           repeat rewrite Nplus_assoc.
           rewrite (Nplus_comm ad).
           repeat rewrite Nplus_assoc.
-          rewrite (Nplus_comm ax).
-          repeat rewrite Nplus_assoc.
-          rewrite (Nplus_comm bd).
-          repeat rewrite Nplus_assoc.
           rewrite (Nplus_comm ad).
-          repeat rewrite Nplus_assoc.
-          rewrite (Nplus_comm bd).
           rewrite Nrest_plus_nmm.
-          subst ax bx ad bd.
-          rewrite <- H in d3r.
-          rewrite Nplus_comm in d3r.
-          apply le_n_plus_l_zero in d3r.
-          subst x0.
+          rewrite <- heqf in d3.
+          rewrite Nplus_comm in d3.
+          apply Nle_plus_elim_zero_l in d3.
+          subst f.
           reflexivity.
         }
       }
       {
-        apply Nmin_neq_le in d2r.
+        apply Nmin_neq_le in d2.
         simpl.
         repeat rewrite Nmult_zero_r in *.
         repeat rewrite Nplus_zero_l in *.
         repeat rewrite Nplus_zero_r in *.
-        destruct (Neq_dec _) as [d3l | d3r].
+        destruct (Neq_dec _) as [d3 | d3].
         {
-          symmetry in d3l. apply Nmin_le in d3l.
+          symmetry in d3. apply Nmin_le in d3.
           simpl.
-          apply Nle_nmk in d1r. destruct d1r. subst c.
+          subst c.
           rewrite (Nplus_comm d) in *. rewrite Nrest_plus_nmm in *.
           repeat rewrite Nplus_mult_distr_l in *.
-          remember (Nmult a x) as ax.
+          remember (Nmult a e) as ae.
           remember (Nmult b d) as bd.
           remember (Nmult a d) as ad.
-          remember (Nmult b x) as bx.
-          repeat rewrite <- Nplus_assoc in d2r.
-          apply le_n_plus_r in d2r.
-          rewrite Nplus_comm in d2r.
-          apply le_n_plus_r in d2r.
-          assert(ha:=Nle_antisym  _ _ d3l d2r).
+          remember (Nmult b e) as be.
+          repeat rewrite <- Nplus_assoc in d2.
+          apply Nle_plus_elim_r in d2.
+          rewrite Nplus_comm in d2.
+          apply Nle_plus_elim_r in d2.
+          assert(ha:=Nle_antisym  _ _ d3 d2).
           rewrite <- ha.
           rewrite Nrest_cancel.
           rewrite (Nplus_comm ad).
@@ -1216,24 +1189,24 @@
           reflexivity.
         }
         {
-          apply Nmin_neq_le in d3r.
-          apply Nle_nmk in d1r. destruct d1r as [x d1r]. subst c.
+          apply Nmin_neq_le in d3.
+          subst c.
           rewrite (Nplus_comm d) in *.
           rewrite Nrest_plus_nmm in *.
           repeat rewrite Nplus_mult_distr_l in *.
-          remember (Nmult a x) as ax.
-          remember (Nmult b x) as bx.
+          remember (Nmult a e) as ae.
+          remember (Nmult b e) as be.
           remember (Nmult a d) as ad.
           remember (Nmult b d) as bd.
-          repeat rewrite <- Nplus_assoc in d2r.
-          apply le_n_plus_r in d2r.
-          rewrite Nplus_comm in d2r.
-          apply le_n_plus_r in d2r.
-          clear d2r.
-          apply Nle_nmk in d3r. destruct d3r. rewrite <- H.
-          rewrite (Nplus_comm bx). rewrite Nrest_plus_nmm.
+          repeat rewrite <- Nplus_assoc in d2.
+          apply Nle_plus_elim_r in d2.
+          rewrite Nplus_comm in d2.
+          apply Nle_plus_elim_r in d2.
+          clear d2.
+          apply Nle_nmk in d3. destruct d3 as [f heqf]. rewrite <- heqf.
+          rewrite (Nplus_comm be). rewrite Nrest_plus_nmm.
           repeat rewrite Nplus_assoc.
-          rewrite (Nplus_comm bx).
+          rewrite (Nplus_comm be).
           repeat rewrite Nplus_assoc.
           rewrite (Nplus_comm bd).
           rewrite Nrest_plus_nmm.
@@ -1264,5 +1237,312 @@
     reflexivity.
   Qed.
 
+  Definition Zeq_dec (x y:ZZ) : sumbool (x = y) (x <> y).
+  Proof.
+    destruct x as [xp hx] eqn:heqx.
+    destruct y as [yp hy] eqn:heqy.
+    destruct xp as [a b] eqn:heqxp.
+    destruct yp as [c d] eqn:heqyp.
+    destruct (Neq_dec a c).
+    {
+      subst c.
+      destruct (Neq_dec b d).
+      { subst d. left. apply proof_irrelevance. simpl. reflexivity. }
+      { right. intro heq. inversion heq. subst d. apply n. reflexivity. }
+    }
+    { right. intro heq. inversion heq. subst c. apply n. reflexivity. }
+  Defined.
+
+
+
+  Definition Zle (x y:ZZ) :=
+    let (xp, xh) := x in
+    let (yp, yh) := y in
+    let (xf, xs):=xp in
+    let (yf, ys):=yp in
+      Nle xf yf /\ Nle ys xs.
+  Notation "x <=z y" := (Zle x y) (only printing, at level 50) : maths. 
+
+  Definition Zlt x y := Zle (Zplus x Zone) y.
+  Notation "x <z y" := (Zlt x y) (only printing, at level 50) : maths. 
+
+  Lemma Zle_zero_one : Zle Zzero Zone.
+  Proof.
+    destruct Zzero as [xp xh] eqn:heqx.
+    destruct Zone as [yp yh] eqn:heqy.
+    destruct xp as [a b] eqn:heqxp.
+    destruct yp as [c d] eqn:heqyp.
+    inversion heqx.
+    inversion heqy.
+    subst.
+    unfold Zle.
+    split.
+    apply Nle_zero_r.
+    apply Nle_zero_r.
+  Qed.
+
+  Lemma Zle_oneopp_zero : Zle Zone_opp Zzero .
+  Proof.
+    destruct Zone_opp as [xp xh] eqn:heqx.
+    destruct Zzero as [yp yh] eqn:heqy.
+    destruct xp as [a b] eqn:heqxp.
+    destruct yp as [c d] eqn:heqyp.
+    inversion heqx.
+    inversion heqy.
+    subst.
+    unfold Zle.
+    split.
+    apply Nle_zero_r.
+    apply Nle_zero_r.
+  Qed.
+
+  Lemma Zle_oneopp_one : Zle Zone_opp Zone .
+  Proof.
+    destruct Zone as [xp xh] eqn:heqx.
+    destruct Zzero as [yp yh] eqn:heqy.
+    destruct xp as [a b] eqn:heqxp.
+    destruct yp as [c d] eqn:heqyp.
+    inversion heqx.
+    inversion heqy.
+    subst.
+    unfold Zle.
+    simpl.
+    split.
+    apply Nle_zero_r.
+    apply Nle_zero_r.
+  Qed.
+
+  Lemma Zle_refl : forall x, Zle x x.
+  Proof.
+    destruct x as [xp xh] eqn:heqx.
+    destruct xp as [a b] eqn:heqxp.
+    unfold Zle.
+    split.
+    apply Nle_refl.
+    apply Nle_refl.
+  Qed.
+
+  Lemma Zle_trans : forall x y z, Zle x y -> Zle y z -> Zle x z.
+  Proof.
+    destruct x as [xp xh] eqn:heqx.
+    destruct y as [yp yh] eqn:heqy.
+    destruct z as [zp zh] eqn:heqz.
+    destruct xp as [a b] eqn:heqxp.
+    destruct yp as [c d] eqn:heqyp.
+    destruct zp as [e f] eqn:heqzp.
+    unfold Zle.
+    intros hxy hyz.
+    destruct hxy as [hxyl hxyr].
+    destruct hyz as [hyzl hyzr].
+    split.
+    apply Nle_trans with c. exact hxyl. exact hyzl.
+    apply Nle_trans with d. exact hyzr. exact hxyr.
+  Qed.
+
+  Lemma Zle_antisym : forall x y , Zle x y -> Zle y x -> x = y.
+  Proof.
+    destruct x as [xp xh] eqn:heqx.
+    destruct y as [yp yh] eqn:heqy.
+    destruct xp as [a b] eqn:heqxp.
+    destruct yp as [c d] eqn:heqyp.
+    unfold Zle.
+    intros hxy hyx.
+    destruct hxy as [hxyl hxyr].
+    destruct hyx as [hyxl hyxr].
+    apply proof_irrelevance. simpl. f_equal.
+    { apply Nle_antisym. exact hxyl. exact hyxl. }
+    { apply Nle_antisym. exact hyxr. exact hxyr.  }
+  Qed.
+
+  Definition Zle_dec (x y:ZZ) : sumbool (Zle x y) (Zle y x).
+  Proof.
+    assert(tech : forall P Q, P \/ Q -> not P -> not Q -> False).
+    {
+      intros P Q h np nq.
+      destruct h as [h|h].
+      apply np. exact h.
+      apply nq. exact h.
+    }
+    destruct x as [xp xh] eqn:heqx.
+    destruct y as [yp yh] eqn:heqy.
+    destruct xp as [a b] eqn:heqxp.
+    destruct yp as [c d] eqn:heqyp.
+    unfold Zle.
+    unfold _Zcond in xh, yh. simpl in xh, yh.
+    destruct (Neq_dec a Nzero);
+    destruct (Neq_dec b Nzero);
+    destruct (Neq_dec c Nzero);
+    destruct (Neq_dec d Nzero).
+    { subst. left. split;apply Nle_zero_r. }
+    { subst. right. split;apply Nle_zero_r. }
+    { subst. left. split;apply Nle_zero_r. }
+    { subst. exfalso. eapply tech. apply yh. assumption. assumption. }
+    { subst. left. split;apply Nle_zero_r. }
+    { subst.
+      destruct (Nle_dec b d).
+      { right. split. apply Nle_refl. assumption. }
+      { left. split. apply Nle_refl. assumption. }
+    }
+    { subst. left. split;apply Nle_zero_r. }
+    { subst. exfalso. eapply tech. apply yh. assumption. assumption. }
+    { subst. right. split; apply Nle_zero_r. }
+    { subst. right. split; apply Nle_zero_r. }
+    { subst. destruct (Nle_dec a c).
+      { left. split. assumption. apply Nle_zero_r. }
+      { right. split. assumption. apply Nle_zero_r. }
+    }
+    { subst. exfalso. eapply tech. apply yh. assumption. assumption. }
+    { subst. exfalso. eapply tech. apply xh. assumption. assumption. }
+    { subst. exfalso. eapply tech. apply xh. assumption. assumption. }
+    { subst. exfalso. eapply tech. apply xh. assumption. assumption. }
+    { subst. exfalso. eapply tech. apply xh. assumption. assumption. }
+  Qed.
+
+  Definition Zopp (x:ZZ) :=
+    let (xp, xh) := x in
+    let (a, b) := xp in
+    Zmake (pair b a).
+
+  Definition Zminus x y := Zplus x (Zopp y).
+
+  Lemma Zmult_zero_r : forall x, Zmult x Zzero = Zzero.
+  Proof.
+    intro x.
+    destruct x as [xp xh] eqn:heqx.
+    destruct xp as [a b] eqn:heqxp.
+    destruct Zzero as [zp hz] eqn:heqz.
+    destruct zp as [c d].
+    inversion heqz.
+    subst c d.
+    unfold Zmult. simpl.
+    repeat rewrite Nmult_zero_r.
+    repeat rewrite Nplus_zero_r.
+    apply proof_irrelevance.
+    simpl.
+    apply f_eq.
+    apply proof_irrelevance.
+    simpl.
+    unfold _Nzero.
+    reflexivity.
+  Qed.
+
+  Lemma Zmult_zero_l : forall x, Zmult Zzero x = Zzero.
+  Proof.
+    intro x. rewrite Zmult_comm. rewrite Zmult_zero_r. reflexivity.
+  Qed.
+
+  Lemma Zopp_involutive : forall x, Zopp (Zopp x) = x.
+  Proof.
+    intro x.
+    destruct x as [xp xh] eqn:heqx.
+    destruct xp as [a b].
+    unfold _Zcond in xh.
+    simpl in xh.
+    destruct xh as [xh|xh].
+    {
+      subst a.
+      unfold Zopp.
+      apply proof_irrelevance.
+      simpl.
+      destruct (Neq_dec _) as [d1|d1].
+      {
+        symmetry in d1. apply Nmin_le in d1.
+        apply Nle_zero_l in d1.
+        subst b.
+        simpl.
+        simpl.
+        apply f_eq.
+        apply proof_irrelevance.
+        simpl.
+        reflexivity.
+      }
+      {
+        apply Nmin_neq_le in d1.
+        simpl.
+        rewrite Nmin_zero_l.
+        simpl.
+        repeat rewrite Nrest_zero_r.
+        reflexivity.
+      }
+    }
+    {
+      subst b.
+      unfold Zopp.
+      apply proof_irrelevance.
+      simpl.
+      rewrite Nmin_zero_l.
+      simpl.
+      rewrite Nrest_zero_r.
+      rewrite Nmin_zero_r.
+      destruct (Neq_dec _) as [d1|d1].
+      {
+        subst a.
+        simpl.
+        apply f_eq. apply proof_irrelevance. simpl. reflexivity.
+      }
+      {
+        rewrite Nrest_zero_r.
+        reflexivity.
+      }
+    }
+  Qed.
+
+  Lemma Zplus_opp : forall x, Zplus x (Zopp x) = Zzero.
+  Proof.
+intro x.
+
+
+  Lemma Zle_destruct : forall x y, Zle x y -> exists z, Zplus x z = y.
+  Proof.
+  intro x.
+pattern x;apply Zinduction;clear x.
+{
+intros y h.
+exists y.
+rewrite Zplus_zero_l.
+reflexivity.
+}
+{
+intros x ih.
+intros y h.
+exists (Zplus (Zplus Zone_opp (Zopp x) ) y).
+{
+repeat rewrite Z_plus_assoc.
+repeat rewrite <- (Z_plus_assoc Zone).
+rewrite Zplus_one_opp.
+rewrite Zplus_zero_l.
+repeat rewrite <- Z_plus_assoc.
+Search Zopp.
+
+
+  Lemma Zle_plus_elim_r : forall x y z, Zle x y -> Zle (Zplus x z) (Zplus y z).
+  Proof.
+  
+
+
+
+intros x y z.
+intro h.
+Search Zle.
+
+  Lemma Zle_plus_intro_r : forall x y z, Zle (Zplus x z) (Zplus y z) -> Zle x y.
+  Proof.
+intros x y z.
+intro h.
+Search Zle.
+
+
+
+
+  Lemma Zlt_antisym : forall x y, Zlt x y -> Zlt y x -> False.
+  Proof.
+    intros x.
+    unfold Zlt.
+    pattern x;apply Zinduction;clear x.
+    {
+      intro y.
+      rewrite Zplus_zero_l.
+      intros hxy yx.
+      apply Zle_plus_intro_r with Zone_opp.
 
 
