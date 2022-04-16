@@ -5,6 +5,14 @@
     subst b. exact h.
   Qed.
 
+  (* Technical lemma two introduce equality *)
+  Lemma eq_impT : forall {T:Type} (a b:T) (P:T->Type), P a -> a = b -> P b.
+  Proof.
+    intros A a b P h heq.
+    subst b. exact h.
+  Qed.
+
+
   Declare Scope maths.
   Open Scope maths.
 

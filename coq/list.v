@@ -2,10 +2,12 @@
   Require Export XD.Definitions.
 
   (* This is the classic inductive definition of a list *)
-  Inductive List {A:Type} : Type :=
-  | nil : List
-  | cons : A -> List -> List
+  Inductive List (A:Type) : Type :=
+  | nil : List A
+  | cons : A -> List A -> List A
   .
+  Arguments nil {A}.
+  Arguments cons {A}.
 
  (* We declare the scope "maths" to host our custom notations *)
   Declare Scope maths.
@@ -21,8 +23,8 @@
 
   (* The syntax for expliciting implicit types is quickly verbose, these make it easier *)
   (* LO is a list of A, LOLO is a list of lists of A *)
-  Definition LO (A:Type) := List (A:=A).
-  Definition LOLO (A:Type) := List (A:=(LO A)).
+  Definition LO (A:Type) := List A.
+  Definition LOLO (A:Type) := List (LO A).
 
   (* Classic fixpoint definition of append *)
   Fixpoint append {A:Type} (l l' : LO A) : (LO A) := match l, l' with
@@ -136,7 +138,7 @@
   Qed.
 
   (* Predicate that asserts that all elements in a list satisfy a given property *)
-  Fixpoint allmatch {A:Type} (l:List) (P:A->Prop) := match l with
+  Fixpoint allmatch {A:Type} (l:List A) (P:A->Prop) := match l with
   | nil => True
   | cons x l' => P x /\ allmatch l' P
   end.
