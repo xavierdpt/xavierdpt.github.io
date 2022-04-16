@@ -1,5 +1,5 @@
 
-  (* This is an attempt to construct natural integers
+  (* In this file, we construct the natural numbers (0, 1, 2, ...)
      from lists of empty lists over some arbitrary type in Coq *)
 
   (* We import a small set of custom rather basic definitions
@@ -746,7 +746,8 @@
   (* Proofs on fixpoint functions are a bit difficult to follow because Coq does a lot of work
      while evaluating the fixpoint and unfolding all the particular cases *)
   (* You have to look closely at what changes on the 'simpl' steps *)
-  Lemma _Nrest_natural : forall l m, isnatural l -> isnatural m -> isnatural (_Nrest l m).
+  Lemma _Nrest_natural : forall l m, isnatural l -> isnatural m ->
+    isnatural (_Nrest l m).
   Proof.
     intro l.
     induction l as [|headl taill ih].
@@ -906,13 +907,18 @@
     }
   Qed.
 
-  (* TODO: describe *)
+  (* When n is not zero, (rest n 1) < n *)
   Lemma Nrest_one_lt : forall n:NN, Nzero <> n -> Nlt (Nrest n None) n.
   Proof.
     intro n.
     induction n as [|n _] using Ninduction.
-    { intro f. contradiction f. reflexivity. }
+    (* n is zero *)
     {
+      (* then this contradict the hypothesis *)
+      intro f. contradiction f. reflexivity.
+    }
+    {
+      (* otherwise, it is straightforward *)
       intros _.
       unfold None.
       rewrite Nrest_next.
@@ -922,238 +928,318 @@
     }
   Qed.
 
-  Definition mytype (a : NN) := forall b : NN, NN.
+  (* We are about to define addition using Fix.
+     That's still quite confusing to be, and I had to go through a lot of trial and error
+     and copy/pasting from the Internet to arrive at this *)
 
-  Definition _Nplus_rec : (forall x : NN, (forall y : NN,(Nlt y x) -> mytype y) -> mytype x).
+  (* In particular, I have some trouble understanding this definition *)
+  Definition _NRecType (a : NN) := forall b : NN, NN.
+
+  (* But anyway, we will use it to define the recursive part of addition *)
+  Definition _Nplus_rec : forall x : NN,
+    (forall y : NN,(Nlt y x) -> _NRecType y) -> _NRecType x.
+    (* We actually construct that function by 'proving' it *)
+    (* We have a number *)
     intro x.
+    (* And a recursive function *)
     intro rec.
-    unfold mytype.
+    (* We can unfold that thing *)
+    unfold _NRecType.
+    (* ok, we have another number *)
     intro y.
+    (* If x is zero, then we return y, otherwise, we proceed with the recursive case *)
     destruct (Neq_dec Nzero x) as [d|d].
+    (* Case x = 0 *)
     { apply y. }
+    (* Recursive case *)
     {
+      (* We want to go down by one, and that's (rest x 1),
+         which is ok because x is not zero *)
       specialize (rec (Nrest x None)).
-      apply Nrest_one_lt in d.
-      specialize (rec d). clear d.
-      unfold mytype in rec.
+      (* We need to prove that we are actually going down, and we can use the
+         lemma we proved earlier just for that *)
+      apply Nrest_one_lt in d. specialize (rec d). clear d.
+      (* Now we unfold the thing again *)
+      unfold _NRecType in rec.
+      (* We give y to rec, why not ? *)
       specialize (rec y).
+      (* And we set the next of rec as the result *)
       apply (Nnext rec).
     }
+    (* Does that look like plus to you ? If so, bravo ! *)
   Defined.
 
+  (* Now we simply give the proof that Nlt is well founded to fix, along with the recursive
+     part, to Fix, and we have our general-recursion fixpoint definition of 'plus' *)
   Definition Nplus := Fix Nlt_wf _ _Nplus_rec.
+  Notation "x +n y" := (Nplus x y) (only printing, at level 50) : maths. 
 
-  Goal Nplus Nzero Nzero = Nzero.
+  (* It's a function from NN into _NRecType *)
+  Check Nplus.
+  (* But if we give it two numbers, it goes through the definition of _NRecType and we 
+     get another number, so that's look like a binary operation on NN *)
+  Check (Nplus Nzero Nzero).
+
+  (* Let's see if our addition has the properties of an addition *)
+  (* First, we'll start with zero *)
+
+  (* 0 + n = n *)
+  Lemma Nplus_zero_l : forall n, Nplus Nzero n = n.
+  Proof.
+    (* The strategy here is to unfold the fixpoint to go straight into the base case *)
+    intro n.
+    (* unfold these three things *)
     unfold Nplus.
-    unfold Fix.
-    simpl.
     unfold _Nplus_rec.
+    unfold Fix.
+    (* It's ugly, but it somehow simplifies *)
     simpl.
+    (* magic *)
     reflexivity.
   Qed.
 
-  Goal Nplus Nzero None = None.
-    unfold Nplus.
-    unfold Fix.
-    unfold _Nplus_rec.
-    simpl.
-    reflexivity.
-  Qed.
-
-  Goal Nplus None Nzero  = None.
-    unfold Nplus.
-    rewrite Fix_eq.
+  (* n + 0 = n *)
+  Lemma Nplus_zero_r : forall n, Nplus n Nzero = n.
+  Proof.
+    (* For the other side, we don't know commutativity yet, so we have to
+       proceed by induction *)
+    intro n.
+    induction n as [|n ih] using Ninduction.
+    (* n = 0 *)
+    { rewrite Nplus_zero_l. reflexivity. }
+    (* Induction step *)
     {
-unfold _Nplus_rec.
-rewrite Nrest_cancel.
-destruct (Neq_dec _). inversion e.
-rewrite Fix_eq. simpl.
-unfold None. reflexivity.
+      (* We can use Fix_eq to unfold one step *)
+      unfold Nplus.
+      rewrite Fix_eq.
+      (* This generates a weird second goal that is a bit annoying but not difficult to
+         prove, we'll look at it after *)
+      {
+        (* If you can read this, you're lucky, all I know is that I can unfold _Nplus_rec *)
+        unfold _Nplus_rec.
+        (* That's ugly, but we can destruct the if part *)
+        destruct (Neq_dec _) as [d|d].
+        {
+          (* That's impossible, but oh! look, the hypothesis is the same as the goal *)
+          exact d.
+        }
+        {
+          (* Now the idea is to make the goal look a bit like the induction hypothesis *)
+          clear d.
+          (* First, we can simplify the Nrest part *)
+          unfold None at 2.
+          rewrite Nrest_next.
+          rewrite Nrest_zero_r.
+          (* Remove 'next' on both sides *)
+          apply f_eq.
+          (* I know it's hard to belive, but you're actually looking at n + 0 = n here *)
+          unfold Nplus in ih.
+          unfold _Nplus_rec in ih.
+          (* And we're done! *)
+          exact ih.
+        }
+      }
+      {
+        (* This weird part is to guarantee some good property of _Nplus_rec *)
+        clear. intros x f g h.
+        (* We can unfold _Nplus_rec *)
+        unfold _Nplus_rec.
+        (* And investigate both possibilities for Neq_dec *)
+        destruct (Neq_dec _) as [d|d].
+        (* In this branch, we have equality *)
+        { reflexivity. }
+        (* In this branch, we need to do some rewriting *)
+        { rewrite h. reflexivity. }
+      }
+    }
+  Qed.
 
-intros.
-destruct (Neq_dec _).
-reflexivity.
-rewrite H. reflexivity.
-}
-intros.
-unfold _Nplus_rec.
-destruct (Neq_dec _).
-reflexivity.
-rewrite H.
-reflexivity.
-Qed.
+  (* Now, it's nice to know how 'plus' and 'next' interact *)
+
+  (* (next n) + m = next (n+m) *)
+  Lemma Nplus_next_l : forall n m, Nplus (Nnext n) m = Nnext (Nplus n m).
+  Proof.
+    intro n.
+    induction n as [|n ih] using Ninduction.
+    (* n = 0 *)
+    {
+      intro m.
+      rewrite Nplus_zero_l.
+      (* We should get to our answer with only one unfolding of the fixpoint *)
+      unfold Nplus.
+      rewrite Fix_eq.
+      {
+        unfold _Nplus_rec.
+        destruct (Neq_dec _) as [d|d].
+        (* Contradiction *)
+        { inversion d. }
+        {
+          unfold None at 2.
+          rewrite Nrest_cancel.
+          apply f_eq.
+          unfold Fix.
+          simpl.
+          (* yeah ! *)
+          reflexivity.
+        }
+      }
+      (* And we have to deal with this weird thing again *)
+      {
+        clear.
+        intros x f g h.
+        unfold _Nplus_rec. destruct (Neq_dec _) as [d|d].
+        reflexivity. rewrite h. reflexivity.
+      }
+    }
+    (* Induction case *)
+    {
+      intro m.
+      rewrite ih. clear ih.
+      (* Usually, once the induction hypothesis is used, we're set *)
+      (* We have to unfold the fixpoint to get further *)
+      unfold Nplus at 1.
+      rewrite Fix_eq.
+      {
+        unfold _Nplus_rec at 1.
+        destruct (Neq_dec _) as [d|d].
+        { inversion d. }
+        {
+          clear d.
+          apply f_eq.
+          unfold None.
+          rewrite Nrest_next.
+          rewrite Nrest_zero_r.
+          unfold Nplus.
+          (* Too bad, we need to unfold again *)
+          rewrite Fix_eq.
+          {
+            unfold _Nplus_rec at 1.
+            destruct (Neq_dec _) as [d|d].
+            { inversion d. }
+            {
+              unfold None at 1.
+              rewrite Nrest_next.
+              rewrite Nrest_zero_r.
+              (* yipee ! *)
+              reflexivity.
+            }
+          }
+          (* What's left is the usual noise *)
+          {
+            clear. intros x f g h. unfold _Nplus_rec.
+            destruct (Neq_dec _) as [d|d].
+            { reflexivity. }
+            { rewrite h. reflexivity. }
+          }
+        }
+      }
+      {
+        clear. intros x f g h. unfold _Nplus_rec.
+        destruct (Neq_dec _) as [d|d].
+        { reflexivity. }
+        { rewrite h. reflexivity. }
+      }
+    }
+  Qed.
+
+  (* n + (next m) = next (n+m) *)
+  Lemma Nplus_next_r : forall n m, Nplus n (Nnext m) = Nnext (Nplus n m).
+  Proof.
+    (* That's the same thing on the right *)
+    intros n.
+    induction n as [|n ih] using Ninduction.
+    (* n = 0 *)
+    {
+      intro m.
+      (* This time, we have zero in scope of 'plus' on both sides *)
+      rewrite Nplus_zero_l. rewrite Nplus_zero_l.
+      reflexivity.
+    }
+    (* Induction case *)
+    {
+      intro m.
+      (* It's accidental, but I'm still doing the induction on n, when I moved
+         'next' to m. *)
+      (* But that allows me to reuse the previous lemma *)
+      rewrite Nplus_next_l.
+      rewrite Nplus_next_l.
+      rewrite ih.
+      (* And we have equality *)
+      reflexivity.
+    }
+  Qed.
+
+  (* Addition is commutative *)
+  Lemma Nplus_comm : commutative Nplus.
+  Proof.
+    (* Using the previous lemmas, this is now easy *)
+    red.
+    intro n.
+    induction n as [|n ih] using Ninduction.
+    (* n = 0 *)
+    {
+      intro m.
+      rewrite Nplus_zero_l.
+      rewrite Nplus_zero_r.
+      reflexivity.
+    }
+    (* Induction step *)
+    {
+      intro m.
+      rewrite Nplus_next_l.
+      rewrite Nplus_next_r.
+      rewrite ih.
+      reflexivity.
+    }
+  Qed.
+
+  (* Addition is associative *)
+  Lemma Nplus_assoc : associative Nplus.
+  Proof.
+    red.
+    intro n.
+    induction n as [|n ih] using Ninduction.
+    (* n = 0 *)
+    {
+      intros m k.
+      rewrite Nplus_zero_l.
+      rewrite Nplus_zero_l.
+      reflexivity.
+    }
+    {
+      intros m k.
+      rewrite Nplus_next_l.
+      rewrite Nplus_next_l.
+      rewrite Nplus_next_l.
+      apply f_eq.
+      rewrite ih.
+      reflexivity.
+    }
+  Qed.
+
+  (* That's all nice, we are now ready to define multiplication ! *)
 
 
-Lemma Nplus_next_l : forall n m, Nplus (Nnext n) m = Nnext (Nplus n m).
-Proof.
-intro n.
-induction n as [|n ih] using Ninduction.
-{
-intro m.
-induction m as [|m _] using Ninduction.
-{
-remember (Nplus _ _) as left eqn:heql in |-*.
-remember (Nplus _ _) as right eqn:heqr in |-*.
-unfold Nplus in heqr.
-unfold Fix in heqr.
-simpl in heqr.
-unfold _Nplus_rec in heqr.
-simpl in heqr.
-subst right.
-unfold Nplus in heql.
-rewrite Fix_eq in heql.
-{
-unfold _Nplus_rec in heql.
-destruct (Neq_dec _) as [d|d] in heql.
-{ inversion d. }
-{ unfold None in heql. rewrite Nrest_cancel in heql.
-unfold Fix in heql. simpl in heql.
-subst left.
-reflexivity.
-}
-}
-{ clear. intros. unfold _Nplus_rec. destruct (Neq_dec _) as [d|d].
-reflexivity. rewrite H. reflexivity. }
-}
-{
-remember (Nplus _ _) as left eqn:heql in |-*.
-remember (Nplus _ _) as right eqn:heqr in |-*.
-unfold Nplus in heqr. unfold Fix in heqr. unfold _Nplus_rec in heqr.
-simpl in heqr.
-subst right.
-unfold Nplus in heql.
-rewrite Fix_eq in heql.
-{
-unfold _Nplus_rec in heql.
-destruct (Neq_dec _) in heql.
-inversion e. clear n.
-unfold None in heql. rewrite Nrest_cancel in heql.
-unfold Fix in heql. simpl in heql.
-subst left.
-reflexivity.
-}
-{
-clear. intros. unfold _Nplus_rec.
-destruct (Neq_dec _). reflexivity. rewrite H. reflexivity.
-}
-}
-}
-{
-intro m.
-rewrite ih.
-clear ih.
-remember (Nplus _ _) as left eqn:heql in |-*.
-remember (Nplus _ _) as right eqn:heqr in |-*.
-unfold Nplus in heql.
-rewrite Fix_eq in heql.
-unfold _Nplus_rec in heql.
-destruct (Neq_dec _) in heql.
-inversion e. clear n0.
-unfold None in heql.
-rewrite Nrest_next in heql.
-rewrite Nrest_zero_r in heql.
-rewrite Fix_eq in heql.
-destruct (Neq_dec _) in heql.
-inversion e. clear n0.
-rewrite Nrest_next in heql.
-rewrite Nrest_zero_r in heql.
-subst left.
-{
-
-apply f_eq. apply f_eq.
-unfold Nplus in heqr.
-unfold _Nplus_rec in heqr.
-subst right.
-reflexivity.
-}
-
-{
-clear. intros.
-destruct (Neq_dec _). reflexivity. rewrite H. reflexivity.
-}
-{
-clear. intros.
-unfold _Nplus_rec. destruct (Neq_dec _ _).
-reflexivity.
-rewrite H. reflexivity.
-}
-}
-Qed.
 
 
 
 
-Lemma Nplus_comm : commutative Nplus.
-red.
-intro n.
-induction n as [|n ih] using Ninduction.
-{
-intro m.
-remember (Nplus _ _) as left eqn:heql in |-*.
-unfold Nplus in heql. unfold Fix in heql.
-unfold _Nplus_rec in heql. simpl in heql.
-subst left.
-induction m as [|m ih] using Ninduction. 
-{
-unfold Nplus. unfold Fix. unfold _Nplus_rec. simpl. reflexivity.
-}
-{
-rewrite Nplus_next_l. rewrite <- ih. reflexivity.
-}
-}
-{
-intro m.
-rewrite Nplus_next_l.
-rewrite ih.
-clear ih.
-induction m as [|m ih] using Ninduction.
-{
-remember (Nplus _ _) as left eqn:heql in |-*.
-remember (Nplus _ _) as right eqn:heqr in |-*.
-unfold Nplus in heql. unfold Fix in heql. unfold _Nplus_rec in heql. simpl in heql. subst left.
-unfold Nplus in heqr. unfold Fix in heqr. unfold _Nplus_rec in heqr. simpl in heqr. subst right.
-reflexivity.
-}
-{
-repeat rewrite Nplus_next_l.
-rewrite <- ih.
-reflexivity.
-}
-}
-Qed.
 
 
 
-Lemma Nplus_next_r : forall n m, Nplus n (Nnext m) = Nnext (Nplus n m).
-intros.
-rewrite Nplus_comm. rewrite Nplus_next_l. rewrite Nplus_comm. reflexivity.
-Qed.
 
-Lemma Nplus_zero_l : forall n, Nplus Nzero n = n.
-intro.
-unfold Nplus. unfold Fix. unfold _Nplus_rec. simpl. reflexivity.
-Qed.
 
-Lemma Nplus_zero_r : forall n, Nplus n Nzero = n.
-intro.
-rewrite Nplus_comm. rewrite Nplus_zero_l. reflexivity.
-Qed.
 
-Lemma Nplus_assoc : associative Nplus.
-red.
-intro n.
-induction n as [|n ih] using Ninduction.
-{ intros. repeat rewrite Nplus_zero_l. reflexivity. }
-{
-intros m k.
-rewrite Nplus_next_l.
-rewrite Nplus_next_l.
-rewrite Nplus_next_l.
-apply f_eq.
-rewrite ih.
-reflexivity.
-}
-Qed.
+
+
+
+
+
+
+
+
+
+
 
 
 
