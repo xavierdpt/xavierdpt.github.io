@@ -1,0 +1,3 @@
+https://jekyllrb.com/docs/installation/ubuntu/
+https://simondosda.github.io/posts/2021-09-14-blog-github-pages-2-setup.html
+https://openjdk.org/jeps/411
