@@ -1,0 +1,12 @@
+---
+layout: post
+title: "Java Security Manager is deprecated"
+date: 2022-07-22 13:00:00 +0200
+categories: owasp
+---
+
+The Java Security Manager API, which was present since the beginning of Java and Applets, [has been marked deprecated in Java 17](https://openjdk.org/jeps/411) and will be removed in a later version.
+
+This is good news because this API is quite difficult to use in practice, and it is now officially not necessary to know it to understand Java Security.
+
+And JEP 411 is an interesting read.

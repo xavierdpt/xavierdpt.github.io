@@ -1,0 +1,62 @@
+---
+layout: post
+title: "CSRF"
+date: 2022-07-22 13:00:00 +0200
+categories: owasp
+---
+
+CSRF means Cross-Site Request Forgery.
+
+This attack is documented on the [OWASP website](https://owasp.org/www-community/attacks/csrf).
+
+This article describes how to fix it in a nutshell.
+
+# The attack
+
+Let's suppose you have a website with a very sensitive state-changing URL, such as ```https://xavierdpt.github.io/changePassword?password=mynewpassord```.
+
+And let's assume that your website is "secured" and that the operation will only succeed if the current user is logged-in, using the session cookie to authenticate the user.
+
+If an attacker want's to change your password, one possibility is to send an email with an image, such as this:
+```html
+<img src="https://xavierdpt.github.io/changePassword?password=pirate"/>
+```
+
+If the user is already logged into the targeted website, the link will be sent to the website and will change the user's password without the user's knowledge, and the pirate is now free to hijack the user's account.
+
+Obviously, this is a terrible way to implement a password changing feature, but most websites use an HTML form which sends a POST request, and in that case, the pirate can create a fake website that will send the new password as an HTML form, it's a bit more involved the not impossible.
+
+
+And other state-changing actions that are less critical are often implemented with GET requests.
+
+# The protection
+
+To protect against CSRF, the principle is to generate random "CSRF" tokens which are known from the servers. The server can remember them by storing them in the user's session, and the browser must submit the CSRF token for the operation to go though.
+
+The steps are as follow:
+
+- [server] Generate a random CSRF token
+- [server] Add the token to the user's session
+- [server] Send the token to the client
+- [client] Submit the request with the token
+- [server] When processing the request, check that the token belongs to the user's session, and abort if this is not the case.
+
+Then an attacker cannot mount a phishing attack without knowing the user's CSRF token, and to do so, the attacker would have to have full access to the user's computer or to the unencrypted network traffic.
+
+# Variations
+
+The CSRF token can be generated once per user's session. This is the simplest way to apply CSRF protection.
+
+Or a different CSRF token can be used for sensitive operation,  which ensures that they cannot be used for other purposes that the purpose they had when the token was generated.
+
+# Commont pitfalls
+
+Some software libraries include the possibility to generate CSRF tokens, most commonly for login forms. But developers may not always know how to use them. It is critical that the submitted CSRF token is compared to the server-side token, otherwise, the login form will only appear to be protected.
+
+It is also recommended to use a secure random number generator to generate the random tokens, so that an attacker cannot predict the next tokens.
+
+It is also recommended to use only POST methods to avoid the CSRF tokens to be stored in log files. But to avoid form attacks, it may be even better to use HTTP request headers when possible.
+
+
+
+
