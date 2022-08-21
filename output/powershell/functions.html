@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Powershell Functions | Xavier's Treasure Trove</title>
+<style>
+a { text-decoration:none }
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/languages/powershell.min.js"></script>
+</head>
+<body>
+<a href="../index.html">Home</a>
+ > <a href="index.html">Powershell</a>
+<h1>Powershell Functions</h1>
+<h2>An empty function</h2>
+<pre><code class="language-powershell hljs">
+function foo {}
+foo
+</code></pre>
+<h2>A function that returns a constant</h2>
+<pre><code class="language-powershell hljs">
+function foo { 5 }
+foo
+</code></pre>
+<h2>A function that returns its argument</h2>
+<pre><code class="language-powershell hljs">
+function foo {
+    param($x)
+    $x
+}
+foo 5
+</code></pre>
+<h2>A function that returns its argument and it's an integer</h2>
+<pre><code class="language-powershell hljs">
+function foo {
+    param([int]$x)
+    $x
+}
+foo 5
+</code></pre>
+<h2>A function that returns its argument plus one</h2>
+<pre><code class="language-powershell hljs">
+function foo {
+    param([int]$x)
+    $x + 1
+}
+foo 5
+</code></pre>
+<h2>A function that takes it's argument from the pipeline</h2>
+<pre><code class="language-powershell hljs">
+function foo {
+    param(
+        [Parameter(ValueFromPipeline)]
+        [int]$x
+    )
+    $x + 1
+}
+3 | foo
+</code></pre>
+<h2>A function that can accept multiple values from the pipeline</h2>
+<pre><code class="language-powershell hljs">
+function foo {
+    param(
+        [Parameter(ValueFromPipeline)]
+        [int]$x
+    )
+    process { $x + 1 }
+}
+1,2,3 | foo
+</code></pre>
+<h2>A function that does something only once at the beginning of the pipeline and at the end of the pipeline</h2>
+<pre><code class="language-powershell hljs">
+function foo {
+    param(
+        [Parameter(ValueFromPipeline)]
+        [int]$x
+    )
+    begin { "Let's do this!" }
+    process { $x + 1 }
+    end { "That was a piece of cake!" }
+}
+1,2,3 | foo
+</code></pre>
+<h2>A function with a mandatory argument</h2>
+<pre><code class="language-powershell hljs">
+function foo {
+    param(
+        [Parameter(Mandatory)]
+        [int]$x
+    )
+    $x + 1
+}
+foo # PowerShell will ask for the value of x
+</code></pre>
+<script>hljs.highlightAll();</script>
+</body>
+</html>
