@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class Trove {
 
-    private static final String BASE_PATH = "output/";
+    private static final String BASE_PATH = "docs/";
 
     public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException, IOException {
         String packageName = "trove.pages";
