@@ -23,18 +23,14 @@ public class Movies extends Page {
     @Override
     public void render(RenderContext renderContext) throws IOException {
         startRender(renderContext, List.of());
-        Comparator<Movie> cmp = new Comparator<Movie>() {
-            @Override
-            public int compare(Movie o1, Movie o2) {
-                int yearCmp = Integer.compare(o1.getYear(), o2.getYear());
-                if (yearCmp == 0) {
-                    return o1.getTitle().compareTo(o2.getTitle());
-                }
-                return yearCmp;
-            }
-        };
         pw.println("<ul>");
-        movies.stream().sorted(cmp).forEach(movie -> {
+        movies.stream().sorted((left, right) -> {
+            int yearCmp = Integer.compare(left.getYear(), right.getYear());
+            if (yearCmp == 0) {
+                return left.getTitle().compareTo(right.getTitle());
+            }
+            return yearCmp;
+        }).forEach(movie -> {
             String href = "https://www.imdb.com/title/" + movie.getImdbCode();
             String link = externalLink(href, movie.getYear() + " | " + movie.getTitle());
             pw.println("<li>" + link + "</li>");
