@@ -19,7 +19,7 @@ public class PowerShell extends Page {
         String powerShellFunctions = internalLink(PowerShellFunctions.class, true, renderContext);
 
         startRender(renderContext, List.of());
-        pw.println("<p>" + powerShell + "</p>");
+        pw.println("<p>Here are troves on " + powerShell + "</p>");
         pw.println("<ul>");
         pw.println("<li>" + powerShellFunctions + "</li>");
         pw.println("</ul>");
