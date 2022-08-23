@@ -15,7 +15,11 @@ public class Trove {
         String packageName = "trove.pages";
         InputStream r = Trove.class.getClassLoader().getResourceAsStream(packageName.replaceAll("[.]", "/"));
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(r));
-        List<String> pageClassNames = bufferedReader.lines().filter(x -> x.endsWith(".class")).map(x -> packageName + "." + x).map(x -> x.substring(0, x.length() - ".class".length())).toList();
+        List<String> pageClassNames = bufferedReader.lines()
+                .filter(x -> x.endsWith(".class"))
+                .map(x -> packageName + "." + x)
+                .map(x -> x.substring(0, x.length() - ".class".length()))
+                .toList();
         List<Page> pages = new ArrayList<>();
         for (String pageClassName : pageClassNames) {
             Class<?> clazz = Class.forName(pageClassName);
@@ -43,7 +47,7 @@ public class Trove {
             String location = page.getLocation();
             String path = BASE_PATH + pathsByLocation.get(location);
             mkdirs(path);
-            page.render(renderContext);
+            page.renderTop(renderContext);
         }
     }
 

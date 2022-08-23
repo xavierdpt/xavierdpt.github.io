@@ -15,14 +15,13 @@ public class Movies extends Page {
     List<Movie> movies = new ArrayList<>();
 
     public Movies() {
-        super("movies", "Movies");
+        super("movies", "Movies",List.of());
         movies.add(new Movie("Sully", 2016, "tt3263904"));
         movies.add(new Movie("Oklahoma!", 1955, "tt0048445"));
     }
 
     @Override
     public void render(RenderContext renderContext) throws IOException {
-        startRender(renderContext, List.of());
         pw.println("<ul>");
         movies.stream().sorted((left, right) -> {
             int yearCmp = Integer.compare(left.getYear(), right.getYear());
@@ -36,7 +35,6 @@ public class Movies extends Page {
             pw.println("<li>" + link + "</li>");
         });
         pw.println("</ul>");
-        finishRender(List.of());
 
     }
 }

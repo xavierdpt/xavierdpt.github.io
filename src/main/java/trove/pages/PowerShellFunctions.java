@@ -4,18 +4,15 @@ import trove.Page;
 import trove.RenderContext;
 
 import java.io.FileNotFoundException;
-import java.io.PrintWriter;
 import java.util.List;
 
 public class PowerShellFunctions extends Page {
     public PowerShellFunctions() {
-        super("powershell/functions", "Powershell Functions");
+        super("powershell/functions", "Powershell Functions", List.of("powershell"));
     }
 
     @Override
     public void render(RenderContext renderContext) throws FileNotFoundException {
-        List<String> languages = List.of("powershell");
-        startRender(renderContext, languages);
 
         section("An empty function");
         code("powershell", """
@@ -97,7 +94,6 @@ public class PowerShellFunctions extends Page {
                 }
                 foo # PowerShell will ask for the value of x""");
 
-        finishRender(languages);
 
     }
 }

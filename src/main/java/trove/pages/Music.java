@@ -6,17 +6,19 @@ import trove.RenderContext;
 
 import java.io.IOException;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Music extends Page {
 
     private List<MusicLink> links = new ArrayList<>();
 
     public Music() {
-        super("music", "Music");
+        super("music", "Music",List.of());
         addMusic("Brassens", "Quand on est con, on est con", "zMALuEYxK6U");
-
-
+        addMusic("Jack Johnson", "Banana Pancakes", "YdgoG8hTMUw");
+        addMusic("Jack Johnson", "Better Together", "fqxNYjDFJUk");
+        addMusic("Les Wriggles", "Thierry le chasseur", "ZTYIOWJ2YQ4");
+        addMusic("Les Wriggles", "Julie la Petite Olive", "GROJ29zOSLQ");
+        addMusic("Bourvil", "La Tactique du Gendarme", "lBzH5ythm_o");
     }
 
     private void addMusic(String author, String title, String youtubeId) {
@@ -25,7 +27,6 @@ public class Music extends Page {
 
     @Override
     public void render(RenderContext renderContext) throws IOException {
-        startRender(renderContext, List.of());
 
         Map<String, List<MusicLink>> byAuthor = new HashMap<>();
         for (MusicLink link : links) {
@@ -49,6 +50,5 @@ public class Music extends Page {
             pw.println("</li>");
         });
         pw.println("</ul>");
-        finishRender(List.of());
     }
 }

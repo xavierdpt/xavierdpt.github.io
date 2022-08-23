@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Home extends Page {
     public Home() {
-        super("", null);
+        super("", null,List.of());
     }
 
     @Override
@@ -22,7 +22,6 @@ public class Home extends Page {
                 .map(page -> internalLink(page, true, renderContext))
                 .toList();
 
-        startRender(renderContext, List.of());
         pw.println("<p>Welcome to Xavier's Treasure Troves</p>");
         pw.println("<p>Here's a list of troves</p>");
         pw.println("<ul>");
@@ -30,6 +29,5 @@ public class Home extends Page {
             pw.println("<li>" + trove + "</li>");
         }
         pw.println("</ul>");
-        finishRender(List.of());
     }
 }

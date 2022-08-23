@@ -10,7 +10,7 @@ public class YouTube extends Page {
     Map<YoutubeChannel, List<YoutubeLink>> links = new HashMap<>();
 
     public YouTube() {
-        super("youtube", "YouTube");
+        super("youtube", "YouTube",List.of());
         {
             YoutubeChannel channel = new YoutubeChannel("Mathémusique", " Mathémusique", YoutubeChannelType.C);
             addVideo(channel, "C'est quoi un RYTHME EUCLIDIEN ?", "8G8qko7NZdE");
@@ -44,7 +44,6 @@ public class YouTube extends Page {
 
     @Override
     public void render(RenderContext renderContext) throws IOException {
-        startRender(renderContext, List.of());
         pw.println("<ul>");
         links.keySet().stream().sorted(Comparator.comparing(YoutubeChannel::getTitle)).forEach(channel -> {
             String channelLink = externalLink("https://www.youtube.com/" + channel.getLinkSuffix(), channel.getTitle());
@@ -58,7 +57,6 @@ public class YouTube extends Page {
             pw.println("</ul>");
             pw.println("</li>");
         });
-        finishRender(List.of());
     }
 
 }

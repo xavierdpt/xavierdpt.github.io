@@ -1,9 +1,6 @@
 package trove;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class RenderContext {
     private String basePath;
@@ -37,7 +34,7 @@ public class RenderContext {
 
     public Page getPageByClass(Class<? extends Page> pageClass) {
         for (Page page : pagesByLocations.values()) {
-            if(page.getClass().equals(pageClass)) {
+            if (page.getClass().equals(pageClass)) {
                 return page;
             }
         }
@@ -45,6 +42,32 @@ public class RenderContext {
     }
 
     public Collection<Page> getAllPages() {
-        return pagesByLocations.values()        ;
+        return pagesByLocations.values();
+    }
+
+    public List<Page> getChildPages(String location) {
+        List<Page> pages = new ArrayList<>();
+        for (Map.Entry<String, Page> entry : pagesByLocations.entrySet()) {
+            String key = entry.getKey();
+            if (key.equals(location) || !key.startsWith(location)) {
+                continue;
+            }
+            int nslash1 = count('/', location);
+            int nslash2 = count('/', key);
+            if (nslash2 == nslash1 + 1) {
+                pages.add(entry.getValue());
+            }
+        }
+        return pages;
+    }
+
+    private int count(char c, String location) {
+        int count = 0;
+        for (char ch : location.toCharArray()) {
+            if (c == ch) {
+                ++count;
+            }
+        }
+        return count;
     }
 }

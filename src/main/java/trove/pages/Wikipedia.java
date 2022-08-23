@@ -13,7 +13,7 @@ public class Wikipedia extends Page {
     List<WikipediaArticle> articles = new ArrayList<>();
 
     public Wikipedia() {
-        super("wikipedia", "Wikipedia");
+        super("wikipedia", "Wikipedia",List.of());
         String cryptoRough = "Crypto / pre-classification";
 
 
@@ -461,7 +461,6 @@ public class Wikipedia extends Page {
 
     @Override
     public void render(RenderContext renderContext) throws IOException {
-        startRender(renderContext, List.of());
         Set<String> visited = new HashSet<>();
         Map<String, List<WikipediaArticle>> byCategory = new HashMap<>();
         for (WikipediaArticle article : articles) {
@@ -488,6 +487,5 @@ public class Wikipedia extends Page {
             pw.println("</li>");
         });
         pw.println("</ul>");
-        finishRender(List.of());
     }
 }

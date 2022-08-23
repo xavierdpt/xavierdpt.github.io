@@ -18,9 +18,10 @@ public abstract class Page {
     protected PrintWriter pw;
     private List<String> languages;
 
-    protected Page(String location, String subTitle) {
+    protected Page(String location, String subTitle, List<String> languages) {
         this.location = location;
         this.subTitle = subTitle;
+        this.languages = languages;
     }
 
     public String getLocation() {
@@ -39,7 +40,7 @@ public abstract class Page {
         this.path = path;
     }
 
-    private void header(List<String> languages, RenderContext renderContext) {
+    private void header(RenderContext renderContext) {
         pw.println("<!DOCTYPE html>");
         pw.println("<html>");
         pw.println("<head>");
@@ -87,7 +88,7 @@ public abstract class Page {
 
     }
 
-    private void footer(List<String> languages) {
+    private void footer() {
         if (!languages.isEmpty()) {
             pw.println("<script>hljs.highlightAll();</script>");
         }
@@ -140,22 +141,34 @@ public abstract class Page {
         pw.println("<h2>" + title + "</h2>");
     }
 
+    protected void p(String content) {
+        pw.println("<p>" + content + "</p>");
+    }
+
+
     protected void code(String language, String code) {
-        pw.println("<pre><code class=\"language-" + language + " hljs\">");
+        code=code.replaceAll("&","&amp;");
+        code=code.replaceAll("<","&lt;");
+        code=code.replaceAll(">","&gt;");
+        pw.print("<pre><code class=\"language-" + language + " hljs\">");
         pw.println(code);
         pw.println("</code></pre>");
     }
 
-    protected void startRender(RenderContext renderContext, List<String> languages) throws FileNotFoundException {
+    private void startRender(RenderContext renderContext) throws FileNotFoundException {
         pw = new PrintWriter(renderContext.getPath(getLocation()));
-        this.languages = languages;
-        header(languages, renderContext);
+        header(renderContext);
     }
 
-    public abstract void render(RenderContext renderContext) throws IOException;
-
-    protected void finishRender(List<String> languages) {
-        footer(languages);
+    public final void renderTop(RenderContext renderContext) throws IOException {
+        startRender(renderContext);
+        render(renderContext);
+        finishRender();
+    }
+    private void finishRender() {
+        footer();
         pw.close();
     }
+
+    protected abstract void render(RenderContext renderContext) throws IOException;
 }

@@ -14,7 +14,7 @@ public class Books extends Page {
     private List<Book> books = new ArrayList<>();
 
     public Books() {
-        super("books", "Books");
+        super("books", "Books",List.of());
         addBook("Managing Successful Projects with PRINCE2", "Stationery Office Books", "978-0113315338", "0113315333");
     }
 
@@ -24,7 +24,6 @@ public class Books extends Page {
 
     @Override
     public void render(RenderContext renderContext) throws IOException {
-        startRender(renderContext, List.of());
         pw.println("<ul>");
         books.stream().sorted(Comparator.comparing(Book::getTitle)).forEach(book -> {
                     pw.println("<li>" + book.getTitle());
@@ -34,6 +33,5 @@ public class Books extends Page {
                 }
         );
         pw.println("</ul>");
-        finishRender(List.of());
     }
 }

@@ -14,42 +14,36 @@ a { text-decoration:none }
  > <a href="index.html">Powershell</a>
 <h1>Powershell Functions</h1>
 <h2>An empty function</h2>
-<pre><code class="language-powershell hljs">
-function foo {}
+<pre><code class="language-powershell hljs">function foo {}
 foo
 </code></pre>
 <h2>A function that returns a constant</h2>
-<pre><code class="language-powershell hljs">
-function foo { 5 }
+<pre><code class="language-powershell hljs">function foo { 5 }
 foo
 </code></pre>
 <h2>A function that returns its argument</h2>
-<pre><code class="language-powershell hljs">
-function foo {
+<pre><code class="language-powershell hljs">function foo {
     param($x)
     $x
 }
 foo 5
 </code></pre>
 <h2>A function that returns its argument and it's an integer</h2>
-<pre><code class="language-powershell hljs">
-function foo {
+<pre><code class="language-powershell hljs">function foo {
     param([int]$x)
     $x
 }
 foo 5
 </code></pre>
 <h2>A function that returns its argument plus one</h2>
-<pre><code class="language-powershell hljs">
-function foo {
+<pre><code class="language-powershell hljs">function foo {
     param([int]$x)
     $x + 1
 }
 foo 5
 </code></pre>
 <h2>A function that takes it's argument from the pipeline</h2>
-<pre><code class="language-powershell hljs">
-function foo {
+<pre><code class="language-powershell hljs">function foo {
     param(
         [Parameter(ValueFromPipeline)]
         [int]$x
@@ -59,8 +53,7 @@ function foo {
 3 | foo
 </code></pre>
 <h2>A function that can accept multiple values from the pipeline</h2>
-<pre><code class="language-powershell hljs">
-function foo {
+<pre><code class="language-powershell hljs">function foo {
     param(
         [Parameter(ValueFromPipeline)]
         [int]$x
@@ -70,8 +63,7 @@ function foo {
 1,2,3 | foo
 </code></pre>
 <h2>A function that does something only once at the beginning of the pipeline and at the end of the pipeline</h2>
-<pre><code class="language-powershell hljs">
-function foo {
+<pre><code class="language-powershell hljs">function foo {
     param(
         [Parameter(ValueFromPipeline)]
         [int]$x
@@ -83,8 +75,7 @@ function foo {
 1,2,3 | foo
 </code></pre>
 <h2>A function with a mandatory argument</h2>
-<pre><code class="language-powershell hljs">
-function foo {
+<pre><code class="language-powershell hljs">function foo {
     param(
         [Parameter(Mandatory)]
         [int]$x
