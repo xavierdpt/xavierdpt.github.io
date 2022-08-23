@@ -15,6 +15,21 @@ public class Wikipedia extends Page {
     public Wikipedia() {
         super("wikipedia", "Wikipedia");
         String cryptoRough = "Crypto / pre-classification";
+
+
+        addArticles("Crypto / TEA", """
+                Tiny Encryption Algorithm
+                XTEA
+                XXTEA
+                """);
+
+        addArticles("Crypto / Rivest Cipher", """
+                RC2
+                RC4
+                RC5
+                RC6
+                """);
+
         addArticle("Vigenère cipher", cryptoRough);
         addArticle("Caesar cipher", cryptoRough);
         addArticle("Frequency analysis", cryptoRough);
@@ -174,13 +189,11 @@ public class Wikipedia extends Page {
         addArticle("GOST (block cipher)", cryptoRough);
         addArticle("International Data Encryption Algorithm", cryptoRough);
         addArticle("LEA (cipher)", cryptoRough);
-        addArticle("RC2", cryptoRough);
-        addArticle("RC5", cryptoRough);
-        addArticle("RC6", cryptoRough);
+
         addArticle("SEED", cryptoRough);
         addArticle("Skipjack (cipher)", cryptoRough);
-        addArticle("Tiny Encryption Algorithm", cryptoRough);
-        addArticle("XTEA", cryptoRough);
+
+
         addArticle("Advanced Encryption Standard", cryptoRough);
         addArticle("Blowfish (cipher)", cryptoRough);
         addArticle("Data Encryption Standard", cryptoRough);
@@ -306,7 +319,7 @@ public class Wikipedia extends Page {
         addArticle("Treyfer", cryptoRough);
         addArticle("UES (cipher)", cryptoRough);
         addArticle("Xmx", cryptoRough);
-        addArticle("XXTEA", cryptoRough);
+
         addArticle("Zodiac (cipher)", cryptoRough);
         addArticle("3-subset meet-in-the-middle attack", cryptoRough);
         addArticle("Acoustic cryptanalysis", cryptoRough);
@@ -359,7 +372,7 @@ public class Wikipedia extends Page {
         addArticle("Weak key", cryptoRough);
         addArticle("Whitening transformation", cryptoRough);
         addArticle("XSL attack", cryptoRough);
-        new BufferedReader(new StringReader("""
+        addArticles(cryptoRough, """
                 Achterbahn
                 F-FCSR
                 FISH (cipher)
@@ -392,7 +405,6 @@ public class Wikipedia extends Page {
                 A5/1
                 A5/2
                 Crypto-1
-                RC4
                 E0 (cipher)
                 HC-256
                 Rabbit (cipher)
@@ -434,8 +446,14 @@ public class Wikipedia extends Page {
                 OpenVPN
                 Point-to-Point Tunneling Protocol
                 WireGuard
-                """)).lines().forEach(title -> addArticle(title, cryptoRough));
+                """);
+
     }
+
+    private void addArticles(String category, String articles) {
+        new BufferedReader(new StringReader(articles)).lines().forEach(title -> addArticle(title, category));
+    }
+
 
     private void addArticle(String title, String category) {
         articles.add(new WikipediaArticle(title, category));
