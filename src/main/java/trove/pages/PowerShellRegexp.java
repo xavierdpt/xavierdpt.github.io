@@ -178,5 +178,10 @@ public class PowerShellRegexp extends Page {
                 "hello" -replace 'l','($&)
                 # he(l)(l)o""");
 
+        section("Special chars");
+        p("Matches tab, carriage return or newline");
+        code("powershell", """
+                "hello" -match '[\\t\\r\\n]' # false""");
+
     }
 }

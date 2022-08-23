@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 public abstract class Page {
 
@@ -145,11 +147,19 @@ public abstract class Page {
         pw.println("<p>" + content + "</p>");
     }
 
+    protected void ul(List<String> items) {
+        pw.println("<ul>");
+        for (String item : items) {
+            pw.println("<li>" + item + "</li>");
+        }
+        pw.println("<ul>");
+    }
+
 
     protected void code(String language, String code) {
-        code=code.replaceAll("&","&amp;");
-        code=code.replaceAll("<","&lt;");
-        code=code.replaceAll(">","&gt;");
+        code = code.replaceAll("&", "&amp;");
+        code = code.replaceAll("<", "&lt;");
+        code = code.replaceAll(">", "&gt;");
         pw.print("<pre><code class=\"language-" + language + " hljs\">");
         pw.println(code);
         pw.println("</code></pre>");
@@ -165,6 +175,7 @@ public abstract class Page {
         render(renderContext);
         finishRender();
     }
+
     private void finishRender() {
         footer();
         pw.close();

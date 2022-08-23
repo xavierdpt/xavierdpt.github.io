@@ -148,6 +148,10 @@ $Matches.what # powershell
 <pre><code class="language-powershell hljs">"hello" -replace 'l','($&amp;)
 # he(l)(l)o
 </code></pre>
+<h2>Special chars</h2>
+<p>Matches tab, carriage return or newline</p>
+<pre><code class="language-powershell hljs">"hello" -match '[\t\r\n]' # false
+</code></pre>
 <script>hljs.highlightAll();</script>
 </body>
 </html>
