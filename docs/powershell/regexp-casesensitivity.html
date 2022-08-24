@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="PowerShell Regular Expression Case Sensitivity | Xavier's Treasure Trove">
+<title>PowerShell Regular Expression Case Sensitivity | Xavier's Treasure Trove</title>
+<style>
+*, *::before { box-sizing:border-box;}
+p { line-height:48px;}
+a { padding: 5px; text-decoration:none; display:inline-block; min-height:48px; min-width:48px; vertical-align:middle; line-height:48px; background-color: #EEF; margin-bottom:2px; }
+li { vertical-align:middle; list-style-type:none; }
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/languages/powershell.min.js"></script>
+</head>
+<body>
+<a href="../index.html">Home</a>
+ > <a href="index.html">PowerShell</a>
+<h1>PowerShell Regular Expression Case Sensitivity</h1>
+<h2>Case insensitive match</h2>
+<pre><code class="language-powershell hljs">$string -match $regex
+</code></pre>
+<h2>Case sensitive match</h2>
+<pre><code class="language-powershell hljs">$string -cmatch $regex
+</code></pre>
+<h2>Case insensitive replace</h2>
+<pre><code class="language-powershell hljs">$string -replace $regex,$replacement
+</code></pre>
+<h2>Case sensitive replace</h2>
+<pre><code class="language-powershell hljs">$string -creplace $regex,$replacement
+</code></pre>
+<h2>Case insensitive split</h2>
+<pre><code class="language-powershell hljs">$string -split $regex
+</code></pre>
+<h2>Case sensitive split</h2>
+<pre><code class="language-powershell hljs">$string -csplit $regex
+</code></pre>
+<h2>Case insensitive Select-String</h2>
+<pre><code class="language-powershell hljs">$something | Select-String $regex
+</code></pre>
+<h2>Case sensitive Select-String</h2>
+<pre><code class="language-powershell hljs">$something | Select-String -CaseSensitie $regex
+</code></pre>
+<p>The following items will be illustrated after the switch statement as been covered   </p>
+<ul>
+<li>switch -regex</li>
+<li>switch -casesensitive</li>
+</ul>
+<script>hljs.highlightAll();</script>
+</body>
+</html>

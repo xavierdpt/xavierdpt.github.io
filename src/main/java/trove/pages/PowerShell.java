@@ -10,7 +10,7 @@ import java.util.List;
 public class PowerShell extends Page {
 
     public PowerShell() {
-        super("powershell", "Powershell", List.of());
+        super("powershell", "PowerShell", List.of());
     }
 
     @Override
@@ -18,11 +18,11 @@ public class PowerShell extends Page {
 
         List<Page> childPages = renderContext.getChildPages(getLocation());
 
-        String powerShell = externalLink("https://docs.microsoft.com/en-us/powershell/", "Powershell");
+        String powerShell = externalLink("https://docs.microsoft.com/en-us/powershell/", "PowerShell");
 
         pw.println("<p>Here are troves on " + powerShell + "</p>");
         pw.println("<ul>");
-        childPages.stream().sorted(Comparator.comparing(Page::getSubTitle)).forEach(page -> {
+        childPages.stream().sorted(Comparator.comparing(p -> p.getSubTitle().toLowerCase())).forEach(page -> {
                     String htmlLink = internalLink(page, true, renderContext);
                     pw.println("<li>" + htmlLink + "</li>");
                 }

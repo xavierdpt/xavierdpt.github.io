@@ -14,7 +14,7 @@ public class Wikipedia extends Page {
 
     public Wikipedia() {
         super("wikipedia", "Wikipedia",List.of());
-        String cryptoRough = "Crypto / pre-classification";
+        String misc = "Misc";
 
 
         addArticles("Crypto / TEA", """
@@ -30,349 +30,349 @@ public class Wikipedia extends Page {
                 RC6
                 """);
 
-        addArticle("Vigenère cipher", cryptoRough);
-        addArticle("Caesar cipher", cryptoRough);
-        addArticle("Frequency analysis", cryptoRough);
-        addArticle("Kasiski examination", cryptoRough);
-        addArticle("Cryptography", cryptoRough);
-        addArticle("Hash-based cryptography", cryptoRough);
-        addArticle("Non-commutative cryptography", cryptoRough);
-        addArticle("RSA problem", cryptoRough);
-        addArticle("IEEE P1363", cryptoRough);
-        addArticle("NSA Suite B Cryptography", cryptoRough);
-        addArticle("NIST Post-Quantum Cryptography Standardization", cryptoRough);
-        addArticle("Algebraic Eraser", cryptoRough);
-        addArticle("Efficient Probabilistic Public-Key Encryption Scheme", cryptoRough);
-        addArticle("Hidden Field Equations", cryptoRough);
-        addArticle("Lamport signature", cryptoRough);
-        addArticle("McEliece cryptosystem", cryptoRough);
-        addArticle("Merkle–Hellman knapsack cryptosystem", cryptoRough);
-        addArticle("Naccache–Stern knapsack cryptosystem", cryptoRough);
-        addArticle("XTR", cryptoRough);
-        addArticle("Lattice-based cryptography", cryptoRough);
-        addArticle("Learning with errors", cryptoRough);
-        addArticle("Short integer solution problem", cryptoRough);
-        addArticle("NTRUEncrypt", cryptoRough);
-        addArticle("NTRUSign", cryptoRough);
-        addArticle("Ring learning with errors key exchange", cryptoRough);
-        addArticle("Ring learning with errors signature", cryptoRough);
-        addArticle("BLISS signature scheme", cryptoRough);
-        addArticle("NewHope", cryptoRough);
-        addArticle("Discrete logarithm", cryptoRough);
-        addArticle("Cramer–Shoup cryptosystem", cryptoRough);
-        addArticle("Elliptic-curve Diffie–Hellman", cryptoRough);
-        addArticle("Curve25519", cryptoRough);
-        addArticle("Curve448", cryptoRough);
-        addArticle("Elliptic Curve Digital Signature Algorithm", cryptoRough);
-        addArticle("EdDSA", cryptoRough);
-        addArticle("Encrypted key exchange", cryptoRough);
-        addArticle("ElGamal encryption", cryptoRough);
-        addArticle("ElGamal signature scheme", cryptoRough);
-        addArticle("Schnorr signature", cryptoRough);
-        addArticle("SPEKE", cryptoRough);
-        addArticle("Secure Remote Password protocol", cryptoRough);
-        addArticle("Station-to-Station protocol", cryptoRough);
-        addArticle("Integer factorization", cryptoRough);
-        addArticle("Blum–Goldwasser cryptosystem", cryptoRough);
-        addArticle("Cayley–Purser algorithm", cryptoRough);
-        addArticle("Damgård–Jurik cryptosystem", cryptoRough);
-        addArticle("GMR (cryptography)", cryptoRough);
-        addArticle("Goldwasser–Micali cryptosystem", cryptoRough);
-        addArticle("Naccache–Stern cryptosystem", cryptoRough);
-        addArticle("Rabin cryptosystem", cryptoRough);
-        addArticle("RSA (cryptosystem)", cryptoRough);
-        addArticle("Okamoto–Uchiyama cryptosystem", cryptoRough);
-        addArticle("Schmidt-Samoa cryptosystem", cryptoRough);
-        addArticle("Public-key cryptography", cryptoRough);
-        addArticle("Optimal asymmetric encryption padding", cryptoRough);
-        addArticle("Public key fingerprint", cryptoRough);
-        addArticle("Web of trust", cryptoRough);
-        addArticle("Key size", cryptoRough);
-        addArticle("Identity-based cryptography", cryptoRough);
-        addArticle("OpenPGP card", cryptoRough);
-        addArticle("History of cryptography", cryptoRough);
-        addArticle("Outline of cryptography", cryptoRough);
-        addArticle("Cryptographic protocol", cryptoRough);
-        addArticle("Authentication protocol", cryptoRough);
-        addArticle("Cryptographic primitive", cryptoRough);
-        addArticle("Cryptanalysis", cryptoRough);
-        addArticle("Cryptocurrency", cryptoRough);
-        addArticle("Cryptosystem", cryptoRough);
-        addArticle("Cryptographic nonce", cryptoRough);
-        addArticle("Cryptovirology", cryptoRough);
-        addArticle("Hash function", cryptoRough);
-        addArticle("Key derivation function", cryptoRough);
-        addArticle("Digital signature", cryptoRough);
-        addArticle("Kleptography", cryptoRough);
-        addArticle("Key (cryptography)", cryptoRough);
-        addArticle("Key exchange", cryptoRough);
-        addArticle("Key generator", cryptoRough);
-        addArticle("Key schedule", cryptoRough);
-        addArticle("Key stretching", cryptoRough);
-        addArticle("Keygen", cryptoRough);
-        addArticle("Cryptojacking", cryptoRough);
-        addArticle("Ransomware", cryptoRough);
-        addArticle("Random number generation", cryptoRough);
-        addArticle("Pseudorandom noise", cryptoRough);
-        addArticle("Secure channel", cryptoRough);
-        addArticle("Subliminal channel", cryptoRough);
-        addArticle("Encryption", cryptoRough);
-        addArticle("End-to-end encryption", cryptoRough);
-        addArticle("Information-theoretic security", cryptoRough);
-        addArticle("Plaintext", cryptoRough);
-        addArticle("Code (cryptography)", cryptoRough);
-        addArticle("Ciphertext", cryptoRough);
-        addArticle("Shared secret", cryptoRough);
-        addArticle("Trapdoor function", cryptoRough);
-        addArticle("Trusted timestamping", cryptoRough);
-        addArticle("Key-based routing", cryptoRough);
-        addArticle("Onion routing", cryptoRough);
-        addArticle("Garlic routing", cryptoRough);
-        addArticle("Kademlia", cryptoRough);
-        addArticle("Mix network", cryptoRough);
-        addArticle("Cryptographic hash function", cryptoRough);
-        addArticle("Block cipher", cryptoRough);
-        addArticle("Stream cipher", cryptoRough);
-        addArticle("Symmetric-key algorithm", cryptoRough);
-        addArticle("Authenticated encryption", cryptoRough);
-        addArticle("Quantum key distribution", cryptoRough);
-        addArticle("Quantum cryptography", cryptoRough);
-        addArticle("Post-quantum cryptography", cryptoRough);
-        addArticle("Message authentication code", cryptoRough);
-        addArticle("Cryptographically secure pseudorandom number generator", cryptoRough);
-        addArticle("Steganography", cryptoRough);
-        addArticle("Hash function security summary", cryptoRough);
-        addArticle("MD5", cryptoRough);
-        addArticle("SHA-1", cryptoRough);
-        addArticle("SHA-2", cryptoRough);
-        addArticle("SHA-3", cryptoRough);
-        addArticle("BLAKE (hash function)", cryptoRough);
-        addArticle("Grøstl", cryptoRough);
-        addArticle("JH (hash function)", cryptoRough);
-        addArticle("Skein (hash function)", cryptoRough);
-        addArticle("CubeHash", cryptoRough);
-        addArticle("Elliptic curve only hash", cryptoRough);
-        addArticle("Fast syndrome-based hash", cryptoRough);
-        addArticle("GOST (hash function)", cryptoRough);
-        addArticle("HAS-160", cryptoRough);
-        addArticle("HAVAL", cryptoRough);
-        addArticle("Kupyna", cryptoRough);
-        addArticle("LSH (hash function)", cryptoRough);
-        addArticle("MASH-1", cryptoRough);
-        addArticle("MD2 (hash function)", cryptoRough);
-        addArticle("MD4", cryptoRough);
-        addArticle("MD6", cryptoRough);
-        addArticle("MDC-2", cryptoRough);
-        addArticle("N-hash", cryptoRough);
-        addArticle("RIPEMD", cryptoRough);
-        addArticle("RadioGatún", cryptoRough);
-        addArticle("SM3 (hash function)", cryptoRough);
-        addArticle("SWIFFT", cryptoRough);
-        addArticle("Snefru", cryptoRough);
-        addArticle("Streebog", cryptoRough);
-        addArticle("Tiger (hash function)", cryptoRough);
-        addArticle("Very smooth hash", cryptoRough);
-        addArticle("Whirlpool (hash function)", cryptoRough);
-        addArticle("Argon2", cryptoRough);
-        addArticle("Balloon hashing", cryptoRough);
-        addArticle("bcrypt", cryptoRough);
-        addArticle("Password Hashing Competition", cryptoRough);
-        addArticle("crypt (C)", cryptoRough);
-        addArticle("LAN Manager", cryptoRough);
-        addArticle("Lyra2", cryptoRough);
-        addArticle("PBKDF2", cryptoRough);
-        addArticle("scrypt", cryptoRough);
-        addArticle("HKDF", cryptoRough);
-        addArticle("ARIA (cipher)", cryptoRough);
-        addArticle("Camellia (cipher)", cryptoRough);
-        addArticle("CAST-128", cryptoRough);
-        addArticle("GOST (block cipher)", cryptoRough);
-        addArticle("International Data Encryption Algorithm", cryptoRough);
-        addArticle("LEA (cipher)", cryptoRough);
+        addArticle("Vigenère cipher", misc);
+        addArticle("Caesar cipher", misc);
+        addArticle("Frequency analysis", misc);
+        addArticle("Kasiski examination", misc);
+        addArticle("Cryptography", misc);
+        addArticle("Hash-based cryptography", misc);
+        addArticle("Non-commutative cryptography", misc);
+        addArticle("RSA problem", misc);
+        addArticle("IEEE P1363", misc);
+        addArticle("NSA Suite B Cryptography", misc);
+        addArticle("NIST Post-Quantum Cryptography Standardization", misc);
+        addArticle("Algebraic Eraser", misc);
+        addArticle("Efficient Probabilistic Public-Key Encryption Scheme", misc);
+        addArticle("Hidden Field Equations", misc);
+        addArticle("Lamport signature", misc);
+        addArticle("McEliece cryptosystem", misc);
+        addArticle("Merkle–Hellman knapsack cryptosystem", misc);
+        addArticle("Naccache–Stern knapsack cryptosystem", misc);
+        addArticle("XTR", misc);
+        addArticle("Lattice-based cryptography", misc);
+        addArticle("Learning with errors", misc);
+        addArticle("Short integer solution problem", misc);
+        addArticle("NTRUEncrypt", misc);
+        addArticle("NTRUSign", misc);
+        addArticle("Ring learning with errors key exchange", misc);
+        addArticle("Ring learning with errors signature", misc);
+        addArticle("BLISS signature scheme", misc);
+        addArticle("NewHope", misc);
+        addArticle("Discrete logarithm", misc);
+        addArticle("Cramer–Shoup cryptosystem", misc);
+        addArticle("Elliptic-curve Diffie–Hellman", misc);
+        addArticle("Curve25519", misc);
+        addArticle("Curve448", misc);
+        addArticle("Elliptic Curve Digital Signature Algorithm", misc);
+        addArticle("EdDSA", misc);
+        addArticle("Encrypted key exchange", misc);
+        addArticle("ElGamal encryption", misc);
+        addArticle("ElGamal signature scheme", misc);
+        addArticle("Schnorr signature", misc);
+        addArticle("SPEKE", misc);
+        addArticle("Secure Remote Password protocol", misc);
+        addArticle("Station-to-Station protocol", misc);
+        addArticle("Integer factorization", misc);
+        addArticle("Blum–Goldwasser cryptosystem", misc);
+        addArticle("Cayley–Purser algorithm", misc);
+        addArticle("Damgård–Jurik cryptosystem", misc);
+        addArticle("GMR (cryptography)", misc);
+        addArticle("Goldwasser–Micali cryptosystem", misc);
+        addArticle("Naccache–Stern cryptosystem", misc);
+        addArticle("Rabin cryptosystem", misc);
+        addArticle("RSA (cryptosystem)", misc);
+        addArticle("Okamoto–Uchiyama cryptosystem", misc);
+        addArticle("Schmidt-Samoa cryptosystem", misc);
+        addArticle("Public-key cryptography", misc);
+        addArticle("Optimal asymmetric encryption padding", misc);
+        addArticle("Public key fingerprint", misc);
+        addArticle("Web of trust", misc);
+        addArticle("Key size", misc);
+        addArticle("Identity-based cryptography", misc);
+        addArticle("OpenPGP card", misc);
+        addArticle("History of cryptography", misc);
+        addArticle("Outline of cryptography", misc);
+        addArticle("Cryptographic protocol", misc);
+        addArticle("Authentication protocol", misc);
+        addArticle("Cryptographic primitive", misc);
+        addArticle("Cryptanalysis", misc);
+        addArticle("Cryptocurrency", misc);
+        addArticle("Cryptosystem", misc);
+        addArticle("Cryptographic nonce", misc);
+        addArticle("Cryptovirology", misc);
+        addArticle("Hash function", misc);
+        addArticle("Key derivation function", misc);
+        addArticle("Digital signature", misc);
+        addArticle("Kleptography", misc);
+        addArticle("Key (cryptography)", misc);
+        addArticle("Key exchange", misc);
+        addArticle("Key generator", misc);
+        addArticle("Key schedule", misc);
+        addArticle("Key stretching", misc);
+        addArticle("Keygen", misc);
+        addArticle("Cryptojacking", misc);
+        addArticle("Ransomware", misc);
+        addArticle("Random number generation", misc);
+        addArticle("Pseudorandom noise", misc);
+        addArticle("Secure channel", misc);
+        addArticle("Subliminal channel", misc);
+        addArticle("Encryption", misc);
+        addArticle("End-to-end encryption", misc);
+        addArticle("Information-theoretic security", misc);
+        addArticle("Plaintext", misc);
+        addArticle("Code (cryptography)", misc);
+        addArticle("Ciphertext", misc);
+        addArticle("Shared secret", misc);
+        addArticle("Trapdoor function", misc);
+        addArticle("Trusted timestamping", misc);
+        addArticle("Key-based routing", misc);
+        addArticle("Onion routing", misc);
+        addArticle("Garlic routing", misc);
+        addArticle("Kademlia", misc);
+        addArticle("Mix network", misc);
+        addArticle("Cryptographic hash function", misc);
+        addArticle("Block cipher", misc);
+        addArticle("Stream cipher", misc);
+        addArticle("Symmetric-key algorithm", misc);
+        addArticle("Authenticated encryption", misc);
+        addArticle("Quantum key distribution", misc);
+        addArticle("Quantum cryptography", misc);
+        addArticle("Post-quantum cryptography", misc);
+        addArticle("Message authentication code", misc);
+        addArticle("Cryptographically secure pseudorandom number generator", misc);
+        addArticle("Steganography", misc);
+        addArticle("Hash function security summary", misc);
+        addArticle("MD5", misc);
+        addArticle("SHA-1", misc);
+        addArticle("SHA-2", misc);
+        addArticle("SHA-3", misc);
+        addArticle("BLAKE (hash function)", misc);
+        addArticle("Grøstl", misc);
+        addArticle("JH (hash function)", misc);
+        addArticle("Skein (hash function)", misc);
+        addArticle("CubeHash", misc);
+        addArticle("Elliptic curve only hash", misc);
+        addArticle("Fast syndrome-based hash", misc);
+        addArticle("GOST (hash function)", misc);
+        addArticle("HAS-160", misc);
+        addArticle("HAVAL", misc);
+        addArticle("Kupyna", misc);
+        addArticle("LSH (hash function)", misc);
+        addArticle("MASH-1", misc);
+        addArticle("MD2 (hash function)", misc);
+        addArticle("MD4", misc);
+        addArticle("MD6", misc);
+        addArticle("MDC-2", misc);
+        addArticle("N-hash", misc);
+        addArticle("RIPEMD", misc);
+        addArticle("RadioGatún", misc);
+        addArticle("SM3 (hash function)", misc);
+        addArticle("SWIFFT", misc);
+        addArticle("Snefru", misc);
+        addArticle("Streebog", misc);
+        addArticle("Tiger (hash function)", misc);
+        addArticle("Very smooth hash", misc);
+        addArticle("Whirlpool (hash function)", misc);
+        addArticle("Argon2", misc);
+        addArticle("Balloon hashing", misc);
+        addArticle("bcrypt", misc);
+        addArticle("Password Hashing Competition", misc);
+        addArticle("crypt (C)", misc);
+        addArticle("LAN Manager", misc);
+        addArticle("Lyra2", misc);
+        addArticle("PBKDF2", misc);
+        addArticle("scrypt", misc);
+        addArticle("HKDF", misc);
+        addArticle("ARIA (cipher)", misc);
+        addArticle("Camellia (cipher)", misc);
+        addArticle("CAST-128", misc);
+        addArticle("GOST (block cipher)", misc);
+        addArticle("International Data Encryption Algorithm", misc);
+        addArticle("LEA (cipher)", misc);
 
-        addArticle("SEED", cryptoRough);
-        addArticle("Skipjack (cipher)", cryptoRough);
+        addArticle("SEED", misc);
+        addArticle("Skipjack (cipher)", misc);
 
 
-        addArticle("Advanced Encryption Standard", cryptoRough);
-        addArticle("Blowfish (cipher)", cryptoRough);
-        addArticle("Data Encryption Standard", cryptoRough);
-        addArticle("DES supplementary material", cryptoRough);
-        addArticle("Triple DES", cryptoRough);
-        addArticle("Serpent (cipher)", cryptoRough);
-        addArticle("Twofish", cryptoRough);
-        addArticle("CRYPTREC", cryptoRough);
-        addArticle("NESSIE", cryptoRough);
-        addArticle("NIST hash function competition", cryptoRough);
-        addArticle("Merkle tree", cryptoRough);
-        addArticle("Message authentication", cryptoRough);
-        addArticle("Proof of work", cryptoRough);
-        addArticle("Salt (cryptography)", cryptoRough);
-        addArticle("Pepper (cryptography)", cryptoRough);
-        addArticle("Hash collision", cryptoRough);
-        addArticle("Merkle–Damgård construction", cryptoRough);
-        addArticle("Sponge function", cryptoRough);
-        addArticle("HAIFA construction", cryptoRough);
-        addArticle("Collision attack", cryptoRough);
-        addArticle("Preimage attack", cryptoRough);
-        addArticle("Birthday attack", cryptoRough);
-        addArticle("Rainbow table", cryptoRough);
-        addArticle("Side-channel attack", cryptoRough);
-        addArticle("Length extension attack", cryptoRough);
-        addArticle("CCM mode", cryptoRough);
-        addArticle("ChaCha20-Poly1305", cryptoRough);
-        addArticle("CWC mode", cryptoRough);
-        addArticle("EAX mode", cryptoRough);
-        addArticle("Galois/Counter Mode", cryptoRough);
-        addArticle("IAPM (mode)", cryptoRough);
-        addArticle("OCB mode", cryptoRough);
-        addArticle("CBC-MAC", cryptoRough);
-        addArticle("Data Authentication Algorithm", cryptoRough);
-        addArticle("HMAC", cryptoRough);
-        addArticle("One-key MAC", cryptoRough);
-        addArticle("PMAC (cryptography)", cryptoRough);
-        addArticle("Poly1305", cryptoRough);
-        addArticle("SipHash", cryptoRough);
-        addArticle("UMAC", cryptoRough);
-        addArticle("VMAC", cryptoRough);
-        addArticle("3-Way", cryptoRough);
-        addArticle("Akelarre (cipher)", cryptoRough);
-        addArticle("Anubis (cipher)", cryptoRough);
-        addArticle("BaseKing", cryptoRough);
-        addArticle("BassOmatic", cryptoRough);
-        addArticle("BATON", cryptoRough);
-        addArticle("BEAR and LION ciphers", cryptoRough);
-        addArticle("CAST-256", cryptoRough);
-        addArticle("Chiasmus (cipher)", cryptoRough);
-        addArticle("CIKS-1", cryptoRough);
-        addArticle("CIPHERUNICORN-A", cryptoRough);
-        addArticle("CIPHERUNICORN-E", cryptoRough);
-        addArticle("CLEFIA", cryptoRough);
-        addArticle("Cellular Message Encryption Algorithm", cryptoRough);
-        addArticle("Cobra ciphers", cryptoRough);
-        addArticle("COCONUT98", cryptoRough);
-        addArticle("Crab (cipher)", cryptoRough);
-        addArticle("Cryptomeria cipher", cryptoRough);
-        addArticle("CRYPTON", cryptoRough);
-        addArticle("CS-Cipher", cryptoRough);
-        addArticle("DEAL", cryptoRough);
-        addArticle("DES-X", cryptoRough);
-        addArticle("DFC (cipher)", cryptoRough);
-        addArticle("E2 (cipher)", cryptoRough);
-        addArticle("FEAL", cryptoRough);
-        addArticle("FEA-M", cryptoRough);
-        addArticle("FROG", cryptoRough);
-        addArticle("GDES", cryptoRough);
-        addArticle("Grand Cru (cipher)", cryptoRough);
-        addArticle("Hasty Pudding cipher", cryptoRough);
-        addArticle("Hierocrypt", cryptoRough);
-        addArticle("ICE (cipher)", cryptoRough);
-        addArticle("IDEA NXT", cryptoRough);
-        addArticle("Intel Cascade Cipher", cryptoRough);
-        addArticle("Iraqi block cipher", cryptoRough);
-        addArticle("Kalyna (cipher)", cryptoRough);
-        addArticle("KASUMI", cryptoRough);
-        addArticle("KeeLoq", cryptoRough);
-        addArticle("KHAZAD", cryptoRough);
-        addArticle("Khufu and Khafre", cryptoRough);
-        addArticle("KN-Cipher", cryptoRough);
-        addArticle("Kuznyechik", cryptoRough);
-        addArticle("Ladder-DES", cryptoRough);
-        addArticle("LOKI97", cryptoRough);
-        addArticle("LOKI", cryptoRough);
-        addArticle("Lucifer (cipher)", cryptoRough);
-        addArticle("M6 (cipher)", cryptoRough);
-        addArticle("M8 (cipher)", cryptoRough);
-        addArticle("MacGuffin (cipher)", cryptoRough);
-        addArticle("Madryga", cryptoRough);
-        addArticle("MAGENTA", cryptoRough);
-        addArticle("MARS (cipher)", cryptoRough);
-        addArticle("Mercy (cipher)", cryptoRough);
-        addArticle("MESH (cipher)", cryptoRough);
-        addArticle("MISTY1", cryptoRough);
-        addArticle("MMB (cipher)", cryptoRough);
-        addArticle("MULTI2", cryptoRough);
-        addArticle("MultiSwap", cryptoRough);
-        addArticle("New Data Seal", cryptoRough);
-        addArticle("NewDES", cryptoRough);
-        addArticle("Nimbus (cipher)", cryptoRough);
-        addArticle("NOEKEON", cryptoRough);
-        addArticle("NUSH", cryptoRough);
-        addArticle("PRESENT", cryptoRough);
-        addArticle("Prince (cipher)", cryptoRough);
-        addArticle("Q (cipher)", cryptoRough);
-        addArticle("REDOC", cryptoRough);
-        addArticle("Red Pike (cipher)", cryptoRough);
-        addArticle("S-1 block cipher", cryptoRough);
-        addArticle("SAFER", cryptoRough);
-        addArticle("SAVILLE", cryptoRough);
-        addArticle("SC2000", cryptoRough);
-        addArticle("SHACAL", cryptoRough);
-        addArticle("SHARK", cryptoRough);
-        addArticle("Simon (cipher)", cryptoRough);
-        addArticle("SM4 (cipher)", cryptoRough);
-        addArticle("Speck (cipher)", cryptoRough);
-        addArticle("Spectr-H64", cryptoRough);
-        addArticle("Square (cipher)", cryptoRough);
-        addArticle("SXAL/MBAL", cryptoRough);
-        addArticle("Threefish", cryptoRough);
-        addArticle("Treyfer", cryptoRough);
-        addArticle("UES (cipher)", cryptoRough);
-        addArticle("Xmx", cryptoRough);
+        addArticle("Advanced Encryption Standard", misc);
+        addArticle("Blowfish (cipher)", misc);
+        addArticle("Data Encryption Standard", misc);
+        addArticle("DES supplementary material", misc);
+        addArticle("Triple DES", misc);
+        addArticle("Serpent (cipher)", misc);
+        addArticle("Twofish", misc);
+        addArticle("CRYPTREC", misc);
+        addArticle("NESSIE", misc);
+        addArticle("NIST hash function competition", misc);
+        addArticle("Merkle tree", misc);
+        addArticle("Message authentication", misc);
+        addArticle("Proof of work", misc);
+        addArticle("Salt (cryptography)", misc);
+        addArticle("Pepper (cryptography)", misc);
+        addArticle("Hash collision", misc);
+        addArticle("Merkle–Damgård construction", misc);
+        addArticle("Sponge function", misc);
+        addArticle("HAIFA construction", misc);
+        addArticle("Collision attack", misc);
+        addArticle("Preimage attack", misc);
+        addArticle("Birthday attack", misc);
+        addArticle("Rainbow table", misc);
+        addArticle("Side-channel attack", misc);
+        addArticle("Length extension attack", misc);
+        addArticle("CCM mode", misc);
+        addArticle("ChaCha20-Poly1305", misc);
+        addArticle("CWC mode", misc);
+        addArticle("EAX mode", misc);
+        addArticle("Galois/Counter Mode", misc);
+        addArticle("IAPM (mode)", misc);
+        addArticle("OCB mode", misc);
+        addArticle("CBC-MAC", misc);
+        addArticle("Data Authentication Algorithm", misc);
+        addArticle("HMAC", misc);
+        addArticle("One-key MAC", misc);
+        addArticle("PMAC (cryptography)", misc);
+        addArticle("Poly1305", misc);
+        addArticle("SipHash", misc);
+        addArticle("UMAC", misc);
+        addArticle("VMAC", misc);
+        addArticle("3-Way", misc);
+        addArticle("Akelarre (cipher)", misc);
+        addArticle("Anubis (cipher)", misc);
+        addArticle("BaseKing", misc);
+        addArticle("BassOmatic", misc);
+        addArticle("BATON", misc);
+        addArticle("BEAR and LION ciphers", misc);
+        addArticle("CAST-256", misc);
+        addArticle("Chiasmus (cipher)", misc);
+        addArticle("CIKS-1", misc);
+        addArticle("CIPHERUNICORN-A", misc);
+        addArticle("CIPHERUNICORN-E", misc);
+        addArticle("CLEFIA", misc);
+        addArticle("Cellular Message Encryption Algorithm", misc);
+        addArticle("Cobra ciphers", misc);
+        addArticle("COCONUT98", misc);
+        addArticle("Crab (cipher)", misc);
+        addArticle("Cryptomeria cipher", misc);
+        addArticle("CRYPTON", misc);
+        addArticle("CS-Cipher", misc);
+        addArticle("DEAL", misc);
+        addArticle("DES-X", misc);
+        addArticle("DFC (cipher)", misc);
+        addArticle("E2 (cipher)", misc);
+        addArticle("FEAL", misc);
+        addArticle("FEA-M", misc);
+        addArticle("FROG", misc);
+        addArticle("GDES", misc);
+        addArticle("Grand Cru (cipher)", misc);
+        addArticle("Hasty Pudding cipher", misc);
+        addArticle("Hierocrypt", misc);
+        addArticle("ICE (cipher)", misc);
+        addArticle("IDEA NXT", misc);
+        addArticle("Intel Cascade Cipher", misc);
+        addArticle("Iraqi block cipher", misc);
+        addArticle("Kalyna (cipher)", misc);
+        addArticle("KASUMI", misc);
+        addArticle("KeeLoq", misc);
+        addArticle("KHAZAD", misc);
+        addArticle("Khufu and Khafre", misc);
+        addArticle("KN-Cipher", misc);
+        addArticle("Kuznyechik", misc);
+        addArticle("Ladder-DES", misc);
+        addArticle("LOKI97", misc);
+        addArticle("LOKI", misc);
+        addArticle("Lucifer (cipher)", misc);
+        addArticle("M6 (cipher)", misc);
+        addArticle("M8 (cipher)", misc);
+        addArticle("MacGuffin (cipher)", misc);
+        addArticle("Madryga", misc);
+        addArticle("MAGENTA", misc);
+        addArticle("MARS (cipher)", misc);
+        addArticle("Mercy (cipher)", misc);
+        addArticle("MESH (cipher)", misc);
+        addArticle("MISTY1", misc);
+        addArticle("MMB (cipher)", misc);
+        addArticle("MULTI2", misc);
+        addArticle("MultiSwap", misc);
+        addArticle("New Data Seal", misc);
+        addArticle("NewDES", misc);
+        addArticle("Nimbus (cipher)", misc);
+        addArticle("NOEKEON", misc);
+        addArticle("NUSH", misc);
+        addArticle("PRESENT", misc);
+        addArticle("Prince (cipher)", misc);
+        addArticle("Q (cipher)", misc);
+        addArticle("REDOC", misc);
+        addArticle("Red Pike (cipher)", misc);
+        addArticle("S-1 block cipher", misc);
+        addArticle("SAFER", misc);
+        addArticle("SAVILLE", misc);
+        addArticle("SC2000", misc);
+        addArticle("SHACAL", misc);
+        addArticle("SHARK", misc);
+        addArticle("Simon (cipher)", misc);
+        addArticle("SM4 (cipher)", misc);
+        addArticle("Speck (cipher)", misc);
+        addArticle("Spectr-H64", misc);
+        addArticle("Square (cipher)", misc);
+        addArticle("SXAL/MBAL", misc);
+        addArticle("Threefish", misc);
+        addArticle("Treyfer", misc);
+        addArticle("UES (cipher)", misc);
+        addArticle("Xmx", misc);
 
-        addArticle("Zodiac (cipher)", cryptoRough);
-        addArticle("3-subset meet-in-the-middle attack", cryptoRough);
-        addArticle("Acoustic cryptanalysis", cryptoRough);
-        addArticle("Advanced Encryption Standard process", cryptoRough);
-        addArticle("Avalanche effect", cryptoRough);
-        addArticle("Biclique attack", cryptoRough);
-        addArticle("Black-bag cryptanalysis", cryptoRough);
-        addArticle("Block cipher mode of operation", cryptoRough);
-        addArticle("Block size (cryptography)", cryptoRough);
-        addArticle("Boomerang attack", cryptoRough);
-        addArticle("Brute-force attack", cryptoRough);
-        addArticle("Chi-squared test", cryptoRough);
-        addArticle("Confusion and diffusion", cryptoRough);
-        addArticle("Davies attack", cryptoRough);
-        addArticle("Differential cryptanalysis", cryptoRough);
-        addArticle("Differential fault analysis", cryptoRough);
-        addArticle("Differential-linear attack", cryptoRough);
-        addArticle("Distinguishing attack", cryptoRough);
-        addArticle("EFF DES cracker", cryptoRough);
-        addArticle("Electromagnetic attack", cryptoRough);
-        addArticle("Feistel cipher", cryptoRough);
-        addArticle("Higher-order differential cryptanalysis", cryptoRough);
-        addArticle("Impossible differential cryptanalysis", cryptoRough);
-        addArticle("Initialization vector", cryptoRough);
-        addArticle("Integral cryptanalysis", cryptoRough);
-        addArticle("Interpolation attack", cryptoRough);
-        addArticle("Kendall rank correlation coefficient", cryptoRough);
-        addArticle("Key whitening", cryptoRough);
-        addArticle("Known-key distinguishing attack", cryptoRough);
-        addArticle("Lai–Massey scheme", cryptoRough);
-        addArticle("Linear cryptanalysis", cryptoRough);
-        addArticle("Meet-in-the-middle attack", cryptoRough);
-        addArticle("Mod n cryptanalysis", cryptoRough);
-        addArticle("Padding (cryptography)", cryptoRough);
-        addArticle("Partitioning cryptanalysis", cryptoRough);
-        addArticle("Permutation box", cryptoRough);
-        addArticle("Piling-up lemma", cryptoRough);
-        addArticle("Power analysis", cryptoRough);
-        addArticle("Product cipher", cryptoRough);
-        addArticle("Rebound attack", cryptoRough);
-        addArticle("Related-key attack", cryptoRough);
-        addArticle("Rotational cryptanalysis", cryptoRough);
-        addArticle("Rubber-hose cryptanalysis", cryptoRough);
-        addArticle("S-box", cryptoRough);
-        addArticle("Slide attack", cryptoRough);
-        addArticle("Substitution–permutation network", cryptoRough);
-        addArticle("Time/memory/data tradeoff attack", cryptoRough);
-        addArticle("Timing attack", cryptoRough);
-        addArticle("Truncated differential cryptanalysis", cryptoRough);
-        addArticle("Weak key", cryptoRough);
-        addArticle("Whitening transformation", cryptoRough);
-        addArticle("XSL attack", cryptoRough);
-        addArticles(cryptoRough, """
+        addArticle("Zodiac (cipher)", misc);
+        addArticle("3-subset meet-in-the-middle attack", misc);
+        addArticle("Acoustic cryptanalysis", misc);
+        addArticle("Advanced Encryption Standard process", misc);
+        addArticle("Avalanche effect", misc);
+        addArticle("Biclique attack", misc);
+        addArticle("Black-bag cryptanalysis", misc);
+        addArticle("Block cipher mode of operation", misc);
+        addArticle("Block size (cryptography)", misc);
+        addArticle("Boomerang attack", misc);
+        addArticle("Brute-force attack", misc);
+        addArticle("Chi-squared test", misc);
+        addArticle("Confusion and diffusion", misc);
+        addArticle("Davies attack", misc);
+        addArticle("Differential cryptanalysis", misc);
+        addArticle("Differential fault analysis", misc);
+        addArticle("Differential-linear attack", misc);
+        addArticle("Distinguishing attack", misc);
+        addArticle("EFF DES cracker", misc);
+        addArticle("Electromagnetic attack", misc);
+        addArticle("Feistel cipher", misc);
+        addArticle("Higher-order differential cryptanalysis", misc);
+        addArticle("Impossible differential cryptanalysis", misc);
+        addArticle("Initialization vector", misc);
+        addArticle("Integral cryptanalysis", misc);
+        addArticle("Interpolation attack", misc);
+        addArticle("Kendall rank correlation coefficient", misc);
+        addArticle("Key whitening", misc);
+        addArticle("Known-key distinguishing attack", misc);
+        addArticle("Lai–Massey scheme", misc);
+        addArticle("Linear cryptanalysis", misc);
+        addArticle("Meet-in-the-middle attack", misc);
+        addArticle("Mod n cryptanalysis", misc);
+        addArticle("Padding (cryptography)", misc);
+        addArticle("Partitioning cryptanalysis", misc);
+        addArticle("Permutation box", misc);
+        addArticle("Piling-up lemma", misc);
+        addArticle("Power analysis", misc);
+        addArticle("Product cipher", misc);
+        addArticle("Rebound attack", misc);
+        addArticle("Related-key attack", misc);
+        addArticle("Rotational cryptanalysis", misc);
+        addArticle("Rubber-hose cryptanalysis", misc);
+        addArticle("S-box", misc);
+        addArticle("Slide attack", misc);
+        addArticle("Substitution–permutation network", misc);
+        addArticle("Time/memory/data tradeoff attack", misc);
+        addArticle("Timing attack", misc);
+        addArticle("Truncated differential cryptanalysis", misc);
+        addArticle("Weak key", misc);
+        addArticle("Whitening transformation", misc);
+        addArticle("XSL attack", misc);
+        addArticles(misc, """
                 Achterbahn
                 F-FCSR
                 FISH (cipher)
@@ -430,12 +430,10 @@ public class Wikipedia extends Page {
                 XKMS
                 DomainKeys Identified Mail
                 DMARC
-                HTTPS
                 Pretty Good Privacy
                 Sender ID
                 Sender Policy Framework
                 S/MIME
-                Secure Shell
                 Transport Layer Security
                 DNS-based Authentication of Named Entities
                 DNS over HTTPS
@@ -446,6 +444,262 @@ public class Wikipedia extends Page {
                 OpenVPN
                 Point-to-Point Tunneling Protocol
                 WireGuard
+                SOAP
+                XML Information Set
+                World Wide Web Consortium
+                Processing Instruction
+                Standard Generalized Markup Language
+                DocBook
+                EPUB
+                RELAX NG
+                Schematron
+                XPath
+                XSLT
+                Document type definition
+                IBM Generalized Markup Language
+                Document Schema Definition Languages
+                List of XML and HTML character entity references
+                Document type declaration
+                Formal Public Identifier
+                System identifier
+                Document Definition Markup Language
+                Schema for Object-Oriented XML
+                MSXML
+                Media type
+                XML data binding
+                Document Object Model
+                Simple API for XML
+                Java API for XML Processing
+                List of XML markup languages
+                List of types of XML schemas
+                StAX
+                Dom4j
+                Jakarta XML Binding
+                Streaming XML
+                XQuery API for Java
+                Apache Xerces
+                Apache Commons
+                Apache XMLBeans
+                YAML
+                MIME
+                TOML
+                Lightweight markup language
+                XPath 2.0
+                XPath 3
+                Query language
+                SQL
+                Datalog
+                GraphQL
+                HTSQL
+                Language Integrated Query
+                Lightweight Directory Access Protocol
+                Molecular Query Language
+                Couchbase Server
+                Object Query Language
+                Object Constraint Language
+                WinFS
+                PQL
+                PTQL
+                QUEL query languages
+                RDF query language
+                SPARQL
+                Resource Description Framework
+                NoSQL
+                MongoDB
+                Federated search
+                Geographic information system
+                Geography Markup Language
+                Well-known text representation of geometry
+                OGC GeoSPARQL
+                SPARUL
+                XQuery
+                List of SPARQL implementations
+                Semantic integration
+                SPARQL Query Results XML Format
+                SPARQL Syntax Expressions
+                Wikidata
+                RDF Schema
+                Web Ontology Language
+                XUL
+                Cypher (query language)
+                Neo4j
+                Comparison of layout engines (XML)
+                XSL Formatting Objects
+                EXSLT
+                XLink
+                XML Base
+                XPointer
+                XML Signature
+                XML Encryption
+                Border Gateway Protocol
+                Dynamic Host Configuration Protocol
+                Domain Name System
+                File Transfer Protocol
+                Hypertext Transfer Protocol
+                HTTPS
+                Internet Message Access Protocol
+                Internet Relay Chat
+                Media Gateway Control Protocol
+                MQTT
+                Network News Transfer Protocol
+                Network Time Protocol
+                Open Shortest Path First
+                Post Office Protocol
+                Precision Time Protocol
+                Sun RPC
+                Real-time Transport Protocol
+                Real Time Streaming Protocol
+                Routing Information Protocol
+                Session Initiation Protocol
+                Simple Mail Transfer Protocol
+                Simple Network Management Protocol
+                Secure Shell
+                Telnet
+                XMPP
+                Application layer
+                OSI model
+                Transport layer
+                Internet layer
+                Link layer
+                Tunneling protocol
+                Point-to-Point Protocol
+                Medium access control
+                Internet Protocol
+                IPv4
+                IPv6
+                Internet Control Message Protocol
+                Internet Control Message Protocol for IPv6
+                Neighbor Discovery Protocol
+                Explicit Congestion Notification
+                Internet Group Management Protocol
+                Transmission Control Protocol
+                User Datagram Protocol
+                Datagram Congestion Control Protocol
+                Stream Control Transmission Protocol
+                Resource Reservation Protocol
+                QUIC
+                HTTP/2
+                SPDY
+                Common Object Request Broker Architecture
+                Internet Communications Engine
+                Distributed Component Object Model
+                Object Linking and Embedding
+                Component Object Model
+                ActiveX
+                Browser Helper Object
+                COM Interop
+                Jakarta Enterprise Beans
+                Microsoft RPC
+                Universal Coded Character Set
+                MAPI
+                Open Software Foundation
+                The Open Group
+                Dynamic Data Exchange
+                .NET Framework
+                DirectX
+                Direct3D
+                XPCOM
+                Interface description language
+                Remote procedure call
+                Open Database Connectivity
+                Web Services Description Language
+                Business Process Execution Language
+                Representational state transfer
+                URL
+                XML Schema (W3C)
+                SDEP
+                Web Application Description Language
+                Apache CXF
+                WS-Addressing
+                WS-Policy
+                WS-ReliableMessaging
+                WS-SecureConversation
+                WS-Security
+                WS-SecurityPolicy
+                Jakarta XML Web Services
+                Jakarta RESTful Web Services
+                Jakarta Messaging
+                Message-oriented middleware
+                Object request broker
+                .NET Remoting
+                Windows Communication Foundation
+                Java remote method invocation
+                General Inter-ORB Protocol
+                RMI-IIOP
+                Message broker
+                Publish–subscribe pattern
+                Messaging pattern
+                Message passing
+                Message queue
+                Data Distribution Service
+                Object Management Group
+                Association for Computing Machinery
+                Producer–consumer problem
+                Push technology
+                WebSub
+                Apache ActiveMQ
+                Apache Kafka
+                HornetQ
+                JBoss Messaging
+                Open Message Queue
+                RabbitMQ
+                Redis
+                ZeroMQ
+                WSO2
+                Comparison of business integration software
+                Stored procedure
+                Advanced Message Queuing Protocol
+                Streaming Text Oriented Messaging Protocol
+                Enterprise service bus
+                Enterprise messaging system
+                Amazon Simple Queue Service
+                OpenJMS
+                Jakarta Activation
+                WS-Policy4MASC
+                Eclipse Metro
+                Jakarta SOAP with Attachments
+                Jakarta EE
+                List of web service specifications
+                XML namespace
+                XInclude
+                SOAP-over-UDP
+                Message Transmission Optimization Mechanism
+                JSON-WSP
+                WS-Discovery
+                Multicast
+                IP multicast
+                Web Services for Devices
+                Devices Profile for Web Services
+                Bonjour (software)
+                OSGi
+                Simple Service Discovery Protocol
+                Universal Plug and Play
+                Web Services Discovery
+                Web Services Inspection Language
+                WS-I Basic Profile
+                S-RAMP
+                Service-oriented architecture
+                WS-MetadataExchange
+                Web Services Semantics
+                Web Services Resource Framework
+                WS-Trust
+                WS-Federation
+                Security Assertion Markup Language
+                XACML
+                P3P
+                Simple Soap Binding Profile
+                Service choreography
+                XPDL
+                Web Services Conversation Language
+                WS-Atomic Transaction
+                WS-Coordination
+                WS-CAF
+                WS-Transaction
+                WS-Context
+                WS-Management
+                Web Services Distributed Management
+                Web Services for Remote Portlets
+                ebXML
                 """);
 
     }
