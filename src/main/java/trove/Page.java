@@ -44,16 +44,23 @@ public abstract class Page {
 
     private void header(RenderContext renderContext) {
         pw.println("<!DOCTYPE html>");
-        pw.println("<html>");
+        pw.println("<html lang=\"en\">");
         pw.println("<head>");
         pw.println("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">");
+
+        String fullTitle;
         if (subTitle != null && !"".equals(subTitle)) {
-            pw.println("<title>" + subTitle + " | " + TITLE + "</title>");
+            fullTitle = subTitle + " | " + TITLE;
         } else {
-            pw.println("<title>" + TITLE + "</title>");
+            fullTitle = TITLE;
         }
+        pw.println("<meta name=\"description\" content=\"" + fullTitle + "\">");
+        pw.println("<title>" + fullTitle + "</title>");
         pw.println("<style>");
-        pw.println("a { text-decoration:none }");
+        pw.println("* { box-sizing:border-box;}");
+        pw.println("p { line-height:48px;}");
+        pw.println("a { padding: 5px; text-decoration:none; border: solid 1px gray; display:inline-block; min-height:48px; min-width:48px; vertical-align:middle; line-height:48px;}");
+        pw.println("li { vertical-align:middle; }");
         pw.println("</style>");
         if (!languages.isEmpty()) {
             pw.println("<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css\">");
