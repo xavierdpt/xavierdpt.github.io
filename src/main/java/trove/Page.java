@@ -46,6 +46,7 @@ public abstract class Page {
         pw.println("<!DOCTYPE html>");
         pw.println("<html>");
         pw.println("<head>");
+        pw.println("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">");
         if (subTitle != null && !"".equals(subTitle)) {
             pw.println("<title>" + subTitle + " | " + TITLE + "</title>");
         } else {
