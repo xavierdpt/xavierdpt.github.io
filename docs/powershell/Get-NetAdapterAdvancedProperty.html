@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Get-NetAdapterAdvancedProperty | Xavier's Treasure Trove">
+<title>Get-NetAdapterAdvancedProperty | Xavier's Treasure Trove</title>
+<style>
+a { text-decoration:none;  }
+p { margin-top:0; margin-bottom:0;  }
+p > code, li > code { font-size:1.05em; color:#660000; }
+*, *::before { box-sizing:border-box;}
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/languages/powershell.min.js"></script>
+</head>
+<body>
+<a href="../index.html">Home</a>
+ > <a href="index.html">PowerShell</a>
+<h1>Get-NetAdapterAdvancedProperty</h1>
+<pre><code class="language-powershell hljs">Get-NetAdapterAdvancedProperty
+</code></pre>
+<p>Network adapters can have custom properties defined for them</p>
+<h2>Properties</h2>
+<p>The <code>Name</code> property is the name of the adapter in which the property is defined</p>
+<p>Example value: <code>Wi-Fi</code></p>
+<div style="width:100%;height:16px"></div>
+<p>The <code>RegistryKeyword</code> property has the internal name of the advanced property, prefixed with "<code>*</code>" when it is a required property.</p>
+<p>Example value: <code>*DeviceSleepOnDisconnect</code></p>
+<div style="width:100%;height:16px"></div>
+<p>The <code>InstanceID</code> property is the GUID of the adapter with the internal name of the advanced property.</p>
+<p>Example value: <code>{D8332A15-3AB0-46F3-95FA-8EC5422775A7}::*DeviceSleepOnDisconnect</code></p>
+<div style="width:100%;height:16px"></div>
+<p>The <code>Optional</code> property tell whether the advanced property is mandatory or not.</p>
+<div style="width:100%;height:16px"></div>
+<p>The <code>Description</code>, <code>DisplayName</code> and <code>ElementName</code> have the same localized values.</p>
+<p>Example value (in French): <code>Veille à la déconnexion WoWLAN</code></p>
+<div style="width:100%;height:16px"></div>
+<p>The <code>InterfaceDescription</code> is the adapter's interface description.</p>
+<p>Example value: <code>Hyper-V Virtual Ethernet Adapter</code></p>
+<div style="width:100%;height:16px"></div>
+<p>The <code>Caption</code> is the interface description prefixed with the object's class name.</p>
+<p>Example value: <code>MSFT_NetAdapterAdvancedPropertySettingData 'Hyper-V Virtual Ethernet Adapter'</code></p>
+<div style="width:100%;height:16px"></div>
+<p>The <code>RegistryDataType</code> is always <code>1</code>.</p>
+<div style="width:100%;height:16px"></div>
+<p>The <code>DisplayDataType</code> is <code>1</code>, <code>5</code> or <code>6</code>. It seems that 1 is for numbers</p>
+<div style="width:100%;height:16px"></div>
+<p>The <code>NumericParameterBaseValue</code> is always 10.</p>
+<p>The <code>NumericParameterStepValue</code> is always 1.</p>
+<p>The <code>NumericParameterMinValue</code> is 0, 1 or 100.</p>
+<p>The <code>NumericParameterMaxValue</code> is 63, 64 or 1500.</p>
+<div style="width:100%;height:16px"></div>
+<p>The <code>Source</code> is always <code>3</code>.</p>
+<div style="width:100%;height:16px"></div>
+<p>The <code>RegistryValue</code> and <code>DefaultRegistryValue</code> are numbers.</p>
+<p>Example value for <code>RegistryValue</code>: {3}</p>
+<p>Example value for <code>DefaultRegistryValue</code>: 3</p>
+<div style="width:100%;height:16px"></div>
+<p>The <code>DisplayValue</code> and <code>DefaultDisplayValue</code> property can be numbers, text strings or localized text strings.</p>
+<p>Example value for <code>DisplayValue</code> and <code>DefaultDisplayValue</code> : <code>8</code>, <code>Enabled</code>, <code>1. Aucune préférence</code>, <code>RTS/CTS activée</code></p>
+<div style="width:100%;height:16px"></div>
+<p>The <code>ValidRegistryValues</code> property contains list of numbers, exposed in a string type.</p>
+<p>Example 1: <code>{0,1,2,3}</code></p>
+<p>Example 1: <code>{1514,4088,9014}</code></p>
+<div style="width:100%;height:16px"></div>
+<p>The <code>ValidDisplayValues</code> property contains list texts, exposed in a string type.</p>
+<p>Example 1: <code>{Disabled, Tx Enabled, Rx Enabled, Rx & Tx Enabled}</code></p>
+<p>Example 2: <code>{Disabled, 4088 Bytes, 9014 Bytes}</code></p>
+<div style="width:100%;height:16px"></div>
+<div style="width:100%;height:16px"></div>
+<p>The <code>SystemName</code> property has the host name as a string.</p>
+<p>The <code>PSComputerName</code> property was always blank.</p>
+<h2>Summary of available properties for some adapters</h2>
+<p>This shows the list of all advanced properties available for some network adapters, together with the available display values.</p>
+<ul>
+<li>HyperV</li><ul>
+<li>IPv4 Checksum Offload (<code>IPChecksumOffloadIPv4</code>)<ul>
+<li><code>Disabled</code></li>
+<li><code>Tx Enabled</code></li>
+<li><code>Rx Enabled</code></li>
+<li><code>Rx & Tx Enabled</code></li>
+</ul>
+</li>
+<li>IPSec Offload (<code>IPsecOffloadV2</code>)<ul>
+<li><code>Disabled</code></li>
+<li><code>Auth Header Enabled</code></li>
+<li><code>ESP Enabled</code></li>
+<li><code>Auth Header and ESP Enabled</code></li>
+</ul>
+</li>
+<li>Jumbo Packet (<code>JumboPacket</code>)<ul>
+<li><code>Disabled</code></li>
+<li><code>4088 Bytes</code></li>
+<li><code>9014 Bytes</code></li>
+<li><code>Auth Header and ESP Enabled</code></li>
+</ul>
+</li>
+<li>Large Send Offload Version 2 (IPv4) (<code>LsoV2IPv4</code>)<ul>
+<li><code>Disabled</code></li>
+<li><code>Enabled</code></li>
+</ul>
+</li>
+<li>Large Send Offload Version 2 (IPv6) (<code>LsoV2IPv6</code>)<ul>
+<li><code>Disabled</code></li>
+<li><code>Enabled</code></li>
+</ul>
+</li>
+<li>Maximum Number of RSS Processors (<code>MaxRssProcessors</code>)<ul>
+<li>1 - 64</li>
+</ul>
+</li>
+<li>Network Direct (RDMA) (<code>NetworkDirect</code>)<ul>
+<li><code>Disabled</code></li>
+<li><code>Enabled</code></li>
+</ul>
+</li>
+<li>Maximum Number of RSS Queues (<code>NumRSSQueues</code>)<ul>
+<li>1 - 64</li>
+</ul>
+</li>
+<li>Recv Segment Coalescing (IPv4) (<code>RscIPv4</code>)<ul>
+<li><code>Disabled</code></li>
+<li><code>Enabled</code></li>
+</ul>
+</li>
+<li>Recv Segment Coalescing (IPv6) (<code>RscIPv6</code>)<ul>
+<li><code>Disabled</code></li>
+<li><code>Enabled</code></li>
+</ul>
+</li>
+<li>Receive Side Scaling (<code>RSS</code>)<ul>
+<li><code>Disabled</code></li>
+<li><code>Enabled</code></li>
+</ul>
+</li>
+<li>RSS Base Processor Number (<code>RssBaseProcNumber</code>)<ul>
+<li>0 - 63</li>
+</ul>
+</li>
+<li>Maximum RSS Processor Number (<code>RssMaxProcNumber</code>)<ul>
+<li>0 - 63</li>
+</ul>
+</li>
+<li>RSS Profile (<code>RSSProfile</code>)<ul>
+<li><code>Closest Processor</code></li>
+<li><code>Closest Processor Static</code></li>
+<li><code>NUMA Scaling</code></li>
+<li><code>NUMA Scaling Static</code></li>
+<li><code>Conservative Scaling</code></li>
+</ul>
+</li>
+<li>TCP Checksum Offload (IPv4) (<code>TCPChecksumOffloadIPv4</code>)<ul>
+<li><code>Disabled</code></li>
+<li><code>Tx Enabled</code></li>
+<li><code>Rx Enabled</code></li>
+<li><code>Rx & Tx Enabled</code></li>
+</ul>
+</li>
+<li>TCP Checksum Offload (IPv6) (<code>TCPChecksumOffloadIPv6</code>)<ul>
+<li><code>Disabled</code></li>
+<li><code>Tx Enabled</code></li>
+<li><code>Rx Enabled</code></li>
+<li><code>Rx & Tx Enabled</code></li>
+</ul>
+</li>
+<li>UDP Checksum Offload (IPv4) (<code>UDPChecksumOffloadIPv4</code>)<ul>
+<li><code>Disabled</code></li>
+<li><code>Tx Enabled</code></li>
+<li><code>Rx Enabled</code></li>
+<li><code>Rx & Tx Enabled</code></li>
+</ul>
+</li>
+<li>UDP Checksum Offload (IPv6) (<code>UDPChecksumOffloadIPv6</code>)<ul>
+<li><code>Disabled</code></li>
+<li><code>Tx Enabled</code></li>
+<li><code>Rx Enabled</code></li>
+<li><code>Rx & Tx Enabled</code></li>
+</ul>
+</li>
+<li>Network Address (<code>NetworkAddress</code>)
+</li>
+</ul>
+<li>Wi-Fi<ul>
+<li>Veille à la déconnexion WoWLAN (<code>DeviceSleepOnDisconnect</code>)<ul>
+<li><code>Désactivé(e)</code></li>
+<li><code>Activé(e)</code></li>
+</ul>
+</li>
+<li>Fusion des paquets (<code>PacketCoalescing</code>)<ul>
+<li><code>Désactivé(e)</code></li>
+<li><code>Activé(e)</code></li>
+</ul>
+</li>
+<li>Délestage ARP pour WoWLAN (<code>PMARPOffload</code>)<ul>
+<li><code>Désactivé(e)</code></li>
+<li><code>Activé(e)</code></li>
+</ul>
+</li>
+<li>Délestage NS pour WoWLAN (<code>PMNSOffload</code>)<ul>
+<li><code>Désactivé(e)</code></li>
+<li><code>Activé(e)</code></li>
+</ul>
+</li>
+<li>Régénération des clés GTK pour WoWLAN (<code>PMWiFiRekeyOffload</code>)<ul>
+<li><code>Désactivé(e)</code></li>
+<li><code>Activé(e)</code></li>
+</ul>
+</li>
+<li>Wake on Magic Packet (<code>WakeOnMagicPacket</code>)<ul>
+<li><code>Désactivé(e)</code></li>
+<li><code>Activé(e)</code></li>
+</ul>
+</li>
+<li>Correspondance au modèle WOL (<code>WakeOnPattern</code>)<ul>
+<li><code>Désactivé(e)</code></li>
+<li><code>Activé(e)</code></li>
+</ul>
+</li>
+<li>Blocage général du scan BG (<code>BgScanGlobalBlocking</code>)<ul>
+<li><code>Jamais</code></li>
+<li><code>Lorsque RSSI est bon</code></li>
+<li><code>Toujours</code></li>
+</ul>
+</li>
+<li>Largeur de canal pour 2,4 GHz (<code>ChannelWidth24</code>)<ul>
+<li><code>20 MHz</code></li>
+<li><code>Auto</code></li>
+</ul>
+</li>
+<li>Largeur de canal pour 5 GHz (<code>ChannelWidth52</code>)<ul>
+<li><code>20 MHz</code></li>
+<li><code>Auto</code></li>
+</ul>
+</li>
+<li>Protection en mode mixte (<code>CtsToItself</code>)<ul>
+<li><code>RTS/CTS activée</code></li>
+<li><code>Auto-CTS activée</code></li>
+</ul>
+</li>
+<li>Incompatible avec canaux de 40 MHz (<code>FatChannelIntolerant</code>)<ul>
+<li><code>Désactivé(e)</code></li>
+<li><code>Activé(e)</code></li>
+</ul>
+</li>
+<li>Puissance de transmission (<code>IbssTxPower</code>)<ul>
+<li><code>1. Min.</code></li>
+<li><code>2. Faible</code></li>
+<li><code>3. Moyenne</code></li>
+<li><code>4. Élevée</code></li>
+<li><code>5. Max.</code></li>
+</ul>
+</li>
+<li>Mode sans fil?802.11n/ac/ax (<code>IEEE11nMode</code>)<ul>
+<li><code>1. Désactivé(e)</code></li>
+<li><code>2. 802.11n</code></li>
+<li><code>3. 802.11ac</code></li>
+<li><code>4. 802.11ax</code></li>
+</ul>
+</li>
+<li>MIMO – Mode économie d'énergie (<code>MIMOPowerSaveMode</code>)<ul>
+<li><code>SMPS auto</code></li>
+<li><code>SMPS statique</code></li>
+<li><code>SMPS dynamique</code></li>
+<li><code>SMPS désactivé</code></li>
+</ul>
+</li>
+<li>Agressivité de l'itinérance (<code>RoamAggressiveness</code>)<ul>
+<li><code>1. Min.</code></li>
+<li><code>2. Faible</code></li>
+<li><code>3. Moyenne</code></li>
+<li><code>4. Élevée</code></li>
+<li><code>5. Max.</code></li>
+</ul>
+</li>
+<li>Bande privilégiée (<code>RoamingPreferredBandType</code>)<ul>
+<li><code>1. Aucune préférence</code></li>
+<li><code>2. Préférer bande 2,4 GHz</code></li>
+<li><code>3. Préférer la bande 5 GHz</code></li>
+</ul>
+</li>
+<li>Multiplicateur de débit (<code>ThroughputBoosterEnabled</code>)<ul>
+<li><code>Désactivé(e)</code></li>
+<li><code>Activé(e)</code></li>
+</ul>
+</li>
+<li>Assistance U-APSD (<code>uAPSDSupport</code>)<ul>
+<li><code>Désactivé(e)</code></li>
+<li><code>Activé(e)</code></li>
+</ul>
+</li>
+<li>Mode sans fil 802.11a/b/g (<code>WirelessMode</code>)<ul>
+<li><code>1. 5 GHz 802.11a</code></li>
+<li><code>2. 2,4 GHz 802.11b</code></li>
+<li><code>3. 2,4 GHz 802.11g</code></li>
+<li><code>4. 2,4 GHz 802.11b/g</code></li>
+<li><code>5. Dual Band 802.11a/g</code></li>
+<li><code>6. Dual Band 802.11a/b/g</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>VPN</li><ul>
+<li>Non-Admin Access (<code>AllowNonAdmin</code>)<ul>
+<li><code>Not Allowed</code></li>
+<li><code>Allowed</code></li>
+</ul>
+</li>
+<li>Media Status (<code>MediaStatus</code>)<ul>
+<li><code>Application Controlled</code></li>
+<li><code>Always Connected</code></li>
+</ul>
+</li>
+<li>MTU (<code>MTU</code>)<ul>
+<li>100 - 1500</li>
+</ul>
+</li>
+<li>MAC Address (<code>NetworkAddress</code>)
+</li>
+</ul>
+</ul>
+<script>hljs.highlightAll();</script>
+</body>
+</html>

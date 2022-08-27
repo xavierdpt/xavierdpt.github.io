@@ -142,14 +142,14 @@ public abstract class Page {
     }
 
     protected void p(String content) {
-        pw.println("<p>" + inlineMarkDown(content) + "</p>");
+        pw.println("<p>" + markdown(content) + "</p>");
     }
 
     protected void sep() {
         pw.println("<div style=\"width:100%;height:16px\"></div>");
     }
 
-    private String inlineMarkDown(String content) {
+    protected String markdown(String content) {
         StringBuilder sb = new StringBuilder();
         boolean incode = false;
         for (char c : content.toCharArray()) {
@@ -206,7 +206,7 @@ public abstract class Page {
     }
 
     protected List<String> linesCode(String input) {
-        return new BufferedReader(new StringReader(input)).lines().map(x -> inlineMarkDown("`" + x + "`")).toList();
+        return new BufferedReader(new StringReader(input)).lines().map(x -> markdown("`" + x + "`")).toList();
     }
 
     protected abstract void render(RenderContext renderContext) throws IOException;
