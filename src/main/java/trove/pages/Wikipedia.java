@@ -700,6 +700,8 @@ public class Wikipedia extends Page {
                 Web Services Distributed Management
                 Web Services for Remote Portlets
                 ebXML
+                Ephemeral port
+                6to4
                 """);
 
     }

@@ -9,7 +9,7 @@ import java.util.Arrays;
 public class PowerShellRegexpCaseSensitivity extends Page {
 
     public PowerShellRegexpCaseSensitivity() {
-        super("powershell/regexp-casesensitivity", "PowerShell Regular Expression Case Sensitivity", Arrays.asList("powershell"));
+        super("powershell/regexp-casesensitivity", "Regular Expression Case Sensitivity", Arrays.asList("powershell"));
     }
 
     @Override

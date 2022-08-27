@@ -9,7 +9,7 @@ import java.util.List;
 public class PowerShellRegexp extends Page {
 
     public PowerShellRegexp() {
-        super("powershell/regexp", "Powershell Regular Expressions", List.of("powershell"));
+        super("powershell/regexp", "Regular Expressions", List.of("powershell"));
     }
 
     @Override

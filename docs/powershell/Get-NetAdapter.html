@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Get-NetAdapter | Xavier's Treasure Trove">
+<title>Get-NetAdapter | Xavier's Treasure Trove</title>
+<style>
+a { text-decoration:none;  }
+p { margin-top:0; margin-bottom:0;  }
+p > code, li > code { font-size:1.05em; color:#660000; }
+*, *::before { box-sizing:border-box;}
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/languages/powershell.min.js"></script>
+</head>
+<body>
+<a href="../index.html">Home</a>
+ > <a href="index.html">PowerShell</a>
+<h1>Get-NetAdapter</h1>
+<pre><code class="language-powershell hljs">Get-NetAdapter
+</code></pre>
+<p>The <code>Get-NetAdapter</code> command exposes <code>MSFT_NetAdapter</code> instances with 121 properties. Some of them have no values for any adapters, some properties expose the same information as other properties in different ways. This is an attempt to find some rhyme and reason to the available information.</p>
+<div style="width:100%;height:16px"></div>
+<p>Here's a command that should display most of what you could be looking for, feel free to remove anything you would not be interested in.</p>
+<pre><code class="language-powershell hljs">Get-NetAdapter | Select-Object Name,DriverDescription,DriverProvider,ComponentID,PnPDeviceID,`
+DriverName,InterfaceName,MediaType,DriverDate,DriverVersion,NdisVersion,DeviceID,InterfaceIndex,`
+HigherLayerInterfaceIndices,LowerLayerInterfaceIndices,MacAddress,PermanentAddress,MtuSize,LinkSpeed,`
+AdminStatus,ifOperStatus,MediaConnectionState,Status,SystemName,AdminLocked,Hidden,IMFilter,`
+iSCSIInterface,PromiscuousMode,NotUserRemovable,ConnectorPresent,Virtual,WdmInterface,`
+DeviceWakeUpEnable,OperationalStatusDownDefaultPortNotAuthenticated,`
+OperationalStatusDownInterfacePaused,OperationalStatusDownLowPowerState,`
+OperationalStatusDownMediaDisconnected,EnabledDefault,State,RequestedState,TransitioningToState,`
+PortNumber,EnabledState,NdisMedium,NdisPhysicalMedium,InterfaceAdminStatus,InterfaceType,NetLuid,`
+NetLuidIndex,EndPointInterface,HardwareInterface,FullDuplex,CreationClassName,`
+SystemCreationClassName | Out-GridView
+</code></pre>
+<h2>String information</h2>
+<p>The <code>Name</code> property contains a string identifier.</p>
+<p>The <code>InterfaceAlias</code> and <code>ifAlias</code> properties contains the same information.</p>
+<p>Example value: <code>VirtualBox Host-Only Network</code></p>
+<div style="width:100%;height:16px"></div>
+<p>The <code>DriverDescription</code> property contains additional useful information about the driver.</p>
+<p>The <code>InterfaceDescription</code> and <code>ifDesc</code> properties contains the same information.</p>
+<p>Possible values include:</p>
+<ul>
+<li><code>Cisco AnyConnect Secure Mobility Client Virtual Miniport Adapter for Windows x64</code></li>
+<li><code>Hyper-V Virtual Ethernet Adapter</code></li>
+<li><code>Intel(R) Wi-Fi 6 AX200 160MHz</code></li>
+<li><code>TAP-Windows Adapter V9</code></li>
+<li><code>VirtualBox Host-Only Ethernet Adapter</code></li>
+<li><code>Wintun Userspace Tunnel</code></li>
+</ul>
+<p>The <code>DriverProvider</code> property contains the company name that developed the driver. Possible values include:</p>
+<ul>
+<li><code>Cisco Systems</code></li>
+<li><code>Intel</code></li>
+<li><code>Microsoft</code></li>
+<li><code>Oracle Corporation</code></li>
+<li><code>TAP-Windows Provider V9</code></li>
+<li><code>WireGuard LLC</code></li>
+</ul>
+<p>The Hardware ID, aka PnP component ID, is available in <code>ComponentID</code>. Possible values include:</p>
+<ul>
+<li><code>PCI\VEN_8086&DEV_2723&SUBSYS_40808086</code></li>
+<li><code>root\tap0901</code></li>
+<li><code>sun_vboxnetadp</code></li>
+<li><code>vms_mp</code></li>
+<li><code>VPNVA</code></li>
+<li><code>Wintun</code></li>
+</ul>
+<p>The <code>PnPDeviceID</code> holds somewhat similar but different information</p>
+<ul>
+<li><code>PCI\VEN_8086&DEV_2723&SUBSYS_40808086&REV_1A\4&1d510a7f&0&00E0</code></li>
+<li><code>ROOT\NET\0000</code></li>
+<li><code>ROOT\NET\0001</code></li>
+<li><code>ROOT\NET\0002</code></li>
+<li><code>ROOT\NET\0003</code></li>
+<li><code>ROOT\VMS_MP\0000</code></li>
+</ul>
+<p>The <code>DriverFileName</code> property contains the name of the driver file. Possible values include:</p>
+<ul>
+<li><code>Netwtw10.sys</code></li>
+<li><code>tap0901.sys</code></li>
+<li><code>VBoxNetAdp6.sys</code></li>
+<li><code>VmsProxyHNic.sys</code></li>
+<li><code>vpnva64-6.sys</code></li>
+<li><code>wintun.sys</code></li>
+</ul>
+<p>The <code>DriverName</code> property contains the path to the driver file.</p>
+<p>Example value: <code>\SystemRoot\system32\DRIVERS\VBoxNetAdp6.sys</code></p>
+<div style="width:100%;height:16px"></div>
+<p>The <code>InterfaceName</code> property contains a string prefix and a number suffix.</p>
+<p>The <code>ifName</code> property contains the same information.</p>
+<p>Example value: <code> ethernet_32774</code></p>
+<p>Possible prefixes:</p>
+<ul>
+<li><code>ethernet</code></li>
+<li><code>iftype53</code></li>
+<li><code>wireless</code></li>
+</ul>
+<p>The <code>MediaType</code> property contains a string with the following possible values on my system:</p>
+<ul>
+<li><code>IP</code></li>
+<li><code>Native 802.11</code></li>
+<li><code>802.3</code></li>
+</ul>
+<p>The <code>PhysicalMediaType</code> property is the same for some adapters, but <code>Unspecified</code> for others:</p>
+<ul>
+<li><code>Unspecified</code></li>
+<li><code>Native 802.11</code></li>
+<li><code>802.3</code></li>
+</ul>
+<h2>Date and version information</h2>
+<p>The <code>DriverInformation</code> property contains the driver date, version and NDIS in a string.</p>
+<p>Example value: <code>Driver Date 2022-07-19 Version 6.1.36.2435 NDIS 6.0</code></p>
+<div style="width:100%;height:16px"></div>
+<p>The <code>DriverDate</code> property exposes a date as a string</p>
+<p>Example value: <code>2022-07-19</code></p>
+<div style="width:100%;height:16px"></div>
+<p>The <code>DriverDateData</code> property exposes <code>DriverDate</code> as a 64-bit unsigned integer.</p>
+<p>Example value: <code>133026624000000000</code></p>
+<div style="width:100%;height:16px"></div>
+<p>The driver's version is available in <code>DriverVersion</code> and <code>DriverVersionString</code> as a string.</p>
+<p>Example value: <code>6.1.36.2435</code>.</p>
+<div style="width:100%;height:16px"></div>
+<p>The driver's NDIS version is available in <code>DriverMajorNdisVersion</code> and <code>DriverMinorNdisVersion</code> as bytes.</p>
+<p>Example values: <code>6</code> and <code>30</code>.</p>
+<div style="width:100%;height:16px"></div>
+<p>The full NDIS version is available in <code>NdisVersion</code>.</p>
+<p>Example value: <code>6.30</code></p>
+<div style="width:100%;height:16px"></div>
+<p>The driver's version is available in <code>MajorDriverVersion</code> and <code>MinorDriverVersion</code> as 16-bit unsigned integers.</p>
+<p>Example values: <code>9</code> and <code>24</code>.</p>
+<h2>GUIDs</h2>
+<p>The <code>DeviceID</code> property exposes a GUID as a string with braces.</p>
+<p>The <code>InterfaceGuid</code> and <code>InstanceID</code> properties exposes the same information.</p>
+<p>Example value: <code>{545C58EC-A1C2-468B-ADD7-00E3A9604DA2}</code></p>
+<div style="width:100%;height:16px"></div>
+<p>The <code>DeviceName</code> property exposes the same GUID prefixed with <code>\Device\</code></p>
+<p>Example value: <code>\Device\{545C58EC-A1C2-468B-ADD7-00E3A9604DA2}</code></p>
+<h2>Interface indices</h2>
+<p>The <code>InterfaceIndex</code> property exposes a 32-bit unsigned integers.</p>
+<p>The <code>ifIndex</code> property contains the same information.</p>
+<div style="width:100%;height:16px"></div>
+<p>The <code>HigherLayerInterfaceIndices</code> and <code>LowerLayerInterfaceIndices</code> properties are arrays of 32-bit unsigned integers.</p>
+<p>On my system, <code>HigherLayerInterfaceIndices</code> had exactly one value for each adapter.</p>
+<p>On my system, <code>LowerLayerInterfaceIndices</code> had one value for HyperV, nothing for the other adapters.</p>
+<h2>MAC address</h2>
+<p>MAC addresses are available in <code>MacAddress</code> and <code>LinkLayerAddress</code> as strings.</p>
+<p>Example value: <code>00-B0-D0-63-C2-26</code>.</p>
+<div style="width:100%;height:16px"></div>
+<p>The same information is available in the <code>NetworkAddresses</code> property as a string too.</p>
+<p>Example value: <code>{00B0D063C226}</code>.</p>
+<div style="width:100%;height:16px"></div>
+<p>The same information is available in the <code>PermanentAddress</code> property as a string too, but was different from the MAC address for HyperV.</p>
+<p>Example value: <code>00B0D063C226</code>.</p>
+<h2>MTU</h2>
+<p>The Maximum Transmission Unit can be found in <code>MtuSize</code> as an unsigned 32-bit integer and in  <code>ActiveMaximumTransmissionUnit</code> as an unsigned 64-bit integer</p>
+<p>Example values: <code>0</code>, <code>1500</code>, <code>6535</code>.</p>
+<h2>Speed</h2>
+<p>The <code>Speed</code>, <code>ReceiveLinkSpeed</code> and <code>TransmitLinkSpeed</code> propertiess exposes the interface speed as a 64-bit unsigned integer.</p>
+<p>Example values in increasing order: <code>0</code>, <code>866700000</code>, <code>1000000000</code>, <code>10000000000</code>, <code>100000000000</code></p>
+<div style="width:100%;height:16px"></div>
+<p>The <code>LinkSpeed</code> property exposes the interface speed as a formatted string.</p>
+<p>Example values in increasing order: <code>0 bps</code>, <code>866.7 Mbps</code>, <code>1 Gbps</code>, <code>10 Gbps</code>, <code>100 Gbps</code></p>
+<h2>Up or down</h2>
+<p>A number of properties are related to whether the adapter is up, down, or something in-between.</p>
+<p>The <code>AdminStatus</code> property exposes an enum value of type <code>NET_IF_ADMIN_STATUS</code>. Most adapters were <code>Up</code> according to this property.</p>
+<p>Values in <code>Microsoft.PowerShell.Cmdletization.GeneratedTypes.NetAdapter.NET_IF_ADMIN_STATUS</code> include:</p>
+<ul>
+<li><code>Down</code></li>
+<li><code>Testing</code></li>
+<li><code>Up</code></li>
+</ul>
+<p>The <code>ifOperStatus</code> property exposes an enum value of type <code>IF_OPER_STATUS</code>. VPN adapters were <code>Down</code> according to this property,other adapters were <code>Up</code>, one adapter had <code>NotPresent</code>.</p>
+<p>Values in <code>Microsoft.PowerShell.Cmdletization.GeneratedTypes.NetAdapter.IF_OPER_STATUS</code> include:</p>
+<ul>
+<li><code>Dormant</code></li>
+<li><code>Down</code></li>
+<li><code>LowerLayerDown</code></li>
+<li><code>NotPresent</code></li>
+<li><code>Testing</code></li>
+<li><code>Unknown</code></li>
+<li><code>Up</code></li>
+</ul>
+<p>The <code>InterfaceOperationalStatus</code> property seems to expose <code>ifOperStatus</code> as an unsigned 32-bit integer with the corresponding enum's number.</p>
+<div style="width:100%;height:16px"></div>
+<p>The <code>MediaConnectionState</code> property exposes an enum value of type <code>NET_IF_MEDIA_CONNECT_STATE</code>. VPNs appeared <code>Disconnected</code>, wifi, virtual box and HyperV <code>Connected</code>, and another appeared as <code>Unknown</code>.</p>
+<p>Values in <code>Microsoft.PowerShell.Cmdletization.GeneratedTypes.NetAdapter.NET_IF_MEDIA_CONNECT_STATE</code> include:</p>
+<ul>
+<li><code>Connected</code></li>
+<li><code>Disconnected</code></li>
+<li><code>Unknown</code></li>
+</ul>
+<p>The <code>MediaConnectState</code> property seems to expose <code>MediaConnectionState</code> as an unsigned 32-bit integer with the corresponding enum's number.</p>
+<p>The <code>Status</code> property seems to expose <code>MediaConnectionState</code> as a string, but with different values:</p>
+<ul>
+<li><code>Up</code></li>
+<li><code>Disconnected</code></li>
+<li><code>Not Present</code></li>
+</ul>
+<h2>Other properties</h2>
+<p>The <code>SystemName</code> property is the computer name.</p>
+<div style="width:100%;height:16px"></div>
+<p>The <code>AdminLocked</code> property was always false on my system.</p>
+<div style="width:100%;height:16px"></div>
+<p>The <code>Hidden</code> property was always false on my system.</p>
+<div style="width:100%;height:16px"></div>
+<p>The <code>IMFilter</code> property was always false on my system.</p>
+<div style="width:100%;height:16px"></div>
+<p>The <code>iSCSIInterface</code> property was always false on my system.</p>
+<div style="width:100%;height:16px"></div>
+<p>The <code>PromiscuousMode</code> property was always false on my system.</p>
+<div style="width:100%;height:16px"></div>
+<p>The <code>NotUserRemovable</code> property was true only for HyperV.</p>
+<div style="width:100%;height:16px"></div>
+<p>The <code>ConnectorPresent</code> property was true only for wifi.</p>
+<div style="width:100%;height:16px"></div>
+<p>The <code>Virtual</code> property was false only for wifi.</p>
+<div style="width:100%;height:16px"></div>
+<p>The <code>WdmInterface</code> property was true for some but not others.</p>
+<div style="width:100%;height:16px"></div>
+<p>The <code>DeviceWakeUpEnable</code> property was true only for wifi.</p>
+<div style="width:100%;height:16px"></div>
+<p>The <code>OperationalStatusDownDefaultPortNotAuthenticated</code> property was always false.</p>
+<div style="width:100%;height:16px"></div>
+<p>The <code>OperationalStatusDownInterfacePaused</code> property was always false.</p>
+<div style="width:100%;height:16px"></div>
+<p>The <code>OperationalStatusDownLowPowerState</code> property was always false.</p>
+<div style="width:100%;height:16px"></div>
+<p>The <code>OperationalStatusDownMediaDisconnected</code> property was true for some adapters.</p>
+<div style="width:100%;height:16px"></div>
+<p>The <code>EnabledDefault</code> property was always <code>2</code> as an unsigned 16-bit integer.</p>
+<div style="width:100%;height:16px"></div>
+<p>The <code>State</code> property was always <code>2</code> as an unsigned 32-bit integer.</p>
+<div style="width:100%;height:16px"></div>
+<p>The <code>RequestedState</code> property was always <code>12</code> as an unsigned 16-bit integer.</p>
+<div style="width:100%;height:16px"></div>
+<p>The <code>TransitioningToState</code> property was always <code>12</code> as an unsigned 16-bit integer.</p>
+<div style="width:100%;height:16px"></div>
+<p>The <code>PortNumber</code> property was always <code>0</code> as an unsigned 16-bit integer.</p>
+<div style="width:100%;height:16px"></div>
+<p>The <code>EnabledState</code> property was always <code>5</code> as an unsigned 16-bit integer.</p>
+<div style="width:100%;height:16px"></div>
+<p>The <code>NdisMedium</code> property is a 32-bit unsigned integer, which was mostly <code>0</code>, but <code>16</code> for on adapter, and <code>19</code> for another.</p>
+<p>The <code>NdisPhysicalMedium</code> property is a 32-bit unsigned integer, which was mostly <code>0</code>, but <code>9</code> for on adapter, and <code>14</code> for another, and not the same adapters as above except wifi which had values for both properties..</p>
+<div style="width:100%;height:16px"></div>
+<p>The <code>InterfaceAdminStatus</code> is exposed as an unsigned 32-bit integer. It was <code>1</code> for most adapters, <code>2</code> for one adapter.</p>
+<div style="width:100%;height:16px"></div>
+<p>The <code>InterfaceType</code> is exposed as an unsigned 32-bit integer.</p>
+<p>Example values: <code>6</code>, <code>53</code>, <code>71</code>.</p>
+<div style="width:100%;height:16px"></div>
+<p>The <code>NetLuid</code> property is an unsigned 64-bit integer which hold large values.</p>
+<p>Example value: <code>14918723538255872</code></p>
+<div style="width:100%;height:16px"></div>
+<p>The <code>NetLuidIndex</code> property is an unsigned 32-bit integer which hold values typically around 32768.</p>
+<p>Example values: <code>32768</code>, <code>32769</code>, <code>32774</code>, <code>32777</code>, <code>32778</code></p>
+<div style="width:100%;height:16px"></div>
+<p>The <code>EndpointInterface</code> property was true only for the VirtualBox adapter.</p>
+<div style="width:100%;height:16px"></div>
+<p>The <code>HardwareInterface</code> property was true only for wifi.</p>
+<div style="width:100%;height:16px"></div>
+<p>The <code>FullDuplex</code> property was true for the VirtualBox and OpenVPN adapters, false for wifi, empty for others .</p>
+<p>The <code>MediaDuplextState</code> seems to expose the same information as a 32-bit unsigned integer, with <code>0</code> for nothing, <code>1</code> for <code>False</code> and <code>2</code> for <code>True</code> .</p>
+<div style="width:100%;height:16px"></div>
+<p>The <code>CreationClassName</code> property represents the underlying object class presented by the CIM object, because <code>Get-NetAdapter</code> uses CIM session to retrieve the information. In this case, it is <code>MSFT_NetAdapter</code>.</p>
+<div style="width:100%;height:16px"></div>
+<p>The <code>SystemCreationClassName</code> was always <code>CIM_NetworkPort</code>.</p>
+<h2>Properties with no values</h2>
+<p>The following properties had no values for any adapters.</p>
+<ul>
+<li><code>AdditionalAvailability</code></li>
+<li><code>AutoSense</code></li>
+<li><code>Availability</code></li>
+<li><code>AvailableRequestedStates</code></li>
+<li><code>Caption</code></li>
+<li><code>CommunicationStatus</code></li>
+<li><code>Description</code></li>
+<li><code>DetailedStatus</code></li>
+<li><code>ElementName</code></li>
+<li><code>ErrorCleared</code></li>
+<li><code>ErrorDescription</code></li>
+<li><code>HealthState</code></li>
+<li><code>IdentifyingDescriptions</code></li>
+<li><code>InstallDate</code></li>
+<li><code>LastErrorCode</code></li>
+<li><code>LinkTechnology</code></li>
+<li><code>MaxQuiesceTime</code></li>
+<li><code>MaxSpeed</code></li>
+<li><code>OperatingStatus</code></li>
+<li><code>OperationalStatus</code></li>
+<li><code>OtherEnabledState</code></li>
+<li><code>OtherIdentifyingInfo</code></li>
+<li><code>OtherLinkTechnology</code></li>
+<li><code>OtherNetworkPortType</code></li>
+<li><code>OtherPortType</code></li>
+<li><code>PortType</code></li>
+<li><code>PowerManagementCapabilities</code></li>
+<li><code>PowerManagementSupported</code></li>
+<li><code>PowerOnHours</code></li>
+<li><code>PrimaryStatus</code></li>
+<li><code>PSComputerName</code></li>
+<li><code>RequestedSpeed</code></li>
+<li><code>StatusDescriptions</code></li>
+<li><code>StatusInfo</code></li>
+<li><code>SupportedMaximumTransmissionUnit</code></li>
+<li><code>TimeOfLastStateChange</code></li>
+<li><code>TotalPowerOnHours</code></li>
+<li><code>UsageRestriction</code></li>
+<li><code>VlanID</code></li>
+</ul>
+<script>hljs.highlightAll();</script>
+</body>
+</html>

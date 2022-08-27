@@ -8,7 +8,7 @@ import java.util.List;
 
 public class PowerShellFunctions extends Page {
     public PowerShellFunctions() {
-        super("powershell/functions", "PowerShell Functions", List.of("powershell"));
+        super("powershell/functions", "Functions", List.of("powershell"));
     }
 
     @Override

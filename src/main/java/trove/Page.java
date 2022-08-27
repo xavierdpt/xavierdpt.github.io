@@ -1,24 +1,18 @@
 package trove;
 
-import trove.pages.Home;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.List;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 public abstract class Page {
 
     private static final String TITLE = "Xavier's Treasure Trove";
 
-    private String location;
-    private String subTitle;
+    private final String location;
+    private final String subTitle;
 
     private String path;
     protected PrintWriter pw;
-    private List<String> languages;
+    private final List<String> languages;
 
     protected Page(String location, String subTitle, List<String> languages) {
         this.location = location;
@@ -57,10 +51,14 @@ public abstract class Page {
         pw.println("<meta name=\"description\" content=\"" + fullTitle + "\">");
         pw.println("<title>" + fullTitle + "</title>");
         pw.println("<style>");
+        pw.println("a { text-decoration:none;  }");
+        pw.println("p { margin-top:0; margin-bottom:0;  }");
+        pw.println("p > code, li > code { font-size:1.05em; color:#660000; }");
         pw.println("*, *::before { box-sizing:border-box;}");
-        pw.println("p { line-height:48px;}");
-        pw.println("a { padding: 5px; text-decoration:none; display:inline-block; min-height:48px; min-width:48px; vertical-align:middle; line-height:48px; background-color: #EEF; margin-bottom:2px; }");
-        pw.println("li { vertical-align:middle; list-style-type:none; }");
+        // TODO : Find how to make lighthouse happy with 48px links but readable paragraphs.
+        //pw.println("p { line-height:48px; margin:0; padding:0; }");
+        //pw.println("a { padding: 5px; text-decoration:none; display:inline-block; min-height:48px; min-width:48px; vertical-align:middle; line-height:48px; background-color: #EEF; margin-bottom:2px; }");
+        //pw.println("li { vertical-align:middle; list-style-type:none; }");
         pw.println("</style>");
         if (!languages.isEmpty()) {
             pw.println("<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css\">");
@@ -152,7 +150,30 @@ public abstract class Page {
     }
 
     protected void p(String content) {
-        pw.println("<p>" + content + "</p>");
+        pw.println("<p>" + inlineMarkDown(content) + "</p>");
+    }
+
+    protected void sep() {
+        pw.println("<div style=\"width:100%;height:16px\"></div>");
+    }
+
+    private String inlineMarkDown(String content) {
+        StringBuilder sb = new StringBuilder();
+        boolean incode = false;
+        for (char c : content.toCharArray()) {
+            if (c == '`') {
+                if (incode) {
+                    sb.append("</code>");
+                    incode = false;
+                } else {
+                    sb.append("<code>");
+                    incode = true;
+                }
+            } else {
+                sb.append(c);
+            }
+        }
+        return sb.toString();
     }
 
     protected void ul(List<String> items) {
@@ -162,7 +183,6 @@ public abstract class Page {
         }
         pw.println("</ul>");
     }
-
 
     protected void code(String language, String code) {
         code = code.replaceAll("&", "&amp;");
@@ -187,6 +207,14 @@ public abstract class Page {
     private void finishRender() {
         footer();
         pw.close();
+    }
+
+    protected List<String> lines(String input) {
+        return new BufferedReader(new StringReader(input)).lines().toList();
+    }
+
+    protected List<String> linesCode(String input) {
+        return new BufferedReader(new StringReader(input)).lines().map(x -> inlineMarkDown("`" + x + "`")).toList();
     }
 
     protected abstract void render(RenderContext renderContext) throws IOException;
