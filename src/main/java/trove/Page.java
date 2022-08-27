@@ -107,7 +107,7 @@ public abstract class Page {
     protected String externalLink(String href, String title) {
         return "<a href=\"" + href + "\" target=\"_blank\">" + title + "</a>";
     }
-    
+
     protected String internalLink(Page page, RenderContext renderContext) {
         String linkTitle = page.getSubTitle();
         String href = findRelativePath(this.getLocation(), page.getLocation(), renderContext);
