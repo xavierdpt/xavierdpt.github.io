@@ -5,10 +5,11 @@
 <meta name="description" content="Get-NetAdapterBinding | Xavier's Treasure Trove">
 <title>Get-NetAdapterBinding | Xavier's Treasure Trove</title>
 <style>
-a { text-decoration:none;  }
-p { margin-top:0; margin-bottom:0;  }
-p > code, li > code { font-size:1.05em; color:#660000; }
 *, *::before { box-sizing:border-box;}
+a { text-decoration:none;  }
+th, td { text-align:left; }
+p { margin-top:0; margin-bottom:0;  }
+p > code, li > code, td > code { font-size:1.05em; color:#660000; }
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
@@ -20,7 +21,177 @@ p > code, li > code { font-size:1.05em; color:#660000; }
 <h1>Get-NetAdapterBinding</h1>
 <pre><code class="language-powershell hljs">Get-NetAdapterBinding
 </code></pre>
-<p>Coming soon...</p>
+<p><code>ComponentClassName</code> is a string.</p>
+<p>Example values:</p>
+<ul>
+<li><code>Client</code></li>
+<li><code>Filter</code></li>
+<li><code>Service</code></li>
+<li><code>Transport</code></li>
+</ul>
+<p><code>ComponentID</code> and <code>ElementName</code> are strings.</p>
+<p>Example values grouped by <code>ComponentClassName</code>:</p>
+<ul>
+<li>Client<ul>
+<li><code>ms_msclient</code></li>
+</ul></li>
+<li>Filter<ul>
+<li><code>INSECURE_NPCAP</code></li>
+<li><code>ms_pacer</code></li>
+<li><code>oracle_VBoxNetLwf</code></li>
+</ul></li>
+<li>Service<ul>
+<li><code>ms_server</code></li>
+</ul></li>
+<li>Transport<ul>
+<li><code>ms_implat</code></li>
+<li><code>ms_lldp</code></li>
+<li><code>ms_lltdio</code></li>
+<li><code>vms_pp</code></li>
+<li><code>ms_rspndr</code></li>
+<li><code>ms_tcpip</code></li>
+<li><code>ms_tcpip6</code></li>
+</ul></li>
+</ul>
+<p><code>Name</code> is the name of the adapter.</p>
+<p>Except particular cases, all components are bound to all interfaces.</p>
+<p>Example value: <code>VirtualBox Host-Only Network</code></p>
+<div style="width:100%;height:16px"></div>
+<p><code>InterfaceDescription</code> is the description of the adapter.</p>
+<p>Example value: <code>VirtualBox Host-Only Ethernet Adapter</code></p>
+<div style="width:100%;height:16px"></div>
+<p><code>Description</code> and <code>DisplayName</code> are the localized description string of the component.</p>
+<p>Example values (in French) for each component</p>
+<div style="width:100%;height:16px"></div>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ms_msclient</code></td>
+<td><code>Client pour les réseaux Microsoft</code></td>
+</tr>
+<tr>
+<td><code>INSECURE_NPCAP</code></td>
+<td><code>Npcap Packet Driver (NPCAP)</code></td>
+</tr>
+<tr>
+<td><code>ms_pacer</code></td>
+<td><code>Planificateur de paquets QoS</code></td>
+</tr>
+<tr>
+<td><code>oracle_VBoxNetLwf</code></td>
+<td><code>VirtualBox NDIS6 Bridged Networking Driver</code></td>
+</tr>
+<tr>
+<td><code>ms_server</code></td>
+<td><code>Partage de fichiers et imprimantes Réseaux Microsoft</code></td>
+</tr>
+<tr>
+<td><code>ms_implat</code></td>
+<td><code>Protocole de multiplexage de carte réseau Microsoft</code></td>
+</tr>
+<tr>
+<td><code>ms_lldp</code></td>
+<td><code>Pilote de protocole LLDP Microsoft</code></td>
+</tr>
+<tr>
+<td><code>ms_lltdio</code></td>
+<td><code>Pilote E/S de mappage de découverte de topologie de la couche de liaison</code></td>
+</tr>
+<tr>
+<td><code>ms_rspndr</code></td>
+<td><code>Répondeur de découverte de la topologie de la couche de liaison</code></td>
+</tr>
+<tr>
+<td><code>ms_tcpip</code></td>
+<td><code>Protocole Internet version 4 (TCP/IPv4)</code></td>
+</tr>
+<tr>
+<td><code>ms_tcpip6</code></td>
+<td><code>Protocole Internet version 6 (TCP/IPv6)</code></td>
+</tr>
+<tr>
+<td><code>vms_pp</code></td>
+<td><code>Commutateur virtuel extensible Hyper-V</code></td>
+</tr>
+</tbody>
+</table>
+<div style="width:100%;height:16px"></div>
+<p><code>ComponentClassGuid</code> is the GUID of the component</p>
+<p>Example value: <code>{4D36E973-E325-11CE-BFC1-08002BE10318}</code></p>
+<div style="width:100%;height:16px"></div>
+<p><code>InstanceID</code> is the component name qualified with the GUID of the adapter.</p>
+<p>Example value: <code>{545C58EC-A1C2-468B-ADD7-00E3A9604DA2}::ms_tcpip</code></p>
+<div style="width:100%;height:16px"></div>
+<p><code>Caption</code> is the name bniding class followed by the name of the adapter.</p>
+<p>Example value: <code>MSFT_NetAdapterBindingSettingData 'VirtualBox Host-Only Ethernet Adapter'</code></p>
+<div style="width:100%;height:16px"></div>
+<p><code>Source</code> is always <code>1</code>, possibly unless you do funny things.</p>
+<div style="width:100%;height:16px"></div>
+<p><code>Enabled</code> is always false for <code>ms_implat</code> and  <code>vms_pp</code>, always true for the others components.</p>
+<div style="width:100%;height:16px"></div>
+<p><code>BindName</code> does not always have a value. Here are the values for the components that have one.</p>
+<div style="width:100%;height:16px"></div>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Bind Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ms_msclient</code></td>
+<td><code>LanmanWorkstation</code></td>
+</tr>
+<tr>
+<td><code>ms_server</code></td>
+<td><code>LanmanServer</code></td>
+</tr>
+<tr>
+<td><code>ms_implat</code></td>
+<td><code>NdisImPlatform</code></td>
+</tr>
+<tr>
+<td><code>ms_lldp</code></td>
+<td><code>MsLldp</code></td>
+</tr>
+<tr>
+<td><code>ms_lltdio</code></td>
+<td><code>lltdio</code></td>
+</tr>
+<tr>
+<td><code>ms_rspndr</code></td>
+<td><code>rspndr</code></td>
+</tr>
+<tr>
+<td><code>ms_tcpip</code></td>
+<td><code>Tcpip</code></td>
+</tr>
+<tr>
+<td><code>ms_tcpip6</code></td>
+<td><code>Tcpip6</code></td>
+</tr>
+<tr>
+<td><code>vms_pp</code></td>
+<td><code>VMSP</code></td>
+</tr>
+</tbody>
+</table>
+<div style="width:100%;height:16px"></div>
+<p><code>Characteristics</code> is dependent on the adapter, and the same for all components</p>
+<p>Example values: <code>1</code>, <code>132</code>, <code>161</code></p>
+<div style="width:100%;height:16px"></div>
+<p><code>SystemName</code> is the host name</p>
+<div style="width:100%;height:16px"></div>
+<p><code>PSComputerName</code> is always blank</p>
+<hr/>
+<p><strong>Disclaimer:</strong> While I hope that the content of this page may be useful to you, and to future me, it may contains statements that are true only in particular circumstances or even blatantly false. To share your feedback, be it positive or negative, a question, a correction, or additional information that you would have and would like to share, you are welcome to <a href="https://github.com/xavierdpt/xavierdpt.github.io/issues" target="_blank">open an issue on GitHub</a>.</p>
 <script>hljs.highlightAll();</script>
 </body>
 </html>

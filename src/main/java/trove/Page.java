@@ -2,6 +2,10 @@ package trove;
 
 import java.io.*;
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Function;
+
+import static java.util.function.Function.identity;
 
 public abstract class Page {
 
@@ -51,10 +55,11 @@ public abstract class Page {
         pw.println("<meta name=\"description\" content=\"" + fullTitle + "\">");
         pw.println("<title>" + fullTitle + "</title>");
         pw.println("<style>");
-        pw.println("a { text-decoration:none;  }");
-        pw.println("p { margin-top:0; margin-bottom:0;  }");
-        pw.println("p > code, li > code { font-size:1.05em; color:#660000; }");
         pw.println("*, *::before { box-sizing:border-box;}");
+        pw.println("a { text-decoration:none;  }");
+        pw.println("th, td { text-align:left; }");
+        pw.println("p { margin-top:0; margin-bottom:0;  }");
+        pw.println("p > code, li > code, td > code { font-size:1.05em; color:#660000; }");
         // TODO : Find how to make lighthouse happy with 48px links but readable paragraphs.
         //pw.println("p { line-height:48px; margin:0; padding:0; }");
         //pw.println("a { padding: 5px; text-decoration:none; display:inline-block; min-height:48px; min-width:48px; vertical-align:middle; line-height:48px; background-color: #EEF; margin-bottom:2px; }");
@@ -210,4 +215,55 @@ public abstract class Page {
     }
 
     protected abstract void render(RenderContext renderContext) throws IOException;
+
+    protected void table(TableFormat format, List<List<String>> content) {
+        boolean hasHeader = format.hasHeader();
+        List<Function<String, String>> headerFormatters = format.getHeaderFormatters();
+        List<Function<String, String>> formatters = format.getFormatters();
+        pw.println("<table>");
+        if (hasHeader) {
+            List<String> row = getOrNull(content, 0);
+            if (row != null) {
+                pw.println("<thead>");
+                pw.println("<tr>");
+                for (int x = 0; x < row.size(); x++) {
+                    Function<String, String> formatter = Optional.ofNullable(getOrNull(headerFormatters, x)).orElse(identity());
+                    String cellContent = formatter.apply(row.get(x));
+                    pw.println("<th>" + cellContent + "</th>");
+                }
+                pw.println("</tr>");
+                pw.println("</thead>");
+            }
+        }
+        pw.println("<tbody>");
+        for (int y = hasHeader ? 1 : 0; y < content.size(); y++) {
+            List<String> row = content.get(y);
+            pw.println("<tr>");
+            for (int x = 0; x < row.size(); x++) {
+                Function<String, String> formatter = Optional.ofNullable(getOrNull(formatters, x)).orElse(identity());
+                String cellContent = formatter.apply(row.get(x));
+                pw.println("<td>" + cellContent + "</td>");
+            }
+            pw.println("</tr>");
+        }
+        pw.println("</tbody>");
+        pw.println("</table>");
+    }
+
+    private <T> T getOrNull(List<T> list, int i) {
+        if (list == null || i >= list.size()) {
+            return null;
+        } else {
+            return list.get(i);
+        }
+    }
+
+    protected void disclaimer() {
+        pw.println("<hr/>");
+        pw.println("<p><strong>Disclaimer:</strong> While I hope that the content of this page may be useful to you," +
+                " and to future me, it may contains statements that are true only in particular circumstances or" +
+                " even blatantly false. To share your feedback, be it positive or negative, a question, a correction," +
+                " or additional information that you would have and would like to share, you are welcome to " +
+                externalLink("https://github.com/xavierdpt/xavierdpt.github.io/issues", "open an issue on GitHub") + ".</p>");
+    }
 }
