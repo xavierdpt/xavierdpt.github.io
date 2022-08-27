@@ -107,17 +107,9 @@ public abstract class Page {
     protected String externalLink(String href, String title) {
         return "<a href=\"" + href + "\" target=\"_blank\">" + title + "</a>";
     }
-
-    protected String internalLink(Class<? extends Page> pageClass, boolean isTrove, RenderContext renderContext) {
-        Page page = renderContext.getPageByClass(pageClass);
-        return internalLink(page, isTrove, renderContext);
-    }
-
-    protected String internalLink(Page page, boolean isTrove, RenderContext renderContext) {
+    
+    protected String internalLink(Page page, RenderContext renderContext) {
         String linkTitle = page.getSubTitle();
-        if (isTrove) {
-            linkTitle += " Trove";
-        }
         String href = findRelativePath(this.getLocation(), page.getLocation(), renderContext);
         return "<a href=\"" + href + "\">" + linkTitle + "</a>";
     }

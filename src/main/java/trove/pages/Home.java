@@ -19,7 +19,7 @@ public class Home extends Page {
                 .filter(page -> page.getLocation().split("/", -1).length == 1)
                 .filter(page -> page.getSubTitle() != null)
                 .sorted(Comparator.comparing(Page::getSubTitle))
-                .map(page -> internalLink(page, true, renderContext))
+                .map(page -> internalLink(page, renderContext))
                 .toList();
 
         pw.println("<p>Welcome to Xavier's Treasure Troves</p>");

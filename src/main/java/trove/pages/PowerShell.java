@@ -23,7 +23,7 @@ public class PowerShell extends Page {
         pw.println("<p>Here are troves on " + powerShell + "</p>");
         pw.println("<ul>");
         childPages.stream().sorted(Comparator.comparing(p -> p.getSubTitle().toLowerCase())).forEach(page -> {
-                    String htmlLink = internalLink(page, true, renderContext);
+                    String htmlLink = internalLink(page, renderContext);
                     pw.println("<li>" + htmlLink + "</li>");
                 }
         );
