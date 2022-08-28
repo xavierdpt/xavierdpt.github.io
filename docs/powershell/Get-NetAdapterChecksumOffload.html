@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Get-NetAdapterChecksumOffload | Xavier's Treasure Trove">
+<title>Get-NetAdapterChecksumOffload | Xavier's Treasure Trove</title>
+<style>
+*, *::before { box-sizing:border-box;}
+a { text-decoration:none;  }
+th, td { text-align:left; }
+p { margin-top:0; margin-bottom:0;  }
+p > code, li > code, td > code { font-size:1.05em; color:#660000; }
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/languages/powershell.min.js"></script>
+</head>
+<body>
+<a href="../index.html">Home</a>
+ > <a href="index.html">PowerShell</a>
+<h1>Get-NetAdapterChecksumOffload</h1>
+<pre><code class="language-powershell hljs">Get-NetAdapterChecksumOffload
+</code></pre>
+<p>This function gets some of the advanced properties available in <a href="Get-NetAdapterAdvancedProperty.html">Get-NetAdapterAdvancedProperty</a>.</p>
+<h2>Main object</h2>
+<p><code>Name</code> is the name of the adapter</p>
+<p>Example value: <code>vEthernet (Default Switch)</code></p>
+<div style="width:100%;height:16px"></div>
+<p><code>Description</code>, <code>ElementName</code> and <code>InterfaceDescription</code> are the description of the adapter</p>
+<p>Example value: <code>Hyper-V Virtual Ethernet Adapter</code></p>
+<div style="width:100%;height:16px"></div>
+<p><code>Caption</code> is the description of the adapter prefixed with the class name.</p>
+<p>Example value: <code>MSFT_NetAdapterChecksumOffloadSettingData 'Hyper-V Virtual Ethernet Adapter'</code></p>
+<div style="width:100%;height:16px"></div>
+<p><code>InstanceID</code> is the GUID of the adapter.</p>
+<p>Example value: <code>{DABC4D36-0A7F-4009-8CD9-D0A9337960B6}</code></p>
+<div style="width:100%;height:16px"></div>
+<p><code>Source</code> is <code>2</code>.</p>
+<div style="width:100%;height:16px"></div>
+<p><code>SystemName</code> is the host name.</p>
+<div style="width:100%;height:16px"></div>
+<p><code>PSComputerName</code> is blank.</p>
+<div style="width:100%;height:16px"></div>
+<p><code>ChecksumOffloadHardwareCapabilities</code> is a CIM object.</p>
+<p>Example value when rendered as a string: <code>MSFT_NetAdapterChecksumOffloadCapabilities</code></p>
+<div style="width:100%;height:16px"></div>
+<p><code>IpIPv4Enabled</code>, <code>TcpIPv4Enabled</code>, <code>TcpIPv6Enabled</code>, <code>UdpIPv4Enabled</code>, <code>UdpIPv6Enabled</code> are enum values of type <code>NetAdapterChecksumOffload.Direction</code>.</p>
+<p>They have all this value: <code>RxTxEnabled</code></p>
+<h2><code>NetAdapterChecksumOffload.Direction</code></h2>
+<p>Possible values for <code>Microsoft.PowerShell.Cmdletization.GeneratedTypes.NetAdapterChecksumOffload.Direction</code>:</p>
+<ul>
+<li><code>Disabled</code></li>
+<li><code>RxEnabled</code></li>
+<li><code>RxTxEnabled</code></li>
+<li><code>TxEnabled</code></li>
+</ul>
+<h2><code>ChecksumOffloadHardwareCapabilities</code></h2>
+<pre><code class="language-powershell hljs">$cap=(Get-NetAdapterChecksumOffload).ChecksumOffloadHardwareCapabilities
+</code></pre>
+<p>The following booleans were all true (there's only data for the HyperV adapter)</p>
+<ul>
+<li><code>IPv4ReceiveIpChecksumSupported</code></li>
+<li><code>IPv4ReceiveIpOptionsSupported</code></li>
+<li><code>IPv4ReceiveTcpChecksumSupported</code></li>
+<li><code>IPv4ReceiveTcpOptionsSupported</code></li>
+<li><code>IPv4ReceiveUdpChecksumSupported</code></li>
+<li><code>IPv4TransmitIpChecksumSupported</code></li>
+<li><code>IPv4TransmitIpOptionsSupported</code></li>
+<li><code>IPv4TransmitTcpChecksumSupported</code></li>
+<li><code>IPv4TransmitTcpOptionsSupported</code></li>
+<li><code>IPv4TransmitUdpChecksumSupported</code></li>
+<li><code>IPv6ReceiveIpExtensionHeadersSupported</code></li>
+<li><code>IPv6ReceiveTcpChecksumSupported</code></li>
+<li><code>IPv6ReceiveTcpOptionsSupported</code></li>
+<li><code>IPv6ReceiveUdpChecksumSupported</code></li>
+<li><code>IPv6TransmitIpExtensionHeadersSupported</code></li>
+<li><code>IPv6TransmitTcpChecksumSupported</code></li>
+<li><code>IPv6TransmitTcpOptionsSupported</code></li>
+<li><code>IPv6TransmitUdpChecksumSupported</code></li>
+</ul>
+<p><code>PSComputerName</code> is blank</p>
+<h2>Encapsulation</h2>
+<p>The following objects have the same properties with the same values:</p>
+<ul>
+<li><code>IPv4ReceiveEncapsulation</code></li>
+<li><code>IPv4TransmitEncapsulation</code></li>
+<li><code>IPv6ReceiveEncapsulation</code></li>
+<li><code>IPv6TransmitEncapsulation</code></li>
+</ul>
+<pre><code class="language-powershell hljs">$IPv4Receive = ($cap).IPv4ReceiveEncapsulation
+</code></pre>
+<p>They have more boolean properties, among with only <code>NdisEncapsulationIeee802_3</code> is true, the others are false.</p>
+<ul>
+<li><code>NdisEncapsulationIeee802_3</code></li>
+<li><code>NdisEncapsulationIeee802_3pAndq</code></li>
+<li><code>NdisEncapsulationIeee802_3PAndQInOob</code></li>
+<li><code>NdisEncapsulationIeeLlcSnapRouted</code></li>
+<li><code>NdisEncapsulationNotNull</code></li>
+<li><code>NdisEncapsulationNotSupported</code></li>
+</ul>
+<p><code>PSComputerName</code> is blank</p>
+<hr/>
+<p><strong>Disclaimer:</strong> While I hope that the content of this page may be useful to you, and to future me, it may contains statements that are true only in particular circumstances or even blatantly false. To share your feedback, be it positive, negative, a question, a correction, or additional information that you would like to share, you are welcome to <a href="https://github.com/xavierdpt/xavierdpt.github.io/issues" target="_blank">open an issue on GitHub</a>.</p>
+<script>hljs.highlightAll();</script>
+</body>
+</html>

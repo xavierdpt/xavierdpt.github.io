@@ -262,8 +262,8 @@ public abstract class Page {
         pw.println("<hr/>");
         pw.println("<p><strong>Disclaimer:</strong> While I hope that the content of this page may be useful to you," +
                 " and to future me, it may contains statements that are true only in particular circumstances or" +
-                " even blatantly false. To share your feedback, be it positive or negative, a question, a correction," +
-                " or additional information that you would have and would like to share, you are welcome to " +
+                " even blatantly false. To share your feedback, be it positive, negative, a question, a correction," +
+                " or additional information that you would like to share, you are welcome to " +
                 externalLink("https://github.com/xavierdpt/xavierdpt.github.io/issues", "open an issue on GitHub") + ".</p>");
     }
 }
