@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Get-NetAdapterIPsecOffload | Xavier's Treasure Trove">
+<title>Get-NetAdapterIPsecOffload | Xavier's Treasure Trove</title>
+<style>
+*, *::before { box-sizing:border-box;}
+a { text-decoration:none;  }
+th, td { text-align:left; }
+p { margin-top:0; margin-bottom:0;  }
+p > code, li > code, td > code { font-size:1.05em; color:#660000; }
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/languages/powershell.min.js"></script>
+</head>
+<body>
+<a href="../index.html">Home</a>
+ > <a href="index.html">PowerShell</a>
+<h1>Get-NetAdapterIPsecOffload</h1>
+<pre><code class="language-powershell hljs">Get-NetAdapterIPsecOffload
+</code></pre>
+<p>On my system, I had only data for one adapter.</p>
+<div style="width:100%;height:16px"></div>
+<p>Boolean properties</p>
+<ul>
+<li><code>AhEnabled</code></li>
+<li><code>AhEspCombinedEnabled</code></li>
+<li><code>AhEspCombinedSupported</code></li>
+<li><code>AhSupported</code></li>
+<li><code>Enabled</code></li>
+<li><code>EspEnabled</code></li>
+<li><code>EspSupported</code></li>
+<li><code>IPv4OptionsEnabled</code></li>
+<li><code>IPv4OptionsSupported</code></li>
+<li><code>IPv6Enabled</code></li>
+<li><code>IPv6NonIPsecExtensionHeadersEnabled</code></li>
+<li><code>IPv6NonIPsecExtensionHeadersSupported</code></li>
+<li><code>IPv6Supported</code></li>
+<li><code>LsoEnabled</code></li>
+<li><code>LsoSupported</code></li>
+<li><code>TransportEnabled</code></li>
+<li><code>TransportSupported</code></li>
+<li><code>TunnelEnabled</code></li>
+<li><code>TunnelSupported</code></li>
+</ul>
+<p>Number properties</p>
+<ul>
+<li><code>SaOffloadCapacityEnabled</code></li>
+<li><code>SaOffloadCapacitySupported</code></li>
+<li><code>Source</code></li>
+<li><code>UdpEspEnabled</code></li>
+<li><code>UdpEspSupported</code></li>
+</ul>
+<h2>String properties</h2>
+<p><code>Name</code> is the name of the adapter, as it appears in <a href="Get-NetAdapter.html">Get-NetAdapter</a></p>
+<div style="width:100%;height:16px"></div>
+<p><code>ElementName</code>, <code>Description</code> and <code>InterfaceDescription</code> are the description of the adapter</p>
+<div style="width:100%;height:16px"></div>
+<p><code>Caption</code> is the description of the adapter, prefixed with <code>MSFT_NetAdapterIPsecOffloadV2SettingData</code></p>
+<div style="width:100%;height:16px"></div>
+<p><code>InstanceID</code> is the GUID of the interface</p>
+<div style="width:100%;height:16px"></div>
+<p><code>SystemName</code> is the hostname</p>
+<div style="width:100%;height:16px"></div>
+<p><code>PSComputerName</code> is empty</p>
+<h2>List of strings properties</h2>
+<p><code>AuthenticationAlgorithmsEnabled</code> and <code>AuthenticationAlgorithmsSupported</code> are list of authentication algorithms</p>
+<p>Example values include:</p>
+<ul>
+<li><code>MD5</code></li>
+<li><code>SHA1</code></li>
+<li><code>SHA256</code></li>
+<li><code>AESGCM128</code></li>
+<li><code>AESGCM192</code></li>
+<li><code>AESGCM256</code></li>
+</ul>
+<p><code>EncryptionAlgorithmsEnabled</code> and <code>EncryptionAlgorithmsSupported</code> are list of encryption algorithms</p>
+<p>Example values include:</p>
+<ul>
+<li><code>DESCBC</code></li>
+<li><code>DES3CBC</code></li>
+<li><code>AESGCM128</code></li>
+<li><code>AESGCM192</code></li>
+<li><code>AESGCM256</code></li>
+<li><code>AESCBC128</code></li>
+<li><code>AESCBC192</code></li>
+<li><code>AESCBC256</code></li>
+</ul>
+<hr/>
+<p><strong>Disclaimer:</strong> While I hope that the content of this page may be useful to you, and to future me, it may contains statements that are true only in particular circumstances or even blatantly false. To share your feedback, be it positive, negative, a question, a correction, or additional information that you would like to share, you are welcome to <a href="https://github.com/xavierdpt/xavierdpt.github.io/issues" target="_blank">open an issue on GitHub</a>.</p>
+<script>hljs.highlightAll();</script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Get-NetAdapterLso | Xavier's Treasure Trove">
+<title>Get-NetAdapterLso | Xavier's Treasure Trove</title>
+<style>
+*, *::before { box-sizing:border-box;}
+a { text-decoration:none;  }
+th, td { text-align:left; }
+p { margin-top:0; margin-bottom:0;  }
+p > code, li > code, td > code { font-size:1.05em; color:#660000; }
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/languages/powershell.min.js"></script>
+</head>
+<body>
+<a href="../index.html">Home</a>
+ > <a href="index.html">PowerShell</a>
+<h1>Get-NetAdapterLso</h1>
+<pre><code class="language-powershell hljs">Get-NetAdapterLso
+</code></pre>
+<h2>Properties common to other commands</h2>
+<p><code>Name</code> is the name of the adapter.</p>
+<div style="width:100%;height:16px"></div>
+<p><code>ElementName</code>, <code>Description</code>, <code>InterfaceDescription</code> is the description of the adapter.</p>
+<div style="width:100%;height:16px"></div>
+<p><code>Caption</code> is the description of the adapter prefixed with <code>MSFT_NetAdapterLsoSettingData</code>.</p>
+<div style="width:100%;height:16px"></div>
+<p><code>InstanceID</code> is the GUID of the adapter.</p>
+<div style="width:100%;height:16px"></div>
+<p><code>SystemName</code> is the hostname.</p>
+<div style="width:100%;height:16px"></div>
+<p><code>PSComputerName</code> is blank.</p>
+<div style="width:100%;height:16px"></div>
+<p><code>Source</code> is <code>2</code>.</p>
+<h2>Boolean and number properties</h2>
+<p>There are three boolean properties in this command:</p>
+<ul>
+<li><code>IPv4Enabled</code></li>
+<li><code>IPv6Enabled</code></li>
+<li><code>V1IPv4Enabled</code></li>
+</ul>
+<p><code>MaximumLsoVersionSupported</code> is the only number property.</p>
+<h2><code>LargeSendOffloadV1HardwareCapabilities</code></h2>
+<pre><code class="language-powershell hljs">$v1 = (Get-NetAdapterLso).LargeSendOffloadV1HardwareCapabilities
+</code></pre>
+<p>Two boolean properties</p>
+<ul>
+<li><code>IPv4IpOptionsSupported</code></li>
+<li><code>IPv4TcpOptionsSupported</code></li>
+</ul>
+<p>Two number properties</p>
+<ul>
+<li><code>IPv4IpOptionsSupported</code></li>
+<li><code>IPv4TcpOptionsSupported</code></li>
+</ul>
+<p><code>PSComputerName</code> is blank</p>
+<h2><code>LargeSendOffloadV1HardwareCapabilities.IPv4Encapsulation</code></h2>
+<pre><code class="language-powershell hljs">$v1Encapsulation = ($v1).IPv4Encapsulation
+</code></pre>
+<p>Boolean properties:</p>
+<ul>
+<li><code>NdisEncapsulationIeee802_3</code></li>
+<li><code>NdisEncapsulationIeee802_3pAndq</code></li>
+<li><code>NdisEncapsulationIeee802_3PAndQInOob</code></li>
+<li><code>NdisEncapsulationIeeLlcSnapRouted</code></li>
+<li><code>NdisEncapsulationNotNull</code></li>
+<li><code>NdisEncapsulationNotSupported</code></li>
+</ul>
+<p><code>PSComputerName</code> is blank</p>
+<h2><code>LargeSendOffloadV2HardwareCapabilities</code></h2>
+<pre><code class="language-powershell hljs">$v2 = (Get-NetAdapterLso).LargeSendOffloadV2HardwareCapabilities
+</code></pre>
+<p>Two boolean properties</p>
+<ul>
+<li><code>IPv6IpExtensionHeadersSupported</code></li>
+<li><code>IPv6TcpOptionsSupported</code></li>
+</ul>
+<p>Four number properties</p>
+<ul>
+<li><code>IPv4MaxOffloadSizeSupported</code></li>
+<li><code>IPv4MinSegmentCountSupported</code></li>
+<li><code>IPv6MaxOffLoadSizeSupported</code></li>
+<li><code>IPv6MinSegmentCountSupported</code></li>
+</ul>
+<p><code>PSComputerName</code> is blank</p>
+<h2><code>LargeSendOffloadV2HardwareCapabilities.IPv4Encapsulation</code></h2>
+<pre><code class="language-powershell hljs">$v2_Ipv4Encapsulation = ($v2).IPv4Encapsulation
+</code></pre>
+<p>It's probably the same thing as for V1</p>
+<h2><code>LargeSendOffloadV2HardwareCapabilities.IPv6Encapsulation</code></h2>
+<pre><code class="language-powershell hljs">$v2_Ipv6Encapsulation = ($v2).IPv6Encapsulation
+</code></pre>
+<p>Boolean properties:</p>
+<ul>
+<li><code>NdisEncapsulationIeee802_3</code></li>
+<li><code>NdisEncapsulationIeee802_3pAndq</code></li>
+<li><code>NdisEncapsulationIeee802_3PAndQInOob</code></li>
+<li><code>NdisEncapsulationIeeLlcSnapRouted</code></li>
+<li><code>NdisEncapsulationNotNull</code></li>
+<li><code>NdisEncapsulationNotSupported</code></li>
+</ul>
+<p><code>PSComputerName</code> is blank</p>
+<hr/>
+<p><strong>Disclaimer:</strong> While I hope that the content of this page may be useful to you, and to future me, it may contains statements that are true only in particular circumstances or even blatantly false. To share your feedback, be it positive, negative, a question, a correction, or additional information that you would like to share, you are welcome to <a href="https://github.com/xavierdpt/xavierdpt.github.io/issues" target="_blank">open an issue on GitHub</a>.</p>
+<script>hljs.highlightAll();</script>
+</body>
+</html>
