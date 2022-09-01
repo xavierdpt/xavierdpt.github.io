@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="URI: Uniform Resource Identifier | Xavier's Treasure Trove">
+<title>URI: Uniform Resource Identifier | Xavier's Treasure Trove</title>
+<style>
+*, *::before { box-sizing:border-box;}
+a { text-decoration:none;  }
+th, td { text-align:left; }
+p { margin-top:0; margin-bottom:0;  }
+p > code, li > code, td > code { font-size:1.05em; color:#660000; }
+code.bnf-token-abstract { border: solid 1px #660000; display:inline-block; padding:5px; font-weight:bold; }
+code.bnf-token-metasyntax { border: solid 1px #660000; display:inline-block; padding:5px; }
+code.bnf-token-concrete { border-top: solid 1px #660000; border-bottom: solid 1px #660000; display:inline-block;}
+</style>
+</head>
+<body>
+<a href="index.html">Home</a>
+<h1>URI: Uniform Resource Identifier</h1>
+<p>Uniform Resource Identifiers are defined in <a href="https://datatracker.ietf.org/doc/html/rfc3986" target="_blank">RFC3986</a>.</p>
+<div style="width:100%;height:16px"></div>
+<p>More information is also available on <a href="https://en.wikipedia.org/wiki/Uniform_Resource_Identifier" target="_blank">Wikipedia</a></p>
+<div style="width:100%;height:16px"></div>
+<p>In this page, we will generate a variety of URI strings by following the rules of the grammar.</p>
+<div style="width:100%;height:16px"></div>
+<p>The root production rule is the following:</p>
+<p><code class="bnf-token-abstract">scheme</code><code class="bnf-token-concrete">:</code><code class="bnf-token-abstract">hier-part</code><code class="bnf-token-metasyntax">[</code><code class="bnf-token-concrete">?</code><code class="bnf-token-abstract">query</code><code class="bnf-token-metasyntax">]</code><code class="bnf-token-metasyntax">[</code><code class="bnf-token-concrete">#</code><code class="bnf-token-abstract">fragment</code><code class="bnf-token-metasyntax">]</code></p>
+<div style="width:100%;height:16px"></div>
+<p>Let's expand the <code>scheme</code> rule.</p>
+<p><code class="bnf-token-abstract">ALPHA</code><code class="bnf-token-metasyntax">*(</code><code class="bnf-token-abstract">ALPHA</code><code class="bnf-token-metasyntax">/</code><code class="bnf-token-abstract">DIGIT</code><code class="bnf-token-metasyntax">/</code><code class="bnf-token-concrete">+</code><code class="bnf-token-metasyntax">/</code><code class="bnf-token-concrete">-</code><code class="bnf-token-metasyntax">/</code><code class="bnf-token-concrete">.</code><code class="bnf-token-metasyntax">)</code><code class="bnf-token-concrete">:</code><code class="bnf-token-abstract">hier-part</code><code class="bnf-token-metasyntax">[</code><code class="bnf-token-concrete">?</code><code class="bnf-token-abstract">query</code><code class="bnf-token-metasyntax">]</code><code class="bnf-token-metasyntax">[</code><code class="bnf-token-concrete">#</code><code class="bnf-token-abstract">fragment</code><code class="bnf-token-metasyntax">]</code></p>
+<div style="width:100%;height:16px"></div>
+<p>This means that the scheme must start with a letter, but then can continue with letters, digits, or '<code>+</code>', '<code>-</code>' or '<code>.</code>' characters.</p>
+<p>For example, <code>http2+ftp-1-5.x.</code> would be a valid scheme according to this specification.</p>
+<p>Let's use <code>myscheme</code> for now, which is equally valid.</p>
+<p><code class="bnf-token-concrete">myscheme:</code><code class="bnf-token-abstract">hier-part</code><code class="bnf-token-metasyntax">[</code><code class="bnf-token-concrete">?</code><code class="bnf-token-abstract">query</code><code class="bnf-token-metasyntax">]</code><code class="bnf-token-metasyntax">[</code><code class="bnf-token-concrete">#</code><code class="bnf-token-abstract">fragment</code><code class="bnf-token-metasyntax">]</code></p>
+<div style="width:100%;height:16px"></div>
+<p>Since <code>query</code> and <code>fragment</code> are optional, we can ignore them for now.</p>
+<p><code class="bnf-token-concrete">myscheme:</code><code class="bnf-token-abstract">hier-part</code></p>
+<p>For <code>hier-part</code>, we have four possibilities.</p>
+</body>
+</html>

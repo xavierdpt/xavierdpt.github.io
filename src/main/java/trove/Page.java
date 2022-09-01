@@ -1,9 +1,12 @@
 package trove;
 
+import org.owasp.encoder.Encode;
+
 import java.io.*;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import static java.util.function.Function.identity;
 
@@ -60,6 +63,9 @@ public abstract class Page {
         pw.println("th, td { text-align:left; }");
         pw.println("p { margin-top:0; margin-bottom:0;  }");
         pw.println("p > code, li > code, td > code { font-size:1.05em; color:#660000; }");
+        pw.println("code.bnf-token-abstract { border: solid 1px #660000; display:inline-block; padding:5px; font-weight:bold; }");
+        pw.println("code.bnf-token-metasyntax { border: solid 1px #660000; display:inline-block; padding:5px; }");
+        pw.println("code.bnf-token-concrete { border-top: solid 1px #660000; border-bottom: solid 1px #660000; display:inline-block;}");
         // TODO : Find how to make lighthouse happy with 48px links but readable paragraphs.
         //pw.println("p { line-height:48px; margin:0; padding:0; }");
         //pw.println("a { padding: 5px; text-decoration:none; display:inline-block; min-height:48px; min-width:48px; vertical-align:middle; line-height:48px; background-color: #EEF; margin-bottom:2px; }");
@@ -110,7 +116,7 @@ public abstract class Page {
     }
 
     protected String externalLink(String href, String title) {
-        return "<a href=\"" + href + "\" target=\"_blank\">" + title + "</a>";
+        return PageUtils.externalLink(href, title);
     }
 
     protected String internalLink(Page page, RenderContext renderContext) {
@@ -147,7 +153,14 @@ public abstract class Page {
     }
 
     protected void p(String content) {
-        pw.println("<p>" + markdown(content) + "</p>");
+        p(content, true);
+    }
+
+    protected void p(String content, boolean markDown) {
+        if (markDown) {
+            content = markdown(content);
+        }
+        pw.println("<p>" + content + "</p>");
     }
 
     protected void sep() {
@@ -261,9 +274,27 @@ public abstract class Page {
     protected void disclaimer() {
         pw.println("<hr/>");
         pw.println("<p><strong>Disclaimer:</strong> While I hope that the content of this page may be useful to you," +
-                " and to future me, it may contains statements that are true only in particular circumstances or" +
-                " even blatantly false. To share your feedback, be it positive, negative, a question, a correction," +
-                " or additional information that you would like to share, you are welcome to " +
-                externalLink("https://github.com/xavierdpt/xavierdpt.github.io/issues", "open an issue on GitHub") + ".</p>");
+                   " and to future me, it may contains statements that are true only in particular circumstances or" +
+                   " even blatantly false. To share your feedback, be it positive, negative, a question, a correction," +
+                   " or additional information that you would like to share, you are welcome to " +
+                   externalLink("https://github.com/xavierdpt/xavierdpt.github.io/issues", "open an issue on GitHub") + ".</p>");
+    }
+
+    protected void explore(String command, String property) {
+        code(Languages.PowerShell, "$" + property + " = (" + command + ")." + property + "\n" +
+                                   "$" + property + " | Get-Member\n");
+    }
+
+    protected static String makeLocation(String prefix, String suffix) {
+        return prefix + "/" + suffix;
+    }
+
+    protected String toHtml(List<SyntaxToken> tokens) {
+        String html = tokens.stream().map(token -> {
+            String className = "bnf-token-" + token.getTokenType().name().toLowerCase();
+            String content = Encode.forHtml(token.getContent());
+            return "<code class=\"" + className + "\">" + content + "</code>";
+        }).collect(Collectors.joining());
+        return html;
     }
 }

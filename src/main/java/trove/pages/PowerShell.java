@@ -9,8 +9,10 @@ import java.util.List;
 
 public class PowerShell extends Page {
 
+    public static final String LOCATION = "powershell";
+
     public PowerShell() {
-        super("powershell", "PowerShell", List.of());
+        super(LOCATION, "PowerShell", List.of());
     }
 
     @Override

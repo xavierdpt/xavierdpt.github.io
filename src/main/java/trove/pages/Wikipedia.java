@@ -523,7 +523,6 @@ public class Wikipedia extends Page {
                 XPointer
                 XML Signature
                 XML Encryption
-                Border Gateway Protocol
                 Dynamic Host Configuration Protocol
                 Domain Name System
                 File Transfer Protocol
@@ -535,13 +534,11 @@ public class Wikipedia extends Page {
                 MQTT
                 Network News Transfer Protocol
                 Network Time Protocol
-                Open Shortest Path First
                 Post Office Protocol
                 Precision Time Protocol
                 Sun RPC
                 Real-time Transport Protocol
                 Real Time Streaming Protocol
-                Routing Information Protocol
                 Session Initiation Protocol
                 Simple Mail Transfer Protocol
                 Simple Network Management Protocol
@@ -816,7 +813,6 @@ public class Wikipedia extends Page {
                 Captive NTFS
                 Windows Interface Source Environment
                 Computer network
-                Communication protocol
                 Multiplexing
                 Internet Protocol
                 Internetwork Packet Exchange
@@ -900,7 +896,6 @@ public class Wikipedia extends Page {
                 Graphics processing unit
                 Man-in-the-middle attack
                 Pass the hash
-                Space–time tradeoff
                 Ophcrack
                 RainbowCrack
                 Hashcat
@@ -1017,7 +1012,82 @@ public class Wikipedia extends Page {
                 Wide area network
                 I2O
                 Internet Security Association and Key Management Protocol
-                """);
+                Link-Local Multicast Name Resolution
+                Remote direct memory access
+                Common Information Model (computing)
+                Distributed Management Task Force
+                Web-Based Enterprise Management
+                Unified Modeling Language
+                CIM Schema
+                Systems Management Architecture for Server Hardware
+                Storage Management Initiative – Specification
+                Windows Management Instrumentation
+                Storage Networking Industry Association
+                Desktop and mobile Architecture for System Hardware
+                Finite-state machine
+                Model of computation
+                Abstract machine
+                State (computer science)
+                Input (computer science)
+                Deterministic finite automaton
+                Nondeterministic finite automaton
+                Turing machine
+                Automata theory
+                Computational problem
+                Theoretical computer science
+                Computer science
+                Data structure
+                Computational complexity theory
+                Computational complexity
+                Average-case complexity
+                Quicksort
+                Sorting algorithm
+                Communication complexity
+                Very Large Scale Integration
+                Communication protocol
+                Gap-Hamming problem
+                Hoeffding's inequality
+                Quantum entanglement
+                Nonnegative rank (linear algebra)
+                Decision tree model
+                Streaming algorithm
+                Space–time tradeoff
+                Memoization
+                Data compression
+                Baby-step giant-step
+                Dynamic programming
+                Bellman equation
+                Value function
+                Hamilton–Jacobi–Bellman equation
+                Partial differential equation
+                Social welfare function
+                Inada conditions
+                Backward induction
+                Dijkstra's algorithm
+                Routing protocol
+                Interior gateway protocol
+                Link-state routing protocol
+                Open Shortest Path First
+                IS-IS
+                Distance-vector routing protocol
+                Routing Information Protocol
+                Exterior gateway protocol
+                Autonomous system (Internet)
+                Border Gateway Protocol
+                Path-vector routing protocol
+                Enhanced Interior Gateway Routing Protocol
+                Bird Internet routing daemon
+                Quagga (software)
+                GNU Zebra
+                OpenBGPD
+                OpenOSPFD
+                XORP
+                Static routing
+                Dynamic routing
+                Hierarchical state routing
+                Optimized Link State Routing Protocol
+                B.A.T.M.A.N.
+                ZHLS-GF""");
 
     }
 

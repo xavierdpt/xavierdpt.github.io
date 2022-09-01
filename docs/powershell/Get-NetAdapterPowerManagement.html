@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Get-NetAdapterPowerManagement | Xavier's Treasure Trove">
+<title>Get-NetAdapterPowerManagement | Xavier's Treasure Trove</title>
+<style>
+*, *::before { box-sizing:border-box;}
+a { text-decoration:none;  }
+th, td { text-align:left; }
+p { margin-top:0; margin-bottom:0;  }
+p > code, li > code, td > code { font-size:1.05em; color:#660000; }
+code.bnf-token-abstract { border: solid 1px #660000; display:inline-block; padding:5px; font-weight:bold; }
+code.bnf-token-metasyntax { border: solid 1px #660000; display:inline-block; padding:5px; }
+code.bnf-token-concrete { border-top: solid 1px #660000; border-bottom: solid 1px #660000; display:inline-block;}
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/languages/powershell.min.js"></script>
+</head>
+<body>
+<a href="../index.html">Home</a>
+ > <a href="index.html">PowerShell</a>
+<h1>Get-NetAdapterPowerManagement</h1>
+<pre><code class="language-powershell hljs">Get-NetAdapterPowerManagement
+</code></pre>
+<h2>Common properties</h2>
+<p><code>Name</code> is the name of the adapter</p>
+<div style="width:100%;height:16px"></div>
+<p><code>ElementName</code>, <code>Description</code> and <code>InterfaceDescription</code> are the description of the adapter</p>
+<div style="width:100%;height:16px"></div>
+<p><code>Caption</code> is the interface description prefixed with <code>MSFT_NetAdapterPowerManagementSettingData</code></p>
+<div style="width:100%;height:16px"></div>
+<p><code>InstanceID</code> is the GUID of the adapter</p>
+<div style="width:100%;height:16px"></div>
+<p><code>Source</code> is <code>2</code> or <code>3</code></p>
+<div style="width:100%;height:16px"></div>
+<p><code>SystemName</code> is the hostname</p>
+<div style="width:100%;height:16px"></div>
+<p><code>PSComputerName</code> is blank</p>
+<h2><code>OffloadParameters</code></h2>
+<pre><code class="language-powershell hljs">$offloadParameters = (Get-NetAdapterPowerManagement).OffloadParameters
+</code></pre>
+<p>This contains an an array of objects of diverse types.</p>
+<h2><code>OffloadParameters</code> : <code>MSFT_NetAdapterPowerManagement_Offload_NS</code></h2>
+<p><code>FriendlyName</code> is <code>ND Offload</code></p>
+<div style="width:100%;height:16px"></div>
+<p><code>ID</code> is an integer</p>
+<div style="width:100%;height:16px"></div>
+<p><code>MacAddress</code> is a string</p>
+<p>Example value: <code>D4-BE-D9-8D-46-9A</code></p>
+<div style="width:100%;height:16px"></div>
+<p><code>OffloadType</code> is an integer</p>
+<div style="width:100%;height:16px"></div>
+<p><code>Priority</code> is a large integer</p>
+<div style="width:100%;height:16px"></div>
+<p><code>PSComputerName</code> is blank</p>
+<div style="width:100%;height:16px"></div>
+<p><code>RemoteIPv6Address</code> is string</p>
+<p>Example value: <code>::</code></p>
+<div style="width:100%;height:16px"></div>
+<p><code>SolicitedNodeIPv6Address</code> is string representing an IPv6 address</p>
+<p>Example value: <code>2001:db8::1234:5678</code></p>
+<div style="width:100%;height:16px"></div>
+<p><code>TargetIPv6Addresses</code> is a list of strings representing IPv6 addresses.</p>
+<p>Example value: <code>{2001:db8::1234:5678, ::}</code></p>
+<h2><code>OffloadParameters</code> : <code>MSFT_NetAdapterPowerManagement_Offload_Arp</code></h2>
+<p><code>FriendlyName</code> is <code>ARP Offload</code></p>
+<div style="width:100%;height:16px"></div>
+<p><code>HostIPv4Address</code> is a string representing an IPv4 address</p>
+<p>Example value: <code>192.168.0.1</code></p>
+<div style="width:100%;height:16px"></div>
+<p><code>ID</code> is an integer</p>
+<div style="width:100%;height:16px"></div>
+<p><code>MACAddress</code> is a string representing a MAC address</p>
+<p>Example value: <code>D4-BE-D9-8D-46-9A</code></p>
+<div style="width:100%;height:16px"></div>
+<p><code>OffloadType</code> is an integer</p>
+<div style="width:100%;height:16px"></div>
+<p><code>Priority</code> is a large integer</p>
+<div style="width:100%;height:16px"></div>
+<p><code>PSComputerName</code> is blank</p>
+<div style="width:100%;height:16px"></div>
+<p><code>RemoteIPv4Address</code> is a string representing an IPv4 address</p>
+<p>Example value: <code>0.0.0.0</code></p>
+<h2><code>WakePatterns</code></h2>
+<pre><code class="language-powershell hljs">$wakePatterns = (Get-NetAdapterPowerManagement).WakePatterns
+</code></pre>
+<p>This contains an an array of objects of diverse types.</p>
+<h2><code>WakePatterns</code> : <code>MSFT_NetAdapterPowerManagement_WakePattern_MagicPacket</code></h2>
+<p><code>FriendlyName</code> is a string, typically <code>Magic Packet</code></p>
+<div style="width:100%;height:16px"></div>
+<p><code>ID</code> is an integer</p>
+<div style="width:100%;height:16px"></div>
+<p><code>Priority</code> is an integer</p>
+<div style="width:100%;height:16px"></div>
+<p><code>PSComputerName</code> is blank</p>
+<div style="width:100%;height:16px"></div>
+<p><code>WakePacketType</code> is an integer</p>
+<h2><code>WakePatterns</code> : <code>MSFT_NetAdapterPowerManagement_WakePattern_TcpSyn</code></h2>
+<p><code>FriendlyName</code> is a string, usually blank</p>
+<div style="width:100%;height:16px"></div>
+<p><code>ID</code> is an integer</p>
+<div style="width:100%;height:16px"></div>
+<p><code>Priority</code> is an integer</p>
+<div style="width:100%;height:16px"></div>
+<p><code>PSComputerName</code> is blank</p>
+<div style="width:100%;height:16px"></div>
+<p><code>WakePacketType</code> is an integer</p>
+<div style="width:100%;height:16px"></div>
+<p><code>DestinationAddress</code> is an string that can represent an IPv4 or an IPv6 address.</p>
+<p>Example values: <code>::</code>, <code>0.0.0.0</code></p>
+<div style="width:100%;height:16px"></div>
+<p><code>DestinationPort</code> is an integer that can be 0</p>
+<div style="width:100%;height:16px"></div>
+<p><code>SourceAddress</code> is an string that can represent an IPv4 or an IPv6 address.</p>
+<p>Example values: <code>::</code>, <code>0.0.0.0</code></p>
+<div style="width:100%;height:16px"></div>
+<p><code>SourcePort</code> is an integer that can be 0</p>
+<h2><code>WakePatterns</code> : <code>MSFT_NetAdapterPowerManagement_WakePattern_Bitmap</code></h2>
+<p><code>FriendlyName</code> is a string</p>
+<p>Example values:</p>
+<ul>
+<li><code>TCP PortCoalescedPattern</code></li>
+<li><code>UDP PortCoalescedPattern</code></li>
+<li><code>TCP V4 Packet</code></li>
+<li><code>TCP V6 Packet</code></li>
+<li><code>NCB:Inbox Client - WNS/EAS</code></li>
+</ul>
+<div style="width:100%;height:16px"></div>
+<p><code>ID</code> is an integer</p>
+<div style="width:100%;height:16px"></div>
+<p><code>Priority</code> is a possibly very large integer</p>
+<div style="width:100%;height:16px"></div>
+<p><code>PSComputerName</code> is blank</p>
+<div style="width:100%;height:16px"></div>
+<p><code>WakePacketType</code> is an integer, usually <code>1</code></p>
+<div style="width:100%;height:16px"></div>
+<p><code>Mask and Pattern are arrays of bytes</code></p>
+<h2>Settings</h2>
+<p>The following properties are of type <code>NetAdapterPowerManagement.Setting</code>:</p>
+<ul>
+<li><code>AllowComputerToTurnOffDevice</code></li>
+<li><code>ArpOffload</code></li>
+<li><code>D0PacketCoalescing</code></li>
+<li><code>DeviceSleepOnDisconnect</code></li>
+<li><code>NSOffload</code></li>
+<li><code>RsnRekeyOffload</code></li>
+<li><code>SelectiveSuspend</code></li>
+<li><code>WakeOnMagicPacket</code></li>
+<li><code>WakeOnPattern</code></li>
+</ul>
+<p>Possible values for <code>Microsoft.PowerShell.Cmdletization.GeneratedTypes.NetAdapterPowerManagement.Setting</code>:</p>
+<ul>
+<li><code>Disabled</code></li>
+<li><code>Enabled</code></li>
+<li><code>Inactive</code></li>
+<li><code>Unsupported</code></li>
+</ul>
+<hr/>
+<p><strong>Disclaimer:</strong> While I hope that the content of this page may be useful to you, and to future me, it may contains statements that are true only in particular circumstances or even blatantly false. To share your feedback, be it positive, negative, a question, a correction, or additional information that you would like to share, you are welcome to <a href="https://github.com/xavierdpt/xavierdpt.github.io/issues" target="_blank">open an issue on GitHub</a>.</p>
+<script>hljs.highlightAll();</script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Get-NetAdapterRdma | Xavier's Treasure Trove">
+<title>Get-NetAdapterRdma | Xavier's Treasure Trove</title>
+<style>
+*, *::before { box-sizing:border-box;}
+a { text-decoration:none;  }
+th, td { text-align:left; }
+p { margin-top:0; margin-bottom:0;  }
+p > code, li > code, td > code { font-size:1.05em; color:#660000; }
+code.bnf-token-abstract { border: solid 1px #660000; display:inline-block; padding:5px; font-weight:bold; }
+code.bnf-token-metasyntax { border: solid 1px #660000; display:inline-block; padding:5px; }
+code.bnf-token-concrete { border-top: solid 1px #660000; border-bottom: solid 1px #660000; display:inline-block;}
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/languages/powershell.min.js"></script>
+</head>
+<body>
+<a href="../index.html">Home</a>
+ > <a href="index.html">PowerShell</a>
+<h1>Get-NetAdapterRdma</h1>
+<pre><code class="language-powershell hljs">Get-NetAdapterRdma
+</code></pre>
+<p>Result type: <code> Microsoft.Management.Infrastructure.CimInstance#ROOT/StandardCimv2/MSFT_NetAdapterRdmaSettingData</code></p>
+<h2>Common properties</h2>
+<p><code>Name</code> is the name of the adapter.</p>
+<div style="width:100%;height:16px"></div>
+<p><code>ElementName</code>, <code>Description</code>, <code>InterfaceDescription</code>  is the description of the adapter.</p>
+<div style="width:100%;height:16px"></div>
+<p><code>InstanceId</code> is the GUID of the adapter.</p>
+<div style="width:100%;height:16px"></div>
+<p><code>Caption</code> is the description of the adapter prefixed with <code>MSFT_NetAdapterRdmaSettingData</code>.</p>
+<div style="width:100%;height:16px"></div>
+<p><code>PSComputerName</code> is blank.</p>
+<div style="width:100%;height:16px"></div>
+<p><code>SystemName</code> is the hostname.</p>
+<div style="width:100%;height:16px"></div>
+<p><code>Source</code> is <code>2</code>.</p>
+<h2>Number and boolean properties</h2>
+<p><code>Enabled</code> is a boolean</p>
+<p>The following properties are integers:</p>
+<ul>
+<li><code>MaxCompletionQueueCount</code></li>
+<li><code>MaxInboundReadLimit</code></li>
+<li><code>MaxMemoryRegionCount</code></li>
+<li><code>MaxMemoryWindowCount</code></li>
+<li><code>MaxOutboundReadLimit</code></li>
+<li><code>MaxProtectionDomainCount</code></li>
+<li><code>MaxQueuePairCount</code></li>
+<li><code>MaxSharedReceiveQueueCount</code></li>
+</ul>
+<h2>QosConfiguration</h2>
+<p><code>ETS</code> and <code>PFC</code> are of type <code>NetAdapterRdma.QosConfiguration</code></p>
+<p>Possible values for <code>Microsoft.PowerShell.Cmdletization.GeneratedTypes.NetAdapterRdma.QosConfiguration</code></p>
+<ul>
+<li><code>False</code></li>
+<li><code>NA</code></li>
+<li><code>True</code></li>
+</ul>
+<h2><code>RdmaMissingCounterInfo</code></h2>
+<p><code>RdmaMissingCounterInfo</code> is of type <code>MSFT_NetAdapter_RdmaMissingCounterInfo</code></p>
+<p>This type exposes the following boolean properties:</p>
+<ul>
+<li><code>AcceptPerformanceCounterMissing</code></li>
+<li><code>ActiveConnectionPerformanceCounterMissing</code></li>
+<li><code>CompletionQueueErrorPerformanceCounterMissing</code></li>
+<li><code>ConnectFailurePerformanceCounterMissing</code></li>
+<li><code>ConnectionErrorPerformanceCounterMissing</code></li>
+<li><code>ConnectPerformanceCounterMissing</code></li>
+<li><code>RDMAInFramesPerformanceCounterMissing</code></li>
+<li><code>RDMAInOctetsPerformanceCounterMissing</code></li>
+<li><code>RDMAOutFramesPerformanceCounterMissing</code></li>
+<li><code>RDMAOutOctetsPerformanceCounterMissing</code></li>
+</ul>
+<h2><code>RdmaAdapterInfo</code></h2>
+<pre><code class="language-powershell hljs">$RdmaAdapterInfo = (Get-NetAdapterRdma).RdmaAdapterInfo
+$RdmaAdapterInfo | Get-Member
+
+</code></pre>
+<hr/>
+<p><strong>Disclaimer:</strong> While I hope that the content of this page may be useful to you, and to future me, it may contains statements that are true only in particular circumstances or even blatantly false. To share your feedback, be it positive, negative, a question, a correction, or additional information that you would like to share, you are welcome to <a href="https://github.com/xavierdpt/xavierdpt.github.io/issues" target="_blank">open an issue on GitHub</a>.</p>
+<script>hljs.highlightAll();</script>
+</body>
+</html>
