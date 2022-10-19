@@ -14,358 +14,345 @@ public class Wikipedia extends Page {
 
     public Wikipedia() {
         super("wikipedia", "Wikipedia",List.of());
-        String misc = "Misc";
-
-
-        addArticles("Crypto / TEA", """
+        addArticles("""
                 Tiny Encryption Algorithm
                 XTEA
                 XXTEA
-                """);
-
-        addArticles("Crypto / Rivest Cipher", """
                 RC2
                 RC4
                 RC5
                 RC6
-                """);
-
-        addArticle("Vigenère cipher", misc);
-        addArticle("Caesar cipher", misc);
-        addArticle("Frequency analysis", misc);
-        addArticle("Kasiski examination", misc);
-        addArticle("Cryptography", misc);
-        addArticle("Hash-based cryptography", misc);
-        addArticle("Non-commutative cryptography", misc);
-        addArticle("RSA problem", misc);
-        addArticle("IEEE P1363", misc);
-        addArticle("NSA Suite B Cryptography", misc);
-        addArticle("NIST Post-Quantum Cryptography Standardization", misc);
-        addArticle("Algebraic Eraser", misc);
-        addArticle("Efficient Probabilistic Public-Key Encryption Scheme", misc);
-        addArticle("Hidden Field Equations", misc);
-        addArticle("Lamport signature", misc);
-        addArticle("McEliece cryptosystem", misc);
-        addArticle("Merkle–Hellman knapsack cryptosystem", misc);
-        addArticle("Naccache–Stern knapsack cryptosystem", misc);
-        addArticle("XTR", misc);
-        addArticle("Lattice-based cryptography", misc);
-        addArticle("Learning with errors", misc);
-        addArticle("Short integer solution problem", misc);
-        addArticle("NTRUEncrypt", misc);
-        addArticle("NTRUSign", misc);
-        addArticle("Ring learning with errors key exchange", misc);
-        addArticle("Ring learning with errors signature", misc);
-        addArticle("BLISS signature scheme", misc);
-        addArticle("NewHope", misc);
-        addArticle("Discrete logarithm", misc);
-        addArticle("Cramer–Shoup cryptosystem", misc);
-        addArticle("Elliptic-curve Diffie–Hellman", misc);
-        addArticle("Curve25519", misc);
-        addArticle("Curve448", misc);
-        addArticle("Elliptic Curve Digital Signature Algorithm", misc);
-        addArticle("EdDSA", misc);
-        addArticle("Encrypted key exchange", misc);
-        addArticle("ElGamal encryption", misc);
-        addArticle("ElGamal signature scheme", misc);
-        addArticle("Schnorr signature", misc);
-        addArticle("SPEKE", misc);
-        addArticle("Secure Remote Password protocol", misc);
-        addArticle("Station-to-Station protocol", misc);
-        addArticle("Integer factorization", misc);
-        addArticle("Blum–Goldwasser cryptosystem", misc);
-        addArticle("Cayley–Purser algorithm", misc);
-        addArticle("Damgård–Jurik cryptosystem", misc);
-        addArticle("GMR (cryptography)", misc);
-        addArticle("Goldwasser–Micali cryptosystem", misc);
-        addArticle("Naccache–Stern cryptosystem", misc);
-        addArticle("Rabin cryptosystem", misc);
-        addArticle("RSA (cryptosystem)", misc);
-        addArticle("Okamoto–Uchiyama cryptosystem", misc);
-        addArticle("Schmidt-Samoa cryptosystem", misc);
-        addArticle("Public-key cryptography", misc);
-        addArticle("Optimal asymmetric encryption padding", misc);
-        addArticle("Public key fingerprint", misc);
-        addArticle("Web of trust", misc);
-        addArticle("Key size", misc);
-        addArticle("Identity-based cryptography", misc);
-        addArticle("OpenPGP card", misc);
-        addArticle("History of cryptography", misc);
-        addArticle("Outline of cryptography", misc);
-        addArticle("Cryptographic protocol", misc);
-        addArticle("Cryptographic primitive", misc);
-        addArticle("Cryptanalysis", misc);
-        addArticle("Cryptocurrency", misc);
-        addArticle("Cryptosystem", misc);
-        addArticle("Cryptographic nonce", misc);
-        addArticle("Cryptovirology", misc);
-        addArticle("Key derivation function", misc);
-        addArticle("Digital signature", misc);
-        addArticle("Kleptography", misc);
-        addArticle("Key (cryptography)", misc);
-        addArticle("Key exchange", misc);
-        addArticle("Key generator", misc);
-        addArticle("Key schedule", misc);
-        addArticle("Key stretching", misc);
-        addArticle("Keygen", misc);
-        addArticle("Cryptojacking", misc);
-        addArticle("Ransomware", misc);
-        addArticle("Random number generation", misc);
-        addArticle("Pseudorandom noise", misc);
-        addArticle("Secure channel", misc);
-        addArticle("Subliminal channel", misc);
-        addArticle("Encryption", misc);
-        addArticle("End-to-end encryption", misc);
-        addArticle("Information-theoretic security", misc);
-        addArticle("Plaintext", misc);
-        addArticle("Code (cryptography)", misc);
-        addArticle("Ciphertext", misc);
-        addArticle("Shared secret", misc);
-        addArticle("Trapdoor function", misc);
-        addArticle("Trusted timestamping", misc);
-        addArticle("Key-based routing", misc);
-        addArticle("Onion routing", misc);
-        addArticle("Garlic routing", misc);
-        addArticle("Kademlia", misc);
-        addArticle("Mix network", misc);
-        addArticle("Cryptographic hash function", misc);
-        addArticle("Stream cipher", misc);
-        addArticle("Symmetric-key algorithm", misc);
-        addArticle("Authenticated encryption", misc);
-        addArticle("Quantum key distribution", misc);
-        addArticle("Quantum cryptography", misc);
-        addArticle("Post-quantum cryptography", misc);
-        addArticle("Message authentication code", misc);
-        addArticle("Cryptographically secure pseudorandom number generator", misc);
-        addArticle("Steganography", misc);
-        addArticle("Hash function security summary", misc);
-        addArticle("MD5", misc);
-        addArticle("SHA-1", misc);
-        addArticle("SHA-2", misc);
-        addArticle("SHA-3", misc);
-        addArticle("BLAKE (hash function)", misc);
-        addArticle("Grøstl", misc);
-        addArticle("JH (hash function)", misc);
-        addArticle("Skein (hash function)", misc);
-        addArticle("CubeHash", misc);
-        addArticle("Elliptic curve only hash", misc);
-        addArticle("Fast syndrome-based hash", misc);
-        addArticle("GOST (hash function)", misc);
-        addArticle("HAS-160", misc);
-        addArticle("HAVAL", misc);
-        addArticle("Kupyna", misc);
-        addArticle("LSH (hash function)", misc);
-        addArticle("MASH-1", misc);
-        addArticle("MD2 (hash function)", misc);
-        addArticle("MD4", misc);
-        addArticle("MD6", misc);
-        addArticle("MDC-2", misc);
-        addArticle("N-hash", misc);
-        addArticle("RIPEMD", misc);
-        addArticle("RadioGatún", misc);
-        addArticle("SM3 (hash function)", misc);
-        addArticle("SWIFFT", misc);
-        addArticle("Snefru", misc);
-        addArticle("Streebog", misc);
-        addArticle("Tiger (hash function)", misc);
-        addArticle("Very smooth hash", misc);
-        addArticle("Whirlpool (hash function)", misc);
-        addArticle("Argon2", misc);
-        addArticle("Balloon hashing", misc);
-        addArticle("bcrypt", misc);
-        addArticle("Password Hashing Competition", misc);
-        addArticle("crypt (C)", misc);
-        addArticle("Lyra2", misc);
-        addArticle("PBKDF2", misc);
-        addArticle("scrypt", misc);
-        addArticle("HKDF", misc);
-        addArticle("ARIA (cipher)", misc);
-        addArticle("Camellia (cipher)", misc);
-        addArticle("CAST-128", misc);
-        addArticle("GOST (block cipher)", misc);
-        addArticle("International Data Encryption Algorithm", misc);
-        addArticle("LEA (cipher)", misc);
-
-        addArticle("SEED", misc);
-        addArticle("Skipjack (cipher)", misc);
-
-
-        addArticle("Advanced Encryption Standard", misc);
-        addArticle("Blowfish (cipher)", misc);
-        addArticle("DES supplementary material", misc);
-        addArticle("Triple DES", misc);
-        addArticle("Serpent (cipher)", misc);
-        addArticle("Twofish", misc);
-        addArticle("CRYPTREC", misc);
-        addArticle("NESSIE", misc);
-        addArticle("NIST hash function competition", misc);
-        addArticle("Merkle tree", misc);
-        addArticle("Message authentication", misc);
-        addArticle("Proof of work", misc);
-        addArticle("Salt (cryptography)", misc);
-        addArticle("Pepper (cryptography)", misc);
-        addArticle("Hash collision", misc);
-        addArticle("Merkle–Damgård construction", misc);
-        addArticle("Sponge function", misc);
-        addArticle("HAIFA construction", misc);
-        addArticle("Collision attack", misc);
-        addArticle("Preimage attack", misc);
-        addArticle("Birthday attack", misc);
-        addArticle("Side-channel attack", misc);
-        addArticle("Length extension attack", misc);
-        addArticle("CCM mode", misc);
-        addArticle("ChaCha20-Poly1305", misc);
-        addArticle("CWC mode", misc);
-        addArticle("EAX mode", misc);
-        addArticle("Galois/Counter Mode", misc);
-        addArticle("IAPM (mode)", misc);
-        addArticle("OCB mode", misc);
-        addArticle("CBC-MAC", misc);
-        addArticle("Data Authentication Algorithm", misc);
-        addArticle("HMAC", misc);
-        addArticle("One-key MAC", misc);
-        addArticle("PMAC (cryptography)", misc);
-        addArticle("Poly1305", misc);
-        addArticle("SipHash", misc);
-        addArticle("UMAC", misc);
-        addArticle("VMAC", misc);
-        addArticle("3-Way", misc);
-        addArticle("Akelarre (cipher)", misc);
-        addArticle("Anubis (cipher)", misc);
-        addArticle("BaseKing", misc);
-        addArticle("BassOmatic", misc);
-        addArticle("BATON", misc);
-        addArticle("BEAR and LION ciphers", misc);
-        addArticle("CAST-256", misc);
-        addArticle("Chiasmus (cipher)", misc);
-        addArticle("CIKS-1", misc);
-        addArticle("CIPHERUNICORN-A", misc);
-        addArticle("CIPHERUNICORN-E", misc);
-        addArticle("CLEFIA", misc);
-        addArticle("Cellular Message Encryption Algorithm", misc);
-        addArticle("Cobra ciphers", misc);
-        addArticle("COCONUT98", misc);
-        addArticle("Crab (cipher)", misc);
-        addArticle("Cryptomeria cipher", misc);
-        addArticle("CRYPTON", misc);
-        addArticle("CS-Cipher", misc);
-        addArticle("DEAL", misc);
-        addArticle("DES-X", misc);
-        addArticle("DFC (cipher)", misc);
-        addArticle("E2 (cipher)", misc);
-        addArticle("FEAL", misc);
-        addArticle("FEA-M", misc);
-        addArticle("FROG", misc);
-        addArticle("GDES", misc);
-        addArticle("Grand Cru (cipher)", misc);
-        addArticle("Hasty Pudding cipher", misc);
-        addArticle("Hierocrypt", misc);
-        addArticle("ICE (cipher)", misc);
-        addArticle("IDEA NXT", misc);
-        addArticle("Intel Cascade Cipher", misc);
-        addArticle("Iraqi block cipher", misc);
-        addArticle("Kalyna (cipher)", misc);
-        addArticle("KASUMI", misc);
-        addArticle("KeeLoq", misc);
-        addArticle("KHAZAD", misc);
-        addArticle("Khufu and Khafre", misc);
-        addArticle("KN-Cipher", misc);
-        addArticle("Kuznyechik", misc);
-        addArticle("Ladder-DES", misc);
-        addArticle("LOKI97", misc);
-        addArticle("LOKI", misc);
-        addArticle("Lucifer (cipher)", misc);
-        addArticle("M6 (cipher)", misc);
-        addArticle("M8 (cipher)", misc);
-        addArticle("MacGuffin (cipher)", misc);
-        addArticle("Madryga", misc);
-        addArticle("MAGENTA", misc);
-        addArticle("MARS (cipher)", misc);
-        addArticle("Mercy (cipher)", misc);
-        addArticle("MESH (cipher)", misc);
-        addArticle("MISTY1", misc);
-        addArticle("MMB (cipher)", misc);
-        addArticle("MULTI2", misc);
-        addArticle("MultiSwap", misc);
-        addArticle("New Data Seal", misc);
-        addArticle("NewDES", misc);
-        addArticle("Nimbus (cipher)", misc);
-        addArticle("NOEKEON", misc);
-        addArticle("NUSH", misc);
-        addArticle("PRESENT", misc);
-        addArticle("Prince (cipher)", misc);
-        addArticle("Q (cipher)", misc);
-        addArticle("REDOC", misc);
-        addArticle("Red Pike (cipher)", misc);
-        addArticle("S-1 block cipher", misc);
-        addArticle("SAFER", misc);
-        addArticle("SAVILLE", misc);
-        addArticle("SC2000", misc);
-        addArticle("SHACAL", misc);
-        addArticle("SHARK", misc);
-        addArticle("Simon (cipher)", misc);
-        addArticle("SM4 (cipher)", misc);
-        addArticle("Speck (cipher)", misc);
-        addArticle("Spectr-H64", misc);
-        addArticle("Square (cipher)", misc);
-        addArticle("SXAL/MBAL", misc);
-        addArticle("Threefish", misc);
-        addArticle("Treyfer", misc);
-        addArticle("UES (cipher)", misc);
-        addArticle("Xmx", misc);
-
-        addArticle("Zodiac (cipher)", misc);
-        addArticle("3-subset meet-in-the-middle attack", misc);
-        addArticle("Acoustic cryptanalysis", misc);
-        addArticle("Advanced Encryption Standard process", misc);
-        addArticle("Avalanche effect", misc);
-        addArticle("Biclique attack", misc);
-        addArticle("Black-bag cryptanalysis", misc);
-        addArticle("Block cipher mode of operation", misc);
-        addArticle("Block size (cryptography)", misc);
-        addArticle("Boomerang attack", misc);
-        addArticle("Chi-squared test", misc);
-        addArticle("Confusion and diffusion", misc);
-        addArticle("Davies attack", misc);
-        addArticle("Differential cryptanalysis", misc);
-        addArticle("Differential fault analysis", misc);
-        addArticle("Differential-linear attack", misc);
-        addArticle("Distinguishing attack", misc);
-        addArticle("EFF DES cracker", misc);
-        addArticle("Electromagnetic attack", misc);
-        addArticle("Feistel cipher", misc);
-        addArticle("Higher-order differential cryptanalysis", misc);
-        addArticle("Impossible differential cryptanalysis", misc);
-        addArticle("Initialization vector", misc);
-        addArticle("Integral cryptanalysis", misc);
-        addArticle("Interpolation attack", misc);
-        addArticle("Kendall rank correlation coefficient", misc);
-        addArticle("Key whitening", misc);
-        addArticle("Known-key distinguishing attack", misc);
-        addArticle("Lai–Massey scheme", misc);
-        addArticle("Linear cryptanalysis", misc);
-        addArticle("Meet-in-the-middle attack", misc);
-        addArticle("Mod n cryptanalysis", misc);
-        addArticle("Padding (cryptography)", misc);
-        addArticle("Partitioning cryptanalysis", misc);
-        addArticle("Permutation box", misc);
-        addArticle("Piling-up lemma", misc);
-        addArticle("Power analysis", misc);
-        addArticle("Product cipher", misc);
-        addArticle("Rebound attack", misc);
-        addArticle("Related-key attack", misc);
-        addArticle("Rotational cryptanalysis", misc);
-        addArticle("Rubber-hose cryptanalysis", misc);
-        addArticle("S-box", misc);
-        addArticle("Slide attack", misc);
-        addArticle("Substitution–permutation network", misc);
-        addArticle("Time/memory/data tradeoff attack", misc);
-        addArticle("Timing attack", misc);
-        addArticle("Truncated differential cryptanalysis", misc);
-        addArticle("Weak key", misc);
-        addArticle("Whitening transformation", misc);
-        addArticle("XSL attack", misc);
-        addArticles(misc, """
+                Vigenère cipher
+                Caesar cipher
+                Frequency analysis
+                Kasiski examination
+                Cryptography
+                Hash-based cryptography
+                Non-commutative cryptography
+                RSA problem
+                IEEE P1363
+                NSA Suite B Cryptography
+                NIST Post-Quantum Cryptography Standardization
+                Algebraic Eraser
+                Efficient Probabilistic Public-Key Encryption Scheme
+                Hidden Field Equations
+                Lamport signature
+                McEliece cryptosystem
+                Merkle–Hellman knapsack cryptosystem
+                Naccache–Stern knapsack cryptosystem
+                XTR
+                Lattice-based cryptography
+                Learning with errors
+                Short integer solution problem
+                NTRUEncrypt
+                NTRUSign
+                Ring learning with errors key exchange
+                Ring learning with errors signature
+                BLISS signature scheme
+                NewHope
+                Discrete logarithm
+                Cramer–Shoup cryptosystem
+                Elliptic-curve Diffie–Hellman
+                Curve25519
+                Curve448
+                Elliptic Curve Digital Signature Algorithm
+                EdDSA
+                Encrypted key exchange
+                ElGamal encryption
+                ElGamal signature scheme
+                Schnorr signature
+                SPEKE
+                Secure Remote Password protocol
+                Station-to-Station protocol
+                Integer factorization
+                Blum–Goldwasser cryptosystem
+                Cayley–Purser algorithm
+                Damgård–Jurik cryptosystem
+                GMR (cryptography)
+                Goldwasser–Micali cryptosystem
+                Naccache–Stern cryptosystem
+                Rabin cryptosystem
+                RSA (cryptosystem)
+                Okamoto–Uchiyama cryptosystem
+                Schmidt-Samoa cryptosystem
+                Public-key cryptography
+                Optimal asymmetric encryption padding
+                Public key fingerprint
+                Web of trust
+                Key size
+                Identity-based cryptography
+                OpenPGP card
+                History of cryptography
+                Outline of cryptography
+                Cryptographic protocol
+                Cryptographic primitive
+                Cryptanalysis
+                Cryptocurrency
+                Cryptosystem
+                Cryptographic nonce
+                Cryptovirology
+                Key derivation function
+                Digital signature
+                Kleptography
+                Key (cryptography)
+                Key exchange
+                Key generator
+                Key schedule
+                Key stretching
+                Keygen
+                Cryptojacking
+                Ransomware
+                Random number generation
+                Pseudorandom noise
+                Secure channel
+                Subliminal channel
+                Encryption
+                End-to-end encryption
+                Information-theoretic security
+                Plaintext
+                Code (cryptography)
+                Ciphertext
+                Shared secret
+                Trapdoor function
+                Trusted timestamping
+                Key-based routing
+                Onion routing
+                Garlic routing
+                Kademlia
+                Mix network
+                Cryptographic hash function
+                Stream cipher
+                Symmetric-key algorithm
+                Authenticated encryption
+                Quantum key distribution
+                Quantum cryptography
+                Post-quantum cryptography
+                Message authentication code
+                Cryptographically secure pseudorandom number generator
+                Steganography
+                Hash function security summary
+                MD5
+                SHA-1
+                SHA-2
+                SHA-3
+                BLAKE (hash function)
+                Grøstl
+                JH (hash function)
+                Skein (hash function)
+                CubeHash
+                Elliptic curve only hash
+                Fast syndrome-based hash
+                GOST (hash function)
+                HAS-160
+                HAVAL
+                Kupyna
+                LSH (hash function)
+                MASH-1
+                MD2 (hash function)
+                MD4
+                MD6
+                MDC-2
+                N-hash
+                RIPEMD
+                RadioGatún
+                SM3 (hash function)
+                SWIFFT
+                Snefru
+                Streebog
+                Tiger (hash function)
+                Very smooth hash
+                Whirlpool (hash function)
+                Argon2
+                Balloon hashing
+                bcrypt
+                Password Hashing Competition
+                crypt (C)
+                Lyra2
+                PBKDF2
+                scrypt
+                HKDF
+                ARIA (cipher)
+                Camellia (cipher)
+                CAST-128
+                GOST (block cipher)
+                International Data Encryption Algorithm
+                LEA (cipher)
+                SEED
+                Skipjack (cipher)
+                Advanced Encryption Standard
+                Blowfish (cipher)
+                DES supplementary material
+                Triple DES
+                Serpent (cipher)
+                Twofish
+                CRYPTREC
+                NESSIE
+                NIST hash function competition
+                Merkle tree
+                Message authentication
+                Proof of work
+                Salt (cryptography)
+                Pepper (cryptography)
+                Hash collision
+                Merkle–Damgård construction
+                Sponge function
+                HAIFA construction
+                Collision attack
+                Preimage attack
+                Birthday attack
+                Side-channel attack
+                Length extension attack
+                CCM mode
+                ChaCha20-Poly1305
+                CWC mode
+                EAX mode
+                Galois/Counter Mode
+                IAPM (mode)
+                OCB mode
+                CBC-MAC
+                Data Authentication Algorithm
+                HMAC
+                One-key MAC
+                PMAC (cryptography)
+                Poly1305
+                SipHash
+                UMAC
+                VMAC
+                3-Way
+                Akelarre (cipher)
+                Anubis (cipher)
+                BaseKing
+                BassOmatic
+                BATON
+                BEAR and LION ciphers
+                CAST-256
+                Chiasmus (cipher)
+                CIKS-1
+                CIPHERUNICORN-A
+                CIPHERUNICORN-E
+                CLEFIA
+                Cellular Message Encryption Algorithm
+                Cobra ciphers
+                COCONUT98
+                Crab (cipher)
+                Cryptomeria cipher
+                CRYPTON
+                CS-Cipher
+                DEAL
+                DES-X
+                DFC (cipher)
+                E2 (cipher)
+                FEAL
+                FEA-M
+                FROG
+                GDES
+                Grand Cru (cipher)
+                Hasty Pudding cipher
+                Hierocrypt
+                ICE (cipher)
+                IDEA NXT
+                Intel Cascade Cipher
+                Iraqi block cipher
+                Kalyna (cipher)
+                KASUMI
+                KeeLoq
+                KHAZAD
+                Khufu and Khafre
+                KN-Cipher
+                Kuznyechik
+                Ladder-DES
+                LOKI97
+                LOKI
+                Lucifer (cipher)
+                M6 (cipher)
+                M8 (cipher)
+                MacGuffin (cipher)
+                Madryga
+                MAGENTA
+                MARS (cipher)
+                Mercy (cipher)
+                MESH (cipher)
+                MISTY1
+                MMB (cipher)
+                MULTI2
+                MultiSwap
+                New Data Seal
+                NewDES
+                Nimbus (cipher)
+                NOEKEON
+                NUSH
+                PRESENT
+                Prince (cipher)
+                Q (cipher)
+                REDOC
+                Red Pike (cipher)
+                S-1 block cipher
+                SAFER
+                SAVILLE
+                SC2000
+                SHACAL
+                SHARK
+                Simon (cipher)
+                SM4 (cipher)
+                Speck (cipher)
+                Spectr-H64
+                Square (cipher)
+                SXAL/MBAL
+                Threefish
+                Treyfer
+                UES (cipher)
+                Xmx
+                Zodiac (cipher)
+                3-subset meet-in-the-middle attack
+                Acoustic cryptanalysis
+                Advanced Encryption Standard process
+                Avalanche effect
+                Biclique attack
+                Black-bag cryptanalysis
+                Block cipher mode of operation
+                Block size (cryptography)
+                Boomerang attack
+                Chi-squared test
+                Confusion and diffusion
+                Davies attack
+                Differential cryptanalysis
+                Differential fault analysis
+                Differential-linear attack
+                Distinguishing attack
+                EFF DES cracker
+                Electromagnetic attack
+                Feistel cipher
+                Higher-order differential cryptanalysis
+                Impossible differential cryptanalysis
+                Initialization vector
+                Integral cryptanalysis
+                Interpolation attack
+                Kendall rank correlation coefficient
+                Key whitening
+                Known-key distinguishing attack
+                Lai–Massey scheme
+                Linear cryptanalysis
+                Meet-in-the-middle attack
+                Mod n cryptanalysis
+                Padding (cryptography)
+                Partitioning cryptanalysis
+                Permutation box
+                Piling-up lemma
+                Power analysis
+                Product cipher
+                Rebound attack
+                Related-key attack
+                Rotational cryptanalysis
+                Rubber-hose cryptanalysis
+                S-box
+                Slide attack
+                Substitution–permutation network
+                Time/memory/data tradeoff attack
+                Timing attack
+                Truncated differential cryptanalysis
+                Weak key
+                Whitening transformation
+                XSL attack
                 Achterbahn
                 F-FCSR
                 FISH (cipher)
@@ -1087,17 +1074,19 @@ public class Wikipedia extends Page {
                 Hierarchical state routing
                 Optimized Link State Routing Protocol
                 B.A.T.M.A.N.
-                ZHLS-GF""");
+                ZHLS-GF
+                Synchronized Multimedia Integration Language
+                MathML""");
 
     }
 
-    private void addArticles(String category, String articles) {
-        new BufferedReader(new StringReader(articles)).lines().forEach(title -> addArticle(title, category));
+    private void addArticles(String articles) {
+        new BufferedReader(new StringReader(articles)).lines().forEach(this::addArticle);
     }
 
 
-    private void addArticle(String title, String category) {
-        articles.add(new WikipediaArticle(title, category));
+    private void addArticle(String title) {
+        articles.add(new WikipediaArticle(title, "Unclassified"));
     }
 
     @Override

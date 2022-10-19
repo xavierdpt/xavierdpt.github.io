@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Bits and Bytes | Xavier's Treasure Trove">
+<title>Bits and Bytes | Xavier's Treasure Trove</title>
+<style>
+*, *::before { box-sizing:border-box;}
+a { text-decoration:none;  }
+th, td { text-align:left; }
+p { margin-top:0; margin-bottom:0;  }
+p > code, li > code, td > code { font-size:1.05em; color:#660000; }
+code.bnf-token-abstract { border: solid 1px #660000; display:inline-block; padding:5px; font-weight:bold; }
+code.bnf-token-metasyntax { border: solid 1px #660000; display:inline-block; padding:5px; }
+code.bnf-token-concrete { border-top: solid 1px #660000; border-bottom: solid 1px #660000; display:inline-block;}
+</style>
+</head>
+<body>
+<a href="index.html">Home</a>
+<h1>Bits and Bytes</h1>
+<h2>The Bit</h2>
+<p>At first, there was the bit</p>
+<p>The bit has always been there</p>
+<p>Day, night, true or false, one or the other, things always are or are not, there is no in-between.</p>
+<p>In computers, bits are 0 or 1, if a bit is not 0, then it is 1, if it is 0, then it is not 1, and reciprocally.</p>
+<p>In other words, with one bit, you can encode two values.</p>
+<p>Set the bit to 0, you have encoded 0, set the bit to 1, you have encoded 1.</p>
+<h2>Two bits</h2>
+<p>If you have two bits, you can do more things. One bit gives you two possibilities, and for each of those, the other bit gives you two other possibities. </p>
+<p>That makes 4 possibilities in total.</p>
+<p>With two bits, you can encode four values.</p>
+<p>For example, you can encode zero as <code>00</code>, one as <code>01</code>, two as <code>10</code>, three as <code>11</code>.</p>
+<p>You've just invented the 2-bit unsigned integer.</p>
+<h2>Two's complement notation</h2>
+<p>The other day, I met a guy, he wanted negative numbers.</p>
+<p>I said I can make numbers, but only with 2 bits.</p>
+<p>He said, that's ok, I don't need too many numbers.</p>
+<p>I said, do you need positive numbers too ?</p>
+<p>He said, yes, it would be nice to have both</p>
+<p>So I said, ok, here's what we'll do, when the first bit is 0, it will be positive, so that gives zero as <code>00</code>, and one as <code>01</code>.</p>
+<p>When the first bit is 1, then it's a negative number, but here's the trick, to get it, you invert all the other bits, and that makes your positive nubmer.</p>
+<p>So <code>10</code> becomes <code>01</code> which is minus one, and <code>11</code> becomes <code>00</code>, and that's minus zero.</p>
+<p>He said, that seems promising, but there are not so many bits here, and zero and minus zero are really the same thing.</p>
+<p>I said, yes, agreed, then subtract one, so <code>01</code> becomes <code>01</code>, and that makes minus one, subtract one, that makes minus two.</p>
+<p>And <code>11</code> becomes <code>00</code>, and that makes minus zero, subtract one, that makes minus one.</p>
+<p>So now, we can encode minus two, minus one, zero and one with two bits.</p>
+<p>He said, well, ok, but if ask for minus two, I get two, and I cannot encode that with my two bits now.</p>
+<p>I said, indeed, you would need to buy more bits.</p>
+<p>He said, well I will have the same problem with more bits.</p>
+<p>I said, how many bits do you really need ?</p>
+<h2>Three bits</h2>
+<p>With three bits, you can encode twice more values as with two bits, that makes eight values.</p>
+<p>So, you can now talks about 1, 2, 3, 4, 5, 6, 7, and that's all.</p>
+<p>But that's not very useful or convenient.</p>
+<h2>Four bits</h2>
+<p>With four bits, you can encode sixteen values.</p>
+<p>Now, if you start counting, it will go like this: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15.</p>
+<p>But that's not convenient, because we end up with numbers with two digits, and we will have to use extra space to resolve alignment issues, and we really don't want that.</p>
+<p>So instead, we start using alphabet letters, and that gives 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F</p>
+<p>And if you like lowercase letters, that works two.</p>
+<p>That's call the hexadecimal notation because it uses sixteen symbols.</p>
+<h2>Five bits, six bits</h2>
+<p>When electric systems communicate between themselves, some use one electric wire for each bit.</p>
+<p>So more bits, more wires.</p>
+<p>Some system use five bits, because they don't need more than that, other may use six, or more.</p>
+<h2>Seven bits</h2>
+<p>The ASCII standard use 7 bits to encode most common characters.</p>
+<p>This include uppercase letters, lowercase letters, digits, punctuation symbols, and some other symbols.</p>
+<p>It also includes non-printable control characters that were very useful for early to transmit things to print on the screen as well as things to do, such as move the cursor to left, down one line, or to the beginning of the line.</p>
+<h2>Eight bits</h2>
+<p>Now it get's interesting, because eight is a very particular number.</p>
+<p>If you divide it by four, you get four bits, and that's a nibble.</p>
+<p>And you can describe nibbles using the hexadecimal notation.</p>
+<p>So you can describe two nibbles with the hexadecimal notation.</p>
+<p>So you ca describe octets using hexadecimal notation.</p>
+<p>And that's very convenient.</p>
+<p>In addition, you encode 256 different values, and that's good enough for many purposes.</p>
+<p>This make one of the core units of computers.</p>
+<p>In many computers, you cannot ask for one bit without getting seven other bits you do not care about, and that's because of that.</p>
+<p>And that makes the byte.</p>
+<p>With an unsigned byte, you get the numbers 0 to 255, or 00 to FF in hexadecimal notation.</p>
+<p>With a signed byte, you get the numbers -128 to 127 using two's complement, where, in hexadecimal notation, <code>00</code> encodes zero, <code>FF</code> encodes minus one</p>
+<h2>Two bytes</h2>
+<p>Two bytes is sixteen bits, and that's called a short number.</p>
+<p>You can have signed or unsigned shorts.</p>
+<p>They are short, because most CPUs nowadays use...</p>
+<h2>Four bytes</h2>
+<p>With four bytes, you get regular 32-bit integers.</p>
+<p>Many CPUs used to like that, but nowadays, it's no longer enough.</p>
+<p>You can have unsigned integers, or signed integers.</p>
+<p>To describe 32-bit integers, you need eight nibbles.</p>
+<p>That's find, but it's starting to be a limit.</p>
+<p>By the way, nobody use three bytes, it's not convenient.</p>
+<h2>Eight bytes</h2>
+<p>With eight bytes, you get the modern 64-bit integers.</p>
+<p>Many CPUs now use 64-bit integers.</p>
+<p>That's because computer memory are becoming so large that you need big numbers to identify individual memory cells.</p>
+<p>With eight bytes, you get long integers, which can be signed or unsigned, still using two's complemenet.</p>
+<p>Eight bytes can be represented with sixteen nibbles, and is starting to be enough to be too many.</p>
+<p>A lot of representation scheme introduce additional separators, and means to transmit less characters when most bytes are zero.</p>
+<p>Some other schemes introduce the concept of prefix, so that only the suffix need to be specified.</p>
+<h2>Characters</h2>
+<p>Back to characters, we stopped at ASCII, which uses 7 bits.</p>
+<p>With eight bits, you get twice more slots to add additional characters.</p>
+<p>Many character encoding standards used the ASCII characters, then added additional characters depending on the targeted use.</p>
+<p>Some added accentuated european characters, other added greek or cyrillic characters.</p>
+<p>But eight bits is really not enough to represent everything we need.</p>
+<p>Unicode introduced a standard that used 32 bits, but 32 bits is too many when most in existence, will have 3 bytes consistently at 0.</p>
+<p>This is why they also defined a varying length encoding that only need one byte for ASCII, then more bytes as needed.</p>
+</body>
+</html>

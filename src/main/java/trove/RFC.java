@@ -38,15 +38,15 @@ public class RFC {
         }
     }
 
-    public String makeLongLinkHtml() {
+    public String makeLongLinkHtml(Page page) {
         String linkTitle = "RFC" + num + " " + title;
         String href = "https://datatracker.ietf.org/doc/html/rfc" + num;
-        return PageUtils.externalLink(href, linkTitle);
+        return PageUtils.externalLink(href, linkTitle,page);
     }
 
-    public String makeShortLinkHtml() {
+    public String makeShortLinkHtml(Page page) {
         String linkTitle = "RFC" + num;
         String href = "https://datatracker.ietf.org/doc/html/rfc" + num;
-        return PageUtils.externalLink(href, linkTitle);
+        return PageUtils.externalLink(href, linkTitle,page);
     }
 }

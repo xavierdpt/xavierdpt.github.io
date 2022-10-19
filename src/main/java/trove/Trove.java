@@ -22,6 +22,7 @@ public class Trove {
                 .toList();
         List<Page> pages = new ArrayList<>();
         for (String pageClassName : pageClassNames) {
+            System.out.println(pageClassName);
             Class<?> clazz = Class.forName(pageClassName);
             if (!Page.class.isAssignableFrom(clazz)) {
                 continue;
@@ -49,7 +50,10 @@ public class Trove {
             mkdirs(path);
             page.renderTop(renderContext);
         }
+        copyResources();
     }
+
+
 
     private static void mkdirs(String path) {
         if (path.endsWith(".html")) {
@@ -72,5 +76,44 @@ public class Trove {
                 l.substring(location.length()).indexOf("/") == 0);
     }
 
+    private static void copyResources() throws IOException {
+        File src = new File("assets/");
+        File dst = new File("docs/assets");
+        copyRecursively(src,dst,true);
+    }
+    private static void copyRecursively(File src, File dst, boolean isRoot) throws IOException {
+        if(src.isDirectory()) {
+            if(!dst.exists()) {
+                dst.mkdirs();
+            }
+            if(dst.exists()&&!dst.isDirectory()) {
+                throw new RuntimeException("File is not a directory: "+dst.getAbsolutePath());
+            }
+            if(!isRoot) {
+                String srcPath = src.getAbsolutePath();
+                String dstPath = dst.getAbsolutePath();
+                System.out.println(srcPath + " -> " + dstPath);
+            }
+            for (File file : src.listFiles()) {
+                File subDst = new File(dst, file.getName());
+                copyRecursively(file,subDst,false);
+            }
+        } else {
+            copyFile(src,dst);
+        }
+    }
+
+    private static void copyFile(File src, File dst) throws IOException {
+        if(dst.exists()) {
+            if (dst.delete()) {
+                System.out.println("Overwriting "+dst.getAbsolutePath());
+            }
+        }
+        try (FileInputStream fis = new FileInputStream(src)) {
+            try (FileOutputStream fos = new FileOutputStream(dst)) {
+                fos.write(fis.readAllBytes());
+            }
+        }
+    }
 
 }

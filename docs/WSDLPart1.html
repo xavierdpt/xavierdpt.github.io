@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="WSDL Part 1 | Xavier's Treasure Trove">
+<title>WSDL Part 1 | Xavier's Treasure Trove</title>
+<style>
+*, *::before { box-sizing:border-box;}
+a { text-decoration:none;  }
+th, td { text-align:left; }
+p { margin-top:0; margin-bottom:0;  }
+p > code, li > code, td > code { font-size:1.05em; color:#660000; }
+code.bnf-token-abstract { border: solid 1px #660000; display:inline-block; padding:5px; font-weight:bold; }
+code.bnf-token-metasyntax { border: solid 1px #660000; display:inline-block; padding:5px; }
+code.bnf-token-concrete { border-top: solid 1px #660000; border-bottom: solid 1px #660000; display:inline-block;}
+</style>
+</head>
+<body>
+<a href="index.html">Home</a>
+<h1>WSDL Part 1</h1>
+<p><a href="https://www.w3.org/TR/wsdl20/" target="_blank" rel="nofollow">Web Services Description Language (WSDL) Version 2.0 Part 1: Core Language<img src="assets/images/link-external-small-ltr-progressive.svg"></a></p>
+<h2>1. Introduction</h2>
+<h2>1.1. Service Description</h2>
+<p>operation, message exchange pattern, interface, binding, endpoint, service</p>
+<h2>1.2. The Meaning of a Service Description</h2>
+<h2>1.3. Document Conformance</h2>
+<p>element information item</p>
+<p>namespace <code>"http://www.w3.org/ns/wsdl"</code></p>
+<p>XML element <code>description</code> in that namespace</p>
+<p><a href="http://www.w3.org/2007/06/wsdl/wsdl20.xsd" target="_blank" rel="nofollow">WSDL XML Schema<img src="assets/images/link-external-small-ltr-progressive.svg"></a></p>
+<p>The root element of a WSDL 2.0 document is a <code>description</code> tag</p>
+<p>component model</p>
+<h2>1.4. Notational Conventions</h2>
+<h2>1.4.1. RFC 2119 Keywords</h2>
+<h2>1.4.2. RFC 3986 Namespaces</h2>
+<h2>1.4.3. XML Schema anyURI</h2>
+<p><code>xs:anyURI</code> defines IRIs that are escaped according to XLink  with is almost identical to IRI escape rules defined in RFC 3987</p>
+<p>Some of the characters allowed in <code>xs:anyURI</code> are not allowed by IRIs</p>
+<h2>1.4.4. Prefixes and Namespaces Used in this Specification</h2>
+<p>Namespace prefixes</p>
+<p><code>wsdl</code> : <code>"http://www.w3.org/ns/wsdl"</code></p>
+<p><code>wsdli</code> : <code>"http://www.w3.org/ns/wsdl-instance"</code></p>
+<p><code>wsdlx</code> : <code>"http://www.w3.org/ns/wsdl-extensions"</code></p>
+<p><code>wrpc</code> : <code>"http://www.w3.org/ns/wsdl/rpc"</code></p>
+<p><code>wsoap</code> : <code>"http://www.w3.org/ns/wsdl/soap"</code></p>
+<p><code>whttp</code> : <code>"http://www.w3.org/ns/wsdl/http"</code></p>
+<p><code>xs</code> : <code>"http://www.w3.org/2001/XMLSchema"</code></p>
+<p><code>xsi</code> : <code>"http://www.w3.org/2001/XMLSchema-instance"</code></p>
+<h2>1.4.5. Terms Used in This Specification</h2>
+<p>Actual value, inlined schema</p>
+<h2>1.4.6 XML Information Set Properties</h2>
+<p>Properties from the XML Information Set specification are referred to by square brackets.</p>
+<h2>1.4.7 WSDL 2.0 Component Model Properties</h2>
+<p>WSDL properties are referred to by curly brackets.</p>
+<h2>1.4.8 Z Notation</h2>
+<p>Fuzz 2000 type checker</p>
+<p>Z notation is available in a non-normative version of the specification.</p>
+<h2>1.4.9 BNF Pseudo-Schemas</h2>
+<h2>1.4.10 Assertions</h2>
+<h2>2 Component Model</h2>
+<h2>2.1 Description</h2>
+<h2>2.1.1 The Description Component</h2>
+<p>WSDL Components and type system components</p>
+<p>WSDL Components = interfaces, bindings and services</p>
+<p>type system components = element declarations and type definitions</p>
+<p>interface operations, endpoints</p>
+<p> type definitions are required, interfaces, bindings, services and element declarations are optional</p>
+<p>Components can be defined in the WSDL document itself, in included documents or in imported namespaces</p>
+<p>To use components from another namespace, <code>wsdl:import</code> must be used.</p>
+<p>All QName references must resolve to components</p>
+<h2>2.1.2 XML Representation of Description Component</h2>
+<p><code>wsdl:description</code> element</p>
+<p><code>targetNamespace</code> attribute</p>
+<p>children: <code>documentation</code>, <code>import</code>, <code>include</code>, <code>types</code>, <code>interface</code>, <code>binding</code>, <code>service</code></p>
+<p>Two components of different kinds can have the same QName</p>
+<p>WSDL documents can include elements and attributes from other namespaces at some designated points</p>
+<h2>2.1.2.1 `targetNamespace` attribute information item</h2>
+<p><code>targetNamespace</code> is in the empty namespace</p>
+<p>type <code>xs:anyURI</code> which must be an IRI</p>
+<h2>2.1.3 Mapping Description's XML Representation to Component Properties</h2>
+<p>interfaces: document's + imported + included</p>
+<p>bindings: document's + imported + included</p>
+<p>services: document's + imported + included</p>
+<p>element declarations</p>
+<p>type definitions: 19 primitive types + 25 derived types + any types defined in the document, imported or included</p>
+<h2>2.2 Interface</h2>
+<h2>2.2.1 The Interface Component</h2>
+<p>operation = sequence of input and output messages</p>
+<p>interface = set of operations</p>
+<p>an interface can extend other interfaces</p>
+<p>interface fault components</p>
+<p>interfaces are referred to by QName</p>
+<p>properties: name, extended interfaces interface faults, interface operations</p>
+<h2>2.2.2 XML Representation of Interface Component</h2>
+<p><code>wsdl:interface</code></p>
+<p>attributes: name, extends, styleDefault</p>
+<p>child elements: documentation, fault, operation</p>
+<h2>2.2.2.1 `name` attribute information item with interface [owner element]</h2>
+<p>QName of the interface = targetNamespace of the description + name of the interface</p>
+<p>The <code>name</code> attribute is in no namespace</p>
+<p>Note: attribute do not take the default namespace when a default namespace is declared.</p>
+<h2>2.2.2.2 `extends` attribute information item</h2>
+<p>Whitespace-separated list of <code>xs:QName</code>, no namespace.</p>
+<p>List of the interfaces that this interface derives from.</p>
+<p>Must not contain duplicates</p>
+<h2>2.2.2.3 `styleDefault` attribute information item</h2>
+<p>no namespace</p>
+<p>Type <code>xs:anyURI</code></p>
+<p>If present, must contain absolute IRIs</p>
+<p>Indicate the default style used to construct element declaration of interface message references</p>
+<h2>2.2.3 Mapping Interface's XML Representation to Component Properties</h2>
+<p>Name, extended interfaces, interface faults, interface operations</p>
+<h2>2.3 Interface Fault</h2>
+<h2>2.3.1 The Interface Fault Component</h2>
+<p>Describes some possible application-specific faults, but not all faults.</p>
+<p>Does not describe system faults.</p>
+<p>Name, message content model (#any #none, #other, #element), element declaration, parent.</p>
+<p>Faults in the same interface cannot have the same name, but faults in different interfaces can have the same name.</p>
+<p>Since the interfaces can be in the same namespaces, faults cannot be identified by name or qualified name.</p>
+<p>If two faults with the same name are defined on different interfaces within a derivatin chain, they must have the same properties.</p>
+<p>Not WSDL documents are usually serialized in XML, but can be serialized in other type systems.</p>
+<h2>2.3.2: XML Representation of Interface Fault Component</h2>
+<p>XML element <code>fault</code> within an <code>interface</code> element</p>
+<p>Namespace: <code>wsdl</code></p>
+<p><code>name</code> attribute</p>
+<p><code>element</code> attribute</p>
+<p>Other attributes within other namespaces</p>
+<p><code>documentation</code> element child</p>
+<p>Other elements within other namespaces</p>
+<h2>2.3.2.1 `name` attribute information item with `fault` owner element</h2>
+<p>Attribute name <code>name</code>, type <code>xs:NCName</code>, no namespace</p>
+<h2>2.3.2.2 `element` attribute information item with `fault` owner element</h2>
+<p>Attribute name <code>element</code>, no namespace, type <code>xs:QName</code> or <code>xs:token</code> with values <code>#any</code>, <code>#none</code>, <code>#other</code>.</p>
+<h2>2.3.3 Mapping Interface Fault's XML Representation to Component Properties</h2>
+<p>Name, message content model, element declaration, parent</p>
+<p>Message content element is #element when the <code>element</code> attribute is the QName of an element</p>
+<h2>2.4 Interface Operation</h2>
+<h2>2.4.1 The Interface Operation Component</h2>
+<p>WSDL Part 2 defines message exchange patterns.</p>
+<p>Name, message exchange pattern, interface message references, interface fault references, style, parent</p>
+<p>Interface operation names are not globally unique, and duplicates must be equivalent.</p>
+<h2>2.4.1.1. Message Exchange Pattern</h2>
+<p>Placeholder message</p>
+<p>Fault propagation ruleset: fault-replaces-message, message-triggers-fault, no-faults.</p>
+<p>Message exchange patterns are idenfied by IRIs</p>
+<h2>2.4.1.2 Operation Style</h2>
+<p>IRIs that identify operation styles.</p>
+<p>See WSDL2 Part 2</p>
+<h2>2.4.2 XML Representation of Interface Operation Component</h2>
+<p>Element name <code>operation</code>, namespace <code>wsdl</code>, parent <code>interface</code></p>
+<p>Required <code>name</code> attribute</p>
+<p>Optional <code>pattern</code> attribute</p>
+<p>Optional <code>style</code> attribute</p>
+<p>Optional <code>documentation</code> child elements</p>
+<p>Optional <code>input</code> child elements</p>
+<p>Optional <code>output</code> child elements</p>
+<p>Optional <code>infault</code> child elements</p>
+<p>Optional <code>outfault</code> child elements</p>
+<p>Other elements from other namespaces</p>
+<h2>2.4.2.1 `name` attribute information item with `operation` owner element</h2>
+<p>Attribute name <code>name</code>, no namespace, type <code>xs:NCName</code></p>
+<h2>2.4.2.2 `pattern` attribute information item with `operation` owner element</h2>
+<p>Attribute name <code>pattern</code>, no namespace, type <code>xs:anyURI</code>, must be an absolute IRI.</p>
+<h2>2.4.2.3 `style` attribute informatin item with `operation` owner element</h2>
+<p>Attribute name <code>style</code>, no namespace, type <code>xs:anyURI</code>, must be an absolute IRI.</p>
+<h2>2.4.3 Mapping Interface Operation's XML Representation to Component Properties</h2>
+<p>name, message exchange pattern, interface message references, interface fault references, style, parent</p>
+<p>Default value for message exchange pattern: <code>http://www.w3.org/ns/wsd/in-out</code></p>
+<h2>2.5 Interface Message Reference</h2>
+<h2>2.5.1 The Interface Message Reference Component</h2>
+<p>message label, direction, message content model, element declaration, parent</p>
+<p>The message label identifies the role that the message plays in the message exchange pattern.</p>
+<p>The direction must be <code>in</code> or <code>out</code> and must match the direction defined in the message exchange pattern.</p>
+<p>The message content model is <code>#any</code>, <code>#none</code>, <code>#other</code> or <code>#element</code>.</p>
+<h2>2.5.2 XML Representation of Interface Message Reference Component</h2>
+<p>Location: <code>description/interface/operation</code></p>
+<p>Element name: <code>input</code> or <code>output</code></p>
+<p>Namespace: <code>wsdl</code></p>
+<p>Attributes: <code>messageLabel</code>, <code>element</code>, others</p>
+<p>Child elements: <code>documentation</code>, others</p>
+<h2>2.5.2.1 `messageLabel` attribute information item with `input` or `output` owner element</h2>
+<p>Attribute name <code>messageLabel</code>, type <code>xs:NCName</code>, no namespace</p>
+<h2>2.5.2.2 `element` attribute information item with `input` or `output` owner element</h2>
+<p>Attribute name <code>element</code>, no namespace, type <code>xs:QName</code> or <code>xs:token</code> with values <code>#any</code>, <code>#none</code>, <code>#other</code></p>
+<h2>2.5.3 Mapping Interface Message Reference's XML Representation to Component Properties</h2>
+<p>Message exchange pattern: that of the interface.</p>
+<p>Direction: <code>in</code> for <code>input</code> and <code>out</code> for <code>output</code>.</p>
+<p>The message label is not required, if absent, it is inferred from the message pattern.</p>
+<p>message label, direction, message content model, element declaration, parent</p>
+<h2>2.6 Interface Fault Reference</h2>
+<h2>2.6.1 The Interface Fault Reference Component</h2>
+<p>fault-replaces-message: the fault replaces the message</p>
+<p>messages-triggers-fault: the fault will travel in the opposite direction of the message</p>
+<p>interface fault, message label, direction, parent</p>
+<h2>2.6.2 XML Representation of Interface Fault Reference</h2>
+<p>Parent element: <code>description/interface/operation</code></p>
+<p>Element names: <code>infault</code>, <code>outfault</code></p>
+<p>Namespace: <code>wsdl</code></p>
+<p>Attributes: <code>ref</code>, <code>messageLabel</code>, others</p>
+<p>Child elements: <code>documentation</code>, others</p>
+<h2>2.6.2.1 `ref` attribute item with `infault`, or `outfault` owner element</h2>
+<p>Attribute name: <code>ref</code>, no namespace, type <code>xs:QName</code></p>
+<h2>2.6.2.2 `messageLabel` attribute information item with `infault`, or `outfault` owner element</h2>
+<p>Attribute name: <code>messageLabel</code>, no namespace, type: <code>xs:NCName</code></p>
+<p>If the message exchange pattern has more than one fault in the specified direction, the <code>messageLabel</code> attribute must be present.</p>
+<h2>2.6.3 Mapping Interface Fault Reference's XML Representation to Component Properties</h2>
+<p>interface fault, message label, direction, parent</p>
+<h2>2.7 Binding</h2>
+<p>A binding component describes a concrete message format and transmission protocol</p>
+<p>A given binding can be used for multiple interfaces</p>
+<p>Bindings can be specified on a per-operation basis.</p>
+<p>When the binding specifies operation-specific or fault-specific details, it must specify the interface containing the corresponding operations and faults.</p>
+<p>Otherwise, bindings do not need to specify interfaces</p>
+<p>WSDL 2 Part 2 defines bindings for SOAP 1.2 and HTTP.</p>
+<p>name, interface, type, binding faults, binding operations</p>
+<h2>2.7.2 XML Representation of Binding Component</h2>
+<p>Element <code>binding</code></p>
+<p>Namespace <code>wsdl</code></p>
+<p>Attributes <code>name</code>, <code>interface</code>, <code>type</code>, others</p>
+<p>Child elements: <code>documentation</code>, <code>fault</code>, <code>operation</code>, others</p>
+<h2>2.7.2.1 `name` attribute information item with `binding` owner element</h2>
+<p>Attribute name <code>name</code>, no namespace, type <code>xs:NCName</code></p>
+<h2>2.7.2.2 `interface` attribute information item with `binding` owner element</h2>
+<p>Attribute name <code>interface</code>, no namespace, type <code>xs:QName</code></p>
+<h2>2.7.2.3 `type` attribute information item with `binding` owner element</h2>
+<p>Attribute name <code>type</code>, no namespace, type <code>xs:anyURI</code></p>
+<h2>2.7.2.4 Binding extension elements</h2>
+<p>...</p>
+<h2>2.7.3 Mapping Binding's XML Representation to Component Properties</h2>
+<p>name, interface, type, binding faults, binding operations</p>
+<h2>2.8 Binding Faults</h2>
+<h2>2.8.1 The Binding Fault Component</h2>
+<p>interface fault, parent</p>
+<h2>2.8.2 XML Representation of Binding Fault Component</h2>
+<p>Parent element: <code>description/binding</code></p>
+<p>Element name <code>fault</code></p>
+<p>Namespace <code>wsdl</code></p>
+<p>Attributes: <code>ref</code>, others</p>
+<p>Child elements: <code>documentation</code>, others</p>
+<h2>2.8.2.1 `ref` attribute information item with `fault` owner element</h2>
+<p>Attribute name <code>ref</code>, no namespace, type <code>xs:QName</code></p>
+<h2>2.8.2.2 Binding Fault extension elements</h2>
+<h2>...</h2>
+<h2>2.8.3 Mapping Binding Fault's XML Representation to Component Properties</h2>
+<p>interface fault, parent</p>
+<h2>2.9 Binding Operation</h2>
+<h2>2.9.1 The Binding Operation Component</h2>
+<p>interface operation, binding message reference, binding fault references, parent</p>
+<h2>2.9.2 XML Representation of Binding Operation Component</h2>
+<p>Parent element <code>description/binding</code></p>
+<p>Element name: <code>operation</code></p>
+<p>Namespace: <code>wsdl</code></p>
+<p>Attributes: <code>ref</code>, others</p>
+<p>Child elements: <code>documentation</code>, <code>input</code>, <code>output</code>, <code>infault</code>, <code>outfault</code>, others</p>
+<h2>2.9.2.1 `ref` attribute information item with `operation` owner element</h2>
+<p>...</p>
+<h2>2.9.2.2 Binding Operation extension elements</h2>
+<p>...</p>
+<h2>2.9.3 Mapping Binding Operation's XML Representation to Component Properties</h2>
+<p>interface operation, binding message references, binding fault references, parent</p>
+<h2>2.10 Binding Message Reference</h2>
+<h2>2.10.1 The Binding Message Reference Component</h2>
+<p>interface message reference, parent</p>
+<h2>2.10.2 XML Representation of Binding Message Reference Component</h2>
+<p>Parent element: <code>description/binding/operation</code></p>
+<p>Element names: <code>input</code>, <code>output</code></p>
+<p>Namespace: <code>wsdl</code></p>
+<p>Attributes: <code>messageLabel</code>, others</p>
+<p>Child elements: <code>documentation</code>, others</p>
+<h2>2.10.2.1 `messageLabel` attribute information item with `input` or `output` owner element</h2>
+<p>...</p>
+<h2>2.10.2.2 Binding Message Reference extension elements</h2>
+<p>...</p>
+<h2>2.10.3 Mapping Binding Reference's XML Representation to Component Properties</h2>
+<p>interface message reference, parent</p>
+<h2>2.11 Binding Fault Reference</h2>
+<h2>2.11.1 The Binding Fault Reference Component</h2>
+<h2>2.11.2 XML Representation of Binding Fault Reference Component</h2>
+<h2>2.11.2.1 `ref` attribute information item `infault` or `outfault` owner element</h2>
+<h2>2.11.2.2 `messageLabel` attribute information item `infault` or `outfault` owner element</h2>
+<h2>2.11.2.3 Binding Fault Reference extension elements</h2>
+<h2>2.11.3 Mapping Binding Fault Reference's XML Representation to Component Properties</h2>
+<h2>2.12 Service</h2>
+<h2>2.12.1 The Service Component</h2>
+<p>name, interface, endpoints</p>
+<h2>2.12.2 XML Representation of Service Component</h2>
+<p>Element name: <code>service</code></p>
+<p>Namespace: <code>wsdl</code></p>
+<p>Attributes: <code>name</code>, <code>interface</code>, others</p>
+<p>Child elements: <code>documentation</code>, <code>endpoint</code>, others</p>
+<h2>2.12.2.1 `name` attribute information item with `service` owner element</h2>
+<h2>2.12.2.2 `interface` attribute information item with `service` owner element</h2>
+<h2>2.12.3 Mapping Service's XML Representation to Component Properties</h2>
+<h2>2.13 Endpoint</h2>
+<h2>2.13.1 The Endpoint Component </h2>
+<p>name, binding, address, parent</p>
+<h2>2.13.2 XML Representation of Endpoint Component</h2>
+<p>Parent element: <code>description/service</code></p>
+<p>Element name: <code>endpoint</code></p>
+<p>Namespace: <code>wsdl</code></p>
+<p>Attributes: name, binding, address</p>
+<p>Child elements: documentation</p>
+<h2>2.13.2.1 `name` attribute information item with `endpoint` owner element</h2>
+<h2>2.13.2.2 `binding` attribute information item with `endpoint` owner element</h2>
+<h2>2.13.2.3 `address` attribute information item with `endpoint` owner element</h2>
+<h2>2.13.2.3 Endpoint extension elements</h2>
+<h2>2.13.3 Mapping Endpoint's XML Representation to Component Properties</h2>
+<h2>2.14 XML Schema 1.0 Simple Types Used in the Component Model</h2>
+<h2>2.15 Equivalence of Components</h2>
+<h2>2.16 Symbol Spaces</h2>
+<h2>2.17 QName resolution</h2>
+<h2>2.18 Comparing URIs and IRIs</h2>
+<h2>3. Types</h2>
+<h2>3.1</h2>
+<h2>3.1.1</h2>
+<h2>3.1.1.1</h2>
+<h2>3.1.1.2</h2>
+<h2>3.1.2</h2>
+<h2>3.1.3</h2>
+<h2>3.2</h2>
+<h2>3.3</h2>
+<h2>3.3.1</h2>
+<h2>3.3.2</h2>
+<h2>3.3.3</h2>
+<h2>3.3.4</h2>
+<h2>4</h2>
+<h2>4.1</h2>
+<h2>4.1.1</h2>
+<h2>4.2</h2>
+<h2>4.2.1</h2>
+<h2>4.2.2</h2>
+<h2>4.3</h2>
+<h2>5</h2>
+<h2>6</h2>
+<h2>6.1</h2>
+<h2>6.1.1</h2>
+<h2>6.1.2</h2>
+<h2>6.2</h2>
+<h2>6.3</h2>
+<h2>7</h2>
+<h2>7.1</h2>
+<h2>8</h2>
+<h2>8.1</h2>
+<h2>9</h2>
+<h2>10</h2>
+<h2>10.1</h2>
+<h2>10.2</h2>
+</body>
+</html>

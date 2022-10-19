@@ -3,6 +3,7 @@ package trove;
 import org.owasp.encoder.Encode;
 
 import java.io.*;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
@@ -12,7 +13,12 @@ import static java.util.function.Function.identity;
 
 public abstract class Page {
 
+    public RenderContext getRenderContext() {
+        return renderContext;
+    }
+
     private static final String TITLE = "Xavier's Treasure Trove";
+
 
     private final String location;
     private final String subTitle;
@@ -20,11 +26,16 @@ public abstract class Page {
     private String path;
     protected PrintWriter pw;
     private final List<String> languages;
+    private RenderContext renderContext;
 
     protected Page(String location, String subTitle, List<String> languages) {
         this.location = location;
         this.subTitle = subTitle;
         this.languages = languages;
+    }
+
+    protected Page(String location, String subTitle) {
+        this(location, subTitle, List.of());
     }
 
     public String getLocation() {
@@ -81,15 +92,14 @@ public abstract class Page {
         pw.println("</head>");
         pw.println("<body>");
         if (!"".equals(location)) {
-            String href = findRelativePath(location, "", renderContext);
+            String href = findRelativePathByLocation(location, "", renderContext);
             pw.println("<a href=\"" + href + "\">Home</a>");
-
             int lastSlash = location.lastIndexOf("/");
             if (lastSlash != -1) {
                 String parentLocation = location.substring(0, lastSlash);
                 Page parentPage = renderContext.getPage(parentLocation);
                 if (parentPage != null) {
-                    String href2 = findRelativePath(location, parentLocation, renderContext);
+                    String href2 = findRelativePathByLocation(location, parentLocation, renderContext);
                     String parentSubtitle = parentPage.getSubTitle();
                     if (parentSubtitle != null && !"".equals(parentSubtitle)) {
                         pw.println(" > <a href=\"" + href2 + "\">" + parentSubtitle + "</a>");
@@ -107,6 +117,7 @@ public abstract class Page {
 
     }
 
+
     private void footer() {
         if (!languages.isEmpty()) {
             pw.println("<script>hljs.highlightAll();</script>");
@@ -115,38 +126,26 @@ public abstract class Page {
         pw.println("</html>");
     }
 
+    protected String externalLink(String href) {
+        return PageUtils.externalLink(href, href, this);
+    }
+
     protected String externalLink(String href, String title) {
-        return PageUtils.externalLink(href, title);
+        return PageUtils.externalLink(href, title, this);
     }
 
     protected String internalLink(Page page, RenderContext renderContext) {
         String linkTitle = page.getSubTitle();
-        String href = findRelativePath(this.getLocation(), page.getLocation(), renderContext);
+        String href = findRelativePathByLocation(this.getLocation(), page.getLocation(), renderContext);
         return "<a href=\"" + href + "\">" + linkTitle + "</a>";
     }
 
-    private static String findRelativePath(String fromLocation, String toLocation, RenderContext renderContext) {
+    private static String findRelativePathByLocation(String fromLocation, String toLocation, RenderContext renderContext) {
         String fromPath = renderContext.getPath(fromLocation);
         String toPath = renderContext.getPath(toLocation);
-        String[] fparts = fromPath.split("/", -1);
-        String[] tparts = toPath.split("/", -1);
-        int i = 0;
-        while (i < fparts.length && i < tparts.length && fparts[i].equals(tparts[i])) {
-            ++i;
-        }
-        String result = "";
-        for (int j = i; j < tparts.length; ++j) {
-            if ("".equals(result)) {
-                result = tparts[j];
-            } else {
-                result = result + "/" + tparts[j];
-            }
-        }
-        for (int k = i; k < fparts.length - 1; ++k) {
-            result = "../" + result;
-        }
-        return result;
+        return PageUtils.findRelativePath(fromPath, toPath);
     }
+
 
     protected void section(String title) {
         pw.println("<h2>" + title + "</h2>");
@@ -204,6 +203,7 @@ public abstract class Page {
     }
 
     private void startRender(RenderContext renderContext) throws FileNotFoundException {
+        this.renderContext=renderContext;
         pw = new PrintWriter(renderContext.getPath(getLocation()));
         header(renderContext);
     }
@@ -296,5 +296,17 @@ public abstract class Page {
             return "<code class=\"" + className + "\">" + content + "</code>";
         }).collect(Collectors.joining());
         return html;
+    }
+
+    protected void subpages(RenderContext renderContext) {
+        pw.println("<ul>");
+        renderContext.getChildPages(getLocation()).stream()
+                .sorted(Comparator.comparing(p -> p.getSubTitle().toLowerCase()))
+                .forEach(page -> {
+                            String htmlLink = internalLink(page, renderContext);
+                            pw.println("<li>" + htmlLink + "</li>");
+                        }
+                );
+        pw.println("</ul>");
     }
 }

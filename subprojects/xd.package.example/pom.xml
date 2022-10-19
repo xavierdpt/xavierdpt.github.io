@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.github.xavierdpt</groupId>
+    <artifactId>package-example</artifactId>
+	<version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>18</maven.compiler.source>
+        <maven.compiler.target>18</maven.compiler.target>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <Implementation-Title>Dummy Implementation Title</Implementation-Title>
+                            <Implementation-Vendor>Dummy Implementation Vendor</Implementation-Vendor>
+                            <Implementation-Version>3.4.5</Implementation-Version>
+                            <Specification-Title>Dummy Specification Title</Specification-Title>
+                            <Specification-Vendor>Dummy Specification Vendor</Specification-Vendor>
+                            <Specification-Version>6.7.8</Specification-Version>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

@@ -1,6 +1,9 @@
 package trove.pages;
 
-import trove.*;
+import trove.Page;
+import trove.RFCs;
+import trove.RenderContext;
+import trove.SyntaxToken;
 
 import java.io.IOException;
 import java.util.List;
@@ -14,7 +17,7 @@ public class URI extends Page {
     @Override
     protected void render(RenderContext renderContext) throws IOException {
 
-        String rfcLinkHtml = RFCs.RFC3986.makeShortLinkHtml();
+        String rfcLinkHtml = RFCs.RFC3986.makeShortLinkHtml(this);
         String wpLinkHtml = externalLink("https://en.wikipedia.org/wiki/Uniform_Resource_Identifier", "Wikipedia");
 
         p("Uniform Resource Identifiers are defined in " + rfcLinkHtml + ".");

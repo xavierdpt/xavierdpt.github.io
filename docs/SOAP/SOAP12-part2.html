@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="SOAP 1.2 - Part 2 | Xavier's Treasure Trove">
+<title>SOAP 1.2 - Part 2 | Xavier's Treasure Trove</title>
+<style>
+*, *::before { box-sizing:border-box;}
+a { text-decoration:none;  }
+th, td { text-align:left; }
+p { margin-top:0; margin-bottom:0;  }
+p > code, li > code, td > code { font-size:1.05em; color:#660000; }
+code.bnf-token-abstract { border: solid 1px #660000; display:inline-block; padding:5px; font-weight:bold; }
+code.bnf-token-metasyntax { border: solid 1px #660000; display:inline-block; padding:5px; }
+code.bnf-token-concrete { border-top: solid 1px #660000; border-bottom: solid 1px #660000; display:inline-block;}
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/languages/xml.min.js"></script>
+</head>
+<body>
+<a href="../index.html">Home</a>
+<h1>SOAP 1.2 - Part 2</h1>
+<p><a href="https://www.w3.org/TR/soap12-part2/" target="_blank" rel="nofollow">SOAP Version 1.2 Part 2: Adjuncts (Second Edition)<img src="../assets/images/link-external-small-ltr-progressive.svg"></a></p>
+<h2>1</h2>
+<p>SOAP Data Model</p>
+<p>SOAP Encoding</p>
+<p>SOAP RPC Representation</p>
+<p>SOAP-Supplied Message Exchange Patterns</p>
+<p>SOAP Web Method</p>
+<p>SOAP HTTP Binding</p>
+<h2>1.1</h2>
+<p>Common prefixes for namespaces:</p>
+<p><code>env</code> : <code>"http://www.w3.org/2003/05/soap-envelope"</code> ; defined in SOAP Version 1.2 Part 1</p>
+<p><code>enc</code> : <code>"http://www.w3.org/2003/05/soap-encoding"</code> ; schema available at <a href="http://www.w3.org/2003/05/soap-encoding" target="_blank" rel="nofollow">http://www.w3.org/2003/05/soap-encoding<img src="../assets/images/link-external-small-ltr-progressive.svg"></a></p>
+<p><code>rpc</code> : <code>"http://www.w3.org/2003/05/soap-rpc"</code> ; schema available at <a href="http://www.w3.org/2003/05/soap-rpc" target="_blank" rel="nofollow">http://www.w3.org/2003/05/soap-rpc<img src="../assets/images/link-external-small-ltr-progressive.svg"></a></p>
+<p><code>xs</code> : <code>"http://www.w3.org/2001/XMLSchema"</code> ; defined in the XML Schema specification</p>
+<p><code>xsi</code> : <code>"http://www.w3.org/2001/XMLSchema-instance"</code> ; defined in the XML Schema specification</p>
+<h2>2</h2>
+<p>SOAP Data Model</p>
+<p>Directed edge-labeled graph of nodes</p>
+<p>Use of the SOAP Data Model + SOAP Encoding + SOAP RPC Representation is optional</p>
+<h2>2.1</h2>
+<p>An edge originates at a graph node and terminates at a graph node.</p>
+<p>A graph node has outbound edges and inbound edges.</p>
+<p>An edge may originate and terminate at the same graph node.</p>
+<p>An edge may have only an originating node or only a terminating node.</p>
+<h2>2.1.1</h2>
+<p>Edge labels are XML qualified names.</p>
+<h2>2.2</h2>
+<p>A graph node as zero or more outbound edges.</p>
+<p>A graph node with no outbound edges has an optional lexical value.</p>
+<p>All graph node have an optional type name of <code>xs:QName</code></p>
+<h2>2.2.1</h2>
+<p>A single reference node has a single inbound edge.</p>
+<p>A multi reference node has multiple inbound edges.</p>
+<h2>2.3</h2>
+<p>A simple value is a graph node with a lexical value.</p>
+<p>A compound value is a graph node with one or more outbound edges.</p>
+<p>A struct is a graph node whose outbound edges are distinguished by label.</p>
+<p>An array is a graph node whose outbound edges are distinguished by position.</p>
+<p>The outbound edges of an array value must not be labeled.</p>
+<h2>3</h2>
+<p>The SOAP encoding of the SOAP Data Model is identified by the URI <code>"http://www.w3.org/2003/05/soap-encoding"</code></p>
+<p>SOAP messages should indicate the encoding using the <code>env:encodingStyle</code> attribute</p>
+<h2>3.1</h2>
+<h2>3.1.1</h2>
+<p>Graph edges are encoded as XML elements.</p>
+<p>An element that does not have a <code>ref</code> attribute represents a node  and, at the same time,  the edge that terminates at that node.</p>
+<p>If an element has a <code>ref</code> attribute, it's value must be the value of the <code>id</code> attribute of another element in the same envelope that is in the scope of a SOAP encoding.</p>
+<p>All graph nodes are represented without a <code>ref</code> attribute.</p>
+<p>Additional inbound edges for multi reference nodes are represented with a <code>ref</code> attribute.</p>
+<h2>3.1.2</h2>
+<p>Simple values are represented as sequence of characters</p>
+<p>The XML element may also have a <code>nodeType</code> attribute.</p>
+<h2>3.1.3</h2>
+<p>Outbound edges are encoded as child XML elements.</p>
+<p>For a graph node distinguished by a label, the local name and namespace name of the XML element is the value of the edge label.</p>
+<p>For a graph node distinguished by position, the local name and namespace name are not significant.</p>
+<p>The XML element for a compound value may have a <code>nodeType</code> attribute.</p>
+<p>For arrays, the XML element may have an <code>itemType</code> attribute and an <code>arraySize</code> attribute.</p>
+<p>Graph edges that do not terminate in a graph node may be omitted or may be represented as an XML element which has <code>xsi:nil</code> attribute set to <code>"true"</code></p>
+<h2>3.1.4</h2>
+<p>The type name property of a graph node is a pair of a namespace name and a local name.</p>
+<p>If an XML element has the <code>xsi:type</code> attribute, then it's type name is the value of that type.</p>
+<p>Otherwise, the type name property is the value of the <code>enc:itemType</code> attribute of the parenet element, if present.</p>
+<p>Otherwise, the item type is unspecified.</p>
+<h2>3.1.4.1</h2>
+<p><code>enc:itemType</code> attribute of type <code>xs:QName</code></p>
+<h2>3.1.5</h2>
+<h2>3.1.5.1</h2>
+<p><code>enc:id</code> of type <code>xs:ID</code></p>
+<h2>3.1.5.2</h2>
+<p><code>enc:ref</code> attribute of type <code>xs:IDREF</code></p>
+<h2>3.1.5.3</h2>
+<p><code>enc:id</code> and <code>enc:ref</code> must not appear on the same XML element</p>
+<h2>3.1.6</h2>
+<p><code>enc:arraySize</code> of type <code>enc:arraySize</code></p>
+<p>The <code>arraySize</code> attribute can describe the sizes of multidimensional arrays.</p>
+<p>The default value is '<code>*</code>'</p>
+<h2>3.1.7</h2>
+<p><code>enc:nodeType</code> attribute of type <code>enc:nodeType</code></p>
+<p>Must be "<code>simple</code>", "<code>struct</code>" or "<code>array</code>"</p>
+<h2>3.2</h2>
+<p><code>ref</code> attribute but no corresponding <code>id</code> found => fault <code>env:Sender</code> with subcode <code>enc:MissingID</code></p>
+<p>same <code>id</code> used more than once => fault <code>env:Sender</code> with subcode <code>enc:DuplicateID</code></p>
+<p>missing type name => fault <code>env:Sender</code> with subcode <code>enc:UntypedValue</code></p>
+<h2>4</h2>
+<p>The SOAP RPC representation must support the SOAP data model but does not need to use the SOAP encoding.</p>
+<p>Address of target SOAP node</p>
+<p>Procedure or method name</p>
+<p>Arguments</p>
+<p>Values for properties required by the bindings</p>
+<p>Optional header data</p>
+<h2>4.1</h2>
+<h2>4.1.1</h2>
+<p>Resources to be updated should be identified with URIs</p>
+<h2>4.1.2</h2>
+<p>The Web Method feature with Response MEP can be used for resource retrieval, with <code>http://www.w3.org/2003/05/soap/features/web-method/Method</code> set to <code>GET</code>.</p>
+<p>The Web Method feature with Request-Response MEP can be used for other cases, with <code>http://www.w3.org/2003/05/soap/features/web-method/Method</code> set to <code>POST</code>.</p>
+<h2>4.2</h2>
+<h2>4.2.1</h2>
+<p>RPC invocation: a struct whose name corresponds to the name of the method, with an outbound edge for each <code>in</code> or <code>in/out</code> parameter, where each edge is labeled with the name of the parameter.</p>
+<h2>4.2.2</h2>
+<p>RPC response: a struct with an outbound edge for the return value and each <code>out</code> or <code>in/out</code> parameter.</p>
+<p>The edges are labeled with the name of the parameters.</p>
+<p>The return value is labeled with <code>"rpc:result"</code>, which terminates in a <code>xs:QName</code> node whose value is the name of the outbound edge which has the actual return value.</p>
+<h2>4.2.3</h2>
+<p>When using SOAP Encoding, the Body must have exactly one child item.</p>
+<h2>4.3</h2>
+<p>Additional information must be expressed as SOAP header blocks.</p>
+<h2>4.4</h2>
+<p>RPC faults</p>
+<p><code>env:Receiver</code></p>
+<p><code>env:DataEncodingUnknown</code></p>
+<p><code>env:Sender rpc:ProcedureNotPresent</code></p>
+<p><code>env:Sender rpc:BadArguments</code></p>
+<p>Values for <code>Reason</code> and <code>Detail</code> are implementation-defined.</p>
+<h2>5</h2>
+<h2>5.1</h2>
+<h2>5.1.1</h2>
+<p>Properties are named with URIs, and should be associated to an XML Schema type.</p>
+<h2>5.1.2</h2>
+<h2>5.1.2.1</h2>
+<p>Message Exchange Context</p>
+<h2>5.1.2.2</h2>
+<p>Environment Context</p>
+<h2>5.1.3</h2>
+<p>One or more properties can enable one or more features.</p>
+<h2>6</h2>
+<h2>6.1</h2>
+<p>Four <code>xs:anyURI</code> properties in <code>"http://www.w3.org/2003/05/soap/bindingFramework/ExchangeContext/"</code></p>
+<p><code>ExchangePatternName</code>, <code>FailureReason</code>, <code>Role</code>, <code>State</code></p>
+<h2>6.2</h2>
+<p>Request-Response MEP</p>
+<h2>6.2.1</h2>
+<p>SOAP feature name: <code>"http://www.w3.org/2003/05/soap/mep/request-response/"</code></p>
+<h2>6.2.2</h2>
+<p>Message acting as a request followed by message acting as a response.</p>
+<p>Response may contain a SOAP envelope or must be a binding-specific message.</p>
+<h2>6.2.3</h2>
+<p>Properties for Request-Response MEP in <code>"http://www.w3.org/2003/05/soap/mep/"</code></p>
+<p><code>OutboundMessage</code>, <code>InboundMessage</code>, <code>ImmediateDestination</code> and <code>ImmediateSender</code></p>
+<div style="width:100%;height:16px"></div>
+<p>Initial message exchange context for a requesting SOAP node:</p>
+<div style="width:100%;height:16px"></div>
+<p><code>"http://www.w3.org/2003/05/soap/bindingFramework/ExchangeContext/ExchangePatternName"</code></p>
+<p><code>"http://www.w3.org/2003/05/soap/mep/request-response/"</code></p>
+<div style="width:100%;height:16px"></div>
+<p><code>"http://www.w3.org/2003/05/soap/bindingFramework/ExchangeContext/FailureReason"</code></p>
+<p><code>"None"</code></p>
+<div style="width:100%;height:16px"></div>
+<p><code>"http://www.w3.org/2003/05/soap/bindingFramework/ExchangeContext/Role"</code></p>
+<p><code>"RequestingSOAPNode"</code></p>
+<div style="width:100%;height:16px"></div>
+<p><code>""</code></p>
+<p><code>"Init"</code></p>
+<div style="width:100%;height:16px"></div>
+<p><code>"http://www.w3.org/2003/05/soap/mep/OutboundMessage"</code></p>
+<div style="width:100%;height:16px"></div>
+<p><code>"http://www.w3.org/2003/05/soap/mep/ImmediateDestination"</code></p>
+<div style="width:100%;height:16px"></div>
+<p>Initial message exchange context for a responding SOAP node</p>
+<p>ExchangePatternName: <code>"http://www.w3.org/2003/05/soap/mep/request-response/"</code></p>
+<p>FailureReason: None</p>
+<p>Role: RespondingSOAPNode</p>
+<p>State: Init</p>
+<div style="width:100%;height:16px"></div>
+<p>Requesting SOAP node state transitions: <code>Init</code> -> <code>Requesting</code> -> <code>Sending+Receiving</code></p>
+<p>Responding SOAP node state transitions: <code>Init</code> -> <code>Receiving</code> -> <code>Receiving+Sending</code></p>
+<p>If using streaming, the node sending the request may need to start processing the response in parallel.</p>
+<h2>6.2.4</h2>
+<p>SOAP faults generated at the responding node while in <code>Responding</code> state are made available in the <code>OutboundMessage</code> property.</p>
+<h2>6.3</h2>
+<p>SOAP Response MEP</p>
+<h2>6.3.1</h2>
+<p>Feature name: <code>"http://www.w3.org/2003/05/soap/mep/soap-response/" </code></p>
+<h2>6.3.2</h2>
+<p>Request transmitted in a binding-specific manner.</p>
+<p>Response which contains a SOAP envelope.</p>
+<h2>6.3.3</h2>
+<p><code>http://www.w3.org/2003/05/soap/mep/OutboundMessage</code></p>
+<p>Properties: <code>OutboundMessage</code>, <code>InboundMessage</code>, <code>ImmediateDestination</code>, <code>ImmediateSender</code></p>
+<div style="width:100%;height:16px"></div>
+<p>Initiation of the message exchange context for the requesting node:</p>
+<p><code>ExchangePatternName</code>: <code>"http://www.w3.org/2003/05/soap/mep/soap-response/" </code></p>
+<p><code>FailureReason</code>: <code>"None"</code></p>
+<p><code>Role</code>: <code>"RequestingSOAPNode"</code></p>
+<p><code>State</code>: <code>"Init"</code></p>
+<p><code>OutboundMessage</code></p>
+<p><code>ImmediateDestination</code></p>
+<div style="width:100%;height:16px"></div>
+<p>Initiation of a message exchange context for an inbound request message:</p>
+<p>ExchangePatternName: <code>"http://www.w3.org/2003/05/soap/mep/soap-response/"</code></p>
+<p>FailureReason: <code>"None"</code></p>
+<p>Role: <code>"RespondingSOAPNode"</code></p>
+<p>State: <code>"Init"</code></p>
+<div style="width:100%;height:16px"></div>
+<p>Requesting SOAP Node State Transitions: <code>Init</code> -> <code>Requesting</code> -> <code>Receiving</code></p>
+<p>Responding SOAP Node State Transitions: <code>Init</code> -> <code>Receiving</code> -> <code>Sending</code></p>
+<h2>6.3.4</h2>
+<p>Faults generated by the responding SOAP node while in the <code>Receiving</code> state are made available in the <code>OutboundMessage</code> property.</p>
+<h2>6.4</h2>
+<p>SOAP Web Method Feature</p>
+<h2>6.4.1</h2>
+<p>Feature name: <code>"http://www.w3.org/2003/05/soap/features/web-method/"</code></p>
+<h2>6.4.2</h2>
+<h2>6.4.3</h2>
+<p>Property name: <code>http://www.w3.org/2003/05/soap/features/web-method/Method</code></p>
+<p>Possible values: <code>"GET"</code>, <code>"POST"</code>, <code>"PUT"</code>, <code>"DELETE"</code>, ...</p>
+<h2>6.5</h2>
+<p>SOAP Action Feature</p>
+<h2>6.5.1</h2>
+<p>Feature name: <code>"http://www.w3.org/2003/05/soap/features/action/"</code></p>
+<h2>6.5.2</h2>
+<p>The <code>"application/soap+xml"</code> media type supports an <code>action</code> parameter.</p>
+<h2>6.5.3</h2>
+<p>Property: <code>http://www.w3.org/2003/05/soap/features/action/Action </code></p>
+<p>Property type: <code>xsd:anyURI</code></p>
+<p>The sender must use the value of that property as the <code>action</code> parameter of the media type, and the receiving node must make the value of that parameter available in the property on the other end.</p>
+<h2>7</h2>
+<h2>7.1</h2>
+<h2>7.1.1</h2>
+<h2>7.1.2</h2>
+<p>The base URI is the value of the <code>Request-URI</code> or the <code>Content-Location</code> header field.</p>
+<h2>7.1.3</h2>
+<h2>7.1.4</h2>
+<p><code>application/soap+xml</code></p>
+<p>Application may advertsise and use other media types.</p>
+<h2>7.2</h2>
+<p>Binding name: <code>"http://www.w3.org/2003/05/soap/bindings/HTTP/"</code></p>
+<h2>7.3</h2>
+<p>Supported MEPs:</p>
+<p><code>"http://www.w3.org/2003/05/soap/mep/request-response/"</code></p>
+<p><code>"http://www.w3.org/2003/05/soap/mep/soap-response/" </code></p>
+<h2>7.4</h2>
+<p>Supported features:</p>
+<p><code>"http://www.w3.org/2003/05/soap/features/web-method/" </code></p>
+<p><code>"http://www.w3.org/2003/05/soap/features/action/"</code></p>
+<p><code>POST</code> => <code>ExchangePatternName</code> = "http://www.w3.org/2003/05/soap/mep/request-response/"</p>
+<p><code>GET</code> => <code>ExchangePatternName</code> = "http://www.w3.org/2003/05/soap/mep/soap-response/"</p>
+<p><code></code></p>
+<h2>7.5</h2>
+<h2>7.5.1</h2>
+<h2>7.5.1.1</h2>
+<h2>7.5.1.2</h2>
+<h2>7.5.1.3</h2>
+<h2>7.5.1.4</h2>
+<h2>7.5.1.5</h2>
+<h2>7.5.2</h2>
+<h2>7.5.2.1</h2>
+<h2>7.5.2.2</h2>
+<h2>7.5.2.3</h2>
+<h2>7.5.2.4</h2>
+<h2>7.5.2.5</h2>
+<h2>7.6</h2>
+<h2>8</h2>
+<h2>8.1</h2>
+<h2>8.2</h2>
+<h2>A</h2>
+<h2>B</h2>
+<h2>B.1</h2>
+<h2>B.2</h2>
+<h2>C</h2>
+<h2>C.1</h2>
+<h2>C.2</h2>
+<h2>C.3</h2>
+<h2>D</h2>
+<script>hljs.highlightAll();</script>
+</body>
+</html>
