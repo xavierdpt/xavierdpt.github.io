@@ -2,7 +2,7 @@ package xdtest.org.apache.cxf.resource;
 
 import org.apache.cxf.resource.PropertiesResolver;
 import org.junit.Test;
-import xdtest.Done;
+import net.xdexamples.Done;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,12 +1,11 @@
 package xd;
 
+import net.xdexamples.jse.examples.java.security.AlgorithmParameterGeneratorExample;
 import xdtest.java.security.ServicesDumper;
 import xdtools.java.net.NetworkInterfaceDumper;
-import xdtools.java.security.AlgorithmParameterGeneratorExample;
-import xdtools.java.security.AlgorithmParametersExample;
-import xdtools.java.security.CertPathBuilderExample;
-import xdtools.java.security.CertificateFactoryExample;
-import xdtools.java.security.MessageDigestExample;
+import net.xdexamples.jse.examples.java.security.AlgorithmParametersExample;
+import net.xdexamples.jse.examples.java.security.cert.CertPathBuilderExample;
+import net.xdexamples.jse.examples.java.security.MessageDigestExample;
 import xdtools.java.security.ProviderDumper;
 
 public class Index {
@@ -18,8 +17,7 @@ public class Index {
                 MessageDigestExample.class,
                 AlgorithmParameterGeneratorExample.class,
                 AlgorithmParametersExample.class,
-                CertPathBuilderExample.class,
-                CertificateFactoryExample.class
+                CertPathBuilderExample.class
         };
         for (Class<?> clazz : classes) {
             System.out.println(clazz.getName());

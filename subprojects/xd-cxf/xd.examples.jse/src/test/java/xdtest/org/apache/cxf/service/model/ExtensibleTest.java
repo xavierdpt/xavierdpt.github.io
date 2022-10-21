@@ -2,7 +2,7 @@ package xdtest.org.apache.cxf.service.model;
 
 import org.apache.cxf.service.model.Extensible;
 import org.junit.Test;
-import xdtest.Done;
+import net.xdexamples.Done;
 
 import javax.xml.namespace.QName;
 import java.util.HashMap;

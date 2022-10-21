@@ -1,5 +1,6 @@
 package xdtest.org.apache.cxf.service.model;
 
+import net.xdexamples.Done;
 import org.apache.cxf.service.model.AbstractMessageContainer;
 import org.apache.cxf.service.model.FaultInfo;
 import org.apache.cxf.service.model.MessagePartInfo;
@@ -7,7 +8,6 @@ import org.apache.cxf.service.model.OperationInfo;
 import org.apache.ws.commons.schema.XmlSchema;
 import org.apache.ws.commons.schema.XmlSchemaAnnotated;
 import org.junit.Test;
-import xdtest.Done;
 
 import javax.xml.namespace.QName;
 

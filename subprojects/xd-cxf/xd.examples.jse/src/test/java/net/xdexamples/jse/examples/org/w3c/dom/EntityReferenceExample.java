@@ -1,0 +1,13 @@
+package net.xdexamples.jse.examples.org.w3c.dom;
+
+import net.xdexamples.BaseExample;
+import net.xdexamples.Scaffolded;
+import org.w3c.dom.EntityReference;
+
+@Scaffolded
+public class EntityReferenceExample extends BaseExample<EntityReference> {
+    @Override
+    protected void scaffold(EntityReference instance) throws Throwable {
+
+    }
+}

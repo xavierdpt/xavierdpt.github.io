@@ -1,0 +1,15 @@
+package net.xdexamples.jse.examples.java.util.spi;
+
+import net.xdexamples.BaseExample;
+
+import java.util.spi.TimeZoneNameProvider;
+
+public class TimeZoneNameProviderExample extends BaseExample<TimeZoneNameProvider> {
+    @Override
+    protected void scaffold(TimeZoneNameProvider instance) throws Throwable {
+/*
+getDisplayName
+getGenericDisplayName
+ */
+    }
+}

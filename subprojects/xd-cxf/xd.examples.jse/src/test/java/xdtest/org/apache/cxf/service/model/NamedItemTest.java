@@ -1,8 +1,9 @@
 package xdtest.org.apache.cxf.service.model;
 
+import net.xdexamples.Bundle;
 import org.apache.cxf.service.model.NamedItem;
 import org.junit.Test;
-import xdtest.Done;
+import net.xdexamples.Done;
 
 import javax.xml.namespace.QName;
 

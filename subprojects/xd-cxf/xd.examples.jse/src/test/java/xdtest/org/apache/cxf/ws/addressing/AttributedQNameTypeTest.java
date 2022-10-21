@@ -1,12 +1,10 @@
 package xdtest.org.apache.cxf.ws.addressing;
 
 import org.apache.cxf.ws.addressing.AttributedQNameType;
-import org.junit.Assert;
 import org.junit.Test;
-import xdtest.Done;
+import net.xdexamples.Done;
 
 import javax.xml.namespace.QName;
-import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;

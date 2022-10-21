@@ -3,7 +3,7 @@ package xdtest.org.apache.cxf.configuration.security;
 import org.apache.cxf.configuration.security.CombinatorType;
 import org.apache.cxf.configuration.security.DNConstraintsType;
 import org.junit.Test;
-import xdtest.Done;
+import net.xdexamples.Done;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;

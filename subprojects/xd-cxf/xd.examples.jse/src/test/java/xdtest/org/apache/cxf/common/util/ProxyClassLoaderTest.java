@@ -2,7 +2,7 @@ package xdtest.org.apache.cxf.common.util;
 
 import org.apache.cxf.common.util.ProxyClassLoader;
 import org.junit.Test;
-import xdtest.Done;
+import net.xdexamples.Done;
 import xdtest.TestUtils;
 
 @Done

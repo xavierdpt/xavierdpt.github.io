@@ -2,7 +2,7 @@ package xdtest.org.apache.cxf.databinding.source.mime;
 
 import org.apache.cxf.databinding.source.mime.CustomExtensionRegistry;
 import org.junit.Test;
-import xdtest.Done;
+import net.xdexamples.Done;
 import xdtest.TestUtils;
 
 @Done

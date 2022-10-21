@@ -1,0 +1,17 @@
+package net.xdexamples.jse.examples.java.lang.annotation;
+
+import net.xdexamples.BaseExample;
+import xdtest.Annotation;
+import net.xdexamples.Scaffolded;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
+@Scaffolded
+@Annotation
+public class RetentionExample extends BaseExample<Retention> {
+    @Override
+    public void scaffold(Retention instance) {
+        RetentionPolicy value = instance.value();
+    }
+}

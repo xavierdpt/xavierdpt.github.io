@@ -3,7 +3,7 @@ package xdtest.org.apache.cxf.bus.extension;
 import org.apache.cxf.bus.extension.Extension;
 import org.apache.cxf.bus.extension.TextExtensionFragmentParser;
 import org.junit.Test;
-import xd.ExampleUtils;
+import net.xdexamples.ExampleUtils;
 
 import java.io.IOException;
 import java.io.InputStream;

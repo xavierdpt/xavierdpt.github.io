@@ -3,7 +3,7 @@ package xdtest.org.apache.cxf.bus.managers;
 import org.apache.cxf.bus.managers.WorkQueueManagerImpl;
 import org.apache.cxf.bus.managers.WorkQueueManagerImplMBeanWrapper;
 import org.junit.Test;
-import xd.ExampleUtils;
+import net.xdexamples.ExampleUtils;
 
 import javax.management.JMException;
 import javax.management.ObjectName;
