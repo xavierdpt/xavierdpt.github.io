@@ -1,5 +1,7 @@
-package net.xdexamples;
+package net.xdexamples.annotations;
 
-public enum Bundle {
-    TBD
+import net.xdexamples.EBundle;
+
+public @interface Bundle {
+    EBundle value();
 }

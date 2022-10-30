@@ -1,0 +1,17 @@
+package net.xdexamples.jse.examples.java.security.cert;
+
+import net.xdexamples.BaseExample;
+
+import java.security.cert.Extension;
+
+public class ExtensionExample extends BaseExample<Extension> {
+    @Override
+    protected void scaffold(Extension instance) throws Throwable {
+/*
+encode
+getId
+getValue
+isCritical
+ */
+    }
+}

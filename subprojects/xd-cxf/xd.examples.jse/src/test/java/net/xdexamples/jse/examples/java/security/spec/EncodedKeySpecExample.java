@@ -1,0 +1,17 @@
+package net.xdexamples.jse.index.java.security.spec;
+
+import net.xdexamples.BaseExample;
+
+import java.security.spec.EncodedKeySpec;
+
+public class EncodedKeySpecExample extends BaseExample<EncodedKeySpec> {
+    @Override
+    protected void scaffold(EncodedKeySpec instance) throws Throwable {
+/*
+EncodedKeySpec
+getAlgorithm
+getEncoded
+getFormat
+ */
+    }
+}

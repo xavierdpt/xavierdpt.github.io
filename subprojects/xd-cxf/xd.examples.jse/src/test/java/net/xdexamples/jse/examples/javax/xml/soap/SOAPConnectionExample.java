@@ -1,0 +1,17 @@
+package net.xdexamples.jse.index.javax.xml.soap;
+
+import net.xdexamples.BaseExample;
+
+import javax.xml.soap.SOAPConnection;
+
+public class SOAPConnectionExample extends BaseExample<SOAPConnection> {
+    @Override
+    protected void scaffold(SOAPConnection instance) throws Throwable {
+/*
+SOAPConnection
+call
+close
+get
+ */
+    }
+}
