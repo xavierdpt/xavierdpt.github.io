@@ -1,7 +1,7 @@
 package net.xdexamples.jse.index.javax.naming;
 
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.javax.naming.BinaryRefAddrExample;
 import net.xdexamples.jse.examples.javax.naming.BindingExample;
 import net.xdexamples.jse.examples.javax.naming.CompositeNameExample;

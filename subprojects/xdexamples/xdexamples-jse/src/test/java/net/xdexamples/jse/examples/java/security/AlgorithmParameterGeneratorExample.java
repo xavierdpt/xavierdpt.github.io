@@ -1,8 +1,7 @@
 package net.xdexamples.jse.examples.java.security;
 
-import net.xdexamples.BaseExample;
-import net.xdexamples.helpers.ExampleHelper;
-import xdtest.TestUtils;
+import net.xdexamples.support.internal.BaseExample;
+import net.xdexamples.support.ExampleSupport;
 
 import javax.crypto.spec.DHParameterSpec;
 import java.io.IOException;
@@ -48,7 +47,7 @@ init
                     AlgorithmParameters parameters = generator.generateParameters();
                     byte[] encoded = parameters.getEncoded();
                     System.out.println(providerName + "/" + algorithm);
-                    System.out.println(ExampleHelper.bytesToHex(encoded));
+                    System.out.println(ExampleSupport.bytesToHex(encoded));
                     AlgorithmParameterSpec spec = findParameterSpec(parameters);
                     if (DSAParameterSpec.class.equals(spec.getClass())) {
                         dumpDSAParameterSpec((DSAParameterSpec) spec);

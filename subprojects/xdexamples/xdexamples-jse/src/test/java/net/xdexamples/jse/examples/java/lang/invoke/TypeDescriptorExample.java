@@ -1,6 +1,6 @@
 package net.xdexamples.jse.examples.java.lang.invoke;
 
-import net.xdexamples.BaseExample;
+import net.xdexamples.support.internal.BaseExample;
 
 import java.lang.invoke.TypeDescriptor;
 

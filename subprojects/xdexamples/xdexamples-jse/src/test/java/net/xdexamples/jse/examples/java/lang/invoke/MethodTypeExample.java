@@ -1,7 +1,7 @@
 package net.xdexamples.jse.examples.java.lang.invoke;
 
-import net.xdexamples.BaseExample;
-import net.xdexamples.Scaffolded;
+import net.xdexamples.support.internal.BaseExample;
+import net.xdexamples.support.internal.Scaffolded;
 
 import java.lang.constant.MethodTypeDesc;
 import java.lang.invoke.MethodType;

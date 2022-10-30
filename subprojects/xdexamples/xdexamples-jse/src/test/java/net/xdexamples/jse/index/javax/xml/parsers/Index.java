@@ -1,6 +1,6 @@
 package net.xdexamples.jse.index.javax.xml.parsers;
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.javax.xml.parsers.DocumentBuilderExample;
 import net.xdexamples.jse.examples.javax.xml.parsers.DocumentBuilderFactoryExample;
 import net.xdexamples.jse.examples.javax.xml.parsers.SAXParserExample;

@@ -1,7 +1,7 @@
 package net.xdexamples.jse.index.javax.annotation.processing;
 
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.javax.annotation.processing.AbstractProcessorExample;
 import net.xdexamples.jse.examples.javax.annotation.processing.CompletionExample;
 import net.xdexamples.jse.examples.javax.annotation.processing.CompletionsExample;

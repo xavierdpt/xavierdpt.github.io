@@ -1,6 +1,6 @@
 package net.xdexamples.jse.examples.java.rmi.dgc;
 
-import net.xdexamples.Scaffolded;
+import net.xdexamples.support.internal.Scaffolded;
 import net.xdexamples.ExampleUtils;
 
 import java.rmi.dgc.Lease;

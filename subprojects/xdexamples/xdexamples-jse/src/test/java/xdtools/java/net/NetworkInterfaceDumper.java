@@ -1,9 +1,8 @@
 package xdtools.java.net;
 
-import net.xdexamples.helpers.ExampleHelper;
+import net.xdexamples.support.ExampleSupport;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import xdtest.TestUtils;
 import xdtools.XMLHelper;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -54,7 +53,7 @@ public class NetworkInterfaceDumper {
         }
         byte[] hardwareAddress = ni.getHardwareAddress();
         if (hardwareAddress != null && hardwareAddress.length != 0) {
-            addTextElement(document, networkInterfaceXML, "hardwareAddress", ExampleHelper.bytesToHex(hardwareAddress));
+            addTextElement(document, networkInterfaceXML, "hardwareAddress", ExampleSupport.bytesToHex(hardwareAddress));
         }
         List<InterfaceAddress> interfaceAddresses = ni.getInterfaceAddresses();
         if (interfaceAddresses != null && !interfaceAddresses.isEmpty()) {
@@ -87,7 +86,7 @@ public class NetworkInterfaceDumper {
     private static void describeInetAddress(Document document, Element parent, String name, InetAddress address) throws IOException {
         if (address != null) {
             Element element = addElement(document, parent, name);
-            addTextElement(document, element, "address", ExampleHelper.bytesToHex(address.getAddress()));
+            addTextElement(document, element, "address", ExampleSupport.bytesToHex(address.getAddress()));
             addTextElement(document, element, "hostAddress", address.getHostAddress());
             addBooleanElement(document, element, "multicast", address.isMulticastAddress());
             addBooleanElement(document, element, "anyLocal", address.isAnyLocalAddress());

@@ -1,8 +1,6 @@
 package xdtest.javax.net.ssl;
 
-import net.xdexamples.BaseExample;
-import org.junit.Test;
-import xdtest.TestUtils;
+import net.xdexamples.support.internal.BaseExample;
 
 import javax.net.ssl.KeyStoreBuilderParameters;
 import java.security.KeyStore;

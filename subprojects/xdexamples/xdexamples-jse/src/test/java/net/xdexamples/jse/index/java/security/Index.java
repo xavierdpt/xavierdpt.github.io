@@ -1,6 +1,6 @@
 package net.xdexamples.jse.index.java.security;
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.java.security.AlgorithmConstraintsExample;
 import net.xdexamples.jse.examples.java.security.AlgorithmParameterGeneratorExample;
 import net.xdexamples.jse.examples.java.security.AlgorithmParameterGeneratorSpiExample;

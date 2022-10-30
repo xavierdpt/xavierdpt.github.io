@@ -1,7 +1,8 @@
 package net.xdexamples.jse.examples.java.lang;
 
+import net.xdexamples.jse.index.java.lang.ObjectIndex;
+import net.xdexamples.support.internal.BaseExample;
 import org.junit.Test;
-import net.xdexamples.BaseExample;
 import xdtest.ToBeContinued;
 
 import java.lang.constant.DynamicConstantDesc;
@@ -107,7 +108,7 @@ public class ByteExample extends BaseExample<Byte> {
         }
         {
             int result = instance.hashCode();
-            seeOthers(ObjectExample.class);
+            seeOthers(ObjectIndex.class);
             ignore(result);
         }
         {
@@ -119,7 +120,7 @@ public class ByteExample extends BaseExample<Byte> {
         {
             Byte other = any();
             boolean result = instance.equals(other);
-            seeOthers(ObjectExample.class);
+            seeOthers(ObjectIndex.class);
             ignore(result);
         }
         {

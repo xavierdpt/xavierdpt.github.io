@@ -1,7 +1,7 @@
 package net.xdexamples.jse.index.javax.naming.directory;
 
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.javax.naming.directory.AttributeExample;
 import net.xdexamples.jse.examples.javax.naming.directory.AttributesExample;
 import net.xdexamples.jse.examples.javax.naming.directory.BasicAttributeExample;

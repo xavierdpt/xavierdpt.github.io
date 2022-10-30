@@ -1,6 +1,6 @@
 package net.xdexamples.jse.examples.org.w3c.dom;
 
-import net.xdexamples.BaseExample;
+import net.xdexamples.support.internal.BaseExample;
 import org.w3c.dom.CharacterData;
 
 public class CharacterDataExample extends BaseExample<CharacterData> {

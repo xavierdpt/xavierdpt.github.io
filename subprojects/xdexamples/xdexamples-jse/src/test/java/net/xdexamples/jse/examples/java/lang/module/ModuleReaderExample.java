@@ -1,8 +1,8 @@
 package net.xdexamples.jse.examples.java.lang.module;
 
 import org.junit.Test;
-import net.xdexamples.BaseExample;
-import net.xdexamples.Scaffolded;
+import net.xdexamples.support.internal.BaseExample;
+import net.xdexamples.support.internal.Scaffolded;
 
 import java.io.IOException;
 import java.io.InputStream;

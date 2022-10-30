@@ -1,6 +1,6 @@
 package net.xdexamples.jse.examples.java.util.concurrent.atomic;
 
-import net.xdexamples.BaseExample;
+import net.xdexamples.support.internal.BaseExample;
 
 import java.util.concurrent.atomic.DoubleAdder;
 

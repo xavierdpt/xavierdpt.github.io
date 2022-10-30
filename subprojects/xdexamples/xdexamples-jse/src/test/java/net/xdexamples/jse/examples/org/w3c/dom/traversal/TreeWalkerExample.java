@@ -1,6 +1,6 @@
 package net.xdexamples.jse.examples.org.w3c.dom.traversal;
 
-import net.xdexamples.BaseExample;
+import net.xdexamples.support.internal.BaseExample;
 import org.w3c.dom.traversal.TreeWalker;
 
 public class TreeWalkerExample extends BaseExample<TreeWalker> {

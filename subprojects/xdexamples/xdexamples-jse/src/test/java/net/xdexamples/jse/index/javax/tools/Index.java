@@ -1,7 +1,7 @@
 package net.xdexamples.jse.index.javax.tools;
 
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.javax.tools.DiagnosticCollectorExample;
 import net.xdexamples.jse.examples.javax.tools.DiagnosticExample;
 import net.xdexamples.jse.examples.javax.tools.DiagnosticListenerExample;

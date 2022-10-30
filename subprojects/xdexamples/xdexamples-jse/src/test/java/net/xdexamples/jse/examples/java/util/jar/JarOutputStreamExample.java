@@ -1,6 +1,6 @@
 package net.xdexamples.jse.examples.java.util.jar;
 
-import net.xdexamples.BaseExample;
+import net.xdexamples.support.internal.BaseExample;
 
 import java.io.OutputStream;
 import java.util.jar.JarOutputStream;

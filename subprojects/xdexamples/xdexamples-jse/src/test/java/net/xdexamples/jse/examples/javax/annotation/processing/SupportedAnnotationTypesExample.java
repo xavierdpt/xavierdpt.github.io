@@ -1,6 +1,6 @@
 package net.xdexamples.jse.examples.javax.annotation.processing;
 
-import net.xdexamples.BaseExample;
+import net.xdexamples.support.internal.BaseExample;
 
 import javax.annotation.processing.SupportedAnnotationTypes;
 

@@ -1,7 +1,7 @@
 package net.xdexamples.jse.examples.java.lang;
 
 import net.xdexamples.ExampleUtils;
-import net.xdexamples.Scaffolded;
+import net.xdexamples.support.internal.Scaffolded;
 
 import java.io.IOException;
 import java.util.Map;

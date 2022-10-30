@@ -1,6 +1,6 @@
 package net.xdexamples.jse.examples.javax.xml.xpath;
 
-import net.xdexamples.BaseExample;
+import net.xdexamples.support.internal.BaseExample;
 import xd.helpers.dummies.Dummy;
 
 import javax.xml.xpath.XPathEvaluationResult;

@@ -1,6 +1,6 @@
 package net.xdexamples;
 
-import net.xdexamples.helpers.ExampleHelper;
+import net.xdexamples.support.ExampleSupport;
 import xdtest.TestUtils;
 
 import java.util.concurrent.CountDownLatch;
@@ -23,7 +23,7 @@ public class ExampleUtils {
     }
 
     public static String bytesToHex(byte[] bytes) {
-        return ExampleHelper.bytesToHex(bytes);
+        return ExampleSupport.bytesToHex(bytes);
     }
 
     public static void parallel(ThrowingRunnable... runnables) {

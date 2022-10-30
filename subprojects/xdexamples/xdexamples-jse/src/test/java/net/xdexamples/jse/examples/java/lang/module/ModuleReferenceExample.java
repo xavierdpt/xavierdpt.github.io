@@ -2,7 +2,7 @@ package net.xdexamples.jse.examples.java.lang.module;
 
 import org.junit.Assert;
 import org.junit.Test;
-import net.xdexamples.BaseExample;
+import net.xdexamples.support.internal.BaseExample;
 
 import java.io.IOException;
 import java.lang.module.Configuration;

@@ -1,7 +1,7 @@
 package net.xdexamples.jse.index.javax.script;
 
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.javax.script.AbstractScriptEngineExample;
 import net.xdexamples.jse.examples.javax.script.BindingsExample;
 import net.xdexamples.jse.examples.javax.script.CompilableExample;

@@ -1,8 +1,8 @@
 package net.xdexamples;
 
 import net.xdexamples.jse.index.Index;
-import net.xdexamples.support.ExampleIndex;
-import net.xdexamples.support.MasterIndex;
+import net.xdexamples.support.internal.ExampleIndex;
+import net.xdexamples.support.internal.MasterIndex;
 import org.junit.Test;
 
 import java.lang.reflect.Method;

@@ -1,6 +1,6 @@
 package net.xdexamples.jse.examples.javax.xml.parsers;
 
-import net.xdexamples.BaseExample;
+import net.xdexamples.support.internal.BaseExample;
 
 import javax.xml.parsers.SAXParserFactory;
 

@@ -1,10 +1,7 @@
 package net.xdexamples.jse.examples.java.security.cert;
 
-import net.xdexamples.BaseExample;
+import net.xdexamples.support.internal.BaseExample;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 
 public class CertificateFactoryExample extends BaseExample<CertificateFactory> {

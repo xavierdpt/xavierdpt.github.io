@@ -1,10 +1,10 @@
 package net.xdexamples.jse.examples.org.w3c.dom.events;
 
-import net.xdexamples.Scaffolded;
+import net.xdexamples.support.internal.Scaffolded;
 import org.w3c.dom.events.EventTarget;
 import org.w3c.dom.events.MouseEvent;
 import org.w3c.dom.views.AbstractView;
-import net.xdexamples.BaseExample;
+import net.xdexamples.support.internal.BaseExample;
 
 @Scaffolded
 public class MouseEventExample extends BaseExample<MouseEvent> {

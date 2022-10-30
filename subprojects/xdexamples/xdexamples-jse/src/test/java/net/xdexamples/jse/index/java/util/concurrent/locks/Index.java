@@ -1,6 +1,6 @@
 package net.xdexamples.jse.index.java.util.concurrent.locks;
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.java.util.concurrent.locks.AbstractOwnableSynchronizerExample;
 import net.xdexamples.jse.examples.java.util.concurrent.locks.AbstractQueuedLongSynchronizerExample;
 import net.xdexamples.jse.examples.java.util.concurrent.locks.AbstractQueuedSynchronizerExample;

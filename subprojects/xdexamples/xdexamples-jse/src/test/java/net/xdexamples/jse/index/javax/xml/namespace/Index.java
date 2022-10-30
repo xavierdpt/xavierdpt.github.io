@@ -1,6 +1,6 @@
 package net.xdexamples.jse.index.javax.xml.namespace;
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.javax.xml.namespace.NamespaceContextExample;
 import net.xdexamples.jse.examples.javax.xml.namespace.QNameExample;
 

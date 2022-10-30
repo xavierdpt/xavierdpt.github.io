@@ -13,7 +13,7 @@
     <dependencies>
         <dependency>
             <groupId>net.xdexamples</groupId>
-            <artifactId>xdexamples-support</artifactId>
+            <artifactId>xdexamples-support-internal</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>test</scope>
         </dependency>

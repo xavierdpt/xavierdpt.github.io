@@ -1,7 +1,7 @@
 package net.xdexamples.jse.examples.java.lang;
 
 import org.junit.Test;
-import net.xdexamples.BaseExample;
+import net.xdexamples.support.internal.BaseExample;
 import xd.examples.java.lang.ClassExampleDummy;
 import xd.helpers.dummies.DummyBaseClassWithMembers;
 import xd.helpers.dummies.DummyClass;

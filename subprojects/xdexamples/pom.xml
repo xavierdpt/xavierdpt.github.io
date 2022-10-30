@@ -10,9 +10,9 @@
     <packaging>pom</packaging>
     <modules>
         <module>xdexamples-jse</module>
-        <module>xdexamples-support</module>
+        <module>xdexamples-support-internal</module>
         <module>xdexamples-site</module>
-        <module>xdexamples-helpers</module>
+        <module>xdexamples-support</module>
         <module>xd-examples-cxf_core</module>
         <module>xd-examples-jakarta_xml_soap</module>
     </modules>

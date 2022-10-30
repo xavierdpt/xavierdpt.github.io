@@ -1,7 +1,7 @@
 package net.xdexamples.jse.index.java.util.jar;
 
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.java.util.jar.AttributesExample;
 import net.xdexamples.jse.examples.java.util.jar.JarEntryExample;
 import net.xdexamples.jse.examples.java.util.jar.JarFileExample;

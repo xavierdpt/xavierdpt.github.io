@@ -1,6 +1,6 @@
 package net.xdexamples.jse.index.java.util.concurrent;
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.java.util.concurrent.AbstractExecutorServiceExample;
 import net.xdexamples.jse.examples.java.util.concurrent.ArrayBlockingQueueExample;
 import net.xdexamples.jse.examples.java.util.concurrent.BlockingDequeExample;

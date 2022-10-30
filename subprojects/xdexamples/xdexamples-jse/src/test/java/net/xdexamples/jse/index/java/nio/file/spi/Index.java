@@ -1,6 +1,6 @@
 package net.xdexamples.jse.index.java.nio.file.spi;
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.java.nio.file.spi.FileSystemProviderExample;
 import net.xdexamples.jse.examples.java.nio.file.spi.FileTypeDetectorExample;
 

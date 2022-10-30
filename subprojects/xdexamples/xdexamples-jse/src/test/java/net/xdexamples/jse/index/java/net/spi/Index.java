@@ -1,6 +1,6 @@
 package net.xdexamples.jse.index.java.net.spi;
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.java.net.spi.InetAddressResolverExample;
 import net.xdexamples.jse.examples.java.net.spi.InetAddressResolverProviderExample;
 import net.xdexamples.jse.examples.java.net.spi.URLStreamHandlerProviderExample;

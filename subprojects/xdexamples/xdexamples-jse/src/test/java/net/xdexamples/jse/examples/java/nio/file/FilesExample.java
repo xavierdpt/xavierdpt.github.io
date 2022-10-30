@@ -1,6 +1,6 @@
 package net.xdexamples.jse.examples.java.nio.file;
 
-import net.xdexamples.Scaffolded;
+import net.xdexamples.support.internal.Scaffolded;
 import net.xdexamples.ExampleUtils;
 
 import java.io.BufferedReader;

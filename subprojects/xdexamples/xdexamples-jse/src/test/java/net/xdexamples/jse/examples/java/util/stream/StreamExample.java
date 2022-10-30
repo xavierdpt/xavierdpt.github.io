@@ -2,12 +2,12 @@ package net.xdexamples.jse.examples.java.util.stream;
 
 import org.junit.Assert;
 import org.junit.Test;
-import net.xdexamples.BaseExample;
+import net.xdexamples.support.internal.BaseExample;
 import net.xdexamples.ExampleUtils;
 import xd.helpers.dummies.Dummy;
 import xd.helpers.dummies.DummyClass;
 import xd.helpers.dummies.DummyInterface;
-import net.xdexamples.Scaffolded;
+import net.xdexamples.support.internal.Scaffolded;
 
 import java.util.Arrays;
 import java.util.Comparator;

@@ -1,7 +1,7 @@
 package net.xdexamples.jse.index.java.lang.module;
 
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.java.lang.module.ConfigurationExample;
 import net.xdexamples.jse.examples.java.lang.module.ModuleDescriptorExample;
 import net.xdexamples.jse.examples.java.lang.module.ModuleFinderExample;

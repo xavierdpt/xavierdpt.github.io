@@ -1,7 +1,7 @@
 package net.xdexamples.jse.examples.java.math;
 
 import net.xdexamples.ExampleUtils;
-import net.xdexamples.Scaffolded;
+import net.xdexamples.support.internal.Scaffolded;
 
 import java.math.MathContext;
 import java.math.RoundingMode;

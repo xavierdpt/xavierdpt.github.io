@@ -1,7 +1,7 @@
 package net.xdexamples.jse.index.javax.naming.ldap;
 
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.javax.naming.ldap.BasicControlExample;
 import net.xdexamples.jse.examples.javax.naming.ldap.ControlExample;
 import net.xdexamples.jse.examples.javax.naming.ldap.ControlFactoryExample;

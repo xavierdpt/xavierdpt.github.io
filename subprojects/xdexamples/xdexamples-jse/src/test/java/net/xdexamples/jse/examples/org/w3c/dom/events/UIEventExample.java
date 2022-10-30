@@ -1,6 +1,6 @@
 package net.xdexamples.jse.examples.org.w3c.dom.events;
 
-import net.xdexamples.BaseExample;
+import net.xdexamples.support.internal.BaseExample;
 import org.w3c.dom.events.UIEvent;
 
 public class UIEventExample extends BaseExample<UIEvent> {

@@ -1,6 +1,6 @@
 package xdtest.java.security;
 
-import net.xdexamples.BaseExample;
+import net.xdexamples.support.internal.BaseExample;
 import xd.helpers.dummies.DummyKey;
 import xd.helpers.dummies.DummyValue;
 import xdtest.SeeAlso;

@@ -1,6 +1,6 @@
 package xdtest.java.security;
 
-import net.xdexamples.BaseExample;
+import net.xdexamples.support.internal.BaseExample;
 import xdtest.SeeAlso;
 import xdtools.java.security.ProviderDumper;
 

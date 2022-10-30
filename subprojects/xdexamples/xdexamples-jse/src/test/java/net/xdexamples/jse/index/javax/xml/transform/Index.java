@@ -1,6 +1,6 @@
 package net.xdexamples.jse.index.javax.xml.transform;
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.javax.xml.transform.ErrorListenerExample;
 import net.xdexamples.jse.examples.javax.xml.transform.OutputKeysExample;
 import net.xdexamples.jse.examples.javax.xml.transform.ResultExample;

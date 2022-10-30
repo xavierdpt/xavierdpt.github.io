@@ -1,7 +1,7 @@
 package net.xdexamples.jse.index.rmi.registry;
 
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.java.rmi.registry.LocateRegistryExample;
 import net.xdexamples.jse.examples.java.rmi.registry.RegistryExample;
 

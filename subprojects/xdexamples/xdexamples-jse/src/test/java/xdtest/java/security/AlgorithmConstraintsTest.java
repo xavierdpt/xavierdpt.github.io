@@ -1,8 +1,6 @@
 package xdtest.java.security;
 
-import net.xdexamples.BaseExample;
-import org.junit.Test;
-import xdtest.TestUtils;
+import net.xdexamples.support.internal.BaseExample;
 
 import java.security.AlgorithmConstraints;
 import java.security.AlgorithmParameters;

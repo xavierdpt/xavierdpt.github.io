@@ -2,8 +2,8 @@ package net.xdexamples.jse.examples.java.lang.module;
 
 import org.junit.Assert;
 import org.junit.Test;
-import net.xdexamples.BaseExample;
-import net.xdexamples.Scaffolded;
+import net.xdexamples.support.internal.BaseExample;
+import net.xdexamples.support.internal.Scaffolded;
 
 import java.lang.module.Configuration;
 import java.lang.module.ModuleReference;

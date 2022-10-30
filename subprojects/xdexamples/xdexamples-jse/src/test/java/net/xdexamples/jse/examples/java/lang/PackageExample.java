@@ -1,8 +1,9 @@
 package net.xdexamples.jse.examples.java.lang;
 
+import net.xdexamples.jse.index.java.lang.ObjectIndex;
 import org.junit.Assert;
 import org.junit.Test;
-import net.xdexamples.BaseExample;
+import net.xdexamples.support.internal.BaseExample;
 import xd.helpers.dummies.Dummy;
 import xd.pkg.example.DummyForPackageExample;
 import xd.pkg.example.DummyPackageAnnotation;
@@ -89,7 +90,7 @@ public class PackageExample extends BaseExample<Package> {
 
         {
             int i = instance.hashCode();
-            seeOthers(ObjectExample.class);
+            seeOthers(ObjectIndex.class);
         }
 
         {

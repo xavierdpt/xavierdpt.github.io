@@ -1,6 +1,6 @@
 package net.xdexamples.jse.index.javax.xml.transform.sax;
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.javax.xml.transform.sax.SAXResultExample;
 import net.xdexamples.jse.examples.javax.xml.transform.sax.SAXSourceExample;
 import net.xdexamples.jse.examples.javax.xml.transform.sax.SAXTransformerFactoryExample;

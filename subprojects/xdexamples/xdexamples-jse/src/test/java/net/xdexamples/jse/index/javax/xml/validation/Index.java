@@ -1,6 +1,6 @@
 package net.xdexamples.jse.index.javax.xml.validation;
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.javax.xml.validation.SchemaExample;
 import net.xdexamples.jse.examples.javax.xml.validation.SchemaFactoryExample;
 import net.xdexamples.jse.examples.javax.xml.validation.SchemaFactoryLoaderExample;

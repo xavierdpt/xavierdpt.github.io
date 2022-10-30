@@ -7,7 +7,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import static net.xdexamples.helpers.ExampleHelper.bytesToHex;
+import static net.xdexamples.support.ExampleSupport.bytesToHex;
 
 public class MessageDigestExample_digestBytes {
 

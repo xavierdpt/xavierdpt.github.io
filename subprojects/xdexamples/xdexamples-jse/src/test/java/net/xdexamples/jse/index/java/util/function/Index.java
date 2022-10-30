@@ -1,6 +1,6 @@
 package net.xdexamples.jse.index.java.util.function;
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.java.util.function.BiConsumerExample;
 import net.xdexamples.jse.examples.java.util.function.BiFunctionExample;
 import net.xdexamples.jse.examples.java.util.function.BiPredicateExample;

@@ -1,6 +1,6 @@
 package net.xdexamples.jse.index.javax.xml.stream;
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.javax.xml.stream.EventFilterExample;
 import net.xdexamples.jse.examples.javax.xml.stream.LocationExample;
 import net.xdexamples.jse.examples.javax.xml.stream.StreamFilterExample;

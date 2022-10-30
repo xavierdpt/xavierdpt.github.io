@@ -1,7 +1,7 @@
 package net.xdexamples.jse.index.javax.naming.ldap.spi;
 
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.javax.naming.ldap.spi.LdapDnsProviderExample;
 import net.xdexamples.jse.examples.javax.naming.ldap.spi.LdapDnsProviderResultExample;
 

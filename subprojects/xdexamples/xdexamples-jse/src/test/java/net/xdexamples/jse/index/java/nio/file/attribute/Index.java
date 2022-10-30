@@ -1,6 +1,6 @@
 package net.xdexamples.jse.index.java.nio.file.attribute;
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.java.nio.file.attribute.AclEntryExample;
 import net.xdexamples.jse.examples.java.nio.file.attribute.AclEntryFlagExample;
 import net.xdexamples.jse.examples.java.nio.file.attribute.AclEntryPermissionExample;

@@ -1,6 +1,6 @@
 package net.xdexamples.jse.index.javax.security.auth.login;
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.javax.security.auth.login.AppConfigurationEntryExample;
 import net.xdexamples.jse.examples.javax.security.auth.login.ConfigurationExample;
 import net.xdexamples.jse.examples.javax.security.auth.login.ConfigurationSpiExample;

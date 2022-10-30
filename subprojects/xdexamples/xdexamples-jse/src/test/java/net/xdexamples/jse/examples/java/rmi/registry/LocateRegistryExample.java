@@ -1,7 +1,7 @@
 package net.xdexamples.jse.examples.java.rmi.registry;
 
 import net.xdexamples.ExampleUtils;
-import net.xdexamples.Scaffolded;
+import net.xdexamples.support.internal.Scaffolded;
 
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;

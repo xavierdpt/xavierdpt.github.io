@@ -1,7 +1,7 @@
 package net.xdexamples.jse.index.java.lang.reflect;
 
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.java.lang.reflect.AccessibleObjectExample;
 import net.xdexamples.jse.examples.java.lang.reflect.AnnotatedArrayTypeExample;
 import net.xdexamples.jse.examples.java.lang.reflect.AnnotatedElementExample;

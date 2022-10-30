@@ -1,7 +1,7 @@
 package net.xdexamples.jse.index.java.lang.constant;
 
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.java.lang.constant.ClassDescExample;
 import net.xdexamples.jse.examples.java.lang.constant.ConstableExample;
 import net.xdexamples.jse.examples.java.lang.constant.ConstantDescExample;

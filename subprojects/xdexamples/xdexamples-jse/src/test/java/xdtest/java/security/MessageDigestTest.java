@@ -1,6 +1,6 @@
 package xdtest.java.security;
 
-import net.xdexamples.BaseExample;
+import net.xdexamples.support.internal.BaseExample;
 
 import java.nio.ByteBuffer;
 import java.security.MessageDigest;

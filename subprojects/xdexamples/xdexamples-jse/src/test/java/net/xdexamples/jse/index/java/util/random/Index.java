@@ -1,7 +1,7 @@
 package net.xdexamples.jse.index.java.util.random;
 
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.java.util.random.RandomGeneratorExample;
 import net.xdexamples.jse.examples.java.util.random.RandomGeneratorFactoryExample;
 

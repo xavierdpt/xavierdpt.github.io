@@ -1,6 +1,6 @@
 package net.xdexamples.jse.examples.java.nio.charset;
 
-import net.xdexamples.BaseExample;
+import net.xdexamples.support.internal.BaseExample;
 
 import java.nio.charset.CodingErrorAction;
 

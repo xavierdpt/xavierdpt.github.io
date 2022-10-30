@@ -1,7 +1,7 @@
 package net.xdexamples.jse.index.java.lang.invoke;
 
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.java.lang.invoke.CallSiteExample;
 import net.xdexamples.jse.examples.java.lang.invoke.ConstantBootstrapsExample;
 import net.xdexamples.jse.examples.java.lang.invoke.ConstantCallSiteExample;

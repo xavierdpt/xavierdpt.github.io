@@ -1,6 +1,6 @@
 package net.xdexamples.jse.index.org.w3c.dom.ranges;
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.org.w3c.dom.ranges.DocumentRangeExample;
 import net.xdexamples.jse.examples.org.w3c.dom.ranges.RangeExample;
 import org.w3c.dom.ranges.DocumentRange;

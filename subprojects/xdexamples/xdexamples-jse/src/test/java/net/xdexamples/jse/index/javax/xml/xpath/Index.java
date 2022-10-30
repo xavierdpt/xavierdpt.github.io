@@ -1,7 +1,7 @@
 package net.xdexamples.jse.index.javax.xml.xpath;
 
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.javax.xml.xpath.XPathConstantsExample;
 import net.xdexamples.jse.examples.javax.xml.xpath.XPathEvaluationResultExample;
 import net.xdexamples.jse.examples.javax.xml.xpath.XPathExample;

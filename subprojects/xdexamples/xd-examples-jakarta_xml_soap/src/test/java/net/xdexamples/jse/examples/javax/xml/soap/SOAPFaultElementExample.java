@@ -1,7 +1,7 @@
 package net.xdexamples.jse.examples.javax.xml.soap;
 
-import net.xdexamples.BaseExample;
-import net.xdexamples.Scaffolded;
+import net.xdexamples.support.internal.BaseExample;
+import net.xdexamples.support.internal.Scaffolded;
 
 import javax.xml.soap.SOAPFaultElement;
 

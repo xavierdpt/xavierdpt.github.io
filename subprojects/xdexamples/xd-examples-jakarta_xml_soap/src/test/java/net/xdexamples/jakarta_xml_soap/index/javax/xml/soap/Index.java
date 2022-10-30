@@ -25,7 +25,7 @@ import net.xdexamples.jse.examples.javax.xml.soap.SOAPHeaderExample;
 import net.xdexamples.jse.examples.javax.xml.soap.SOAPMessageExample;
 import net.xdexamples.jse.examples.javax.xml.soap.SOAPPartExample;
 import net.xdexamples.jse.examples.javax.xml.soap.TextExample;
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 
 import javax.xml.soap.AttachmentPart;
 import javax.xml.soap.Detail;

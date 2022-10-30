@@ -1,6 +1,6 @@
 package net.xdexamples.jse.index.javax.xml.datatype;
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.javax.xml.datatype.DatatypeConstantsExample;
 import net.xdexamples.jse.examples.javax.xml.datatype.DatatypeFactoryExample;
 import net.xdexamples.jse.examples.javax.xml.datatype.DurationExample;

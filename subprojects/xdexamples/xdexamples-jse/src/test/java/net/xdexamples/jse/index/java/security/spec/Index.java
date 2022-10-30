@@ -1,6 +1,6 @@
 package net.xdexamples.jse.index.java.security.spec;
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.java.security.spec.AlgorithmParameterSpecExample;
 import net.xdexamples.jse.examples.java.security.spec.DSAGenParameterSpecExample;
 import net.xdexamples.jse.examples.java.security.spec.DSAParameterSpecExample;

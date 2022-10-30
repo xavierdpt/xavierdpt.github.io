@@ -1,4 +1,4 @@
-package net.xdexamples.support;
+package net.xdexamples.support.internal;
 
 public enum ScratchEnum {
 

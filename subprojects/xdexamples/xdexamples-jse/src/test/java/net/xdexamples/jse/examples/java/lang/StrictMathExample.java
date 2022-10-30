@@ -1,6 +1,6 @@
 package net.xdexamples.jse.examples.java.lang;
 
-import net.xdexamples.BaseExample;
+import net.xdexamples.support.internal.BaseExample;
 
 public class StrictMathExample extends BaseExample<StrictMath> {
     @Override

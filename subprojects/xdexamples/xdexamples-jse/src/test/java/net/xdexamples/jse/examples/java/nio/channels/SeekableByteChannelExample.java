@@ -1,10 +1,8 @@
 package net.xdexamples.jse.examples.java.nio.channels;
 
-import net.xdexamples.BaseExample;
-import net.xdexamples.ExampleUtils;
-import net.xdexamples.Scaffolded;
+import net.xdexamples.support.internal.BaseExample;
+import net.xdexamples.support.internal.Scaffolded;
 
-import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.SeekableByteChannel;
 

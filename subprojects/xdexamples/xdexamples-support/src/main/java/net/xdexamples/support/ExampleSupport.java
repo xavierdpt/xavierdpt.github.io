@@ -1,6 +1,6 @@
-package net.xdexamples.helpers;
+package net.xdexamples.support;
 
-public class ExampleHelper {
+public class ExampleSupport {
 
     public static String bytesToHex(byte[] bytes) {
         if (bytes == null) {

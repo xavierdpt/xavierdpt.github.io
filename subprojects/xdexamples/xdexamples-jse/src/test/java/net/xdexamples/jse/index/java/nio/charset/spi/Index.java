@@ -1,6 +1,6 @@
 package net.xdexamples.jse.index.java.nio.charset.spi;
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.java.nio.charset.spi.CharsetProviderExample;
 
 import java.nio.charset.spi.CharsetProvider;

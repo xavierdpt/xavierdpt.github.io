@@ -1,7 +1,6 @@
 package xd.examples;
 
 import net.xdexamples.helpers.ExampleHelper;
-import xd.XDUtils;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;

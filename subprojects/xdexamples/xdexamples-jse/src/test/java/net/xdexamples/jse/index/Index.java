@@ -1,6 +1,6 @@
 package net.xdexamples.jse.index;
 
-import net.xdexamples.support.MasterIndex;
+import net.xdexamples.support.internal.MasterIndex;
 
 @MasterIndex({
         net.xdexamples.jse.index.java.io.Index.class,

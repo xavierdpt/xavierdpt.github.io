@@ -1,7 +1,7 @@
 package net.xdexamples.jse.index.javax.naming.spi;
 
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.javax.naming.spi.DirObjectFactoryExample;
 import net.xdexamples.jse.examples.javax.naming.spi.DirStateFactoryExample;
 import net.xdexamples.jse.examples.javax.naming.spi.DirectoryManagerExample;

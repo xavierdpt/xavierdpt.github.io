@@ -1,6 +1,6 @@
 package net.xdexamples.jse.examples.java.lang;
 
-import net.xdexamples.BaseExample;
+import net.xdexamples.support.internal.BaseExample;
 import net.xdexamples.AllMethodsCovered;
 import net.xdexamples.ExampleUtils;
 import net.xdexamples.jse.examples.java.lang.constant.ConstableExample;

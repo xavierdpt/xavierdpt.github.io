@@ -1,6 +1,6 @@
 package net.xdexamples;
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 
 import java.io.IOException;
 import java.lang.module.ModuleReader;

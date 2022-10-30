@@ -1,6 +1,6 @@
 package net.xdexamples.jse.index.java.nio.channels.spi;
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.java.nio.channels.spi.AbstractInterruptibleChannelExample;
 import net.xdexamples.jse.examples.java.nio.channels.spi.AbstractSelectableChannelExample;
 import net.xdexamples.jse.examples.java.nio.channels.spi.AbstractSelectionKeyExample;

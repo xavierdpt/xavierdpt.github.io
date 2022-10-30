@@ -1,17 +1,14 @@
 package net.xdexamples.jse.examples.java.util;
 
-import org.junit.Assert;
 import org.junit.Test;
-import net.xdexamples.BaseExample;
+import net.xdexamples.support.internal.BaseExample;
 import xd.helpers.dummies.Dummy;
-import net.xdexamples.Scaffolded;
 import xdtest.ToBeContinued;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.RandomAccess;
-import java.util.Set;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;

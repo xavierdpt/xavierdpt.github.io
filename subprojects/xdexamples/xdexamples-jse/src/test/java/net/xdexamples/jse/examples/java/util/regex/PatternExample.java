@@ -1,7 +1,7 @@
 package net.xdexamples.jse.examples.java.util.regex;
 
 import org.junit.Test;
-import net.xdexamples.BaseExample;
+import net.xdexamples.support.internal.BaseExample;
 import xdtest.ToBeContinued;
 
 import java.util.function.Predicate;

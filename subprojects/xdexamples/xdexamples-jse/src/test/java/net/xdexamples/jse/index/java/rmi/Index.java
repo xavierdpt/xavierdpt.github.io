@@ -1,7 +1,7 @@
 package net.xdexamples.jse.index.java.rmi;
 
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.java.rmi.MarshalledObjectExample;
 import net.xdexamples.jse.examples.java.rmi.NamingExample;
 import net.xdexamples.jse.examples.java.rmi.RemoteExample;

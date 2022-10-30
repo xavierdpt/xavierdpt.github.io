@@ -1,6 +1,6 @@
 package net.xdexamples.jse.index.org.w3c.dom.traversal;
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.org.w3c.dom.traversal.DocumentTraversalExample;
 import net.xdexamples.jse.examples.org.w3c.dom.traversal.NodeFilterExample;
 import net.xdexamples.jse.examples.org.w3c.dom.traversal.NodeIteratorExample;

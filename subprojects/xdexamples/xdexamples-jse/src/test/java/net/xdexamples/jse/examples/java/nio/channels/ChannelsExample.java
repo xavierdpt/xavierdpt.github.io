@@ -1,7 +1,7 @@
 package net.xdexamples.jse.examples.java.nio.channels;
 
 import net.xdexamples.ExampleUtils;
-import net.xdexamples.Scaffolded;
+import net.xdexamples.support.internal.Scaffolded;
 
 import java.io.InputStream;
 import java.io.OutputStream;

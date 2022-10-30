@@ -1,6 +1,6 @@
 package net.xdexamples.jse.examples.java.util.stream;
 
-import net.xdexamples.BaseExample;
+import net.xdexamples.support.internal.BaseExample;
 import xd.helpers.dummies.Dummy;
 import xd.helpers.dummies.DummyForBaseStream;
 

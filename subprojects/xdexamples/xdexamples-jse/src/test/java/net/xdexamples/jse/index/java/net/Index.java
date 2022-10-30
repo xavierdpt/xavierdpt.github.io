@@ -1,6 +1,6 @@
 package net.xdexamples.jse.index.java.net;
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.java.net.AuthenticatorExample;
 import net.xdexamples.jse.examples.java.net.CacheRequestExample;
 import net.xdexamples.jse.examples.java.net.CacheResponseExample;

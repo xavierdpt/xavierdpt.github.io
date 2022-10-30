@@ -1,6 +1,6 @@
 package net.xdexamples.jse.index.org.w3c.dom.events;
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 
 import net.xdexamples.jse.examples.org.w3c.dom.events.DocumentEventExample;
 import net.xdexamples.jse.examples.org.w3c.dom.events.EventExample;

@@ -1,6 +1,6 @@
 package net.xdexamples.jse.examples.java.lang.ref;
 
-import net.xdexamples.BaseExample;
+import net.xdexamples.support.internal.BaseExample;
 
 import java.lang.ref.ReferenceQueue;
 import java.lang.ref.SoftReference;

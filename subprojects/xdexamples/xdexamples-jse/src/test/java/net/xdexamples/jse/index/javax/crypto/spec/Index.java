@@ -1,6 +1,6 @@
 package net.xdexamples.jse.index.javax.crypto.spec;
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.javax.crypto.spec.ChaCha20ParameterSpecExample;
 import net.xdexamples.jse.examples.javax.crypto.spec.DESKeySpecExample;
 import net.xdexamples.jse.examples.javax.crypto.spec.DESedeKeySpecExample;

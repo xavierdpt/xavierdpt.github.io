@@ -1,6 +1,6 @@
 package net.xdexamples.jse.examples.javax.rmi.ssl;
 
-import net.xdexamples.BaseExample;
+import net.xdexamples.support.internal.BaseExample;
 
 import javax.rmi.ssl.SslRMIClientSocketFactory;
 

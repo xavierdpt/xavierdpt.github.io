@@ -1,7 +1,7 @@
 package xdtest.javax.net.ssl;
 
-import net.xdexamples.BaseExample;
-import net.xdexamples.Scaffolded;
+import net.xdexamples.support.internal.BaseExample;
+import net.xdexamples.support.internal.Scaffolded;
 
 import javax.net.ssl.KeyManager;
 

@@ -1,7 +1,7 @@
 package net.xdexamples.jse.examples.java.rmi.dgc;
 
 import net.xdexamples.ExampleUtils;
-import net.xdexamples.Scaffolded;
+import net.xdexamples.support.internal.Scaffolded;
 
 import java.rmi.dgc.VMID;
 

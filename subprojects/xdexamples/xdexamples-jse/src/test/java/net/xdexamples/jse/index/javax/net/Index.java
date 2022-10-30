@@ -1,6 +1,6 @@
 package net.xdexamples.jse.index.javax.net;
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.javax.net.ServerSocketFactoryExample;
 import net.xdexamples.jse.examples.javax.net.SocketFactoryExample;
 

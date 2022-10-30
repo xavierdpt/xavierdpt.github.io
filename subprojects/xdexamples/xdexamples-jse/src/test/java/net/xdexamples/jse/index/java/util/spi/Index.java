@@ -1,6 +1,6 @@
 package net.xdexamples.jse.index.java.util.spi;
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.java.util.spi.AbstractResourceBundleProviderExample;
 import net.xdexamples.jse.examples.java.util.spi.CalendarDataProviderExample;
 import net.xdexamples.jse.examples.java.util.spi.CalendarNameProviderExample;

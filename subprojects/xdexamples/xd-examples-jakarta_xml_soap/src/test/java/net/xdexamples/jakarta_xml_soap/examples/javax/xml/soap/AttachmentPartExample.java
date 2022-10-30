@@ -1,6 +1,6 @@
 package net.xdexamples.jakarta_xml_soap.examples.javax.xml.soap;
 
-import net.xdexamples.BaseExample;
+import net.xdexamples.support.internal.BaseExample;
 
 import javax.xml.soap.AttachmentPart;
 

@@ -1,10 +1,10 @@
 package net.xdexamples.jse.examples.java.util;
 
-import net.xdexamples.BaseExample;
+import net.xdexamples.support.internal.BaseExample;
 import xd.helpers.dummies.Dummy;
 import xd.helpers.dummies.DummyClass;
 import xd.helpers.dummies.DummyComparable;
-import net.xdexamples.Scaffolded;
+import net.xdexamples.support.internal.Scaffolded;
 
 import java.util.Arrays;
 import java.util.Comparator;

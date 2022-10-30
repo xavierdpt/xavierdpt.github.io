@@ -1,7 +1,7 @@
 package net.xdexamples.jse.index.java.math;
 
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.java.math.BigDecimalExample;
 import net.xdexamples.jse.examples.java.math.BigIntegerExample;
 import net.xdexamples.jse.examples.java.math.MathContextExample;

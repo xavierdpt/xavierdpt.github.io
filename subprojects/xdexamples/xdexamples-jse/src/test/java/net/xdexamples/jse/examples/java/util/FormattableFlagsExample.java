@@ -1,7 +1,7 @@
 package net.xdexamples.jse.examples.java.util;
 
-import net.xdexamples.Scaffolded;
-import net.xdexamples.BaseExample;
+import net.xdexamples.support.internal.Scaffolded;
+import net.xdexamples.support.internal.BaseExample;
 
 import java.util.FormattableFlags;
 

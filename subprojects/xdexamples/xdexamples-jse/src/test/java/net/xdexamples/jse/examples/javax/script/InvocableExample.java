@@ -1,9 +1,9 @@
 package net.xdexamples.jse.examples.javax.script;
 
-import net.xdexamples.BaseExample;
+import net.xdexamples.support.internal.BaseExample;
 import xd.helpers.dummies.Dummy;
 import xd.helpers.dummies.DummyInterface;
-import net.xdexamples.Scaffolded;
+import net.xdexamples.support.internal.Scaffolded;
 
 import javax.script.Invocable;
 import javax.script.ScriptException;

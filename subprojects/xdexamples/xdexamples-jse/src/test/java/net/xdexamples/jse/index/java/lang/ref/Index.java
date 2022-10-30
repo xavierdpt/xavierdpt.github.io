@@ -1,7 +1,7 @@
 package net.xdexamples.jse.index.java.lang.ref;
 
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.java.lang.ref.CleanerExample;
 import net.xdexamples.jse.examples.java.lang.ref.PhantomReferenceExample;
 import net.xdexamples.jse.examples.java.lang.ref.ReferenceExample;

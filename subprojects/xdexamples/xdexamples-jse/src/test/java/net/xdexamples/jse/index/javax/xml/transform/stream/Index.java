@@ -1,6 +1,6 @@
 package net.xdexamples.jse.index.javax.xml.transform.stream;
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.javax.xml.transform.stream.StreamResultExample;
 import net.xdexamples.jse.examples.javax.xml.transform.stream.StreamSourceExample;
 

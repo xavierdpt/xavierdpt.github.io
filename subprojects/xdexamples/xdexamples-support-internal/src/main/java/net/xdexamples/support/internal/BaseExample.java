@@ -1,4 +1,4 @@
-package net.xdexamples;
+package net.xdexamples.support.internal;
 
 public abstract class BaseExample<T> {
 

@@ -1,6 +1,6 @@
 package net.xdexamples.jse.index.javax.security.auth.x500;
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.javax.security.auth.x500.X500PrincipalExample;
 
 import javax.security.auth.x500.X500Principal;

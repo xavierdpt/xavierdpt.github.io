@@ -1,7 +1,7 @@
 package net.xdexamples.jse.examples.java.util.regex;
 
-import net.xdexamples.BaseExample;
-import net.xdexamples.Scaffolded;
+import net.xdexamples.support.internal.BaseExample;
+import net.xdexamples.support.internal.Scaffolded;
 
 import java.util.function.Function;
 import java.util.regex.MatchResult;

@@ -1,7 +1,7 @@
 package net.xdexamples.jse.index.java.rmi.server;
 
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.java.rmi.server.ObjIDExample;
 import net.xdexamples.jse.examples.java.rmi.server.RMIClassLoaderExample;
 import net.xdexamples.jse.examples.java.rmi.server.RMIClassLoaderSpiExample;

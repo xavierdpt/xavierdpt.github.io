@@ -1,8 +1,7 @@
 package net.xdexamples.jse.examples.java.security.spec;
 
-import net.xdexamples.BaseExample;
+import net.xdexamples.support.internal.BaseExample;
 
-import java.security.spec.ECGenParameterSpec;
 import java.security.spec.ECParameterSpec;
 
 public class ECParameterSpecExample extends BaseExample<ECParameterSpec> {

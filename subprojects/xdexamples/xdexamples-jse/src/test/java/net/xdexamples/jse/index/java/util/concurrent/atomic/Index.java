@@ -1,6 +1,6 @@
 package net.xdexamples.jse.index.java.util.concurrent.atomic;
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.java.util.concurrent.atomic.AtomicBooleanExample;
 import net.xdexamples.jse.examples.java.util.concurrent.atomic.AtomicIntegerArrayExample;
 import net.xdexamples.jse.examples.java.util.concurrent.atomic.AtomicIntegerExample;

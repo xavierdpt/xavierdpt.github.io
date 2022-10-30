@@ -1,6 +1,6 @@
 package net.xdexamples.jse.index.javax.xml.transform.stax;
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.javax.xml.transform.stax.StAXResultExample;
 import net.xdexamples.jse.examples.javax.xml.transform.stax.StAXSourceExample;
 

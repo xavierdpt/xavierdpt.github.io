@@ -1,6 +1,6 @@
 package net.xdexamples.jse.index.javax.xml.transform.dom;
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.javax.xml.transform.dom.DOMLocatorExample;
 import net.xdexamples.jse.examples.javax.xml.transform.dom.DOMResultExample;
 import net.xdexamples.jse.examples.javax.xml.transform.dom.DOMSourceExample;

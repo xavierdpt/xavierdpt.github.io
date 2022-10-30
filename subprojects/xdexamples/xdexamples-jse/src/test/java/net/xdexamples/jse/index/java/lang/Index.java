@@ -1,7 +1,6 @@
 package net.xdexamples.jse.index.java.lang;
 
 
-import net.xdexamples.support.ExampleIndex;
 import net.xdexamples.jse.examples.java.lang.AppendableExample;
 import net.xdexamples.jse.examples.java.lang.AutoCloseableExample;
 import net.xdexamples.jse.examples.java.lang.BooleanExample;
@@ -26,7 +25,6 @@ import net.xdexamples.jse.examples.java.lang.MathExample;
 import net.xdexamples.jse.examples.java.lang.ModuleExample;
 import net.xdexamples.jse.examples.java.lang.ModuleLayerExample;
 import net.xdexamples.jse.examples.java.lang.NumberExample;
-import net.xdexamples.jse.examples.java.lang.ObjectExample;
 import net.xdexamples.jse.examples.java.lang.OverrideExample;
 import net.xdexamples.jse.examples.java.lang.PackageExample;
 import net.xdexamples.jse.examples.java.lang.ProcessBuilderExample;
@@ -51,6 +49,7 @@ import net.xdexamples.jse.examples.java.lang.ThreadExample;
 import net.xdexamples.jse.examples.java.lang.ThreadGroupExample;
 import net.xdexamples.jse.examples.java.lang.ThreadLocalExample;
 import net.xdexamples.jse.examples.java.lang.VoidExample;
+import net.xdexamples.support.internal.ExampleIndex;
 
 @ExampleIndex({
 
@@ -203,7 +202,7 @@ import net.xdexamples.jse.examples.java.lang.VoidExample;
         NumberFormatException.class,
 
         Object.class,
-        ObjectExample.class,
+        ObjectIndex.class,
 
         OutOfMemoryError.class,
 

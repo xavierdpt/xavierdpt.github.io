@@ -1,6 +1,6 @@
 package net.xdexamples.jse.examples.java.security;
 
-import net.xdexamples.BaseExample;
+import net.xdexamples.support.internal.BaseExample;
 
 import javax.crypto.spec.DHParameterSpec;
 import javax.crypto.spec.GCMParameterSpec;

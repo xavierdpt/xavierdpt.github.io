@@ -1,6 +1,6 @@
 package net.xdexamples.jse.index.javax.xml.stream.util;
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.javax.xml.stream.util.EventReaderDelegateExample;
 import net.xdexamples.jse.examples.javax.xml.stream.util.StreamReaderDelegateExample;
 import net.xdexamples.jse.examples.javax.xml.stream.util.XMLEventAllocatorExample;

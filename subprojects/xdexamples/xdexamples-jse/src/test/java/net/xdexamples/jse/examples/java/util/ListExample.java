@@ -2,12 +2,10 @@ package net.xdexamples.jse.examples.java.util;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.function.ThrowingRunnable;
-import net.xdexamples.BaseExample;
+import net.xdexamples.support.internal.BaseExample;
 import xd.helpers.dummies.DummyClass;
-import net.xdexamples.Scaffolded;
+import net.xdexamples.support.internal.Scaffolded;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;

@@ -1,6 +1,6 @@
 package net.xdexamples.jse.examples.javax.security.auth.callback;
 
-import net.xdexamples.BaseExample;
+import net.xdexamples.support.internal.BaseExample;
 
 import javax.security.auth.callback.NameCallback;
 

@@ -1,6 +1,6 @@
 package net.xdexamples.jse.index.java.util.zip;
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.java.util.zip.Adler32Example;
 import net.xdexamples.jse.examples.java.util.zip.CRC32CExample;
 import net.xdexamples.jse.examples.java.util.zip.CRC32Example;

@@ -1,7 +1,7 @@
 package net.xdexamples.jse.index.java.nio;
 
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.java.nio.BufferExample;
 import net.xdexamples.jse.examples.java.nio.ByteBufferExample;
 import net.xdexamples.jse.examples.java.nio.ByteOrderExample;

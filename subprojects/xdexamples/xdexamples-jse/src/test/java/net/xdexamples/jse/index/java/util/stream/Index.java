@@ -1,7 +1,7 @@
 package net.xdexamples.jse.index.java.util.stream;
 
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.java.util.stream.BaseStreamExample;
 import net.xdexamples.jse.examples.java.util.stream.CollectorExample;
 import net.xdexamples.jse.examples.java.util.stream.CollectorsExample;

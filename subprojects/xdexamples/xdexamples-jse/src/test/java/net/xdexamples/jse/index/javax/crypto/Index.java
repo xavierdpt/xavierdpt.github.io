@@ -1,6 +1,6 @@
 package net.xdexamples.jse.index.javax.crypto;
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.javax.crypto.CipherExample;
 import net.xdexamples.jse.examples.javax.crypto.CipherInputStreamExample;
 import net.xdexamples.jse.examples.javax.crypto.CipherOutputStreamExample;

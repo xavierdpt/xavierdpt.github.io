@@ -1,7 +1,7 @@
 package net.xdexamples.jse.index.java.io;
 
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.java.io.BufferedInputStreamExample;
 import net.xdexamples.jse.examples.java.io.BufferedOutputStreamExample;
 import net.xdexamples.jse.examples.java.io.BufferedReaderExample;

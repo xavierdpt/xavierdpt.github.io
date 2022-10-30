@@ -1,8 +1,8 @@
 package net.xdexamples.jse.examples.java.util;
 
-import net.xdexamples.BaseExample;
+import net.xdexamples.support.internal.BaseExample;
 import xd.helpers.dummies.Dummy;
-import net.xdexamples.Scaffolded;
+import net.xdexamples.support.internal.Scaffolded;
 
 import java.util.ListIterator;
 

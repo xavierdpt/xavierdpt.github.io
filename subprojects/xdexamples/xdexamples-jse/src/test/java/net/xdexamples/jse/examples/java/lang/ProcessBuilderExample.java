@@ -2,10 +2,10 @@ package net.xdexamples.jse.examples.java.lang;
 
 import org.junit.Assert;
 import org.junit.Test;
-import net.xdexamples.BaseExample;
+import net.xdexamples.support.internal.BaseExample;
 import net.xdexamples.ExampleUtils;
 import xdtest.OperatingSystem;
-import net.xdexamples.Scaffolded;
+import net.xdexamples.support.internal.Scaffolded;
 import xdtest.TestUtils;
 
 import java.io.ByteArrayOutputStream;

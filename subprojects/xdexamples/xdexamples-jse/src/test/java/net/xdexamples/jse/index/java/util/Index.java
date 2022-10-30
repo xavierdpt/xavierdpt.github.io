@@ -1,6 +1,6 @@
 package net.xdexamples.jse.index.java.util;
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.java.util.AbstractCollectionExample;
 import net.xdexamples.jse.examples.java.util.AbstractListExample;
 import net.xdexamples.jse.examples.java.util.AbstractMapExample;

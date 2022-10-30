@@ -1,7 +1,7 @@
 package net.xdexamples.jse.index.java.nio.file;
 
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.java.nio.file.AccessModeExample;
 import net.xdexamples.jse.examples.java.nio.file.CopyOptionExample;
 import net.xdexamples.jse.examples.java.nio.file.DirectoryStreamExample;

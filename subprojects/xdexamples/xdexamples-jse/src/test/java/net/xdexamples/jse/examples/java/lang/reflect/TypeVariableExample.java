@@ -1,7 +1,6 @@
 package net.xdexamples.jse.examples.java.lang.reflect;
 
-import net.xdexamples.BaseExample;
-import xd.helpers.dummies.Dummy;
+import net.xdexamples.support.internal.BaseExample;
 import xd.helpers.dummies.DummyGenericDeclaration;
 
 import java.lang.reflect.TypeVariable;

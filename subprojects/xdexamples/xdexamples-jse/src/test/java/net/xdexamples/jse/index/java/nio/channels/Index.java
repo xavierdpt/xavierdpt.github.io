@@ -1,7 +1,7 @@
 package net.xdexamples.jse.index.java.nio.channels;
 
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.java.nio.channels.AsynchronousByteChannelExample;
 import net.xdexamples.jse.examples.java.nio.channels.AsynchronousChannelExample;
 import net.xdexamples.jse.examples.java.nio.channels.AsynchronousChannelGroupExample;

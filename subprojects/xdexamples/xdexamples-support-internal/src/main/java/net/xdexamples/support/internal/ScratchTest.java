@@ -1,6 +1,6 @@
-package net.xdexamples.support;
+package net.xdexamples.support.internal;
 
-import org.testng.annotations.Test;
+
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -9,7 +9,7 @@ import java.lang.reflect.Method;
 
 public class ScratchTest {
     // https://stackoverflow.com/questions/7318011/is-it-possible-to-create-an-empty-java-enum-type-with-methods
-    @Test
+
     public void scratch() throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
         Constructor<?> constructor = ScratchEnum.class.getDeclaredConstructors()[0];
         for (Method method : constructor.getClass().getDeclaredMethods()) {

@@ -2,7 +2,7 @@ package net.xdexamples.jse.examples.java.util.function;
 
 import org.junit.Assert;
 import org.junit.Test;
-import net.xdexamples.BaseExample;
+import net.xdexamples.support.internal.BaseExample;
 import xd.helpers.dummies.Dummy1;
 import xd.helpers.dummies.Dummy2;
 import xdtest.ToBeContinued;

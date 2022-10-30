@@ -1,6 +1,6 @@
 package net.xdexamples.jse.index.org.w3c.dom.ls;
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.org.w3c.dom.ls.DOMImplementationLSExample;
 import net.xdexamples.jse.examples.org.w3c.dom.ls.LSInputExample;
 import net.xdexamples.jse.examples.org.w3c.dom.ls.LSLoadEventExample;

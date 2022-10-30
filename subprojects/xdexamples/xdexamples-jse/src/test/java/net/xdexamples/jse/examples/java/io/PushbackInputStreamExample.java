@@ -1,6 +1,6 @@
 package net.xdexamples.jse.examples.java.io;
 
-import net.xdexamples.BaseExample;
+import net.xdexamples.support.internal.BaseExample;
 
 import java.io.PushbackInputStream;
 

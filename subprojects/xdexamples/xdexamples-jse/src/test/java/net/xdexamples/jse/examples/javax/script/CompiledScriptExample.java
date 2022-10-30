@@ -1,6 +1,6 @@
 package net.xdexamples.jse.examples.javax.script;
 
-import net.xdexamples.BaseExample;
+import net.xdexamples.support.internal.BaseExample;
 
 import javax.script.Bindings;
 import javax.script.CompiledScript;

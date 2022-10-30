@@ -1,6 +1,6 @@
 package net.xdexamples.jse.index.javax.xml.catalog;
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.javax.xml.catalog.CatalogExample;
 import net.xdexamples.jse.examples.javax.xml.catalog.CatalogFeaturesExample;
 import net.xdexamples.jse.examples.javax.xml.catalog.CatalogManagerExample;

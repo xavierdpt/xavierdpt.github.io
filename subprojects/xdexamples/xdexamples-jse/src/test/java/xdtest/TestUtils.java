@@ -1,8 +1,6 @@
 package xdtest;
 
 import net.xdexamples.AllMethodsCovered;
-import net.xdexamples.helpers.ExampleHelper;
-import xd.XDUtils;
 
 import java.util.Arrays;
 import java.util.List;

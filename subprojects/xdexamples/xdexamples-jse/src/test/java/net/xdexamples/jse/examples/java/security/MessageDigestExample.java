@@ -1,11 +1,11 @@
 package net.xdexamples.jse.examples.java.security;
 
-import net.xdexamples.BaseExample;
-import net.xdexamples.Bundle;
-import net.xdexamples.EBundle;
-import net.xdexamples.support.Example;
-import net.xdexamples.support.Examples;
-import net.xdexamples.helpers.ExampleHelper;
+import net.xdexamples.support.internal.BaseExample;
+import net.xdexamples.support.internal.Bundle;
+import net.xdexamples.support.internal.EBundle;
+import net.xdexamples.support.internal.Example;
+import net.xdexamples.support.internal.Examples;
+import net.xdexamples.support.ExampleSupport;
 
 import java.nio.ByteBuffer;
 import java.security.DigestException;
@@ -19,7 +19,7 @@ import java.security.Security;
 @Examples(
         @Example(
                 value = MessageDigestExample_digestBytes.class,
-                illustratedMethods = "getInstance,digest"
+                illustrated = "getInstance,digest"
         )
 )
 public class MessageDigestExample extends BaseExample<MessageDigest> {
@@ -107,7 +107,7 @@ public class MessageDigestExample extends BaseExample<MessageDigest> {
                     String algorithm = service.getAlgorithm();
                     MessageDigest messageDigest = MessageDigest.getInstance(algorithm, provider);
                     byte[] digest = messageDigest.digest(new byte[]{});
-                    String digestStr = ExampleHelper.bytesToHex(digest);
+                    String digestStr = ExampleSupport.bytesToHex(digest);
                     System.out.println(providerName + "/" + algorithm + ": " + digestStr);
                 }
             }

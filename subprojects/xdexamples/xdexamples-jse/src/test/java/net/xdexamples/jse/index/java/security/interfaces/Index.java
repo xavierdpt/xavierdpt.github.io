@@ -1,6 +1,6 @@
 package net.xdexamples.jse.index.java.security.interfaces;
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.java.security.interfaces.DSAKeyExample;
 import net.xdexamples.jse.examples.java.security.interfaces.DSAKeyPairGeneratorExample;
 import net.xdexamples.jse.examples.java.security.interfaces.DSAParamsExample;

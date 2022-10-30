@@ -1,6 +1,6 @@
 package xdtest.javax.net.ssl;
 
-import net.xdexamples.BaseExample;
+import net.xdexamples.support.internal.BaseExample;
 
 import javax.net.ServerSocketFactory;
 import java.net.InetAddress;

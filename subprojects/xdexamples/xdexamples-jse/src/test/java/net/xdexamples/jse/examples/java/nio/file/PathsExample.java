@@ -1,7 +1,7 @@
 package net.xdexamples.jse.examples.java.nio.file;
 
 import net.xdexamples.ExampleUtils;
-import net.xdexamples.Scaffolded;
+import net.xdexamples.support.internal.Scaffolded;
 
 import java.net.URI;
 import java.nio.file.Path;

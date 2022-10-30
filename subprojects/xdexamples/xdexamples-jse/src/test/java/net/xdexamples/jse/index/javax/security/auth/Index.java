@@ -1,6 +1,6 @@
 package net.xdexamples.jse.index.javax.security.auth;
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.javax.security.auth.AuthPermissionExample;
 import net.xdexamples.jse.examples.javax.security.auth.DestroyableExample;
 import net.xdexamples.jse.examples.javax.security.auth.PrivateCredentialPermissionExample;

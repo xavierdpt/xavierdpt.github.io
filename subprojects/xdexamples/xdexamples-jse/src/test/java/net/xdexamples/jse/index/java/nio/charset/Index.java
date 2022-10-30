@@ -1,6 +1,6 @@
 package net.xdexamples.jse.index.java.nio.charset;
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.java.nio.charset.CharsetDecoderExample;
 import net.xdexamples.jse.examples.java.nio.charset.CharsetEncoderExample;
 import net.xdexamples.jse.examples.java.nio.charset.CharsetExample;

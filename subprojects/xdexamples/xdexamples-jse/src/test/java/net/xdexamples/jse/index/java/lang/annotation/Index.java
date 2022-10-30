@@ -1,7 +1,7 @@
 package net.xdexamples.jse.index.java.lang.annotation;
 
 
-import net.xdexamples.support.ExampleIndex;
+import net.xdexamples.support.internal.ExampleIndex;
 import net.xdexamples.jse.examples.java.lang.annotation.AnnotationExample;
 import net.xdexamples.jse.examples.java.lang.annotation.DocumentedExample;
 import net.xdexamples.jse.examples.java.lang.annotation.ElementTypeExample;
