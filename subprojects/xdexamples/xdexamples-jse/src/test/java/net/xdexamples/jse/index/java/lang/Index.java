@@ -1,20 +1,9 @@
 package net.xdexamples.jse.index.java.lang;
 
 
-import net.xdexamples.jse.examples.java.lang.AppendableExample;
-import net.xdexamples.jse.examples.java.lang.AutoCloseableExample;
-import net.xdexamples.jse.examples.java.lang.BooleanExample;
-import net.xdexamples.jse.examples.java.lang.ByteExample;
-import net.xdexamples.jse.examples.java.lang.CharSequenceExample;
-import net.xdexamples.jse.examples.java.lang.CharacterExample;
-import net.xdexamples.jse.examples.java.lang.ClassExample;
 import net.xdexamples.jse.examples.java.lang.ClassLoaderExample;
 import net.xdexamples.jse.examples.java.lang.ClassValueExample;
-import net.xdexamples.jse.examples.java.lang.CloneableExample;
-import net.xdexamples.jse.examples.java.lang.ComparableExample;
-import net.xdexamples.jse.examples.java.lang.DeprecatedExample;
 import net.xdexamples.jse.examples.java.lang.DoubleExample;
-import net.xdexamples.jse.examples.java.lang.EnumExample;
 import net.xdexamples.jse.examples.java.lang.FloatExample;
 import net.xdexamples.jse.examples.java.lang.FunctionalInterfaceExample;
 import net.xdexamples.jse.examples.java.lang.InheritableThreadLocalExample;
@@ -24,15 +13,12 @@ import net.xdexamples.jse.examples.java.lang.LongExample;
 import net.xdexamples.jse.examples.java.lang.MathExample;
 import net.xdexamples.jse.examples.java.lang.ModuleExample;
 import net.xdexamples.jse.examples.java.lang.ModuleLayerExample;
-import net.xdexamples.jse.examples.java.lang.NumberExample;
 import net.xdexamples.jse.examples.java.lang.OverrideExample;
 import net.xdexamples.jse.examples.java.lang.PackageExample;
 import net.xdexamples.jse.examples.java.lang.ProcessBuilderExample;
 import net.xdexamples.jse.examples.java.lang.ProcessExample;
 import net.xdexamples.jse.examples.java.lang.ProcessHandleExample;
-import net.xdexamples.jse.examples.java.lang.ReadableExample;
 import net.xdexamples.jse.examples.java.lang.RecordExample;
-import net.xdexamples.jse.examples.java.lang.RunnableExample;
 import net.xdexamples.jse.examples.java.lang.RuntimeExample;
 import net.xdexamples.jse.examples.java.lang.SafeVarargsExample;
 import net.xdexamples.jse.examples.java.lang.ShortExample;
@@ -41,14 +27,7 @@ import net.xdexamples.jse.examples.java.lang.StackWalkerExample;
 import net.xdexamples.jse.examples.java.lang.StrictMathExample;
 import net.xdexamples.jse.examples.java.lang.StringBufferExample;
 import net.xdexamples.jse.examples.java.lang.StringBuilderExample;
-import net.xdexamples.jse.examples.java.lang.StringExample;
-import net.xdexamples.jse.examples.java.lang.SuppressWarningsExample;
 import net.xdexamples.jse.examples.java.lang.SystemExample;
-import net.xdexamples.jse.examples.java.lang.ThreadDeathExample;
-import net.xdexamples.jse.examples.java.lang.ThreadExample;
-import net.xdexamples.jse.examples.java.lang.ThreadGroupExample;
-import net.xdexamples.jse.examples.java.lang.ThreadLocalExample;
-import net.xdexamples.jse.examples.java.lang.VoidExample;
 import net.xdexamples.support.internal.ExampleIndex;
 
 @ExampleIndex({
@@ -56,7 +35,7 @@ import net.xdexamples.support.internal.ExampleIndex;
         AbstractMethodError.class,
 
         Appendable.class,
-        AppendableExample.class,
+        AppendableIndex.class,
 
         ArithmeticException.class,
 
@@ -67,24 +46,24 @@ import net.xdexamples.support.internal.ExampleIndex;
         AssertionError.class,
 
         AutoCloseable.class,
-        AutoCloseableExample.class,
+        AutoCloseableIndex.class,
 
         Boolean.class,
-        BooleanExample.class,
+        BooleanIndex.class,
 
         BootstrapMethodError.class,
 
         Byte.class,
-        ByteExample.class,
+        ByteIndex.class,
 
         Character.class,
-        CharacterExample.class,
+        CharacterIndex.class,
 
         CharSequence.class,
-        CharSequenceExample.class,
+        CharSequenceIndex.class,
 
         Class.class,
-        ClassExample.class,
+        ClassIndex.class,
 
         ClassCastException.class,
 
@@ -101,21 +80,21 @@ import net.xdexamples.support.internal.ExampleIndex;
         ClassValueExample.class,
 
         Cloneable.class,
-        CloneableExample.class,
+        CloneableIndex.class,
 
         CloneNotSupportedException.class,
 
         Comparable.class,
-        ComparableExample.class,
+        ComparableIndex.class,
 
         Deprecated.class,
-        DeprecatedExample.class,
+        DeprecatedIndex.class,
 
         Double.class,
         DoubleExample.class,
 
         Enum.class,
-        EnumExample.class,
+        EnumIndex.class,
 
         EnumConstantNotPresentException.class,
 
@@ -197,7 +176,7 @@ import net.xdexamples.support.internal.ExampleIndex;
         NullPointerException.class,
 
         Number.class,
-        NumberExample.class,
+        NumberIndex.class,
 
         NumberFormatException.class,
 
@@ -222,7 +201,7 @@ import net.xdexamples.support.internal.ExampleIndex;
         ProcessHandleExample.class,
 
         Readable.class,
-        ReadableExample.class,
+        ReadableIndex.class,
 
         Record.class,
         RecordExample.class,
@@ -230,7 +209,7 @@ import net.xdexamples.support.internal.ExampleIndex;
         ReflectiveOperationException.class,
 
         Runnable.class,
-        RunnableExample.class,
+        RunnableIndex.class,
 
         Runtime.class,
         RuntimeExample.class,
@@ -257,7 +236,7 @@ import net.xdexamples.support.internal.ExampleIndex;
         StrictMathExample.class,
 
         String.class,
-        StringExample.class,
+        StringIndex.class,
 
         StringBuffer.class,
         StringBufferExample.class,
@@ -268,22 +247,22 @@ import net.xdexamples.support.internal.ExampleIndex;
         StringIndexOutOfBoundsException.class,
 
         SuppressWarnings.class,
-        SuppressWarningsExample.class,
+        SuppressWarningsIndex.class,
 
         System.class,
         SystemExample.class,
 
         Thread.class,
-        ThreadExample.class,
+        ThreadIndex.class,
 
         ThreadDeath.class,
-        ThreadDeathExample.class,
+        ThreadDeathIndex.class,
 
         ThreadGroup.class,
-        ThreadGroupExample.class,
+        ThreadGroupIndex.class,
 
         ThreadLocal.class,
-        ThreadLocalExample.class,
+        ThreadLocalIndex.class,
 
         TypeNotPresentException.class,
 
@@ -300,7 +279,7 @@ import net.xdexamples.support.internal.ExampleIndex;
         VirtualMachineError.class,
 
         Void.class,
-        VoidExample.class,
+        VoidIndex.class,
 })
 public class Index {
 }

@@ -66,6 +66,6 @@ public class ExampleUtils {
     }
 
     public interface ThrowingRunnable {
-        public void run() throws Throwable;
+        void run() throws Throwable;
     }
 }

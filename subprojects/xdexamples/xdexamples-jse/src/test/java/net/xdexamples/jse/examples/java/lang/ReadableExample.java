@@ -1,21 +1,36 @@
 package net.xdexamples.jse.examples.java.lang;
 
-import net.xdexamples.ExampleUtils;
-import net.xdexamples.support.internal.Scaffolded;
+import org.junit.Assert;
+import org.junit.Test;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.CharBuffer;
 
-@Scaffolded
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+
 public class ReadableExample {
 
-    public void scaffold() throws ClassNotFoundException, IOException, InterruptedException {
-        if (ExampleUtils.skip()) {
-            Readable instance = ExampleUtils.makeInstance(Readable.class);
-            CharBuffer charBuffer = null;
-            int read = instance.read(charBuffer);
-        }
-    }
+    @Test
+    public void example() throws IOException {
 
+        // InputStreamReader implements readable
+        Readable readable = new InputStreamReader(new ByteArrayInputStream("hello".getBytes()));
+
+        // Allocate a char buffer with 2 chars
+        CharBuffer charBuffer = CharBuffer.allocate(2);
+
+        // Read from the readable into the char buffer
+        int read = readable.read(charBuffer);
+
+        // Check number of chars read
+        assertEquals(2, read);
+
+        // Check chars read
+        assertArrayEquals(new char[]{'h', 'e'}, charBuffer.array());
+
+    }
 
 }

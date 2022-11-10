@@ -1,6 +1,6 @@
 package xd.examples;
 
-import net.xdexamples.helpers.ExampleHelper;
+import net.xdexamples.support.ExampleSupport;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -75,9 +75,9 @@ public class CipherExamples {
                             AlgorithmParameters parameters = cipher.getParameters();
                             cipher.init(Cipher.DECRYPT_MODE, key, parameters);
                             byte[] decrypted = cipher.doFinal(encrypted);
-                            System.out.println(ExampleHelper.bytesToHex(encrypted));
-                            System.out.println(ExampleHelper.bytesToHex(plain));
-                            System.out.println(ExampleHelper.bytesToHex(decrypted));
+                            System.out.println(ExampleSupport.bytesToHex(encrypted));
+                            System.out.println(ExampleSupport.bytesToHex(plain));
+                            System.out.println(ExampleSupport.bytesToHex(decrypted));
                         }
                         case "SunJCE/AES_192/OFB/NoPadding": {
 

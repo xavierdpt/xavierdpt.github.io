@@ -3,5 +3,14 @@ package net.xdexamples.support.internal;
 import java.util.Optional;
 
 public enum EBundle {
-    CORE, CRYPTO, INHERIT, CONCURRENCY;
+    CONCURRENCY,
+
+    // TODO: Find a better name
+    CONSTABLE,
+
+    CORE,
+
+    CRYPTO,
+
+    INHERIT, REFLECTION;
 }

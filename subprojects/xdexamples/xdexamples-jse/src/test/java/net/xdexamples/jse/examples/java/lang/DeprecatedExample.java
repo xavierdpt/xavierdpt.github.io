@@ -1,19 +1,32 @@
 package net.xdexamples.jse.examples.java.lang;
 
-import net.xdexamples.ExampleUtils;
-import net.xdexamples.support.internal.Scaffolded;
+import org.junit.Test;
 
-import java.io.IOException;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 
-@Scaffolded
 public class DeprecatedExample {
 
-    public void scaffold() throws ClassNotFoundException, IOException {
-        if (ExampleUtils.skip()) {
-            Deprecated instance = ExampleUtils.makeInstance(Deprecated.class);
-            String since = instance.since();
-            boolean b = instance.forRemoval();
-        }
+    @Test
+    public void example() {
+
+        // This annotation is exploited by IDEs and build tools to identify code that is deprecated
+        Deprecated deprecated = A.class.getAnnotation(Deprecated.class);
+
+        assertNotNull(deprecated);
+
+        // By default, since is blank (it's new in Java 9)
+        String since = deprecated.since();
+        assertEquals("", since);
+
+        // By default, forRemoval is false (it's new in Java 9)
+        boolean forRemoval = deprecated.forRemoval();
+        assertFalse(forRemoval);
     }
 
+    @Deprecated
+    public static class A {
+
+    }
 }
