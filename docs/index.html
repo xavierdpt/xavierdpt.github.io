@@ -9,7 +9,18 @@
         <p>Welcome2</p>
         <div id="root"></div>
         <script type="application/javascript">
-            const vnode = Vue.h('div',{}, ["Bim"]);
+            const links ={
+                vue:{
+                    label:"Vue",
+                    href:"https://vuejs.org/"
+                }
+            }
+            const lis = [];
+            for(let k in links) {
+                const link = links[k];
+                lis.push(Vue.h("li",{},[Vue.h("a",{href:link.href},[link.label])]));
+            }
+            const vnode = Vue.h('ul',{}, lis);
             Vue.createApp({ render: () => vnode }).mount('#root');
         </script>
     </body>
