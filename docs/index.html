@@ -10,8 +10,7 @@
         <div id="root"></div>
         <script type="application/javascript">
             const vnode = Vue.h('div',{}, ["Bim"]);
-            const app = new Vue({ render: () => vnode });
-            app.$mount('#root');
+            Vue.createApp({ render: () => vnode }).mount('#root');
         </script>
     </body>
 </html>
