@@ -10,6 +10,10 @@
         <div id="root"></div>
         <script type="application/javascript">
             document.getElementById("root").appendChild(document.createTextNode(Vue.h));
+            const vnode = h('div',{}, []);
+            const app = new Vue({ render: () => vnode });
+            app.$mount('#root');
+
         </script>
     </body>
 </html>
