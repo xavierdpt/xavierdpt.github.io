@@ -109,10 +109,134 @@
                 "jakarta-ee":{
                     label:"Jakarta EE",
                     href:"https://jakarta.ee/specifications/"
+                },
+                "zig":{
+                    label:"Zig",
+                    href:"https://ziglang.org/"
+                },
+                "nim":{
+                    label:"Nim",
+                    href:"https://nim-lang.org/"
+                },
+                "rebol":{
+                    label:"Rebol",
+                    href:"http://www.rebol.com/"
+                },
+                "coq":{
+                    label:"Coq",
+                    href:"https://coq.inria.fr/"
+                },
+                "ocaml":{
+                    label:"OCaml",
+                    href:"https://ocaml.org/"
+                },
+                "groovy":{
+                    label:"Groovy",
+                    href:"https://groovy-lang.org/"
+                },
+                "kotlin":{
+                    label:"Kotlin",
+                    href:"https://kotlinlang.org/"
+                },
+                "idea":{
+                    label:"IntelliJ IDEA",
+                    href:"https://www.jetbrains.com/idea/"
+                },
+                "scala":{
+                    label:"Scala",
+                    href:"https://www.scala-lang.org/"
+                },
+                "mathjax":{
+                    label:"MathJax",
+                    href:"https://www.mathjax.org/"
+                },
+                "marked":{
+                    label:"Marked",
+                    href:"https://marked.js.org/"
+                },
+                "tcp":{
+                    label:"TCP",
+                    href:"https://en.wikipedia.org/wiki/Transmission_Control_Protocol"
+                },
+                "udp":{
+                    label:"UDP",
+                    href:"https://en.wikipedia.org/wiki/User_Datagram_Protocol"
+                },
+                "ipv4":{
+                    label:"IPv4",
+                    href:"https://en.wikipedia.org/wiki/Internet_Protocol_version_4"
+                },
+                "ipv6":{
+                    label:"IPv6",
+                    href:"https://en.wikipedia.org/wiki/IPv6"
+                },
+                "ethernet":{
+                    label:"Ethernet",
+                    href:"https://en.wikipedia.org/wiki/Ethernet"
+                },
+                "dns":{
+                    label:"DNS",
+                    href:"https://en.wikipedia.org/wiki/Domain_Name_System"
+                },
+                "arp":{
+                    label:"ARP",
+                    href:"https://en.wikipedia.org/wiki/Address_Resolution_Protocol"
+                },
+                "tls":{
+                    label:"TLS",
+                    href:"https://en.wikipedia.org/wiki/Transport_Layer_Security"
+                },
+                "snmp":{
+                    label:"SNMP",
+                    href:"https://en.wikipedia.org/wiki/Simple_Network_Management_Protocol"
+                },
+                "osgi":{
+                    label:"OSGi",
+                    href:"https://www.osgi.org/"
+                },
+                "":{
+                    label:"",
+                    href:""
+                },
+                "":{
+                    label:"",
+                    href:""
+                },
+                "omg":{
+                    label:"OMG",
+                    href:"https://www.omg.org/"
+                },
+                "corba":{
+                    label:"CORBA",
+                    href:"https://www.corba.org/"
+                },
+                "":{
+                    label:"",
+                    href:""
+                },
+                "":{
+                    label:"",
+                    href:""
+                },
+                "":{
+                    label:"",
+                    href:""
+                },
+                "":{
+                    label:"",
+                    href:""
+                },
+                "":{
+                    label:"",
+                    href:""
                 }
+                
             };
             const lis = [];
             for(let k in links) {
+                if(k==="") {
+                    continue;
+                }
                 const link = links[k];
                 lis.push(Vue.h("li",{},[Vue.h("a",{href:link.href},[link.label])]));
             }
