@@ -1,7 +1,8 @@
 window.xdata = {
     vue: {
         label: "Vue",
-        href: "https://vuejs.org/"
+        href: "https://vuejs.org/",
+        parent:"ecmascript"
     },
     "whatwg-specs": {
         label: "WHATWG Standards",
@@ -10,6 +11,7 @@ window.xdata = {
     "echarts": {
         label: "Apache ECharts",
         href: "https://echarts.apache.org/",
+        parent:"ecmascript",
         articles: {
             "simple-line": {
                 title: "Simple Line Graph"
@@ -18,11 +20,13 @@ window.xdata = {
     },
     "modernizr": {
         label: "Modernizr",
-        href: "https://modernizr.com/"
+        href: "https://modernizr.com/",
+        parent:"ecmascript"
     },
     "preact": {
         label: "Preact",
-        href: "https://preactjs.com/"
+        href: "https://preactjs.com/",
+        parent:"ecmascript"
     },
     "webassembly": {
         label: "WebAssembly",
@@ -46,23 +50,28 @@ window.xdata = {
     },
     "redux-saga": {
         label: "Redux-Saga",
-        href: "https://redux-saga.js.org/"
+        href: "https://redux-saga.js.org/",
+        parent:"ecmascript"
     },
     "redux": {
         label: "Redux",
-        href: "https://redux.js.org/"
+        href: "https://redux.js.org/",
+        parent:"ecmascript"
     },
     "three.js": {
         label: "three.js",
-        href: "https://threejs.org/"
+        href: "https://threejs.org/",
+        parent:"ecmascript"
     },
     "babylon.js": {
         label: "Babylon.js",
-        href: "https://www.babylonjs.com/"
+        href: "https://www.babylonjs.com/",
+        parent:"ecmascript"
     },
     "p5.js": {
         label: "p5.js",
-        href: "https://p5js.org/"
+        href: "https://p5js.org/",
+        parent:"ecmascript"
     },
     "narayana": {
         label: "Narayana",
@@ -142,11 +151,13 @@ window.xdata = {
     },
     "mathjax": {
         label: "MathJax",
-        href: "https://www.mathjax.org/"
+        href: "https://www.mathjax.org/",
+        parent:"ecmascript"
     },
     "marked": {
         label: "Marked",
-        href: "https://marked.js.org/"
+        href: "https://marked.js.org/",
+        parent:"ecmascript"
     },
     "tcp": {
         label: "TCP",
@@ -214,7 +225,8 @@ window.xdata = {
     },
     "jest": {
         label: "Jest",
-        href: "https://jestjs.io/"
+        href: "https://jestjs.io/",
+        parent:"ecmascript"
     },
     "webrtc": {
         label: "WebRTC",
@@ -222,7 +234,8 @@ window.xdata = {
     },
     "javascript.info": {
         label: "The Modern JavaScript Tutorial",
-        href: "https://javascript.info/"
+        href: "https://javascript.info/",
+        parent:"ecmascript"
     },
     "craftinginterpreters.com": {
         label: "Crafting Interpreters",
@@ -230,166 +243,198 @@ window.xdata = {
     },
     "vue-template-explorer": {
         label: "Vue 3 Template Explorer",
-        href: "https://template-explorer.vuejs.org/"
+        href: "https://template-explorer.vuejs.org/",
+        parent:"ecmascript"
     },
     "javascript-proxy": {
         label: "JavaScript Proxy",
-        href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy"
+        href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy",
+        parent:"ecmascript"
     },
     "svelte": {
         label: "Svelte",
-        href: "https://svelte.dev/"
+        href: "https://svelte.dev/",
+        parent:"ecmascript"
     },
     "immutable": {
         label: "Immutable",
-        href: "https://immutable-js.com/"
+        href: "https://immutable-js.com/",
+        parent:"ecmascript"
     },
     "immer": {
         label: "Immer",
-        href: "https://immutable-js.com/"
+        href: "https://immerjs.github.io/immer/"        
     },
     "vue-play": {
         label: "Vue SFC Playground",
-        href: "https://play.vuejs.org/"
+        href: "https://play.vuejs.org/",
+        parent:"ecmascript"
     },
     "xstate": {
         label: "XState",
-        href: "https://xstate.js.org/"
+        href: "https://xstate.js.org/",
+        parent:"ecmascript"
     },
     "rxjs": {
         label: "RxJS",
-        href: "https://rxjs.dev/"
+        href: "https://rxjs.dev/",
+        parent:"ecmascript"
     },
     "vueuse": {
         label: "VueUse",
-        href: "https://vueuse.org/"
+        href: "https://vueuse.org/",
+        parent:"ecmascript"
     },
     "solidjs": {
         label: "SolidJS",
-        href: "https://www.solidjs.com/"
+        href: "https://www.solidjs.com/",
+        parent:"ecmascript"
     },
     "angular": {
         label: "Angular",
-        href: "https://angular.io/"
+        href: "https://angular.io/",
+        parent:"ecmascript"
     },
     "qwik": {
         label: "Qwik",
-        href: "https://qwik.dev/"
+        href: "https://qwik.dev/",
+        parent:"ecmascript"
     },
     "knockout": {
         label: "Knockout",
-        href: "https://knockoutjs.com/"
+        href: "https://knockoutjs.com/",
+        parent:"ecmascript"
     },
     "meteor": {
         label: "Meteor",
-        href: "https://www.meteor.com/"
+        href: "https://www.meteor.com/",
+        parent:"ecmascript"
     },
     "mobx": {
         label: "MobX",
-        href: "https://mobx.js.org/README.html"
+        href: "https://mobx.js.org/README.html",
+        parent:"ecmascript"
     },
     "react": {
         label: "React",
-        href: "https://react.dev/"
+        href: "https://react.dev/",
+        parent:"ecmascript"
     },
     "typescript": {
         label: "TypeScript",
-        href: "https://www.typescriptlang.org/"
+        href: "https://www.typescriptlang.org/",
+        parent:"ecmascript"
     },
     "babel": {
         label: "Babel",
-        href: "https://babeljs.io/"
+        href: "https://babeljs.io/",
+        parent:"ecmascript"
     },
     "coffeescript": {
         label: "CoffeeScript",
-        href: "https://coffeescript.org/"
+        href: "https://coffeescript.org/",
+        parent:"ecmascript"
     },
-    "learnyouahaskell":{
-        label:"Learn You a Haskell for Great Good!",
-        href:"https://learnyouahaskell.com/"
+    "learnyouahaskell": {
+        label: "Learn You a Haskell for Great Good!",
+        href: "https://learnyouahaskell.com/"
     },
-    "eloquent-javascript":{
-        label:"Eloquent JavaScript",
-        href:"https://eloquentjavascript.net/"
+    "eloquent-javascript": {
+        label: "Eloquent JavaScript",
+        href: "https://eloquentjavascript.net/",
+        parent:"ecmascript"
     },
-    "exploringjs":{
-        label:"Exploring JS",
-        href:"https://exploringjs.com/"
+    "exploringjs": {
+        label: "Exploring JS",
+        href: "https://exploringjs.com/",
+        parent:"ecmascript"
     },
-    "exploringjs/impatient-js":{
-        label:"JavaScript for impatient programmers (ES2022 edition)",
-        href:"https://exploringjs.com/impatient-js/index.html"
+    "exploringjs/impatient-js": {
+        label: "JavaScript for impatient programmers (ES2022 edition)",
+        href: "https://exploringjs.com/impatient-js/index.html",
+        parent: "exploringjs"
     },
-    "exploringjs/deep-js":{
-        label:"Deep JavaScript: Theory and techniques",
-        href:"https://exploringjs.com/deep-js/index.html"
+    "exploringjs/deep-js": {
+        label: "Deep JavaScript: Theory and techniques",
+        href: "https://exploringjs.com/deep-js/index.html",
+        parent: "exploringjs"
     },
-    "exploringjs/tackling-ts":{
-        label:"Tackling TypeScript: Upgrading from JavaScript",
-        href:"https://exploringjs.com/tackling-ts/index.html"
+    "exploringjs/tackling-ts": {
+        label: "Tackling TypeScript: Upgrading from JavaScript",
+        href: "https://exploringjs.com/tackling-ts/index.html",
+        parent: "exploringjs"
     },
-    "exploringjs/nodejs-shell-scripting":{
-        label:"Shell scripting with Node.js",
-        href:"https://exploringjs.com/nodejs-shell-scripting/index.html"
+    "exploringjs/nodejs-shell-scripting": {
+        label: "Shell scripting with Node.js",
+        href: "https://exploringjs.com/nodejs-shell-scripting/index.html",
+        parent: "exploringjs"
     },
-    "exploringjs/es6":{
-        label:"Exploring ES6",
-        href:"https://exploringjs.com/es6.html"
+    "exploringjs/es6": {
+        label: "Exploring ES6",
+        href: "https://exploringjs.com/es6.html",
+        parent: "exploringjs"
     },
-    "exploringjs/es5":{
-        label:"Speaking JavaScript: An In-Depth Guide for Programmers",
-        href:"https://exploringjs.com/es5/index.html"
+    "exploringjs/es5": {
+        label: "Speaking JavaScript: An In-Depth Guide for Programmers",
+        href: "https://exploringjs.com/es5/index.html",
+        parent: "exploringjs"
     },
-    "dune":{
-        label:"Dune",
-        href:"https://dune.build/"
+    "dune": {
+        label: "Dune",
+        href: "https://dune.build/",
+        parent: "ocaml"
     },
-    "opam":{
-        label:"OPAM",
-        href:"https://opam.ocaml.org/"
+    "opam": {
+        label: "OPAM",
+        href: "https://opam.ocaml.org/",
+        parent: "ocaml"
     },
-    "go":{
-        label:"Go",
-        href:"https://go.dev/"
+    "go": {
+        label: "Go",
+        href: "https://go.dev/"
     },
-    "ruby":{
-        label:"Ruby",
-        href:"https://www.ruby-lang.org/en/"
+    "ruby": {
+        label: "Ruby",
+        href: "https://www.ruby-lang.org/en/"
     },
-    "python":{
-        label:"Python",
-        href:"https://www.python.org/"
+    "python": {
+        label: "Python",
+        href: "https://www.python.org/"
     },
-    "activemq":{
-        label:"ActiveMQ",
-        href:"https://activemq.apache.org/"
+    "activemq": {
+        label: "ActiveMQ",
+        href: "https://activemq.apache.org/"
     },
-    "camel":{
-        label:"Apache Camel",
-        href:"https://camel.apache.org/"
+    "camel": {
+        label: "Apache Camel",
+        href: "https://camel.apache.org/"
     },
-    "cxf":{
-        label:"Apache CXF",
-        href:"https://cxf.apache.org/"
+    "cxf": {
+        label: "Apache CXF",
+        href: "https://cxf.apache.org/"
     },
-    "karaf":{
-        label:"Apache Karaf",
-        href:"https://karaf.apache.org/"
+    "karaf": {
+        label: "Apache Karaf",
+        href: "https://karaf.apache.org/"
     },
-    "mina":{
-        label:"Apache Mina",
-        href:"https://mina.apache.org/"
+    "mina": {
+        label: "Apache Mina",
+        href: "https://mina.apache.org/"
     },
-    "activiti":{
-        label:"Activiti",
-        href:"https://www.activiti.org/"
+    "activiti": {
+        label: "Activiti",
+        href: "https://www.activiti.org/"
     },
-    "openjpa":{
-        label:"Apache OpenJPA",
-        href:"https://openjpa.apache.org/"
+    "openjpa": {
+        label: "Apache OpenJPA",
+        href: "https://openjpa.apache.org/"
     },
-    "aries":{
-        label:"Apache Aries",
-        href:"https://aries.apache.org/"
+    "aries": {
+        label: "Apache Aries",
+        href: "https://aries.apache.org/"
+    },
+    "ecmascript": {
+        label: "ECMAScript",
+        "href": "https://ecma-international.org/publications-and-standards/standards/ecma-262/"
     }
 };
