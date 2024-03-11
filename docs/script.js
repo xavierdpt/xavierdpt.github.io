@@ -29,13 +29,10 @@ function rn(key) {
 }
 
 function r0() {
-    const lis = [];
-    for (const key of roots) {
+    return Vue.h('ul', {}, roots.map(key => {
         const { href, label } = links[key];
-        lis.push(Vue.h('li', {}, [Vue.h("a", { href }, [label])]))
-        //rn(key);
-    }
-    return Vue.h('ul', {}, lis);
+        return Vue.h('li', {}, [Vue.h("a", { href }, [label])]);
+    }));
 }
 
 for (let k in links) {
