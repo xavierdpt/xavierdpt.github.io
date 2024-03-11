@@ -17,11 +17,29 @@ const button = {
                 onClick() {
                     count.value = count.value + 1;
                 }
-            }, ['Click me! (' + count.value+')']);
+            }, ['Click me! (' + count.value + ')']);
         }
     }
 };
 
+const button2 = {
+    setup() {
+        const content = Vue.ref("Nothing");
+        return () => {
+            return Vue.h('div', {}, [
+                Vue.h('button', {
+                    onClick() {
+
+                    }
+                }, ['Fetch!']),
+                content.value
+            ]);
+        }
+    }
+};
+
+
+
 const ul = Vue.h('ul', {}, lis);
-const vnode = Vue.h('div', {}, [Vue.h(button), ul]);
+const vnode = Vue.h('div', {}, [Vue.h(button), Vue.h(button2), ul]);
 Vue.createApp({ render: () => vnode }).mount('#root');
