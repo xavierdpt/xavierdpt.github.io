@@ -303,5 +303,81 @@ window.xdata = {
     "coffeescript": {
         label: "CoffeeScript",
         href: "https://coffeescript.org/"
+    },
+    "learnyouahaskell":{
+        label:"Learn You a Haskell for Great Good!",
+        href:"https://learnyouahaskell.com/"
+    },
+    "eloquent-javascript":{
+        label:"Eloquent JavaScript",
+        href:"https://eloquentjavascript.net/"
+    },
+    "exploringjs":{
+        label:"Exploring JS",
+        href:"https://exploringjs.com/"
+    },
+    "exploringjs/impatient-js":{
+        label:"JavaScript for impatient programmers (ES2022 edition)",
+        href:"https://exploringjs.com/impatient-js/index.html"
+    },
+    "exploringjs/deep-js":{
+        label:"Deep JavaScript: Theory and techniques",
+        href:"https://exploringjs.com/deep-js/index.html"
+    },
+    "exploringjs/tackling-ts":{
+        label:"Tackling TypeScript: Upgrading from JavaScript",
+        href:"https://exploringjs.com/tackling-ts/index.html"
+    },
+    "exploringjs/nodejs-shell-scripting":{
+        label:"",
+        href:"https://exploringjs.com/nodejs-shell-scripting/index.html"
+    },
+    "exploringjs/es6":{
+        label:"Exploring ES6",
+        href:"https://exploringjs.com/es6.html"
+    },
+    "exploringjs/es5":{
+        label:"Speaking JavaScript: An In-Depth Guide for Programmers",
+        href:"https://exploringjs.com/es5/index.html"
+    },
+    "":{
+        label:"",
+        href:""
+    },
+    "":{
+        label:"",
+        href:""
+    },
+    "":{
+        label:"",
+        href:""
+    },
+    "":{
+        label:"",
+        href:""
+    },
+    "":{
+        label:"",
+        href:""
+    },
+    "":{
+        label:"",
+        href:""
+    },
+    "":{
+        label:"",
+        href:""
+    },
+    "":{
+        label:"",
+        href:""
+    },
+    "":{
+        label:"",
+        href:""
+    },
+    "":{
+        label:"",
+        href:""
     }
 };
