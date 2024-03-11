@@ -475,5 +475,13 @@ window.xdata = {
     "nodejs": {
         label: "Node.js",
         href: "https://nodejs.org/"
+    },
+    "unicode-home": {
+        label: "Unicode Home",
+        href: "https://home.unicode.org/"
+    },
+    "unicode-standard": {
+        label: "Unicode Standard",
+        href: "https://www.unicode.org/versions/Unicode15.1.0/"
     }
 };
