@@ -12,7 +12,7 @@ const button = Vue.h('button', {
     onClick() {
         count.value = count.value + 1;
     }
-}, ['Click me! ' + count.value]);
+}, ['Click me! ' + count.value+' world']);
 const ul = Vue.h('ul', {}, lis);
 const vnode = Vue.h('div', {}, [button, ul]);
 Vue.createApp({ render: () => vnode }).mount('#root');
