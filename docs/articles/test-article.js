@@ -1,0 +1,1 @@
+Vue.h('div',{}, ["My Test Article"]);
