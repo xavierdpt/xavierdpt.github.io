@@ -35,10 +35,10 @@ const button2 = {
             return Vue.h('div', {}, [
                 Vue.h('button', {
                     onClick() {
-                        fetchArticle().then(text => content.value = text);
+                        fetchArticle().then(text => content.value = marked.parse(text));
                     }
                 }, ['Fetch!']),
-                Vue.h('div', { domProps: { innerHTML: marked.parse(content.value) } }, [])
+                Vue.h('div', { domProps: { innerHTML: content.value } }, [])
             ]);
         }
     }
