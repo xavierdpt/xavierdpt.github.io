@@ -38,8 +38,6 @@ function r0() {
     return Vue.h('ul', {}, lis);
 }
 
-r0();
-
 for (let k in links) {
     if (k === "") {
         continue;
@@ -48,14 +46,7 @@ for (let k in links) {
     lis.push(Vue.h("li", {}, [Vue.h("a", { href: link.href }, [link.label])]));
 }
 
-function randomize(elements) {
-    for (var i = 0; i < elements.length; ++i) {
-        const tmp = elements[i];
-        const newIndex = Math.floor(Math.random() * elements.length);
-        elements[i] = elements[newIndex];
-        elements[newIndex] = tmp;
-    }
-}
+
 
 
 const button = {
@@ -96,6 +87,17 @@ const button2 = {
 
 
 
-const ul = Vue.h('ul', {}, lis);
+const ul = r0();
 const vnode = Vue.h('div', {}, [Vue.h(button), Vue.h(button2), ul]);
 Vue.createApp({ render: () => vnode }).mount('#root');
+
+
+// Unused
+function randomize(elements) {
+    for (var i = 0; i < elements.length; ++i) {
+        const tmp = elements[i];
+        const newIndex = Math.floor(Math.random() * elements.length);
+        elements[i] = elements[newIndex];
+        elements[newIndex] = tmp;
+    }
+}
