@@ -21,14 +21,14 @@ function rn(key) {
     const childKeys = children[key];
     return childKeys ? [Vue.h('ul', {}, childKeys.map(childKey => {
         const { href, label } = links[childKey];
-        return Vue.h('li', {}, [Vue.h("a", { href }, [label, rn(childKey)])]);
+        return Vue.h('li', {}, [Vue.h("a", { href, target: '_blank' }, [label, rn(childKey)])]);
     }))] : [];
 }
 
 function r0() {
     return Vue.h('ul', {}, roots.map(key => {
         const { href, label } = links[key];
-        return Vue.h('li', {}, [Vue.h("a", { href }, [label, ...rn(key)])]);
+        return Vue.h('li', {}, [Vue.h("a", { href, target: '_blank' }, [label, ...rn(key)])]);
     }));
 }
 
