@@ -1,4 +1,4 @@
-const links ={
+window.xdata ={
     vue:{
         label:"Vue",
         href:"https://vuejs.org/"
