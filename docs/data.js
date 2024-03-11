@@ -329,7 +329,7 @@ window.xdata = {
         href:"https://exploringjs.com/tackling-ts/index.html"
     },
     "exploringjs/nodejs-shell-scripting":{
-        label:"",
+        label:"Shell scripting with Node.js",
         href:"https://exploringjs.com/nodejs-shell-scripting/index.html"
     },
     "exploringjs/es6":{
