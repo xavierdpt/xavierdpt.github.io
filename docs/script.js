@@ -22,6 +22,12 @@ const button = {
     }
 };
 
+async function fetchArticle() {
+    const response = await fetch("articles/test-article.md");
+    const text = await response.text();
+    return text;
+}
+
 const button2 = {
     setup() {
         const content = Vue.ref("Nothing");
@@ -29,7 +35,7 @@ const button2 = {
             return Vue.h('div', {}, [
                 Vue.h('button', {
                     onClick() {
-
+                        fetchArticle.then(text => content.value = text);
                     }
                 }, ['Fetch!']),
                 content.value

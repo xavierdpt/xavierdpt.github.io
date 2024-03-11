@@ -214,5 +214,9 @@ window.xdata ={
     "webrtc":{
         label:"WebRTC",
         href:"https://webrtc.org/"
+    },
+    "javascript.info": {
+        label:"The Modern JavaScript Tutorial",
+        href:"https://javascript.info/"
     }
 };
