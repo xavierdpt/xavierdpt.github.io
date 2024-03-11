@@ -49,7 +49,8 @@ window.xdata = {
     },
     "baeldung": {
         label: "Baeldung",
-        href: "https://www.baeldung.com/"
+        href: "https://www.baeldung.com/",
+        parent: "java"
     },
     "redux-saga": {
         label: "Redux-Saga",
