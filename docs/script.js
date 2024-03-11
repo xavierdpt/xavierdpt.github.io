@@ -38,7 +38,7 @@ function r0() {
     }
 }
 
-
+r0();
 
 for (let k in links) {
     if (k === "") {
