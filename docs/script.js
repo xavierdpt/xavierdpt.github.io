@@ -1,6 +1,25 @@
 const links = window.xdata;
 
 const lis = [];
+
+// Compute the children structures
+const roots = [];
+const children = {};
+for (let key in links) {
+    const { label, href, parent } = links[key];
+    if (parent !== undefined) {
+        if (children[parent] === undefined) {
+            chlidren[parent] = [];
+        }
+        children[parent].push(key);
+    } else {
+        roots.push(key);
+    }
+}
+console.log(roots);
+console.log(children);
+
+
 for (let k in links) {
     if (k === "") {
         continue;
@@ -10,14 +29,14 @@ for (let k in links) {
 }
 
 function randomize(elements) {
-    for(var i=0;i<elements;++i) {
+    for (var i = 0; i < elements.length; ++i) {
         const tmp = elements[i];
-        const newIndex = Math.floor(Math.random()*elements.length);
-        elements[i]=elements[newIndex];
-        elements[newIndex]=tmp;
+        const newIndex = Math.floor(Math.random() * elements.length);
+        elements[i] = elements[newIndex];
+        elements[newIndex] = tmp;
     }
 }
-randomize(lis);
+
 
 const button = {
     setup() {
