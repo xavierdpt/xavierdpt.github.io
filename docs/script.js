@@ -16,22 +16,19 @@ for (let key in links) {
         roots.push(key);
     }
 }
-console.log(roots);
-console.log(children);
 
 function rn(key) {
     const childKeys = children[key];
-    if (childKeys !== undefined) {
-        for (const childKey of childKeys) {
-            rn(childKey);
-        }
-    }
+    return childKeys ? [Vue.h('ul', {}, childKeys.map(childKey => {
+        const { href, label } = links[childKey];
+        return Vue.h('li', {}, [Vue.h("a", { href }, [label, rn(childKey)])]);
+    }))] : [];
 }
 
 function r0() {
     return Vue.h('ul', {}, roots.map(key => {
         const { href, label } = links[key];
-        return Vue.h('li', {}, [Vue.h("a", { href }, [label])]);
+        return Vue.h('li', {}, [Vue.h("a", { href }, [label, ...rn(key)])]);
     }));
 }
 
