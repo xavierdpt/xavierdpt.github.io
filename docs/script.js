@@ -9,7 +9,7 @@ for (let key in links) {
     const { label, href, parent } = links[key];
     if (parent !== undefined) {
         if (children[parent] === undefined) {
-            chlidren[parent] = [];
+            children[parent] = [];
         }
         children[parent].push(key);
     } else {
