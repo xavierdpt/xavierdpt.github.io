@@ -9,6 +9,16 @@ for (let k in links) {
     lis.push(Vue.h("li", {}, [Vue.h("a", { href: link.href }, [link.label])]));
 }
 
+function randomize(elements) {
+    for(var i=0;i<elements;++i) {
+        const tmp = elements[i];
+        const newIndex = Math.floor(Math.random()*elements.length);
+        elements[i]=elements[newIndex];
+        elements[newIndex]=tmp;
+    }
+}
+randomize(lis);
+
 const button = {
     setup() {
         const count = Vue.ref(1);
