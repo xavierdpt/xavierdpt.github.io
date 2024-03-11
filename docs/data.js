@@ -34,7 +34,8 @@ window.xdata = {
     },
     "java-spec": {
         label: "Java Language and Virtual Machine Specifications",
-        href: "https://docs.oracle.com/javase/specs/"
+        href: "https://docs.oracle.com/javase/specs/",
+        parent: "java"
     },
     "gimple": {
         label: "GIMPLE",
@@ -78,17 +79,17 @@ window.xdata = {
     "narayana": {
         label: "Narayana",
         href: "https://www.narayana.io/",
-        parent:"java"
+        parent: "java"
     },
     "undertow": {
         label: "Undertow",
         href: "https://undertow.io/",
-        parent:"java"
+        parent: "java"
     },
     "servicemix": {
         label: "Apache ServiceMix",
         href: "https://servicemix.apache.org/",
-        parent:"java"
+        parent: "java"
     },
     "modelio": {
         label: "Modelio",
@@ -97,32 +98,32 @@ window.xdata = {
     "openjdk": {
         label: "OpenJDK",
         href: "https://openjdk.org/",
-        parent:"java"
+        parent: "java"
     },
     "caffeine": {
         label: "Caffeine",
         href: "https://github.com/ben-manes/caffeine",
-        parent:"java"
+        parent: "java"
     },
     "vertx": {
         label: "Vert.x",
         href: "https://vertx.io/",
-        parent:"java"
+        parent: "java"
     },
     "spark": {
         label: "Apache Spark",
         href: "https://spark.apache.org/",
-        parent:"java"
+        parent: "java"
     },
     "spring-projects": {
         label: "Spring Projects",
         href: "https://spring.io/projects",
-        parent:"java"
+        parent: "java"
     },
     "jakarta-ee": {
         label: "Jakarta EE",
         href: "https://jakarta.ee/specifications/",
-        parent:"java"
+        parent: "java"
     },
     "zig": {
         label: "Zig",
@@ -147,12 +148,12 @@ window.xdata = {
     "groovy": {
         label: "Groovy",
         href: "https://groovy-lang.org/",
-        parent:"java"
+        parent: "java"
     },
     "kotlin": {
         label: "Kotlin",
         href: "https://kotlinlang.org/",
-        parent:"java"
+        parent: "java"
     },
     "idea": {
         label: "IntelliJ IDEA",
@@ -161,7 +162,7 @@ window.xdata = {
     "scala": {
         label: "Scala",
         href: "https://www.scala-lang.org/",
-        parent:"java"
+        parent: "java"
     },
     "mathjax": {
         label: "MathJax",
@@ -232,12 +233,12 @@ window.xdata = {
     "maven": {
         label: "Maven",
         href: "https://maven.apache.org/",
-        parent:"java"
+        parent: "java"
     },
     "gradle": {
         label: "Gradle",
         href: "https://gradle.org/",
-        parent:"java"
+        parent: "java"
     },
     "jest": {
         label: "Jest",
@@ -420,22 +421,22 @@ window.xdata = {
     "activemq": {
         label: "ActiveMQ",
         href: "https://activemq.apache.org/",
-        parent:"java"
+        parent: "java"
     },
     "camel": {
         label: "Apache Camel",
         href: "https://camel.apache.org/",
-        parent:"java"
+        parent: "java"
     },
     "cxf": {
         label: "Apache CXF",
         href: "https://cxf.apache.org/",
-        parent:"java"
+        parent: "java"
     },
     "karaf": {
         label: "Apache Karaf",
         href: "https://karaf.apache.org/",
-        parent:"java"
+        parent: "java"
     },
     "mina": {
         label: "Apache Mina",
@@ -448,7 +449,7 @@ window.xdata = {
     "openjpa": {
         label: "Apache OpenJPA",
         href: "https://openjpa.apache.org/",
-        parent:"java"
+        parent: "java"
     },
     "aries": {
         label: "Apache Aries",
@@ -462,8 +463,8 @@ window.xdata = {
         label: "GCC",
         href: "https://gcc.gnu.org/"
     },
-    "java":{
-        label:"Java",
-        href:"https://docs.oracle.com/en/java/javase/index.html"
+    "java": {
+        label: "Java",
+        href: "https://docs.oracle.com/en/java/javase/index.html"
     }
 };
