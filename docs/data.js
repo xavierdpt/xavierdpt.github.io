@@ -360,24 +360,36 @@ window.xdata = {
         label:"Python",
         href:"https://www.python.org/"
     },
-    "":{
-        label:"",
-        href:""
+    "activemq":{
+        label:"ActiveMQ",
+        href:"https://activemq.apache.org/"
     },
-    "":{
-        label:"",
-        href:""
+    "camel":{
+        label:"Apache Camel",
+        href:"https://camel.apache.org/"
     },
-    "":{
-        label:"",
-        href:""
+    "cxf":{
+        label:"Apache CXF",
+        href:"https://cxf.apache.org/"
     },
-    "":{
-        label:"",
-        href:""
+    "karaf":{
+        label:"Apache Karaf",
+        href:"https://karaf.apache.org/"
     },
-    "":{
-        label:"",
-        href:""
+    "mina":{
+        label:"Apache Mina",
+        href:"https://mina.apache.org/"
+    },
+    "activiti":{
+        label:"Activiti",
+        href:"https://www.activiti.org/"
+    },
+    "openjpa":{
+        label:"Apache OpenJPA",
+        href:"https://openjpa.apache.org/"
+    },
+    "aries":{
+        label:"Apache Aries",
+        href:"https://aries.apache.org/"
     }
 };
