@@ -39,7 +39,7 @@ const button2 = {
                         console.log(content.value);
                     }
                 }, ['Fetch!']),
-                Vue.h('div', { domProps: { innerHTML: content.value } }, [])
+                Vue.h('div', { innerHTML: content.value }, [])
             ]);
         }
     }
