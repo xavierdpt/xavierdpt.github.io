@@ -1,8 +1,5 @@
 const links = window.xdata;
 
-const lis = [];
-
-// Compute the children structures
 const roots = [];
 const children = {};
 for (let key in links) {
@@ -17,11 +14,24 @@ for (let key in links) {
     }
 }
 
+const expandButton = {
+    setup() {
+        return () => {
+            return Vue.h("span", {}, ["+"]);
+        }
+    }
+}
+
 function rn(key) {
     const childKeys = children[key];
     return childKeys ? [Vue.h('ul', {}, childKeys.map(childKey => {
         const { href, label } = links[childKey];
-        return Vue.h('li', {}, [Vue.h("a", { href, target: '_blank' }, [label, rn(childKey)])]);
+        const hasChildren = !!children[childKey]
+        return Vue.h('li', {}, [
+            Vue.h("a", { href, target: '_blank' }, [label]),
+            ... (hasChildren ? Vue.h(expandButton) : []),
+            ...rn(childKey)
+        ]);
     }))] : [];
 }
 
@@ -29,20 +39,13 @@ function r0() {
     return Vue.h('ul', {}, roots.map(key => {
         const { href, label } = links[key];
         const hasChildren = !!children[key]
-        return Vue.h('li', {}, [Vue.h("a", { href, target: '_blank' }, [label, ... (hasChildren ? "[+]" : []), ...rn(key)])]);
+        return Vue.h('li', {}, [
+            Vue.h("a", { href, target: '_blank' }, [label]),
+            ... (hasChildren ? Vue.h(expandButton) : []),
+            ...rn(key)
+        ]);
     }));
 }
-
-for (let k in links) {
-    if (k === "") {
-        continue;
-    }
-    const link = links[k];
-    lis.push(Vue.h("li", {}, [Vue.h("a", { href: link.href }, [link.label])]));
-}
-
-
-
 
 const button = {
     setup() {
