@@ -35,7 +35,7 @@ const button2 = {
             return Vue.h('div', {}, [
                 Vue.h('button', {
                     onClick() {
-                        fetchArticle.then(text => content.value = text);
+                        fetchArticle().then(text => content.value = text);
                     }
                 }, ['Fetch!']),
                 content.value
