@@ -340,25 +340,25 @@ window.xdata = {
         label:"Speaking JavaScript: An In-Depth Guide for Programmers",
         href:"https://exploringjs.com/es5/index.html"
     },
-    "":{
-        label:"",
-        href:""
+    "dune":{
+        label:"Dune",
+        href:"https://dune.build/"
     },
-    "":{
-        label:"",
-        href:""
+    "opam":{
+        label:"OPAM",
+        href:"https://opam.ocaml.org/"
     },
-    "":{
-        label:"",
-        href:""
+    "go":{
+        label:"Go",
+        href:"https://go.dev/"
     },
-    "":{
-        label:"",
-        href:""
+    "ruby":{
+        label:"Ruby",
+        href:"https://www.ruby-lang.org/en/"
     },
-    "":{
-        label:"",
-        href:""
+    "python":{
+        label:"Python",
+        href:"https://www.python.org/"
     },
     "":{
         label:"",
