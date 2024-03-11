@@ -2,7 +2,7 @@ window.xdata = {
     vue: {
         label: "Vue",
         href: "https://vuejs.org/",
-        parent:"ecmascript"
+        parent: "ecmascript"
     },
     "whatwg-specs": {
         label: "WHATWG Standards",
@@ -11,7 +11,7 @@ window.xdata = {
     "echarts": {
         label: "Apache ECharts",
         href: "https://echarts.apache.org/",
-        parent:"ecmascript",
+        parent: "ecmascript",
         articles: {
             "simple-line": {
                 title: "Simple Line Graph"
@@ -21,12 +21,12 @@ window.xdata = {
     "modernizr": {
         label: "Modernizr",
         href: "https://modernizr.com/",
-        parent:"ecmascript"
+        parent: "ecmascript"
     },
     "preact": {
         label: "Preact",
         href: "https://preactjs.com/",
-        parent:"ecmascript"
+        parent: "ecmascript"
     },
     "webassembly": {
         label: "WebAssembly",
@@ -38,11 +38,13 @@ window.xdata = {
     },
     "gimple": {
         label: "GIMPLE",
-        href: "https://gcc.gnu.org/onlinedocs/gccint/GIMPLE.html"
+        href: "https://gcc.gnu.org/onlinedocs/gccint/GIMPLE.html",
+        parent: "gcc"
     },
     "rtl": {
         label: "RTL",
-        href: "https://gcc.gnu.org/onlinedocs/gccint/RTL.html"
+        href: "https://gcc.gnu.org/onlinedocs/gccint/RTL.html",
+        parent: "gcc"
     },
     "baeldung": {
         label: "Baeldung",
@@ -51,39 +53,42 @@ window.xdata = {
     "redux-saga": {
         label: "Redux-Saga",
         href: "https://redux-saga.js.org/",
-        parent:"ecmascript"
+        parent: "ecmascript"
     },
     "redux": {
         label: "Redux",
         href: "https://redux.js.org/",
-        parent:"ecmascript"
+        parent: "ecmascript"
     },
     "three.js": {
         label: "three.js",
         href: "https://threejs.org/",
-        parent:"ecmascript"
+        parent: "ecmascript"
     },
     "babylon.js": {
         label: "Babylon.js",
         href: "https://www.babylonjs.com/",
-        parent:"ecmascript"
+        parent: "ecmascript"
     },
     "p5.js": {
         label: "p5.js",
         href: "https://p5js.org/",
-        parent:"ecmascript"
+        parent: "ecmascript"
     },
     "narayana": {
         label: "Narayana",
-        href: "https://www.narayana.io/"
+        href: "https://www.narayana.io/",
+        parent:"java"
     },
     "undertow": {
         label: "Undertow",
-        href: "https://undertow.io/"
+        href: "https://undertow.io/",
+        parent:"java"
     },
     "servicemix": {
         label: "Apache ServiceMix",
-        href: "https://servicemix.apache.org/"
+        href: "https://servicemix.apache.org/",
+        parent:"java"
     },
     "modelio": {
         label: "Modelio",
@@ -91,27 +96,33 @@ window.xdata = {
     },
     "openjdk": {
         label: "OpenJDK",
-        href: "https://openjdk.org/"
+        href: "https://openjdk.org/",
+        parent:"java"
     },
     "caffeine": {
         label: "Caffeine",
-        href: "https://github.com/ben-manes/caffeine"
+        href: "https://github.com/ben-manes/caffeine",
+        parent:"java"
     },
     "vertx": {
         label: "Vert.x",
-        href: "https://vertx.io/"
+        href: "https://vertx.io/",
+        parent:"java"
     },
     "spark": {
         label: "Apache Spark",
-        href: "https://spark.apache.org/"
+        href: "https://spark.apache.org/",
+        parent:"java"
     },
     "spring-projects": {
         label: "Spring Projects",
-        href: "https://spring.io/projects"
+        href: "https://spring.io/projects",
+        parent:"java"
     },
     "jakarta-ee": {
         label: "Jakarta EE",
-        href: "https://jakarta.ee/specifications/"
+        href: "https://jakarta.ee/specifications/",
+        parent:"java"
     },
     "zig": {
         label: "Zig",
@@ -135,11 +146,13 @@ window.xdata = {
     },
     "groovy": {
         label: "Groovy",
-        href: "https://groovy-lang.org/"
+        href: "https://groovy-lang.org/",
+        parent:"java"
     },
     "kotlin": {
         label: "Kotlin",
-        href: "https://kotlinlang.org/"
+        href: "https://kotlinlang.org/",
+        parent:"java"
     },
     "idea": {
         label: "IntelliJ IDEA",
@@ -147,17 +160,18 @@ window.xdata = {
     },
     "scala": {
         label: "Scala",
-        href: "https://www.scala-lang.org/"
+        href: "https://www.scala-lang.org/",
+        parent:"java"
     },
     "mathjax": {
         label: "MathJax",
         href: "https://www.mathjax.org/",
-        parent:"ecmascript"
+        parent: "ecmascript"
     },
     "marked": {
         label: "Marked",
         href: "https://marked.js.org/",
-        parent:"ecmascript"
+        parent: "ecmascript"
     },
     "tcp": {
         label: "TCP",
@@ -217,16 +231,18 @@ window.xdata = {
     },
     "maven": {
         label: "Maven",
-        href: "https://maven.apache.org/"
+        href: "https://maven.apache.org/",
+        parent:"java"
     },
     "gradle": {
         label: "Gradle",
-        href: "https://gradle.org/"
+        href: "https://gradle.org/",
+        parent:"java"
     },
     "jest": {
         label: "Jest",
         href: "https://jestjs.io/",
-        parent:"ecmascript"
+        parent: "ecmascript"
     },
     "webrtc": {
         label: "WebRTC",
@@ -235,7 +251,7 @@ window.xdata = {
     "javascript.info": {
         label: "The Modern JavaScript Tutorial",
         href: "https://javascript.info/",
-        parent:"ecmascript"
+        parent: "ecmascript"
     },
     "craftinginterpreters.com": {
         label: "Crafting Interpreters",
@@ -244,96 +260,96 @@ window.xdata = {
     "vue-template-explorer": {
         label: "Vue 3 Template Explorer",
         href: "https://template-explorer.vuejs.org/",
-        parent:"ecmascript"
+        parent: "vue"
     },
     "javascript-proxy": {
         label: "JavaScript Proxy",
         href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy",
-        parent:"ecmascript"
+        parent: "ecmascript"
     },
     "svelte": {
         label: "Svelte",
         href: "https://svelte.dev/",
-        parent:"ecmascript"
+        parent: "ecmascript"
     },
     "immutable": {
         label: "Immutable",
         href: "https://immutable-js.com/",
-        parent:"ecmascript"
+        parent: "ecmascript"
     },
     "immer": {
         label: "Immer",
-        href: "https://immerjs.github.io/immer/"        
+        href: "https://immerjs.github.io/immer/"
     },
     "vue-play": {
         label: "Vue SFC Playground",
         href: "https://play.vuejs.org/",
-        parent:"ecmascript"
+        parent: "vue"
     },
     "xstate": {
         label: "XState",
         href: "https://xstate.js.org/",
-        parent:"ecmascript"
+        parent: "ecmascript"
     },
     "rxjs": {
         label: "RxJS",
         href: "https://rxjs.dev/",
-        parent:"ecmascript"
+        parent: "ecmascript"
     },
     "vueuse": {
         label: "VueUse",
         href: "https://vueuse.org/",
-        parent:"ecmascript"
+        parent: "vue"
     },
     "solidjs": {
         label: "SolidJS",
         href: "https://www.solidjs.com/",
-        parent:"ecmascript"
+        parent: "ecmascript"
     },
     "angular": {
         label: "Angular",
         href: "https://angular.io/",
-        parent:"ecmascript"
+        parent: "ecmascript"
     },
     "qwik": {
         label: "Qwik",
         href: "https://qwik.dev/",
-        parent:"ecmascript"
+        parent: "ecmascript"
     },
     "knockout": {
         label: "Knockout",
         href: "https://knockoutjs.com/",
-        parent:"ecmascript"
+        parent: "ecmascript"
     },
     "meteor": {
         label: "Meteor",
         href: "https://www.meteor.com/",
-        parent:"ecmascript"
+        parent: "ecmascript"
     },
     "mobx": {
         label: "MobX",
         href: "https://mobx.js.org/README.html",
-        parent:"ecmascript"
+        parent: "ecmascript"
     },
     "react": {
         label: "React",
         href: "https://react.dev/",
-        parent:"ecmascript"
+        parent: "ecmascript"
     },
     "typescript": {
         label: "TypeScript",
         href: "https://www.typescriptlang.org/",
-        parent:"ecmascript"
+        parent: "ecmascript"
     },
     "babel": {
         label: "Babel",
         href: "https://babeljs.io/",
-        parent:"ecmascript"
+        parent: "ecmascript"
     },
     "coffeescript": {
         label: "CoffeeScript",
         href: "https://coffeescript.org/",
-        parent:"ecmascript"
+        parent: "ecmascript"
     },
     "learnyouahaskell": {
         label: "Learn You a Haskell for Great Good!",
@@ -342,12 +358,12 @@ window.xdata = {
     "eloquent-javascript": {
         label: "Eloquent JavaScript",
         href: "https://eloquentjavascript.net/",
-        parent:"ecmascript"
+        parent: "ecmascript"
     },
     "exploringjs": {
         label: "Exploring JS",
         href: "https://exploringjs.com/",
-        parent:"ecmascript"
+        parent: "ecmascript"
     },
     "exploringjs/impatient-js": {
         label: "JavaScript for impatient programmers (ES2022 edition)",
@@ -403,19 +419,23 @@ window.xdata = {
     },
     "activemq": {
         label: "ActiveMQ",
-        href: "https://activemq.apache.org/"
+        href: "https://activemq.apache.org/",
+        parent:"java"
     },
     "camel": {
         label: "Apache Camel",
-        href: "https://camel.apache.org/"
+        href: "https://camel.apache.org/",
+        parent:"java"
     },
     "cxf": {
         label: "Apache CXF",
-        href: "https://cxf.apache.org/"
+        href: "https://cxf.apache.org/",
+        parent:"java"
     },
     "karaf": {
         label: "Apache Karaf",
-        href: "https://karaf.apache.org/"
+        href: "https://karaf.apache.org/",
+        parent:"java"
     },
     "mina": {
         label: "Apache Mina",
@@ -427,7 +447,8 @@ window.xdata = {
     },
     "openjpa": {
         label: "Apache OpenJPA",
-        href: "https://openjpa.apache.org/"
+        href: "https://openjpa.apache.org/",
+        parent:"java"
     },
     "aries": {
         label: "Apache Aries",
@@ -435,6 +456,14 @@ window.xdata = {
     },
     "ecmascript": {
         label: "ECMAScript",
-        "href": "https://ecma-international.org/publications-and-standards/standards/ecma-262/"
+        href: "https://ecma-international.org/publications-and-standards/standards/ecma-262/"
+    },
+    "gcc": {
+        label: "GCC",
+        href: "https://gcc.gnu.org/"
+    },
+    "java":{
+        label:"Java",
+        href:"https://docs.oracle.com/en/java/javase/index.html"
     }
 };
