@@ -17,7 +17,7 @@ const button = {
                 onClick() {
                     count.value = count.value + 1;
                 }
-            }, ['Click me! ' + count.value + ' world']);
+            }, ['Click me! ' + count.value]);
         }
     }
 };
