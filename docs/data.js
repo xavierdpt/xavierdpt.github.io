@@ -467,5 +467,9 @@ window.xdata = {
     "java": {
         label: "Java",
         href: "https://docs.oracle.com/en/java/javase/index.html"
+    },
+    "visual-studio-code": {
+        label: "Visual Studio Code",
+        href: "https://code.visualstudio.com/"
     }
 };
