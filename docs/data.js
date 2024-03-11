@@ -218,5 +218,9 @@ window.xdata ={
     "javascript.info": {
         label:"The Modern JavaScript Tutorial",
         href:"https://javascript.info/"
+    },
+    "craftinginterpreters.com":{
+        label:"Crafting Interpreters",
+        href:"https://craftinginterpreters.com/"
     }
 };
