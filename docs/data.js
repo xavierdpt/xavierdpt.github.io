@@ -9,7 +9,12 @@ window.xdata = {
     },
     "echarts": {
         label: "Apache ECharts",
-        href: "https://echarts.apache.org/"
+        href: "https://echarts.apache.org/",
+        articles: {
+            "simple-line": {
+                title: "Simple Line Graph"
+            }
+        }
     },
     "modernizr": {
         label: "Modernizr",
