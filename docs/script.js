@@ -23,19 +23,19 @@ function rn(key) {
     const childKeys = children[key];
     if (childKeys !== undefined) {
         for (const childKey of childKeys) {
-            console.log(childKey);
             rn(childKey);
         }
-    } else {
-        console.log("Found leaf: " + key);
     }
 }
 
 function r0() {
+    const lis = [];
     for (const key of roots) {
-        console.log(key);
-        rn(key);
+        const { href, label } = links[key];
+        lis.push(Vue.h('li', {}, [Vue.h("a", { href }, [label])]))
+        //rn(key);
     }
+    return Vue.h('ul', {}, lis);
 }
 
 r0();
