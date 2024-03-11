@@ -29,7 +29,7 @@ function rn(key) {
         const hasChildren = !!children[childKey]
         return Vue.h('li', {}, [
             Vue.h("a", { href, target: '_blank' }, [label]),
-            ... (hasChildren ? Vue.h(expandButton) : []),
+            ... (hasChildren ? [Vue.h(expandButton)] : []),
             ...rn(childKey)
         ]);
     }))] : [];
@@ -41,7 +41,7 @@ function r0() {
         const hasChildren = !!children[key]
         return Vue.h('li', {}, [
             Vue.h("a", { href, target: '_blank' }, [label]),
-            ... (hasChildren ? Vue.h(expandButton) : []),
+            ... (hasChildren ? [Vue.h(expandButton)] : []),
             ...rn(key)
         ]);
     }));
