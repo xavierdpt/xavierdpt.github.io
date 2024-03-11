@@ -28,7 +28,8 @@ function rn(key) {
 function r0() {
     return Vue.h('ul', {}, roots.map(key => {
         const { href, label } = links[key];
-        return Vue.h('li', {}, [Vue.h("a", { href, target: '_blank' }, [label, ...rn(key)])]);
+        const hasChildren = !!children[key]
+        return Vue.h('li', {}, [Vue.h("a", { href, target: '_blank' }, [label, ... (hasChildren ? "[+]" : []), ...rn(key)])]);
     }));
 }
 
