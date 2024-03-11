@@ -471,5 +471,9 @@ window.xdata = {
     "visual-studio-code": {
         label: "Visual Studio Code",
         href: "https://code.visualstudio.com/"
+    },
+    "nodejs": {
+        label: "Node.js",
+        href: "https://nodejs.org/"
     }
 };
