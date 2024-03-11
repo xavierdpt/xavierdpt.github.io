@@ -23,5 +23,5 @@ const button = {
 };
 
 const ul = Vue.h('ul', {}, lis);
-const vnode = Vue.h('div', {}, [button, ul]);
+const vnode = Vue.h('div', {}, [Vue.h(button), ul]);
 Vue.createApp({ render: () => vnode }).mount('#root');
