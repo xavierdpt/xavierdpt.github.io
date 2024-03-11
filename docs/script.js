@@ -19,6 +19,26 @@ for (let key in links) {
 console.log(roots);
 console.log(children);
 
+function rn(key) {
+    const childKeys = children[key];
+    if (childKeys !== undefined) {
+        for (const childKey of childKeys) {
+            console.log(childKey);
+            rn(childKey);
+        }
+    } else {
+        console.log("Found leaf: " + key);
+    }
+}
+
+function r0() {
+    for (const key of roots) {
+        console.log(key);
+        rn(key);
+    }
+}
+
+
 
 for (let k in links) {
     if (k === "") {
