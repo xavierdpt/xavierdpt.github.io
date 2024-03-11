@@ -7,5 +7,7 @@ for (let k in links) {
     const link = links[k];
     lis.push(Vue.h("li", {}, [Vue.h("a", { href: link.href }, [link.label])]));
 }
-const vnode = Vue.h('ul', {}, lis);
+const button = Vue.h('button',{},['Click me!']);
+const ul = Vue.h('ul', {}, lis);
+const vnode = Vue.h('div',{},[button,ul]);
 Vue.createApp({ render: () => vnode }).mount('#root');
