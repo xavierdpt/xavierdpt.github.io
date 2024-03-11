@@ -38,7 +38,7 @@ const button2 = {
                         fetchArticle().then(text => content.value = text);
                     }
                 }, ['Fetch!']),
-                h('div', { domProps: { innerHTML: marked.parse(content.value) } }, [])
+                Vue.h('div', { domProps: { innerHTML: marked.parse(content.value) } }, [])
             ]);
         }
     }
