@@ -496,7 +496,7 @@ window.xdata = {
   },
   "bytebuddy": {
     label: "ByteBuddy",
-    href: "https://bytebuddy.net/",,
+    href: "https://bytebuddy.net/",
     parent:"java"
   },
   "mvnrepository": {
