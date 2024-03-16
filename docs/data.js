@@ -855,13 +855,13 @@ window.xdata = {
     label: "FL Studio",
     href: "https://www.image-line.com/",
   },
-  "": {
-    label: "",
-    href: "",
+  "intellij-sdk": {
+    label: "IntelliJ Platform SDK",
+    href: "https://plugins.jetbrains.com/docs/intellij/welcome.html",
   },
-  "": {
-    label: "",
-    href: "",
+  "windows": {
+    label: "Microsoft Windows",
+    href: "https://learn.microsoft.com/en-us/windows/resources/",
   },
   "": {
     label: "",

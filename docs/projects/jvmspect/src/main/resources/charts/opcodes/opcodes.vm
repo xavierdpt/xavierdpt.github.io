@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%">
+<head>
+    <title>$title</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"
+            integrity="sha512-k37wQcV4v2h6jgYf5IUz1MoSKPpDs630XGSmCaCCOXxy2awgAWKHGZWr9nMyGgk3IOxA1NxdkN8r1JHgkUtMoQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body style="height: 100%; margin: 0">
+<div id="root" style="height: 100%"></div>
+<script>
+    const data = $JSON.toString($dataJson);
+    const dom = document.getElementById("root");
+    const myChart = echarts.init(dom, null, {
+        renderer: "canvas",
+        useDirtyRect: false,
+    });
+    const option = {
+        title: {
+            text: '$title',
+            left: 'leafDepth'
+        },
+        series: [{
+            type: 'treemap', label: {
+                position: "insideTopLeft",
+                formatter: "{b}\n{c}",
+            },
+            breadcrumb: {
+                show: false,
+            }, data: data
+        }]
+    };
+    myChart.setOption(option);
+</script>
+</body>
+</html>

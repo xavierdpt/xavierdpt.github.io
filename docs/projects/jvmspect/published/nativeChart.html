@@ -1,0 +1,7544 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%">
+<head>
+    <title>Native methods OpenJDK 21</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"
+            integrity="sha512-k37wQcV4v2h6jgYf5IUz1MoSKPpDs630XGSmCaCCOXxy2awgAWKHGZWr9nMyGgk3IOxA1NxdkN8r1JHgkUtMoQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body style="height: 100%; margin: 0">
+<div id="root" style="height: 99%;width:98%;margin:auto;"></div>
+<script>
+    const data = [ {
+  "name" : "jdk",
+  "children" : [ {
+    "name" : "internal",
+    "children" : [ {
+      "name" : "reflect",
+      "children" : [ {
+        "name" : "NativeMethodAccessorImpl",
+        "children" : [ {
+          "name" : "invoke0",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "NativeConstructorAccessorImpl",
+        "children" : [ {
+          "name" : "newInstance0",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "ConstantPool",
+        "children" : [ {
+          "name" : "getIntAt0",
+          "value" : 1
+        }, {
+          "name" : "getFieldAt0",
+          "value" : 1
+        }, {
+          "name" : "getUTF8At0",
+          "value" : 1
+        }, {
+          "name" : "getClassAt0",
+          "value" : 1
+        }, {
+          "name" : "getMethodAtIfLoaded0",
+          "value" : 1
+        }, {
+          "name" : "getTagAt0",
+          "value" : 1
+        }, {
+          "name" : "getNameAndTypeRefIndexAt0",
+          "value" : 1
+        }, {
+          "name" : "getFieldAtIfLoaded0",
+          "value" : 1
+        }, {
+          "name" : "getNameAndTypeRefInfoAt0",
+          "value" : 1
+        }, {
+          "name" : "getClassRefIndexAt0",
+          "value" : 1
+        }, {
+          "name" : "getStringAt0",
+          "value" : 1
+        }, {
+          "name" : "getDoubleAt0",
+          "value" : 1
+        }, {
+          "name" : "getMemberRefInfoAt0",
+          "value" : 1
+        }, {
+          "name" : "getMethodAt0",
+          "value" : 1
+        }, {
+          "name" : "getSize0",
+          "value" : 1
+        }, {
+          "name" : "getClassAtIfLoaded0",
+          "value" : 1
+        }, {
+          "name" : "getLongAt0",
+          "value" : 1
+        }, {
+          "name" : "getFloatAt0",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "Reflection",
+        "children" : [ {
+          "name" : "getClassAccessFlags",
+          "value" : 1
+        }, {
+          "name" : "areNestMates",
+          "value" : 1
+        }, {
+          "name" : "getCallerClass",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "DirectConstructorHandleAccessor$NativeAccessor",
+        "children" : [ {
+          "name" : "newInstance0",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "DirectMethodHandleAccessor$NativeAccessor",
+        "children" : [ {
+          "name" : "invoke0",
+          "value" : 1
+        } ]
+      } ]
+    }, {
+      "name" : "agent",
+      "children" : [ {
+        "name" : "FileSystemImpl",
+        "children" : [ {
+          "name" : "isSecuritySupported0",
+          "value" : 1
+        }, {
+          "name" : "init0",
+          "value" : 1
+        }, {
+          "name" : "isAccessUserOnly0",
+          "value" : 1
+        } ]
+      } ]
+    }, {
+      "name" : "util",
+      "children" : [ {
+        "name" : "SystemProps$Raw",
+        "children" : [ {
+          "name" : "platformProperties",
+          "value" : 1
+        }, {
+          "name" : "vmProperties",
+          "value" : 1
+        } ]
+      } ]
+    }, {
+      "name" : "org",
+      "children" : [ {
+        "name" : "jline",
+        "children" : [ {
+          "name" : "terminal",
+          "children" : [ {
+            "name" : "impl",
+            "children" : [ {
+              "name" : "jna",
+              "children" : [ {
+                "name" : "win",
+                "children" : [ {
+                  "name" : "Kernel32Impl",
+                  "children" : [ {
+                    "name" : "GetStdHandle",
+                    "value" : 1
+                  }, {
+                    "name" : "ReadConsoleInput",
+                    "value" : 1
+                  }, {
+                    "name" : "SetConsoleTextAttribute",
+                    "value" : 1
+                  }, {
+                    "name" : "GetConsoleScreenBufferInfo",
+                    "value" : 1
+                  }, {
+                    "name" : "SetConsoleTitle",
+                    "value" : 1
+                  }, {
+                    "name" : "FillConsoleOutputCharacter",
+                    "value" : 1
+                  }, {
+                    "name" : "WriteConsoleW",
+                    "value" : 1
+                  }, {
+                    "name" : "initIDs",
+                    "value" : 1
+                  }, {
+                    "name" : "GetConsoleMode",
+                    "value" : 1
+                  }, {
+                    "name" : "SetConsoleCursorPosition",
+                    "value" : 1
+                  }, {
+                    "name" : "WaitForSingleObject",
+                    "value" : 1
+                  }, {
+                    "name" : "SetConsoleMode",
+                    "value" : 1
+                  }, {
+                    "name" : "FillConsoleOutputAttribute",
+                    "value" : 1
+                  }, {
+                    "name" : "GetConsoleOutputCP",
+                    "value" : 1
+                  }, {
+                    "name" : "ScrollConsoleScreenBuffer",
+                    "value" : 1
+                  } ]
+                } ]
+              } ]
+            } ]
+          } ]
+        } ]
+      } ]
+    }, {
+      "name" : "loader",
+      "children" : [ {
+        "name" : "NativeLibraries",
+        "children" : [ {
+          "name" : "load",
+          "value" : 1
+        }, {
+          "name" : "unload",
+          "value" : 1
+        }, {
+          "name" : "findBuiltinLib",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "RawNativeLibraries",
+        "children" : [ {
+          "name" : "unload0",
+          "value" : 1
+        }, {
+          "name" : "load0",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "NativeLibrary",
+        "children" : [ {
+          "name" : "findEntry0",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "BootLoader",
+        "children" : [ {
+          "name" : "getSystemPackageNames",
+          "value" : 1
+        }, {
+          "name" : "setBootLoaderUnnamedModule0",
+          "value" : 1
+        }, {
+          "name" : "getSystemPackageLocation",
+          "value" : 1
+        } ]
+      } ]
+    }, {
+      "name" : "io",
+      "children" : [ {
+        "name" : "JdkConsoleImpl",
+        "children" : [ {
+          "name" : "echo",
+          "value" : 1
+        } ]
+      } ]
+    }, {
+      "name" : "vm",
+      "children" : [ {
+        "name" : "Continuation",
+        "children" : [ {
+          "name" : "doYield",
+          "value" : 1
+        }, {
+          "name" : "pin",
+          "value" : 1
+        }, {
+          "name" : "isPinned0",
+          "value" : 1
+        }, {
+          "name" : "unpin",
+          "value" : 1
+        }, {
+          "name" : "enterSpecial",
+          "value" : 1
+        }, {
+          "name" : "registerNatives",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "VMSupport",
+        "children" : [ {
+          "name" : "initAgentProperties",
+          "value" : 1
+        }, {
+          "name" : "getVMTemporaryDirectory",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "vector",
+        "children" : [ {
+          "name" : "VectorSupport",
+          "children" : [ {
+            "name" : "registerNatives",
+            "value" : 1
+          }, {
+            "name" : "getMaxLaneCount",
+            "value" : 1
+          } ]
+        } ]
+      }, {
+        "name" : "ForeignLinkerSupport",
+        "children" : [ {
+          "name" : "isSupported0",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "ContinuationSupport",
+        "children" : [ {
+          "name" : "isSupported0",
+          "value" : 1
+        } ]
+      } ]
+    }, {
+      "name" : "perf",
+      "children" : [ {
+        "name" : "Perf",
+        "children" : [ {
+          "name" : "createLong",
+          "value" : 1
+        }, {
+          "name" : "highResFrequency",
+          "value" : 1
+        }, {
+          "name" : "attach0",
+          "value" : 1
+        }, {
+          "name" : "createByteArray",
+          "value" : 1
+        }, {
+          "name" : "highResCounter",
+          "value" : 1
+        }, {
+          "name" : "detach",
+          "value" : 1
+        }, {
+          "name" : "registerNatives",
+          "value" : 1
+        } ]
+      } ]
+    }, {
+      "name" : "jimage",
+      "children" : [ {
+        "name" : "NativeImageBuffer",
+        "children" : [ {
+          "name" : "getNativeMap",
+          "value" : 1
+        } ]
+      } ]
+    }, {
+      "name" : "misc",
+      "children" : [ {
+        "name" : "Signal",
+        "children" : [ {
+          "name" : "handle0",
+          "value" : 1
+        }, {
+          "name" : "findSignal0",
+          "value" : 1
+        }, {
+          "name" : "raise0",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "PreviewFeatures",
+        "children" : [ {
+          "name" : "isPreviewEnabled",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "CDS",
+        "children" : [ {
+          "name" : "defineArchivedModules",
+          "value" : 1
+        }, {
+          "name" : "isSharingEnabled0",
+          "value" : 1
+        }, {
+          "name" : "initializeFromArchive",
+          "value" : 1
+        }, {
+          "name" : "dumpClassList",
+          "value" : 1
+        }, {
+          "name" : "isDumpingClassList0",
+          "value" : 1
+        }, {
+          "name" : "logLambdaFormInvoker",
+          "value" : 1
+        }, {
+          "name" : "dumpDynamicArchive",
+          "value" : 1
+        }, {
+          "name" : "getRandomSeedForDumping",
+          "value" : 1
+        }, {
+          "name" : "isDumpingArchive0",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "VM",
+        "children" : [ {
+          "name" : "getNanoTimeAdjustment",
+          "value" : 1
+        }, {
+          "name" : "getRuntimeArguments",
+          "value" : 1
+        }, {
+          "name" : "getuid",
+          "value" : 1
+        }, {
+          "name" : "getgid",
+          "value" : 1
+        }, {
+          "name" : "initialize",
+          "value" : 1
+        }, {
+          "name" : "geteuid",
+          "value" : 1
+        }, {
+          "name" : "latestUserDefinedLoader0",
+          "value" : 1
+        }, {
+          "name" : "getegid",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "Unsafe",
+        "children" : [ {
+          "name" : "putCharVolatile",
+          "value" : 1
+        }, {
+          "name" : "getByte",
+          "value" : 1
+        }, {
+          "name" : "compareAndSetLong",
+          "value" : 1
+        }, {
+          "name" : "putShortVolatile",
+          "value" : 1
+        }, {
+          "name" : "putBooleanVolatile",
+          "value" : 1
+        }, {
+          "name" : "staticFieldBase0",
+          "value" : 1
+        }, {
+          "name" : "shouldBeInitialized0",
+          "value" : 1
+        }, {
+          "name" : "getDoubleVolatile",
+          "value" : 1
+        }, {
+          "name" : "getLoadAverage0",
+          "value" : 1
+        }, {
+          "name" : "compareAndSetInt",
+          "value" : 1
+        }, {
+          "name" : "getShortVolatile",
+          "value" : 1
+        }, {
+          "name" : "writeback0",
+          "value" : 1
+        }, {
+          "name" : "putBoolean",
+          "value" : 1
+        }, {
+          "name" : "arrayIndexScale0",
+          "value" : 1
+        }, {
+          "name" : "getByteVolatile",
+          "value" : 1
+        }, {
+          "name" : "putIntVolatile",
+          "value" : 1
+        }, {
+          "name" : "reallocateMemory0",
+          "value" : 1
+        }, {
+          "name" : "getCharVolatile",
+          "value" : 1
+        }, {
+          "name" : "putInt",
+          "value" : 1
+        }, {
+          "name" : "putReferenceVolatile",
+          "value" : 1
+        }, {
+          "name" : "defineClass0",
+          "value" : 1
+        }, {
+          "name" : "putReference",
+          "value" : 1
+        }, {
+          "name" : "putFloat",
+          "value" : 1
+        }, {
+          "name" : "getChar",
+          "value" : 1
+        }, {
+          "name" : "getInt",
+          "value" : 1
+        }, {
+          "name" : "freeMemory0",
+          "value" : 1
+        }, {
+          "name" : "compareAndExchangeLong",
+          "value" : 1
+        }, {
+          "name" : "writebackPreSync0",
+          "value" : 1
+        }, {
+          "name" : "getFloatVolatile",
+          "value" : 1
+        }, {
+          "name" : "allocateInstance",
+          "value" : 1
+        }, {
+          "name" : "getBooleanVolatile",
+          "value" : 1
+        }, {
+          "name" : "allocateMemory0",
+          "value" : 1
+        }, {
+          "name" : "getUncompressedObject",
+          "value" : 1
+        }, {
+          "name" : "staticFieldOffset0",
+          "value" : 1
+        }, {
+          "name" : "fullFence",
+          "value" : 1
+        }, {
+          "name" : "putDouble",
+          "value" : 1
+        }, {
+          "name" : "getDouble",
+          "value" : 1
+        }, {
+          "name" : "registerNatives",
+          "value" : 1
+        }, {
+          "name" : "putByteVolatile",
+          "value" : 1
+        }, {
+          "name" : "getFloat",
+          "value" : 1
+        }, {
+          "name" : "putLong",
+          "value" : 1
+        }, {
+          "name" : "copySwapMemory0",
+          "value" : 1
+        }, {
+          "name" : "putByte",
+          "value" : 1
+        }, {
+          "name" : "putDoubleVolatile",
+          "value" : 1
+        }, {
+          "name" : "compareAndSetReference",
+          "value" : 1
+        }, {
+          "name" : "getLongVolatile",
+          "value" : 1
+        }, {
+          "name" : "getBoolean",
+          "value" : 1
+        }, {
+          "name" : "putShort",
+          "value" : 1
+        }, {
+          "name" : "getReference",
+          "value" : 1
+        }, {
+          "name" : "setMemory0",
+          "value" : 1
+        }, {
+          "name" : "park",
+          "value" : 1
+        }, {
+          "name" : "compareAndExchangeInt",
+          "value" : 1
+        }, {
+          "name" : "ensureClassInitialized0",
+          "value" : 1
+        }, {
+          "name" : "getShort",
+          "value" : 1
+        }, {
+          "name" : "compareAndExchangeReference",
+          "value" : 1
+        }, {
+          "name" : "putChar",
+          "value" : 1
+        }, {
+          "name" : "putFloatVolatile",
+          "value" : 1
+        }, {
+          "name" : "unpark",
+          "value" : 1
+        }, {
+          "name" : "throwException",
+          "value" : 1
+        }, {
+          "name" : "putLongVolatile",
+          "value" : 1
+        }, {
+          "name" : "copyMemory0",
+          "value" : 1
+        }, {
+          "name" : "getReferenceVolatile",
+          "value" : 1
+        }, {
+          "name" : "getIntVolatile",
+          "value" : 1
+        }, {
+          "name" : "writebackPostSync0",
+          "value" : 1
+        }, {
+          "name" : "getLong",
+          "value" : 1
+        }, {
+          "name" : "arrayBaseOffset0",
+          "value" : 1
+        }, {
+          "name" : "objectFieldOffset1",
+          "value" : 1
+        }, {
+          "name" : "objectFieldOffset0",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "ScopedMemoryAccess",
+        "children" : [ {
+          "name" : "closeScope0",
+          "value" : 1
+        }, {
+          "name" : "registerNatives",
+          "value" : 1
+        } ]
+      } ]
+    }, {
+      "name" : "foreign",
+      "children" : [ {
+        "name" : "abi",
+        "children" : [ {
+          "name" : "UpcallStubs",
+          "children" : [ {
+            "name" : "registerNatives",
+            "value" : 1
+          }, {
+            "name" : "freeUpcallStub0",
+            "value" : 1
+          } ]
+        }, {
+          "name" : "NativeEntryPoint",
+          "children" : [ {
+            "name" : "makeDowncallStub",
+            "value" : 1
+          }, {
+            "name" : "freeDowncallStub0",
+            "value" : 1
+          }, {
+            "name" : "registerNatives",
+            "value" : 1
+          } ]
+        }, {
+          "name" : "UpcallLinker",
+          "children" : [ {
+            "name" : "makeUpcallStub",
+            "value" : 1
+          }, {
+            "name" : "registerNatives",
+            "value" : 1
+          } ]
+        }, {
+          "name" : "fallback",
+          "children" : [ {
+            "name" : "LibFallback",
+            "children" : [ {
+              "name" : "init",
+              "value" : 1
+            }, {
+              "name" : "ffi_type_uint64",
+              "value" : 1
+            }, {
+              "name" : "ffi_prep_cif",
+              "value" : 1
+            }, {
+              "name" : "ffi_type_void",
+              "value" : 1
+            }, {
+              "name" : "ffi_type_sint8",
+              "value" : 1
+            }, {
+              "name" : "doDowncall",
+              "value" : 1
+            }, {
+              "name" : "freeClosure",
+              "value" : 1
+            }, {
+              "name" : "ffi_type_pointer",
+              "value" : 1
+            }, {
+              "name" : "ffi_prep_cif_var",
+              "value" : 1
+            }, {
+              "name" : "ffi_type_uint8",
+              "value" : 1
+            }, {
+              "name" : "ffi_type_uint16",
+              "value" : 1
+            }, {
+              "name" : "ffi_type_sint16",
+              "value" : 1
+            }, {
+              "name" : "ffi_type_uint32",
+              "value" : 1
+            }, {
+              "name" : "createClosure",
+              "value" : 1
+            }, {
+              "name" : "ffi_type_sint64",
+              "value" : 1
+            }, {
+              "name" : "ffi_get_struct_offsets",
+              "value" : 1
+            }, {
+              "name" : "ffi_type_sint32",
+              "value" : 1
+            }, {
+              "name" : "ffi_type_double",
+              "value" : 1
+            }, {
+              "name" : "ffi_default_abi",
+              "value" : 1
+            }, {
+              "name" : "ffi_type_struct",
+              "value" : 1
+            }, {
+              "name" : "ffi_type_float",
+              "value" : 1
+            }, {
+              "name" : "sizeofCif",
+              "value" : 1
+            } ]
+          } ]
+        } ]
+      } ]
+    } ]
+  }, {
+    "name" : "jfr",
+    "children" : [ {
+      "name" : "internal",
+      "children" : [ {
+        "name" : "JVM",
+        "children" : [ {
+          "name" : "isContainerized",
+          "value" : 1
+        }, {
+          "name" : "addStringConstant",
+          "value" : 1
+        }, {
+          "name" : "setMethodSamplingPeriod",
+          "value" : 1
+        }, {
+          "name" : "counterTime",
+          "value" : 1
+        }, {
+          "name" : "isExcluded",
+          "value" : 1
+        }, {
+          "name" : "commit",
+          "value" : 1
+        }, {
+          "name" : "setThreshold",
+          "value" : 1
+        }, {
+          "name" : "setCutoff",
+          "value" : 1
+        }, {
+          "name" : "getTypeId",
+          "value" : 1
+        }, {
+          "name" : "setThreadBufferSize",
+          "value" : 1
+        }, {
+          "name" : "setMemorySize",
+          "value" : 1
+        }, {
+          "name" : "isRecording",
+          "value" : 1
+        }, {
+          "name" : "isInstrumented",
+          "value" : 1
+        }, {
+          "name" : "subscribeLogLevel",
+          "value" : 1
+        }, {
+          "name" : "setRepositoryLocation",
+          "value" : 1
+        }, {
+          "name" : "getThreadId",
+          "value" : 1
+        }, {
+          "name" : "exclude",
+          "value" : 1
+        }, {
+          "name" : "retransformClasses",
+          "value" : 1
+        }, {
+          "name" : "getEventWriter",
+          "value" : 1
+        }, {
+          "name" : "getAllEventClasses",
+          "value" : 1
+        }, {
+          "name" : "getTicksFrequency",
+          "value" : 1
+        }, {
+          "name" : "setCompressedIntegers",
+          "value" : 1
+        }, {
+          "name" : "getAllowedToDoEventRetransforms",
+          "value" : 1
+        }, {
+          "name" : "setDumpPath",
+          "value" : 1
+        }, {
+          "name" : "getChunkStartNanos",
+          "value" : 1
+        }, {
+          "name" : "logEvent",
+          "value" : 1
+        }, {
+          "name" : "createJFR",
+          "value" : 1
+        }, {
+          "name" : "setEnabled",
+          "value" : 1
+        }, {
+          "name" : "emitOldObjectSamples",
+          "value" : 1
+        }, {
+          "name" : "setForceInstrumentation",
+          "value" : 1
+        }, {
+          "name" : "hostTotalMemory",
+          "value" : 1
+        }, {
+          "name" : "abort",
+          "value" : 1
+        }, {
+          "name" : "shouldRotateDisk",
+          "value" : 1
+        }, {
+          "name" : "isAvailable",
+          "value" : 1
+        }, {
+          "name" : "setGlobalBufferSize",
+          "value" : 1
+        }, {
+          "name" : "getTimeConversionFactor",
+          "value" : 1
+        }, {
+          "name" : "emitEvent",
+          "value" : 1
+        }, {
+          "name" : "log",
+          "value" : 1
+        }, {
+          "name" : "registerNatives",
+          "value" : 1
+        }, {
+          "name" : "setStackTraceEnabled",
+          "value" : 1
+        }, {
+          "name" : "beginRecording",
+          "value" : 1
+        }, {
+          "name" : "setThrottle",
+          "value" : 1
+        }, {
+          "name" : "getConfiguration",
+          "value" : 1
+        }, {
+          "name" : "getClassId",
+          "value" : 1
+        }, {
+          "name" : "flush",
+          "value" : 1
+        }, {
+          "name" : "setStackDepth",
+          "value" : 1
+        }, {
+          "name" : "setGlobalBufferCount",
+          "value" : 1
+        }, {
+          "name" : "destroyJFR",
+          "value" : 1
+        }, {
+          "name" : "setConfiguration",
+          "value" : 1
+        }, {
+          "name" : "getPid",
+          "value" : 1
+        }, {
+          "name" : "setOutput",
+          "value" : 1
+        }, {
+          "name" : "getUnloadedEventClassCount",
+          "value" : 1
+        }, {
+          "name" : "include",
+          "value" : 1
+        }, {
+          "name" : "endRecording",
+          "value" : 1
+        }, {
+          "name" : "getStackTraceId",
+          "value" : 1
+        }, {
+          "name" : "emitDataLoss",
+          "value" : 1
+        }, {
+          "name" : "setFileNotification",
+          "value" : 1
+        }, {
+          "name" : "markChunkFinal",
+          "value" : 1
+        }, {
+          "name" : "getDumpPath",
+          "value" : 1
+        }, {
+          "name" : "uncaughtException",
+          "value" : 1
+        }, {
+          "name" : "newEventWriter",
+          "value" : 1
+        }, {
+          "name" : "storeMetadataDescriptor",
+          "value" : 1
+        } ]
+      } ]
+    } ]
+  }, {
+    "name" : "vm",
+    "children" : [ {
+      "name" : "ci",
+      "children" : [ {
+        "name" : "hotspot",
+        "children" : [ {
+          "name" : "CompilerToVM",
+          "children" : [ {
+            "name" : "getVtableIndexForInterfaceMethod",
+            "value" : 1
+          }, {
+            "name" : "methodIsIgnoredBySecurityStackWalk",
+            "value" : 1
+          }, {
+            "name" : "getArrayType",
+            "value" : 1
+          }, {
+            "name" : "asReflectionExecutable",
+            "value" : 1
+          }, {
+            "name" : "writeDebugOutput",
+            "value" : 1
+          }, {
+            "name" : "readFieldValue",
+            "value" : 1
+          }, {
+            "name" : "releaseClearedOopHandles",
+            "value" : 1
+          }, {
+            "name" : "executeHotSpotNmethod",
+            "value" : 1
+          }, {
+            "name" : "getResolvedJavaMethod",
+            "value" : 1
+          }, {
+            "name" : "isInstance",
+            "value" : 1
+          }, {
+            "name" : "updateHotSpotNmethod",
+            "value" : 1
+          }, {
+            "name" : "allocateCompileId",
+            "value" : 1
+          }, {
+            "name" : "lookupJClass",
+            "value" : 1
+          }, {
+            "name" : "getLocalVariableTableStart",
+            "value" : 1
+          }, {
+            "name" : "registerNativeMethods",
+            "value" : 1
+          }, {
+            "name" : "asString",
+            "value" : 1
+          }, {
+            "name" : "getCode",
+            "value" : 1
+          }, {
+            "name" : "iterateFrames",
+            "value" : 1
+          }, {
+            "name" : "callSystemExit",
+            "value" : 1
+          }, {
+            "name" : "getThreadLocalLong",
+            "value" : 1
+          }, {
+            "name" : "addFailedSpeculation",
+            "value" : 1
+          }, {
+            "name" : "unboxPrimitive",
+            "value" : 1
+          }, {
+            "name" : "resolveTypeInPool",
+            "value" : 1
+          }, {
+            "name" : "lookupKlassRefIndexInPool",
+            "value" : 1
+          }, {
+            "name" : "getInstallCodeFlags",
+            "value" : 1
+          }, {
+            "name" : "getFailedSpeculations",
+            "value" : 1
+          }, {
+            "name" : "getArrayLength",
+            "value" : 1
+          }, {
+            "name" : "setNotInlinableOrCompilable",
+            "value" : 1
+          }, {
+            "name" : "releaseFailedSpeculations",
+            "value" : 1
+          }, {
+            "name" : "materializeVirtualObjects",
+            "value" : 1
+          }, {
+            "name" : "getLineNumberTable",
+            "value" : 1
+          }, {
+            "name" : "getFlagValue",
+            "value" : 1
+          }, {
+            "name" : "getComponentType",
+            "value" : 1
+          }, {
+            "name" : "lookupKlassInPool",
+            "value" : 1
+          }, {
+            "name" : "resolveMethod",
+            "value" : 1
+          }, {
+            "name" : "getUncachedStringInPool",
+            "value" : 1
+          }, {
+            "name" : "getDeclaredConstructors",
+            "value" : 1
+          }, {
+            "name" : "getCurrentJavaThread",
+            "value" : 1
+          }, {
+            "name" : "lookupClass",
+            "value" : 1
+          }, {
+            "name" : "registerNatives",
+            "value" : 1
+          }, {
+            "name" : "isAssignableFrom",
+            "value" : 1
+          }, {
+            "name" : "getStackTraceElement",
+            "value" : 1
+          }, {
+            "name" : "lookupMethodInPool",
+            "value" : 1
+          }, {
+            "name" : "getDeclaredMethods",
+            "value" : 1
+          }, {
+            "name" : "methodDataExceptionSeen",
+            "value" : 1
+          }, {
+            "name" : "getEncodedExecutableAnnotationData",
+            "value" : 1
+          }, {
+            "name" : "resolveInvokeHandleInPool",
+            "value" : 1
+          }, {
+            "name" : "readStaticFieldValue",
+            "value" : 1
+          }, {
+            "name" : "getFailedSpeculationsAddress",
+            "value" : 1
+          }, {
+            "name" : "getExceptionTableLength",
+            "value" : 1
+          }, {
+            "name" : "getImplementor",
+            "value" : 1
+          }, {
+            "name" : "resetCompilationStatistics",
+            "value" : 1
+          }, {
+            "name" : "isMature",
+            "value" : 1
+          }, {
+            "name" : "unhand",
+            "value" : 1
+          }, {
+            "name" : "hasCompiledCodeForOSR",
+            "value" : 1
+          }, {
+            "name" : "asJavaType",
+            "value" : 1
+          }, {
+            "name" : "resolvePossiblyCachedConstantInPool",
+            "value" : 1
+          }, {
+            "name" : "getJavaMirror",
+            "value" : 1
+          }, {
+            "name" : "equals",
+            "value" : 1
+          }, {
+            "name" : "notifyCompilerPhaseEvent",
+            "value" : 1
+          }, {
+            "name" : "shouldDebugNonSafepoints",
+            "value" : 1
+          }, {
+            "name" : "compileToBytecode",
+            "value" : 1
+          }, {
+            "name" : "arrayIndexScale",
+            "value" : 1
+          }, {
+            "name" : "getDeclaredFieldsInfo",
+            "value" : 1
+          }, {
+            "name" : "notifyCompilerInliningEvent",
+            "value" : 1
+          }, {
+            "name" : "asResolvedJavaMethod",
+            "value" : 1
+          }, {
+            "name" : "translate",
+            "value" : 1
+          }, {
+            "name" : "setThreadLocalObject",
+            "value" : 1
+          }, {
+            "name" : "flushDebugOutput",
+            "value" : 1
+          }, {
+            "name" : "isTrustedForIntrinsics",
+            "value" : 1
+          }, {
+            "name" : "ensureLinked",
+            "value" : 1
+          }, {
+            "name" : "getEncodedClassAnnotationData",
+            "value" : 1
+          }, {
+            "name" : "isResolvedInvokeHandleInPool",
+            "value" : 1
+          }, {
+            "name" : "methodDataProfileDataSize",
+            "value" : 1
+          }, {
+            "name" : "asReflectionField",
+            "value" : 1
+          }, {
+            "name" : "constantPoolRemapInstructionOperandFromCache",
+            "value" : 1
+          }, {
+            "name" : "shouldInlineMethod",
+            "value" : 1
+          }, {
+            "name" : "attachCurrentThread",
+            "value" : 1
+          }, {
+            "name" : "isCurrentThreadAttached",
+            "value" : 1
+          }, {
+            "name" : "getLocalVariableTableLength",
+            "value" : 1
+          }, {
+            "name" : "getExceptionTableStart",
+            "value" : 1
+          }, {
+            "name" : "getCountersSize",
+            "value" : 1
+          }, {
+            "name" : "getInterfaces",
+            "value" : 1
+          }, {
+            "name" : "isInternedString",
+            "value" : 1
+          }, {
+            "name" : "getResolvedJavaType0",
+            "value" : 1
+          }, {
+            "name" : "lookupType",
+            "value" : 1
+          }, {
+            "name" : "getIdentityHashCode",
+            "value" : 1
+          }, {
+            "name" : "ensureInitialized",
+            "value" : 1
+          }, {
+            "name" : "invalidateHotSpotNmethod",
+            "value" : 1
+          }, {
+            "name" : "disassembleCodeBlob",
+            "value" : 1
+          }, {
+            "name" : "getSignatureName",
+            "value" : 1
+          }, {
+            "name" : "getClassInitializer",
+            "value" : 1
+          }, {
+            "name" : "getEncodedFieldAnnotationData",
+            "value" : 1
+          }, {
+            "name" : "getSymbol",
+            "value" : 1
+          }, {
+            "name" : "detachCurrentThread",
+            "value" : 1
+          }, {
+            "name" : "setThreadLocalLong",
+            "value" : 1
+          }, {
+            "name" : "readArrayElement",
+            "value" : 1
+          }, {
+            "name" : "lookupNameInPool",
+            "value" : 1
+          }, {
+            "name" : "lookupNameAndTypeRefIndexInPool",
+            "value" : 1
+          }, {
+            "name" : "interpreterFrameSize",
+            "value" : 1
+          }, {
+            "name" : "getConstantPool",
+            "value" : 1
+          }, {
+            "name" : "reprofile",
+            "value" : 1
+          }, {
+            "name" : "hasFinalizableSubclass",
+            "value" : 1
+          }, {
+            "name" : "readConfiguration",
+            "value" : 1
+          }, {
+            "name" : "installCode0",
+            "value" : 1
+          }, {
+            "name" : "getSignaturePolymorphicHolders",
+            "value" : 1
+          }, {
+            "name" : "collectCounters",
+            "value" : 1
+          }, {
+            "name" : "getThreadLocalObject",
+            "value" : 1
+          }, {
+            "name" : "registerCompilerPhase",
+            "value" : 1
+          }, {
+            "name" : "lookupAppendixInPool",
+            "value" : 1
+          }, {
+            "name" : "findUniqueConcreteMethod",
+            "value" : 1
+          }, {
+            "name" : "resolveInvokeDynamicInPool",
+            "value" : 1
+          }, {
+            "name" : "hasNeverInlineDirective",
+            "value" : 1
+          }, {
+            "name" : "lookupSignatureInPool",
+            "value" : 1
+          }, {
+            "name" : "resolveFieldInPool",
+            "value" : 1
+          }, {
+            "name" : "arrayBaseOffset",
+            "value" : 1
+          }, {
+            "name" : "getBytecode",
+            "value" : 1
+          }, {
+            "name" : "setCountersSize",
+            "value" : 1
+          }, {
+            "name" : "getMaxCallTargetOffset",
+            "value" : 1
+          }, {
+            "name" : "boxPrimitive",
+            "value" : 1
+          }, {
+            "name" : "isCompilable",
+            "value" : 1
+          }, {
+            "name" : "ticksNow",
+            "value" : 1
+          }, {
+            "name" : "resolveBootstrapMethod",
+            "value" : 1
+          } ]
+        } ]
+      }, {
+        "name" : "runtime",
+        "children" : [ {
+          "name" : "JVMCI",
+          "children" : [ {
+            "name" : "initializeRuntime",
+            "value" : 1
+          } ]
+        } ]
+      } ]
+    } ]
+  }, {
+    "name" : "net",
+    "children" : [ {
+      "name" : "WindowsSocketOptions",
+      "children" : [ {
+        "name" : "setTcpKeepAliveProbes0",
+        "value" : 1
+      }, {
+        "name" : "getIpDontFragment0",
+        "value" : 1
+      }, {
+        "name" : "getTcpKeepAliveIntvl0",
+        "value" : 1
+      }, {
+        "name" : "getTcpKeepAliveTime0",
+        "value" : 1
+      }, {
+        "name" : "getTcpKeepAliveProbes0",
+        "value" : 1
+      }, {
+        "name" : "keepAliveOptionsSupported0",
+        "value" : 1
+      }, {
+        "name" : "setIpDontFragment0",
+        "value" : 1
+      }, {
+        "name" : "setTcpKeepAliveTime0",
+        "value" : 1
+      }, {
+        "name" : "setTcpKeepAliveIntvl0",
+        "value" : 1
+      } ]
+    } ]
+  }, {
+    "name" : "jpackage",
+    "children" : [ {
+      "name" : "internal",
+      "children" : [ {
+        "name" : "ExecutableRebrander",
+        "children" : [ {
+          "name" : "versionSwap",
+          "value" : 1
+        }, {
+          "name" : "lockResource",
+          "value" : 1
+        }, {
+          "name" : "unlockResource",
+          "value" : 1
+        }, {
+          "name" : "iconSwap",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WinExeBundler",
+        "children" : [ {
+          "name" : "embedMSI",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WindowsRegistry",
+        "children" : [ {
+          "name" : "comparePaths",
+          "value" : 1
+        }, {
+          "name" : "openRegistryKey",
+          "value" : 1
+        }, {
+          "name" : "closeRegistryKey",
+          "value" : 1
+        }, {
+          "name" : "enumRegistryValue",
+          "value" : 1
+        }, {
+          "name" : "readDwordValue",
+          "value" : 1
+        } ]
+      } ]
+    } ]
+  } ]
+}, {
+  "name" : "com",
+  "children" : [ {
+    "name" : "sun",
+    "children" : [ {
+      "name" : "security",
+      "children" : [ {
+        "name" : "auth",
+        "children" : [ {
+          "name" : "module",
+          "children" : [ {
+            "name" : "UnixSystem",
+            "children" : [ {
+              "name" : "getUnixInfo",
+              "value" : 1
+            } ]
+          }, {
+            "name" : "NTSystem",
+            "children" : [ {
+              "name" : "getImpersonationToken0",
+              "value" : 1
+            }, {
+              "name" : "getCurrent",
+              "value" : 1
+            } ]
+          } ]
+        } ]
+      } ]
+    }, {
+      "name" : "java",
+      "children" : [ {
+        "name" : "accessibility",
+        "children" : [ {
+          "name" : "internal",
+          "children" : [ {
+            "name" : "AccessBridge",
+            "children" : [ {
+              "name" : "propertyActiveDescendentChange",
+              "value" : 1
+            }, {
+              "name" : "mouseExited",
+              "value" : 1
+            }, {
+              "name" : "propertyChildChange",
+              "value" : 1
+            }, {
+              "name" : "menuSelected",
+              "value" : 1
+            }, {
+              "name" : "propertyValueChange",
+              "value" : 1
+            }, {
+              "name" : "propertyCaretChange",
+              "value" : 1
+            }, {
+              "name" : "mousePressed",
+              "value" : 1
+            }, {
+              "name" : "mouseReleased",
+              "value" : 1
+            }, {
+              "name" : "focusLost",
+              "value" : 1
+            }, {
+              "name" : "isSysWow",
+              "value" : 1
+            }, {
+              "name" : "mouseEntered",
+              "value" : 1
+            }, {
+              "name" : "propertyStateChange",
+              "value" : 1
+            }, {
+              "name" : "jawtGetNativeWindowHandleFromComponent",
+              "value" : 1
+            }, {
+              "name" : "propertySelectionChange",
+              "value" : 1
+            }, {
+              "name" : "javaShutdown",
+              "value" : 1
+            }, {
+              "name" : "menuDeselected",
+              "value" : 1
+            }, {
+              "name" : "caretUpdate",
+              "value" : 1
+            }, {
+              "name" : "focusGained",
+              "value" : 1
+            }, {
+              "name" : "popupMenuCanceled",
+              "value" : 1
+            }, {
+              "name" : "propertyDescriptionChange",
+              "value" : 1
+            }, {
+              "name" : "propertyTextChange",
+              "value" : 1
+            }, {
+              "name" : "propertyVisibleDataChange",
+              "value" : 1
+            }, {
+              "name" : "menuCanceled",
+              "value" : 1
+            }, {
+              "name" : "sendDebugString",
+              "value" : 1
+            }, {
+              "name" : "popupMenuWillBecomeVisible",
+              "value" : 1
+            }, {
+              "name" : "runDLL",
+              "value" : 1
+            }, {
+              "name" : "propertyNameChange",
+              "value" : 1
+            }, {
+              "name" : "mouseClicked",
+              "value" : 1
+            }, {
+              "name" : "jawtGetComponentFromNativeWindowHandle",
+              "value" : 1
+            }, {
+              "name" : "popupMenuWillBecomeInvisible",
+              "value" : 1
+            } ]
+          } ]
+        } ]
+      } ]
+    }, {
+      "name" : "imageio",
+      "children" : [ {
+        "name" : "plugins",
+        "children" : [ {
+          "name" : "jpeg",
+          "children" : [ {
+            "name" : "JPEGImageWriter",
+            "children" : [ {
+              "name" : "writeImage",
+              "value" : 1
+            }, {
+              "name" : "resetWriter",
+              "value" : 1
+            }, {
+              "name" : "initWriterIDs",
+              "value" : 1
+            }, {
+              "name" : "writeTables",
+              "value" : 1
+            }, {
+              "name" : "initJPEGImageWriter",
+              "value" : 1
+            }, {
+              "name" : "disposeWriter",
+              "value" : 1
+            }, {
+              "name" : "setDest",
+              "value" : 1
+            }, {
+              "name" : "abortWrite",
+              "value" : 1
+            } ]
+          }, {
+            "name" : "JPEGImageReader",
+            "children" : [ {
+              "name" : "resetReader",
+              "value" : 1
+            }, {
+              "name" : "abortRead",
+              "value" : 1
+            }, {
+              "name" : "readImageHeader",
+              "value" : 1
+            }, {
+              "name" : "setSource",
+              "value" : 1
+            }, {
+              "name" : "setOutColorSpace",
+              "value" : 1
+            }, {
+              "name" : "resetLibraryState",
+              "value" : 1
+            }, {
+              "name" : "clearNativeReadAbortFlag",
+              "value" : 1
+            }, {
+              "name" : "initReaderIDs",
+              "value" : 1
+            }, {
+              "name" : "initJPEGImageReader",
+              "value" : 1
+            }, {
+              "name" : "readImage",
+              "value" : 1
+            }, {
+              "name" : "disposeReader",
+              "value" : 1
+            } ]
+          } ]
+        } ]
+      } ]
+    }, {
+      "name" : "management",
+      "children" : [ {
+        "name" : "internal",
+        "children" : [ {
+          "name" : "GcInfoBuilder",
+          "children" : [ {
+            "name" : "getNumGcExtAttributes",
+            "value" : 1
+          }, {
+            "name" : "getLastGcInfo0",
+            "value" : 1
+          }, {
+            "name" : "fillGcAttributeInfo",
+            "value" : 1
+          } ]
+        }, {
+          "name" : "HotSpotDiagnostic",
+          "children" : [ {
+            "name" : "dumpHeap0",
+            "value" : 1
+          } ]
+        }, {
+          "name" : "OperatingSystemImpl",
+          "children" : [ {
+            "name" : "getTotalSwapSpaceSize0",
+            "value" : 1
+          }, {
+            "name" : "getCommittedVirtualMemorySize0",
+            "value" : 1
+          }, {
+            "name" : "getProcessCpuLoad0",
+            "value" : 1
+          }, {
+            "name" : "getTotalMemorySize0",
+            "value" : 1
+          }, {
+            "name" : "getProcessCpuTime0",
+            "value" : 1
+          }, {
+            "name" : "getCpuLoad0",
+            "value" : 1
+          }, {
+            "name" : "getFreeSwapSpaceSize0",
+            "value" : 1
+          }, {
+            "name" : "getFreeMemorySize0",
+            "value" : 1
+          }, {
+            "name" : "initialize0",
+            "value" : 1
+          } ]
+        }, {
+          "name" : "DiagnosticCommandImpl",
+          "children" : [ {
+            "name" : "executeDiagnosticCommand",
+            "value" : 1
+          }, {
+            "name" : "getDiagnosticCommands",
+            "value" : 1
+          }, {
+            "name" : "setNotificationEnabled",
+            "value" : 1
+          }, {
+            "name" : "getDiagnosticCommandInfo",
+            "value" : 1
+          } ]
+        }, {
+          "name" : "GarbageCollectorExtImpl",
+          "children" : [ {
+            "name" : "setNotificationEnabled",
+            "value" : 1
+          } ]
+        }, {
+          "name" : "Flag",
+          "children" : [ {
+            "name" : "setStringValue",
+            "value" : 1
+          }, {
+            "name" : "setBooleanValue",
+            "value" : 1
+          }, {
+            "name" : "getInternalFlagCount",
+            "value" : 1
+          }, {
+            "name" : "getAllFlagNames",
+            "value" : 1
+          }, {
+            "name" : "setDoubleValue",
+            "value" : 1
+          }, {
+            "name" : "initialize",
+            "value" : 1
+          }, {
+            "name" : "getFlags",
+            "value" : 1
+          }, {
+            "name" : "setLongValue",
+            "value" : 1
+          } ]
+        } ]
+      } ]
+    }, {
+      "name" : "media",
+      "children" : [ {
+        "name" : "sound",
+        "children" : [ {
+          "name" : "PortMixer",
+          "children" : [ {
+            "name" : "nGetControls",
+            "value" : 1
+          }, {
+            "name" : "nGetPortType",
+            "value" : 1
+          }, {
+            "name" : "nClose",
+            "value" : 1
+          }, {
+            "name" : "nGetPortCount",
+            "value" : 1
+          }, {
+            "name" : "nGetPortName",
+            "value" : 1
+          }, {
+            "name" : "nControlGetIntValue",
+            "value" : 1
+          }, {
+            "name" : "nOpen",
+            "value" : 1
+          }, {
+            "name" : "nControlGetFloatValue",
+            "value" : 1
+          }, {
+            "name" : "nControlSetFloatValue",
+            "value" : 1
+          }, {
+            "name" : "nControlSetIntValue",
+            "value" : 1
+          } ]
+        }, {
+          "name" : "Platform",
+          "children" : [ {
+            "name" : "nIsBigEndian",
+            "value" : 1
+          } ]
+        }, {
+          "name" : "MidiOutDevice",
+          "children" : [ {
+            "name" : "nSendLongMessage",
+            "value" : 1
+          }, {
+            "name" : "nSendShortMessage",
+            "value" : 1
+          }, {
+            "name" : "nClose",
+            "value" : 1
+          }, {
+            "name" : "nGetTimeStamp",
+            "value" : 1
+          }, {
+            "name" : "nOpen",
+            "value" : 1
+          } ]
+        }, {
+          "name" : "DirectAudioDeviceProvider",
+          "children" : [ {
+            "name" : "nNewDirectAudioDeviceInfo",
+            "value" : 1
+          }, {
+            "name" : "nGetNumDevices",
+            "value" : 1
+          } ]
+        }, {
+          "name" : "MidiInDeviceProvider",
+          "children" : [ {
+            "name" : "nGetVendor",
+            "value" : 1
+          }, {
+            "name" : "nGetVersion",
+            "value" : 1
+          }, {
+            "name" : "nGetNumDevices",
+            "value" : 1
+          }, {
+            "name" : "nGetDescription",
+            "value" : 1
+          }, {
+            "name" : "nGetName",
+            "value" : 1
+          } ]
+        }, {
+          "name" : "MidiOutDeviceProvider",
+          "children" : [ {
+            "name" : "nGetVendor",
+            "value" : 1
+          }, {
+            "name" : "nGetVersion",
+            "value" : 1
+          }, {
+            "name" : "nGetNumDevices",
+            "value" : 1
+          }, {
+            "name" : "nGetDescription",
+            "value" : 1
+          }, {
+            "name" : "nGetName",
+            "value" : 1
+          } ]
+        }, {
+          "name" : "DirectAudioDevice",
+          "children" : [ {
+            "name" : "nGetBufferSize",
+            "value" : 1
+          }, {
+            "name" : "nIsStillDraining",
+            "value" : 1
+          }, {
+            "name" : "nWrite",
+            "value" : 1
+          }, {
+            "name" : "nStop",
+            "value" : 1
+          }, {
+            "name" : "nStart",
+            "value" : 1
+          }, {
+            "name" : "nOpen",
+            "value" : 1
+          }, {
+            "name" : "nSetBytePosition",
+            "value" : 1
+          }, {
+            "name" : "nRead",
+            "value" : 1
+          }, {
+            "name" : "nClose",
+            "value" : 1
+          }, {
+            "name" : "nFlush",
+            "value" : 1
+          }, {
+            "name" : "nGetFormats",
+            "value" : 1
+          }, {
+            "name" : "nGetBytePosition",
+            "value" : 1
+          }, {
+            "name" : "nAvailable",
+            "value" : 1
+          }, {
+            "name" : "nService",
+            "value" : 1
+          }, {
+            "name" : "nRequiresServicing",
+            "value" : 1
+          } ]
+        }, {
+          "name" : "PortMixerProvider",
+          "children" : [ {
+            "name" : "nNewPortMixerInfo",
+            "value" : 1
+          }, {
+            "name" : "nGetNumDevices",
+            "value" : 1
+          } ]
+        }, {
+          "name" : "MidiInDevice",
+          "children" : [ {
+            "name" : "nClose",
+            "value" : 1
+          }, {
+            "name" : "nGetTimeStamp",
+            "value" : 1
+          }, {
+            "name" : "nStop",
+            "value" : 1
+          }, {
+            "name" : "nStart",
+            "value" : 1
+          }, {
+            "name" : "nGetMessages",
+            "value" : 1
+          }, {
+            "name" : "nOpen",
+            "value" : 1
+          } ]
+        } ]
+      } ]
+    }, {
+      "name" : "tools",
+      "children" : [ {
+        "name" : "jdi",
+        "children" : [ {
+          "name" : "SharedMemoryTransportService",
+          "children" : [ {
+            "name" : "stopListening0",
+            "value" : 1
+          }, {
+            "name" : "startListening0",
+            "value" : 1
+          }, {
+            "name" : "attach0",
+            "value" : 1
+          }, {
+            "name" : "accept0",
+            "value" : 1
+          }, {
+            "name" : "name",
+            "value" : 1
+          }, {
+            "name" : "initialize",
+            "value" : 1
+          } ]
+        }, {
+          "name" : "SharedMemoryConnection",
+          "children" : [ {
+            "name" : "sendPacket0",
+            "value" : 1
+          }, {
+            "name" : "sendByte0",
+            "value" : 1
+          }, {
+            "name" : "receivePacket0",
+            "value" : 1
+          }, {
+            "name" : "close0",
+            "value" : 1
+          }, {
+            "name" : "receiveByte0",
+            "value" : 1
+          } ]
+        } ]
+      } ]
+    } ]
+  } ]
+}, {
+  "name" : "java",
+  "children" : [ {
+    "name" : "security",
+    "children" : [ {
+      "name" : "AccessController",
+      "children" : [ {
+        "name" : "getInheritedAccessControlContext",
+        "value" : 1
+      }, {
+        "name" : "getProtectionDomain",
+        "value" : 1
+      }, {
+        "name" : "ensureMaterializedForStackWalk",
+        "value" : 1
+      }, {
+        "name" : "getStackAccessControlContext",
+        "value" : 1
+      } ]
+    } ]
+  }, {
+    "name" : "util",
+    "children" : [ {
+      "name" : "zip",
+      "children" : [ {
+        "name" : "Deflater",
+        "children" : [ {
+          "name" : "deflateBytesBuffer",
+          "value" : 1
+        }, {
+          "name" : "init",
+          "value" : 1
+        }, {
+          "name" : "setDictionary",
+          "value" : 1
+        }, {
+          "name" : "getAdler",
+          "value" : 1
+        }, {
+          "name" : "deflateBufferBuffer",
+          "value" : 1
+        }, {
+          "name" : "setDictionaryBuffer",
+          "value" : 1
+        }, {
+          "name" : "reset",
+          "value" : 1
+        }, {
+          "name" : "end",
+          "value" : 1
+        }, {
+          "name" : "deflateBufferBytes",
+          "value" : 1
+        }, {
+          "name" : "deflateBytesBytes",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "CRC32",
+        "children" : [ {
+          "name" : "updateByteBuffer0",
+          "value" : 1
+        }, {
+          "name" : "updateBytes0",
+          "value" : 1
+        }, {
+          "name" : "update",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "Inflater",
+        "children" : [ {
+          "name" : "init",
+          "value" : 1
+        }, {
+          "name" : "setDictionary",
+          "value" : 1
+        }, {
+          "name" : "getAdler",
+          "value" : 1
+        }, {
+          "name" : "inflateBufferBuffer",
+          "value" : 1
+        }, {
+          "name" : "inflateBytesBytes",
+          "value" : 1
+        }, {
+          "name" : "setDictionaryBuffer",
+          "value" : 1
+        }, {
+          "name" : "inflateBytesBuffer",
+          "value" : 1
+        }, {
+          "name" : "inflateBufferBytes",
+          "value" : 1
+        }, {
+          "name" : "initIDs",
+          "value" : 1
+        }, {
+          "name" : "reset",
+          "value" : 1
+        }, {
+          "name" : "end",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "Adler32",
+        "children" : [ {
+          "name" : "updateByteBuffer",
+          "value" : 1
+        }, {
+          "name" : "updateBytes",
+          "value" : 1
+        }, {
+          "name" : "update",
+          "value" : 1
+        } ]
+      } ]
+    }, {
+      "name" : "TimeZone",
+      "children" : [ {
+        "name" : "getSystemTimeZoneID",
+        "value" : 1
+      }, {
+        "name" : "getSystemGMTOffsetID",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "concurrent",
+      "children" : [ {
+        "name" : "atomic",
+        "children" : [ {
+          "name" : "AtomicLong",
+          "children" : [ {
+            "name" : "VMSupportsCS8",
+            "value" : 1
+          } ]
+        } ]
+      } ]
+    }, {
+      "name" : "prefs",
+      "children" : [ {
+        "name" : "WindowsPreferences",
+        "children" : [ {
+          "name" : "WindowsRegOpenKey",
+          "value" : 1
+        }, {
+          "name" : "WindowsRegQueryInfoKey",
+          "value" : 1
+        }, {
+          "name" : "WindowsRegQueryValueEx",
+          "value" : 1
+        }, {
+          "name" : "WindowsRegEnumKeyEx",
+          "value" : 1
+        }, {
+          "name" : "WindowsRegSetValueEx",
+          "value" : 1
+        }, {
+          "name" : "WindowsRegDeleteKey",
+          "value" : 1
+        }, {
+          "name" : "WindowsRegFlushKey",
+          "value" : 1
+        }, {
+          "name" : "WindowsRegDeleteValue",
+          "value" : 1
+        }, {
+          "name" : "WindowsRegCloseKey",
+          "value" : 1
+        }, {
+          "name" : "WindowsRegCreateKeyEx",
+          "value" : 1
+        }, {
+          "name" : "WindowsRegEnumValue",
+          "value" : 1
+        } ]
+      } ]
+    } ]
+  }, {
+    "name" : "nio",
+    "children" : [ {
+      "name" : "MappedMemoryUtils",
+      "children" : [ {
+        "name" : "isLoaded0",
+        "value" : 1
+      }, {
+        "name" : "unload0",
+        "value" : 1
+      }, {
+        "name" : "force0",
+        "value" : 1
+      }, {
+        "name" : "load0",
+        "value" : 1
+      } ]
+    } ]
+  }, {
+    "name" : "io",
+    "children" : [ {
+      "name" : "WinNTFileSystem",
+      "children" : [ {
+        "name" : "getNameMax0",
+        "value" : 1
+      }, {
+        "name" : "initIDs",
+        "value" : 1
+      }, {
+        "name" : "rename0",
+        "value" : 1
+      }, {
+        "name" : "getSpace0",
+        "value" : 1
+      }, {
+        "name" : "createDirectory0",
+        "value" : 1
+      }, {
+        "name" : "getLastModifiedTime0",
+        "value" : 1
+      }, {
+        "name" : "delete0",
+        "value" : 1
+      }, {
+        "name" : "list0",
+        "value" : 1
+      }, {
+        "name" : "createFileExclusively0",
+        "value" : 1
+      }, {
+        "name" : "setPermission0",
+        "value" : 1
+      }, {
+        "name" : "getLength0",
+        "value" : 1
+      }, {
+        "name" : "setReadOnly0",
+        "value" : 1
+      }, {
+        "name" : "checkAccess0",
+        "value" : 1
+      }, {
+        "name" : "listRoots0",
+        "value" : 1
+      }, {
+        "name" : "setLastModifiedTime0",
+        "value" : 1
+      }, {
+        "name" : "canonicalize0",
+        "value" : 1
+      }, {
+        "name" : "getBooleanAttributes0",
+        "value" : 1
+      }, {
+        "name" : "getDriveDirectory",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "FileCleanable",
+      "children" : [ {
+        "name" : "cleanupClose0",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "RandomAccessFile",
+      "children" : [ {
+        "name" : "length0",
+        "value" : 1
+      }, {
+        "name" : "writeBytes0",
+        "value" : 1
+      }, {
+        "name" : "open0",
+        "value" : 1
+      }, {
+        "name" : "initIDs",
+        "value" : 1
+      }, {
+        "name" : "getFilePointer",
+        "value" : 1
+      }, {
+        "name" : "write0",
+        "value" : 1
+      }, {
+        "name" : "seek0",
+        "value" : 1
+      }, {
+        "name" : "setLength0",
+        "value" : 1
+      }, {
+        "name" : "readBytes0",
+        "value" : 1
+      }, {
+        "name" : "read0",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "FileOutputStream",
+      "children" : [ {
+        "name" : "writeBytes",
+        "value" : 1
+      }, {
+        "name" : "open0",
+        "value" : 1
+      }, {
+        "name" : "initIDs",
+        "value" : 1
+      }, {
+        "name" : "write",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "Console",
+      "children" : [ {
+        "name" : "istty",
+        "value" : 1
+      }, {
+        "name" : "encoding",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "ObjectStreamClass",
+      "children" : [ {
+        "name" : "hasStaticInitializer",
+        "value" : 1
+      }, {
+        "name" : "initNative",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "FileInputStream",
+      "children" : [ {
+        "name" : "length0",
+        "value" : 1
+      }, {
+        "name" : "open0",
+        "value" : 1
+      }, {
+        "name" : "skip0",
+        "value" : 1
+      }, {
+        "name" : "position0",
+        "value" : 1
+      }, {
+        "name" : "initIDs",
+        "value" : 1
+      }, {
+        "name" : "available0",
+        "value" : 1
+      }, {
+        "name" : "readBytes",
+        "value" : 1
+      }, {
+        "name" : "read0",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "FileDescriptor",
+      "children" : [ {
+        "name" : "getHandle",
+        "value" : 1
+      }, {
+        "name" : "initIDs",
+        "value" : 1
+      }, {
+        "name" : "sync0",
+        "value" : 1
+      }, {
+        "name" : "getAppend",
+        "value" : 1
+      }, {
+        "name" : "close0",
+        "value" : 1
+      } ]
+    } ]
+  }, {
+    "name" : "net",
+    "children" : [ {
+      "name" : "Inet4Address",
+      "children" : [ {
+        "name" : "init",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "Inet4AddressImpl",
+      "children" : [ {
+        "name" : "getHostByAddr",
+        "value" : 1
+      }, {
+        "name" : "getLocalHostName",
+        "value" : 1
+      }, {
+        "name" : "isReachable0",
+        "value" : 1
+      }, {
+        "name" : "lookupAllHostAddr",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "Inet6AddressImpl",
+      "children" : [ {
+        "name" : "getHostByAddr",
+        "value" : 1
+      }, {
+        "name" : "getLocalHostName",
+        "value" : 1
+      }, {
+        "name" : "isReachable0",
+        "value" : 1
+      }, {
+        "name" : "lookupAllHostAddr",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "NetworkInterface",
+      "children" : [ {
+        "name" : "init",
+        "value" : 1
+      }, {
+        "name" : "getByInetAddress0",
+        "value" : 1
+      }, {
+        "name" : "getAll",
+        "value" : 1
+      }, {
+        "name" : "getByIndex0",
+        "value" : 1
+      }, {
+        "name" : "isUp0",
+        "value" : 1
+      }, {
+        "name" : "boundInetAddress0",
+        "value" : 1
+      }, {
+        "name" : "isLoopback0",
+        "value" : 1
+      }, {
+        "name" : "getMTU0",
+        "value" : 1
+      }, {
+        "name" : "isP2P0",
+        "value" : 1
+      }, {
+        "name" : "supportsMulticast0",
+        "value" : 1
+      }, {
+        "name" : "getByName0",
+        "value" : 1
+      }, {
+        "name" : "getMacAddr0",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "Inet6Address",
+      "children" : [ {
+        "name" : "init",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "InetAddress",
+      "children" : [ {
+        "name" : "init",
+        "value" : 1
+      }, {
+        "name" : "isIPv6Supported",
+        "value" : 1
+      }, {
+        "name" : "isIPv4Available",
+        "value" : 1
+      } ]
+    } ]
+  }, {
+    "name" : "lang",
+    "children" : [ {
+      "name" : "SecurityManager",
+      "children" : [ {
+        "name" : "getClassContext",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "StackTraceElement",
+      "children" : [ {
+        "name" : "initStackTraceElement",
+        "value" : 1
+      }, {
+        "name" : "initStackTraceElements",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "invoke",
+      "children" : [ {
+        "name" : "MethodHandleNatives",
+        "children" : [ {
+          "name" : "getMemberVMInfo",
+          "value" : 1
+        }, {
+          "name" : "init",
+          "value" : 1
+        }, {
+          "name" : "expand",
+          "value" : 1
+        }, {
+          "name" : "staticFieldOffset",
+          "value" : 1
+        }, {
+          "name" : "setCallSiteTargetVolatile",
+          "value" : 1
+        }, {
+          "name" : "resolve",
+          "value" : 1
+        }, {
+          "name" : "copyOutBootstrapArguments",
+          "value" : 1
+        }, {
+          "name" : "staticFieldBase",
+          "value" : 1
+        }, {
+          "name" : "setCallSiteTargetNormal",
+          "value" : 1
+        }, {
+          "name" : "clearCallSiteContext",
+          "value" : 1
+        }, {
+          "name" : "getNamedCon",
+          "value" : 1
+        }, {
+          "name" : "registerNatives",
+          "value" : 1
+        }, {
+          "name" : "objectFieldOffset",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "VarHandle",
+        "children" : [ {
+          "name" : "weakCompareAndSetPlain",
+          "value" : 1
+        }, {
+          "name" : "getVolatile",
+          "value" : 1
+        }, {
+          "name" : "getAndBitwiseXor",
+          "value" : 1
+        }, {
+          "name" : "compareAndExchange",
+          "value" : 1
+        }, {
+          "name" : "getAndSetRelease",
+          "value" : 1
+        }, {
+          "name" : "getAcquire",
+          "value" : 1
+        }, {
+          "name" : "getAndBitwiseAnd",
+          "value" : 1
+        }, {
+          "name" : "getAndBitwiseOr",
+          "value" : 1
+        }, {
+          "name" : "getAndBitwiseOrRelease",
+          "value" : 1
+        }, {
+          "name" : "getAndSetAcquire",
+          "value" : 1
+        }, {
+          "name" : "getOpaque",
+          "value" : 1
+        }, {
+          "name" : "getAndBitwiseXorAcquire",
+          "value" : 1
+        }, {
+          "name" : "getAndBitwiseAndRelease",
+          "value" : 1
+        }, {
+          "name" : "getAndBitwiseOrAcquire",
+          "value" : 1
+        }, {
+          "name" : "setVolatile",
+          "value" : 1
+        }, {
+          "name" : "get",
+          "value" : 1
+        }, {
+          "name" : "getAndAdd",
+          "value" : 1
+        }, {
+          "name" : "getAndSet",
+          "value" : 1
+        }, {
+          "name" : "weakCompareAndSetAcquire",
+          "value" : 1
+        }, {
+          "name" : "set",
+          "value" : 1
+        }, {
+          "name" : "weakCompareAndSetRelease",
+          "value" : 1
+        }, {
+          "name" : "weakCompareAndSet",
+          "value" : 1
+        }, {
+          "name" : "getAndAddRelease",
+          "value" : 1
+        }, {
+          "name" : "getAndAddAcquire",
+          "value" : 1
+        }, {
+          "name" : "setOpaque",
+          "value" : 1
+        }, {
+          "name" : "compareAndExchangeRelease",
+          "value" : 1
+        }, {
+          "name" : "compareAndSet",
+          "value" : 1
+        }, {
+          "name" : "compareAndExchangeAcquire",
+          "value" : 1
+        }, {
+          "name" : "getAndBitwiseXorRelease",
+          "value" : 1
+        }, {
+          "name" : "setRelease",
+          "value" : 1
+        }, {
+          "name" : "getAndBitwiseAndAcquire",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "LambdaProxyClassArchive",
+        "children" : [ {
+          "name" : "addToArchive",
+          "value" : 1
+        }, {
+          "name" : "findFromArchive",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "MethodHandle",
+        "children" : [ {
+          "name" : "linkToStatic",
+          "value" : 1
+        }, {
+          "name" : "linkToVirtual",
+          "value" : 1
+        }, {
+          "name" : "invokeExact",
+          "value" : 1
+        }, {
+          "name" : "linkToSpecial",
+          "value" : 1
+        }, {
+          "name" : "linkToNative",
+          "value" : 1
+        }, {
+          "name" : "invoke",
+          "value" : 1
+        }, {
+          "name" : "linkToInterface",
+          "value" : 1
+        }, {
+          "name" : "invokeBasic",
+          "value" : 1
+        } ]
+      } ]
+    }, {
+      "name" : "String",
+      "children" : [ {
+        "name" : "intern",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "ProcessEnvironment",
+      "children" : [ {
+        "name" : "environmentBlock",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "System",
+      "children" : [ {
+        "name" : "identityHashCode",
+        "value" : 1
+      }, {
+        "name" : "setErr0",
+        "value" : 1
+      }, {
+        "name" : "mapLibraryName",
+        "value" : 1
+      }, {
+        "name" : "arraycopy",
+        "value" : 1
+      }, {
+        "name" : "nanoTime",
+        "value" : 1
+      }, {
+        "name" : "currentTimeMillis",
+        "value" : 1
+      }, {
+        "name" : "setOut0",
+        "value" : 1
+      }, {
+        "name" : "registerNatives",
+        "value" : 1
+      }, {
+        "name" : "setIn0",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "ref",
+      "children" : [ {
+        "name" : "Reference",
+        "children" : [ {
+          "name" : "waitForReferencePendingList",
+          "value" : 1
+        }, {
+          "name" : "clear0",
+          "value" : 1
+        }, {
+          "name" : "refersTo0",
+          "value" : 1
+        }, {
+          "name" : "hasReferencePendingList",
+          "value" : 1
+        }, {
+          "name" : "getAndClearReferencePendingList",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "PhantomReference",
+        "children" : [ {
+          "name" : "refersTo0",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "Finalizer",
+        "children" : [ {
+          "name" : "reportComplete",
+          "value" : 1
+        }, {
+          "name" : "isFinalizationEnabled",
+          "value" : 1
+        } ]
+      } ]
+    }, {
+      "name" : "Runtime",
+      "children" : [ {
+        "name" : "totalMemory",
+        "value" : 1
+      }, {
+        "name" : "availableProcessors",
+        "value" : 1
+      }, {
+        "name" : "gc",
+        "value" : 1
+      }, {
+        "name" : "maxMemory",
+        "value" : 1
+      }, {
+        "name" : "freeMemory",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "reflect",
+      "children" : [ {
+        "name" : "Array",
+        "children" : [ {
+          "name" : "setFloat",
+          "value" : 1
+        }, {
+          "name" : "setByte",
+          "value" : 1
+        }, {
+          "name" : "set",
+          "value" : 1
+        }, {
+          "name" : "getByte",
+          "value" : 1
+        }, {
+          "name" : "getShort",
+          "value" : 1
+        }, {
+          "name" : "newArray",
+          "value" : 1
+        }, {
+          "name" : "getDouble",
+          "value" : 1
+        }, {
+          "name" : "multiNewArray",
+          "value" : 1
+        }, {
+          "name" : "setShort",
+          "value" : 1
+        }, {
+          "name" : "getFloat",
+          "value" : 1
+        }, {
+          "name" : "setInt",
+          "value" : 1
+        }, {
+          "name" : "setDouble",
+          "value" : 1
+        }, {
+          "name" : "setChar",
+          "value" : 1
+        }, {
+          "name" : "getLong",
+          "value" : 1
+        }, {
+          "name" : "getInt",
+          "value" : 1
+        }, {
+          "name" : "getChar",
+          "value" : 1
+        }, {
+          "name" : "setLong",
+          "value" : 1
+        }, {
+          "name" : "get",
+          "value" : 1
+        }, {
+          "name" : "getLength",
+          "value" : 1
+        }, {
+          "name" : "getBoolean",
+          "value" : 1
+        }, {
+          "name" : "setBoolean",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "Field",
+        "children" : [ {
+          "name" : "getTypeAnnotationBytes0",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "Executable",
+        "children" : [ {
+          "name" : "getParameters0",
+          "value" : 1
+        }, {
+          "name" : "getTypeAnnotationBytes0",
+          "value" : 1
+        } ]
+      } ]
+    }, {
+      "name" : "NullPointerException",
+      "children" : [ {
+        "name" : "getExtendedNPEMessage",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "ClassLoader",
+      "children" : [ {
+        "name" : "retrieveDirectives",
+        "value" : 1
+      }, {
+        "name" : "defineClass1",
+        "value" : 1
+      }, {
+        "name" : "registerNatives",
+        "value" : 1
+      }, {
+        "name" : "findBootstrapClass",
+        "value" : 1
+      }, {
+        "name" : "defineClass2",
+        "value" : 1
+      }, {
+        "name" : "defineClass0",
+        "value" : 1
+      }, {
+        "name" : "findLoadedClass0",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "StringUTF16",
+      "children" : [ {
+        "name" : "isBigEndian",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "ProcessHandleImpl",
+      "children" : [ {
+        "name" : "parent0",
+        "value" : 1
+      }, {
+        "name" : "getCurrentPid0",
+        "value" : 1
+      }, {
+        "name" : "getProcessPids0",
+        "value" : 1
+      }, {
+        "name" : "destroy0",
+        "value" : 1
+      }, {
+        "name" : "waitForProcessExit0",
+        "value" : 1
+      }, {
+        "name" : "isAlive0",
+        "value" : 1
+      }, {
+        "name" : "initNative",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "VirtualThread",
+      "children" : [ {
+        "name" : "notifyJvmtiEnd",
+        "value" : 1
+      }, {
+        "name" : "notifyJvmtiUnmount",
+        "value" : 1
+      }, {
+        "name" : "notifyJvmtiMount",
+        "value" : 1
+      }, {
+        "name" : "registerNatives",
+        "value" : 1
+      }, {
+        "name" : "notifyJvmtiHideFrames",
+        "value" : 1
+      }, {
+        "name" : "notifyJvmtiStart",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "Double",
+      "children" : [ {
+        "name" : "longBitsToDouble",
+        "value" : 1
+      }, {
+        "name" : "doubleToRawLongBits",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "StackStreamFactory$AbstractStackWalker",
+      "children" : [ {
+        "name" : "callStackWalk",
+        "value" : 1
+      }, {
+        "name" : "fetchStackFrames",
+        "value" : 1
+      }, {
+        "name" : "setContinuation",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "Thread",
+      "children" : [ {
+        "name" : "getNextThreadIdOffset",
+        "value" : 1
+      }, {
+        "name" : "currentThread",
+        "value" : 1
+      }, {
+        "name" : "start0",
+        "value" : 1
+      }, {
+        "name" : "interrupt0",
+        "value" : 1
+      }, {
+        "name" : "sleep0",
+        "value" : 1
+      }, {
+        "name" : "registerNatives",
+        "value" : 1
+      }, {
+        "name" : "setScopedValueCache",
+        "value" : 1
+      }, {
+        "name" : "setNativeName",
+        "value" : 1
+      }, {
+        "name" : "setPriority0",
+        "value" : 1
+      }, {
+        "name" : "holdsLock",
+        "value" : 1
+      }, {
+        "name" : "yield0",
+        "value" : 1
+      }, {
+        "name" : "scopedValueCache",
+        "value" : 1
+      }, {
+        "name" : "dumpThreads",
+        "value" : 1
+      }, {
+        "name" : "findScopedValueBindings",
+        "value" : 1
+      }, {
+        "name" : "ensureMaterializedForStackWalk",
+        "value" : 1
+      }, {
+        "name" : "currentCarrierThread",
+        "value" : 1
+      }, {
+        "name" : "setCurrentThread",
+        "value" : 1
+      }, {
+        "name" : "clearInterruptEvent",
+        "value" : 1
+      }, {
+        "name" : "getThreads",
+        "value" : 1
+      }, {
+        "name" : "getStackTrace0",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "Float",
+      "children" : [ {
+        "name" : "floatToRawIntBits",
+        "value" : 1
+      }, {
+        "name" : "intBitsToFloat",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "Shutdown",
+      "children" : [ {
+        "name" : "beforeHalt",
+        "value" : 1
+      }, {
+        "name" : "halt0",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "StackStreamFactory",
+      "children" : [ {
+        "name" : "checkStackWalkModes",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "ProcessImpl",
+      "children" : [ {
+        "name" : "terminateProcess",
+        "value" : 1
+      }, {
+        "name" : "getProcessId0",
+        "value" : 1
+      }, {
+        "name" : "getStillActive",
+        "value" : 1
+      }, {
+        "name" : "openForAtomicAppend",
+        "value" : 1
+      }, {
+        "name" : "create",
+        "value" : 1
+      }, {
+        "name" : "closeHandle",
+        "value" : 1
+      }, {
+        "name" : "waitForTimeoutInterruptibly",
+        "value" : 1
+      }, {
+        "name" : "waitForInterruptibly",
+        "value" : 1
+      }, {
+        "name" : "isProcessAlive",
+        "value" : 1
+      }, {
+        "name" : "getExitCodeProcess",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "Throwable",
+      "children" : [ {
+        "name" : "fillInStackTrace",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "Object",
+      "children" : [ {
+        "name" : "wait0",
+        "value" : 1
+      }, {
+        "name" : "getClass",
+        "value" : 1
+      }, {
+        "name" : "hashCode",
+        "value" : 1
+      }, {
+        "name" : "notifyAll",
+        "value" : 1
+      }, {
+        "name" : "clone",
+        "value" : 1
+      }, {
+        "name" : "notify",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "Class",
+      "children" : [ {
+        "name" : "getNestMembers0",
+        "value" : 1
+      }, {
+        "name" : "getInterfaces0",
+        "value" : 1
+      }, {
+        "name" : "getConstantPool",
+        "value" : 1
+      }, {
+        "name" : "getPrimitiveClass",
+        "value" : 1
+      }, {
+        "name" : "registerNatives",
+        "value" : 1
+      }, {
+        "name" : "desiredAssertionStatus0",
+        "value" : 1
+      }, {
+        "name" : "getClassAccessFlagsRaw0",
+        "value" : 1
+      }, {
+        "name" : "isRecord0",
+        "value" : 1
+      }, {
+        "name" : "getSimpleBinaryName0",
+        "value" : 1
+      }, {
+        "name" : "isAssignableFrom",
+        "value" : 1
+      }, {
+        "name" : "getDeclaredConstructors0",
+        "value" : 1
+      }, {
+        "name" : "getEnclosingMethod0",
+        "value" : 1
+      }, {
+        "name" : "isInstance",
+        "value" : 1
+      }, {
+        "name" : "getSigners",
+        "value" : 1
+      }, {
+        "name" : "getModifiers",
+        "value" : 1
+      }, {
+        "name" : "isInterface",
+        "value" : 1
+      }, {
+        "name" : "getRecordComponents0",
+        "value" : 1
+      }, {
+        "name" : "getSuperclass",
+        "value" : 1
+      }, {
+        "name" : "getClassFileVersion0",
+        "value" : 1
+      }, {
+        "name" : "getPermittedSubclasses0",
+        "value" : 1
+      }, {
+        "name" : "getRawTypeAnnotations",
+        "value" : 1
+      }, {
+        "name" : "getDeclaredFields0",
+        "value" : 1
+      }, {
+        "name" : "isHidden",
+        "value" : 1
+      }, {
+        "name" : "getNestHost0",
+        "value" : 1
+      }, {
+        "name" : "forName0",
+        "value" : 1
+      }, {
+        "name" : "setSigners",
+        "value" : 1
+      }, {
+        "name" : "initClassName",
+        "value" : 1
+      }, {
+        "name" : "getProtectionDomain0",
+        "value" : 1
+      }, {
+        "name" : "getDeclaringClass0",
+        "value" : 1
+      }, {
+        "name" : "getDeclaredMethods0",
+        "value" : 1
+      }, {
+        "name" : "getDeclaredClasses0",
+        "value" : 1
+      }, {
+        "name" : "getGenericSignature0",
+        "value" : 1
+      }, {
+        "name" : "isArray",
+        "value" : 1
+      }, {
+        "name" : "isPrimitive",
+        "value" : 1
+      }, {
+        "name" : "getRawAnnotations",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "ProcessHandleImpl$Info",
+      "children" : [ {
+        "name" : "initIDs",
+        "value" : 1
+      }, {
+        "name" : "info0",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "Module",
+      "children" : [ {
+        "name" : "addExportsToAll0",
+        "value" : 1
+      }, {
+        "name" : "addExports0",
+        "value" : 1
+      }, {
+        "name" : "addReads0",
+        "value" : 1
+      }, {
+        "name" : "addExportsToAllUnnamed0",
+        "value" : 1
+      }, {
+        "name" : "defineModule0",
+        "value" : 1
+      } ]
+    } ]
+  }, {
+    "name" : "awt",
+    "children" : [ {
+      "name" : "Frame",
+      "children" : [ {
+        "name" : "initIDs",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "ScrollPaneAdjustable",
+      "children" : [ {
+        "name" : "initIDs",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "Insets",
+      "children" : [ {
+        "name" : "initIDs",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "Choice",
+      "children" : [ {
+        "name" : "initIDs",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "TextArea",
+      "children" : [ {
+        "name" : "initIDs",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "Rectangle",
+      "children" : [ {
+        "name" : "initIDs",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "Label",
+      "children" : [ {
+        "name" : "initIDs",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "MenuBar",
+      "children" : [ {
+        "name" : "initIDs",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "Cursor",
+      "children" : [ {
+        "name" : "initIDs",
+        "value" : 1
+      }, {
+        "name" : "finalizeImpl",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "Font",
+      "children" : [ {
+        "name" : "initIDs",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "Container",
+      "children" : [ {
+        "name" : "initIDs",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "TrayIcon",
+      "children" : [ {
+        "name" : "initIDs",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "Button",
+      "children" : [ {
+        "name" : "initIDs",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "FontMetrics",
+      "children" : [ {
+        "name" : "initIDs",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "Dialog",
+      "children" : [ {
+        "name" : "initIDs",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "Checkbox",
+      "children" : [ {
+        "name" : "initIDs",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "CheckboxMenuItem",
+      "children" : [ {
+        "name" : "initIDs",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "TextField",
+      "children" : [ {
+        "name" : "initIDs",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "SplashScreen",
+      "children" : [ {
+        "name" : "_getImageJarName",
+        "value" : 1
+      }, {
+        "name" : "_getInstance",
+        "value" : 1
+      }, {
+        "name" : "_getScaleFactor",
+        "value" : 1
+      }, {
+        "name" : "_setImageData",
+        "value" : 1
+      }, {
+        "name" : "_getImageFileName",
+        "value" : 1
+      }, {
+        "name" : "_update",
+        "value" : 1
+      }, {
+        "name" : "_getBounds",
+        "value" : 1
+      }, {
+        "name" : "_close",
+        "value" : 1
+      }, {
+        "name" : "_isVisible",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "KeyboardFocusManager",
+      "children" : [ {
+        "name" : "initIDs",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "AWTEvent",
+      "children" : [ {
+        "name" : "initIDs",
+        "value" : 1
+      }, {
+        "name" : "nativeSetSource",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "Toolkit",
+      "children" : [ {
+        "name" : "initIDs",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "Menu",
+      "children" : [ {
+        "name" : "initIDs",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "event",
+      "children" : [ {
+        "name" : "KeyEvent",
+        "children" : [ {
+          "name" : "initIDs",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "MouseEvent",
+        "children" : [ {
+          "name" : "initIDs",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "InputEvent",
+        "children" : [ {
+          "name" : "initIDs",
+          "value" : 1
+        } ]
+      } ]
+    }, {
+      "name" : "Component",
+      "children" : [ {
+        "name" : "initIDs",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "Scrollbar",
+      "children" : [ {
+        "name" : "initIDs",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "Window",
+      "children" : [ {
+        "name" : "initIDs",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "image",
+      "children" : [ {
+        "name" : "SampleModel",
+        "children" : [ {
+          "name" : "initIDs",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "ColorModel",
+        "children" : [ {
+          "name" : "initIDs",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "Raster",
+        "children" : [ {
+          "name" : "initIDs",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "SinglePixelPackedSampleModel",
+        "children" : [ {
+          "name" : "initIDs",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "Kernel",
+        "children" : [ {
+          "name" : "initIDs",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "BufferedImage",
+        "children" : [ {
+          "name" : "initIDs",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "IndexColorModel",
+        "children" : [ {
+          "name" : "initIDs",
+          "value" : 1
+        } ]
+      } ]
+    }, {
+      "name" : "Color",
+      "children" : [ {
+        "name" : "initIDs",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "MenuItem",
+      "children" : [ {
+        "name" : "initIDs",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "MenuComponent",
+      "children" : [ {
+        "name" : "initIDs",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "Dimension",
+      "children" : [ {
+        "name" : "initIDs",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "ScrollPane",
+      "children" : [ {
+        "name" : "initIDs",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "Event",
+      "children" : [ {
+        "name" : "initIDs",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "FileDialog",
+      "children" : [ {
+        "name" : "initIDs",
+        "value" : 1
+      } ]
+    } ]
+  } ]
+}, {
+  "name" : "sun",
+  "children" : [ {
+    "name" : "jvm",
+    "children" : [ {
+      "name" : "hotspot",
+      "children" : [ {
+        "name" : "debugger",
+        "children" : [ {
+          "name" : "bsd",
+          "children" : [ {
+            "name" : "BsdDebuggerLocal",
+            "children" : [ {
+              "name" : "getAddressSize",
+              "value" : 1
+            }, {
+              "name" : "getThreadIntegerRegisterSet0",
+              "value" : 1
+            }, {
+              "name" : "detach0",
+              "value" : 1
+            }, {
+              "name" : "attach0",
+              "value" : 1
+            }, {
+              "name" : "lookupByName0",
+              "value" : 1
+            }, {
+              "name" : "lookupByAddress0",
+              "value" : 1
+            }, {
+              "name" : "init0",
+              "value" : 1
+            }, {
+              "name" : "readBytesFromProcess0",
+              "value" : 1
+            } ]
+          } ]
+        }, {
+          "name" : "windbg",
+          "children" : [ {
+            "name" : "WindbgDebuggerLocal",
+            "children" : [ {
+              "name" : "getThreadIdFromSysId0",
+              "value" : 1
+            }, {
+              "name" : "consoleExecuteCommand0",
+              "value" : 1
+            }, {
+              "name" : "detach0",
+              "value" : 1
+            }, {
+              "name" : "attach0",
+              "value" : 1
+            }, {
+              "name" : "lookupByName0",
+              "value" : 1
+            }, {
+              "name" : "initIDs",
+              "value" : 1
+            }, {
+              "name" : "lookupByAddress0",
+              "value" : 1
+            }, {
+              "name" : "readBytesFromProcess0",
+              "value" : 1
+            } ]
+          } ]
+        }, {
+          "name" : "linux",
+          "children" : [ {
+            "name" : "LinuxDebuggerLocal",
+            "children" : [ {
+              "name" : "getAddressSize",
+              "value" : 1
+            }, {
+              "name" : "demangle",
+              "value" : 1
+            }, {
+              "name" : "getThreadIntegerRegisterSet0",
+              "value" : 1
+            }, {
+              "name" : "findLibPtrByAddress0",
+              "value" : 1
+            }, {
+              "name" : "detach0",
+              "value" : 1
+            }, {
+              "name" : "attach0",
+              "value" : 1
+            }, {
+              "name" : "lookupByName0",
+              "value" : 1
+            }, {
+              "name" : "lookupByAddress0",
+              "value" : 1
+            }, {
+              "name" : "init0",
+              "value" : 1
+            }, {
+              "name" : "readBytesFromProcess0",
+              "value" : 1
+            }, {
+              "name" : "setSAAltRoot0",
+              "value" : 1
+            } ]
+          }, {
+            "name" : "amd64",
+            "children" : [ {
+              "name" : "DwarfParser",
+              "children" : [ {
+                "name" : "destroyDwarfContext",
+                "value" : 1
+              }, {
+                "name" : "getReturnAddressOffsetFromCFA",
+                "value" : 1
+              }, {
+                "name" : "isBPOffsetAvailable",
+                "value" : 1
+              }, {
+                "name" : "getCFARegister",
+                "value" : 1
+              }, {
+                "name" : "processDwarf0",
+                "value" : 1
+              }, {
+                "name" : "init0",
+                "value" : 1
+              }, {
+                "name" : "getBasePointerOffsetFromCFA",
+                "value" : 1
+              }, {
+                "name" : "getCFAOffset",
+                "value" : 1
+              }, {
+                "name" : "isIn0",
+                "value" : 1
+              }, {
+                "name" : "createDwarfContext",
+                "value" : 1
+              } ]
+            } ]
+          } ]
+        } ]
+      }, {
+        "name" : "asm",
+        "children" : [ {
+          "name" : "Disassembler",
+          "children" : [ {
+            "name" : "load_library",
+            "value" : 1
+          }, {
+            "name" : "decode",
+            "value" : 1
+          } ]
+        } ]
+      } ]
+    } ]
+  }, {
+    "name" : "io",
+    "children" : [ {
+      "name" : "Win32ErrorMode",
+      "children" : [ {
+        "name" : "setErrorMode",
+        "value" : 1
+      } ]
+    } ]
+  }, {
+    "name" : "instrument",
+    "children" : [ {
+      "name" : "InstrumentationImpl",
+      "children" : [ {
+        "name" : "setNativeMethodPrefixes",
+        "value" : 1
+      }, {
+        "name" : "getInitiatedClasses0",
+        "value" : 1
+      }, {
+        "name" : "getObjectSize0",
+        "value" : 1
+      }, {
+        "name" : "retransformClasses0",
+        "value" : 1
+      }, {
+        "name" : "getAllLoadedClasses0",
+        "value" : 1
+      }, {
+        "name" : "redefineClasses0",
+        "value" : 1
+      }, {
+        "name" : "jarFile",
+        "value" : 1
+      }, {
+        "name" : "setHasTransformers",
+        "value" : 1
+      }, {
+        "name" : "isModifiableClass0",
+        "value" : 1
+      }, {
+        "name" : "isRetransformClassesSupported0",
+        "value" : 1
+      }, {
+        "name" : "appendToClassLoaderSearch0",
+        "value" : 1
+      }, {
+        "name" : "loadAgent0",
+        "value" : 1
+      }, {
+        "name" : "setHasRetransformableTransformers",
+        "value" : 1
+      } ]
+    } ]
+  }, {
+    "name" : "tools",
+    "children" : [ {
+      "name" : "attach",
+      "children" : [ {
+        "name" : "VirtualMachineImpl",
+        "children" : [ {
+          "name" : "createPipe",
+          "value" : 1
+        }, {
+          "name" : "enqueue",
+          "value" : 1
+        }, {
+          "name" : "init",
+          "value" : 1
+        }, {
+          "name" : "openProcess",
+          "value" : 1
+        }, {
+          "name" : "connectPipe",
+          "value" : 1
+        }, {
+          "name" : "closeProcess",
+          "value" : 1
+        }, {
+          "name" : "closePipe",
+          "value" : 1
+        }, {
+          "name" : "readPipe",
+          "value" : 1
+        }, {
+          "name" : "generateStub",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "AttachProviderImpl",
+        "children" : [ {
+          "name" : "isLibraryLoadedByProcess",
+          "value" : 1
+        }, {
+          "name" : "volumeFlags",
+          "value" : 1
+        }, {
+          "name" : "tempPath",
+          "value" : 1
+        }, {
+          "name" : "enumProcesses",
+          "value" : 1
+        } ]
+      } ]
+    } ]
+  }, {
+    "name" : "rmi",
+    "children" : [ {
+      "name" : "transport",
+      "children" : [ {
+        "name" : "GC",
+        "children" : [ {
+          "name" : "maxObjectInspectionAge",
+          "value" : 1
+        } ]
+      } ]
+    } ]
+  }, {
+    "name" : "security",
+    "children" : [ {
+      "name" : "provider",
+      "children" : [ {
+        "name" : "NativeSeedGenerator",
+        "children" : [ {
+          "name" : "nativeGenerateSeed",
+          "value" : 1
+        } ]
+      } ]
+    }, {
+      "name" : "krb5",
+      "children" : [ {
+        "name" : "Config",
+        "children" : [ {
+          "name" : "getWindowsDirectory",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "SCDynamicStoreConfig",
+        "children" : [ {
+          "name" : "getKerberosConfig",
+          "value" : 1
+        }, {
+          "name" : "installNotificationCallback",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "Credentials",
+        "children" : [ {
+          "name" : "acquireDefaultNativeCreds",
+          "value" : 1
+        } ]
+      } ]
+    }, {
+      "name" : "pkcs11",
+      "children" : [ {
+        "name" : "Secmod",
+        "children" : [ {
+          "name" : "nssLoadLibrary",
+          "value" : 1
+        }, {
+          "name" : "nssGetLibraryHandle",
+          "value" : 1
+        }, {
+          "name" : "nssInitialize",
+          "value" : 1
+        }, {
+          "name" : "nssVersionCheck",
+          "value" : 1
+        }, {
+          "name" : "nssGetModuleList",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "wrapper",
+        "children" : [ {
+          "name" : "PKCS11",
+          "children" : [ {
+            "name" : "C_CloseSession",
+            "value" : 1
+          }, {
+            "name" : "disconnect",
+            "value" : 1
+          }, {
+            "name" : "C_DecryptInit",
+            "value" : 1
+          }, {
+            "name" : "C_DigestSingle",
+            "value" : 1
+          }, {
+            "name" : "C_SetAttributeValue",
+            "value" : 1
+          }, {
+            "name" : "C_SignInit",
+            "value" : 1
+          }, {
+            "name" : "C_Login",
+            "value" : 1
+          }, {
+            "name" : "C_GetMechanismInfo",
+            "value" : 1
+          }, {
+            "name" : "C_SignRecoverInit",
+            "value" : 1
+          }, {
+            "name" : "C_GetSessionInfo",
+            "value" : 1
+          }, {
+            "name" : "C_SessionCancel",
+            "value" : 1
+          }, {
+            "name" : "finalizeLibrary",
+            "value" : 1
+          }, {
+            "name" : "C_SignFinal",
+            "value" : 1
+          }, {
+            "name" : "C_GetSlotInfo",
+            "value" : 1
+          }, {
+            "name" : "initializeLibrary",
+            "value" : 1
+          }, {
+            "name" : "C_DeriveKey",
+            "value" : 1
+          }, {
+            "name" : "C_DecryptFinal",
+            "value" : 1
+          }, {
+            "name" : "C_FindObjectsInit",
+            "value" : 1
+          }, {
+            "name" : "C_GetSlotList",
+            "value" : 1
+          }, {
+            "name" : "C_DigestFinal",
+            "value" : 1
+          }, {
+            "name" : "C_GetAttributeValue",
+            "value" : 1
+          }, {
+            "name" : "C_SetOperationState",
+            "value" : 1
+          }, {
+            "name" : "C_SignUpdate",
+            "value" : 1
+          }, {
+            "name" : "C_Encrypt",
+            "value" : 1
+          }, {
+            "name" : "C_VerifyRecover",
+            "value" : 1
+          }, {
+            "name" : "C_DigestInit",
+            "value" : 1
+          }, {
+            "name" : "C_Initialize",
+            "value" : 1
+          }, {
+            "name" : "freeMechanism",
+            "value" : 1
+          }, {
+            "name" : "C_GetInfo",
+            "value" : 1
+          }, {
+            "name" : "C_FindObjectsFinal",
+            "value" : 1
+          }, {
+            "name" : "createNativeKey",
+            "value" : 1
+          }, {
+            "name" : "C_DecryptUpdate",
+            "value" : 1
+          }, {
+            "name" : "C_GetOperationState",
+            "value" : 1
+          }, {
+            "name" : "C_DestroyObject",
+            "value" : 1
+          }, {
+            "name" : "C_CopyObject",
+            "value" : 1
+          }, {
+            "name" : "C_SignRecover",
+            "value" : 1
+          }, {
+            "name" : "C_UnwrapKey",
+            "value" : 1
+          }, {
+            "name" : "C_WrapKey",
+            "value" : 1
+          }, {
+            "name" : "C_VerifyInit",
+            "value" : 1
+          }, {
+            "name" : "C_Decrypt",
+            "value" : 1
+          }, {
+            "name" : "getNativeKeyInfo",
+            "value" : 1
+          }, {
+            "name" : "C_SeedRandom",
+            "value" : 1
+          }, {
+            "name" : "C_VerifyRecoverInit",
+            "value" : 1
+          }, {
+            "name" : "C_DigestUpdate",
+            "value" : 1
+          }, {
+            "name" : "C_CreateObject",
+            "value" : 1
+          }, {
+            "name" : "connect",
+            "value" : 1
+          }, {
+            "name" : "C_GetTokenInfo",
+            "value" : 1
+          }, {
+            "name" : "C_GenerateRandom",
+            "value" : 1
+          }, {
+            "name" : "C_EncryptInit",
+            "value" : 1
+          }, {
+            "name" : "C_OpenSession",
+            "value" : 1
+          }, {
+            "name" : "C_Finalize",
+            "value" : 1
+          }, {
+            "name" : "C_EncryptUpdate",
+            "value" : 1
+          }, {
+            "name" : "C_Sign",
+            "value" : 1
+          }, {
+            "name" : "C_Verify",
+            "value" : 1
+          }, {
+            "name" : "C_GenerateKey",
+            "value" : 1
+          }, {
+            "name" : "C_DigestKey",
+            "value" : 1
+          }, {
+            "name" : "C_VerifyUpdate",
+            "value" : 1
+          }, {
+            "name" : "C_FindObjects",
+            "value" : 1
+          }, {
+            "name" : "C_VerifyFinal",
+            "value" : 1
+          }, {
+            "name" : "C_EncryptFinal",
+            "value" : 1
+          }, {
+            "name" : "C_GenerateKeyPair",
+            "value" : 1
+          }, {
+            "name" : "C_GetMechanismList",
+            "value" : 1
+          }, {
+            "name" : "C_Logout",
+            "value" : 1
+          } ]
+        } ]
+      } ]
+    }, {
+      "name" : "smartcardio",
+      "children" : [ {
+        "name" : "PCSC",
+        "children" : [ {
+          "name" : "SCardEndTransaction",
+          "value" : 1
+        }, {
+          "name" : "SCardBeginTransaction",
+          "value" : 1
+        }, {
+          "name" : "SCardStatus",
+          "value" : 1
+        }, {
+          "name" : "SCardConnect",
+          "value" : 1
+        }, {
+          "name" : "SCardEstablishContext",
+          "value" : 1
+        }, {
+          "name" : "SCardGetStatusChange",
+          "value" : 1
+        }, {
+          "name" : "SCardTransmit",
+          "value" : 1
+        }, {
+          "name" : "SCardListReaders",
+          "value" : 1
+        }, {
+          "name" : "SCardDisconnect",
+          "value" : 1
+        }, {
+          "name" : "SCardControl",
+          "value" : 1
+        } ]
+      } ]
+    }, {
+      "name" : "jgss",
+      "children" : [ {
+        "name" : "wrapper",
+        "children" : [ {
+          "name" : "GSSLibStub",
+          "children" : [ {
+            "name" : "deleteContext",
+            "value" : 1
+          }, {
+            "name" : "getCredTime",
+            "value" : 1
+          }, {
+            "name" : "displayName",
+            "value" : 1
+          }, {
+            "name" : "releaseName",
+            "value" : 1
+          }, {
+            "name" : "unwrap",
+            "value" : 1
+          }, {
+            "name" : "getContextTime",
+            "value" : 1
+          }, {
+            "name" : "exportContext",
+            "value" : 1
+          }, {
+            "name" : "getContextName",
+            "value" : 1
+          }, {
+            "name" : "acquireCred",
+            "value" : 1
+          }, {
+            "name" : "getMic",
+            "value" : 1
+          }, {
+            "name" : "wrapSizeLimit",
+            "value" : 1
+          }, {
+            "name" : "initContext",
+            "value" : 1
+          }, {
+            "name" : "releaseCred",
+            "value" : 1
+          }, {
+            "name" : "getCredName",
+            "value" : 1
+          }, {
+            "name" : "init",
+            "value" : 1
+          }, {
+            "name" : "verifyMic",
+            "value" : 1
+          }, {
+            "name" : "getContextMech",
+            "value" : 1
+          }, {
+            "name" : "exportName",
+            "value" : 1
+          }, {
+            "name" : "getMechPtr",
+            "value" : 1
+          }, {
+            "name" : "acceptContext",
+            "value" : 1
+          }, {
+            "name" : "inquireContext",
+            "value" : 1
+          }, {
+            "name" : "importContext",
+            "value" : 1
+          }, {
+            "name" : "indicateMechs",
+            "value" : 1
+          }, {
+            "name" : "inquireNamesForMech",
+            "value" : 1
+          }, {
+            "name" : "compareName",
+            "value" : 1
+          }, {
+            "name" : "getCredUsage",
+            "value" : 1
+          }, {
+            "name" : "importName",
+            "value" : 1
+          }, {
+            "name" : "canonicalizeName",
+            "value" : 1
+          }, {
+            "name" : "wrap",
+            "value" : 1
+          } ]
+        } ]
+      } ]
+    }, {
+      "name" : "mscapi",
+      "children" : [ {
+        "name" : "CRSACipher",
+        "children" : [ {
+          "name" : "cngEncryptDecrypt",
+          "value" : 1
+        }, {
+          "name" : "encryptDecrypt",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "CPublicKey$CRSAPublicKey",
+        "children" : [ {
+          "name" : "getModulus",
+          "value" : 1
+        }, {
+          "name" : "getExponent",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "CKey",
+        "children" : [ {
+          "name" : "getKeyType",
+          "value" : 1
+        }, {
+          "name" : "cleanUp",
+          "value" : 1
+        }, {
+          "name" : "getContainerName",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "CPublicKey",
+        "children" : [ {
+          "name" : "getPublicKeyBlob",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "CSignature",
+        "children" : [ {
+          "name" : "verifySignedHash",
+          "value" : 1
+        }, {
+          "name" : "signHash",
+          "value" : 1
+        }, {
+          "name" : "importPublicKey",
+          "value" : 1
+        }, {
+          "name" : "verifyCngSignedHash",
+          "value" : 1
+        }, {
+          "name" : "signCngHash",
+          "value" : 1
+        }, {
+          "name" : "importECPublicKey",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "CKeyStore",
+        "children" : [ {
+          "name" : "storeCertificate",
+          "value" : 1
+        }, {
+          "name" : "storePrivateKey",
+          "value" : 1
+        }, {
+          "name" : "generateRSAPrivateKeyBlob",
+          "value" : 1
+        }, {
+          "name" : "removeCngKey",
+          "value" : 1
+        }, {
+          "name" : "destroyKeyContainer",
+          "value" : 1
+        }, {
+          "name" : "removeCertificate",
+          "value" : 1
+        }, {
+          "name" : "loadKeysOrCertificateChains",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "PRNG",
+        "children" : [ {
+          "name" : "releaseContext",
+          "value" : 1
+        }, {
+          "name" : "generateSeed",
+          "value" : 1
+        }, {
+          "name" : "getContext",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "CSignature$RSA",
+        "children" : [ {
+          "name" : "generatePublicKeyBlob",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "CKeyPairGenerator$RSA",
+        "children" : [ {
+          "name" : "generateCKeyPair",
+          "value" : 1
+        } ]
+      } ]
+    } ]
+  }, {
+    "name" : "print",
+    "children" : [ {
+      "name" : "Win32PrintService",
+      "children" : [ {
+        "name" : "getPrinterPort",
+        "value" : 1
+      }, {
+        "name" : "getJobStatus",
+        "value" : 1
+      }, {
+        "name" : "getDefaultSettings",
+        "value" : 1
+      }, {
+        "name" : "getAllMediaNames",
+        "value" : 1
+      }, {
+        "name" : "getCopiesSupported",
+        "value" : 1
+      }, {
+        "name" : "getAllMediaTrayNames",
+        "value" : 1
+      }, {
+        "name" : "getCapabilities",
+        "value" : 1
+      }, {
+        "name" : "getAllResolutions",
+        "value" : 1
+      }, {
+        "name" : "getAllMediaTrays",
+        "value" : 1
+      }, {
+        "name" : "getMediaPrintableArea",
+        "value" : 1
+      }, {
+        "name" : "getAllMediaIDs",
+        "value" : 1
+      }, {
+        "name" : "getAllMediaSizes",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "PrintServiceLookupProvider",
+      "children" : [ {
+        "name" : "getDefaultPrinterName",
+        "value" : 1
+      }, {
+        "name" : "notifyLocalPrinterChange",
+        "value" : 1
+      }, {
+        "name" : "getAllPrinterNames",
+        "value" : 1
+      }, {
+        "name" : "notifyRemotePrinterChange",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "Win32PrintJob",
+      "children" : [ {
+        "name" : "printRawData",
+        "value" : 1
+      }, {
+        "name" : "endPrintRawData",
+        "value" : 1
+      }, {
+        "name" : "startPrintRawData",
+        "value" : 1
+      } ]
+    } ]
+  }, {
+    "name" : "util",
+    "children" : [ {
+      "name" : "locale",
+      "children" : [ {
+        "name" : "provider",
+        "children" : [ {
+          "name" : "HostLocaleProviderAdapterImpl",
+          "children" : [ {
+            "name" : "getCalendarID",
+            "value" : 1
+          }, {
+            "name" : "getWeekdays",
+            "value" : 1
+          }, {
+            "name" : "getCurrencySymbol",
+            "value" : 1
+          }, {
+            "name" : "getNaN",
+            "value" : 1
+          }, {
+            "name" : "getMonths",
+            "value" : 1
+          }, {
+            "name" : "getGroupingSeparator",
+            "value" : 1
+          }, {
+            "name" : "getCalendarDisplayStrings",
+            "value" : 1
+          }, {
+            "name" : "getAmPmStrings",
+            "value" : 1
+          }, {
+            "name" : "getCalendarDataValue",
+            "value" : 1
+          }, {
+            "name" : "getPercent",
+            "value" : 1
+          }, {
+            "name" : "isNativeDigit",
+            "value" : 1
+          }, {
+            "name" : "getNumberPattern",
+            "value" : 1
+          }, {
+            "name" : "getDecimalSeparator",
+            "value" : 1
+          }, {
+            "name" : "getPerMill",
+            "value" : 1
+          }, {
+            "name" : "getInternationalCurrencySymbol",
+            "value" : 1
+          }, {
+            "name" : "getEras",
+            "value" : 1
+          }, {
+            "name" : "getMinusSign",
+            "value" : 1
+          }, {
+            "name" : "getDefaultLocale",
+            "value" : 1
+          }, {
+            "name" : "getZeroDigit",
+            "value" : 1
+          }, {
+            "name" : "getInfinity",
+            "value" : 1
+          }, {
+            "name" : "getDateTimePattern",
+            "value" : 1
+          }, {
+            "name" : "getMonetaryDecimalSeparator",
+            "value" : 1
+          }, {
+            "name" : "getDisplayString",
+            "value" : 1
+          }, {
+            "name" : "getShortMonths",
+            "value" : 1
+          }, {
+            "name" : "initialize",
+            "value" : 1
+          }, {
+            "name" : "getShortWeekdays",
+            "value" : 1
+          } ]
+        } ]
+      } ]
+    } ]
+  }, {
+    "name" : "nio",
+    "children" : [ {
+      "name" : "ch",
+      "children" : [ {
+        "name" : "FileKey",
+        "children" : [ {
+          "name" : "init",
+          "value" : 1
+        }, {
+          "name" : "initIDs",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "FileDispatcherImpl",
+        "children" : [ {
+          "name" : "lock0",
+          "value" : 1
+        }, {
+          "name" : "pwrite0",
+          "value" : 1
+        }, {
+          "name" : "unmap0",
+          "value" : 1
+        }, {
+          "name" : "map0",
+          "value" : 1
+        }, {
+          "name" : "size0",
+          "value" : 1
+        }, {
+          "name" : "release0",
+          "value" : 1
+        }, {
+          "name" : "duplicateHandle",
+          "value" : 1
+        }, {
+          "name" : "close0",
+          "value" : 1
+        }, {
+          "name" : "transferTo0",
+          "value" : 1
+        }, {
+          "name" : "read0",
+          "value" : 1
+        }, {
+          "name" : "allocationGranularity0",
+          "value" : 1
+        }, {
+          "name" : "writev0",
+          "value" : 1
+        }, {
+          "name" : "setDirect0",
+          "value" : 1
+        }, {
+          "name" : "readv0",
+          "value" : 1
+        }, {
+          "name" : "write0",
+          "value" : 1
+        }, {
+          "name" : "force0",
+          "value" : 1
+        }, {
+          "name" : "maxDirectTransferSize0",
+          "value" : 1
+        }, {
+          "name" : "seek0",
+          "value" : 1
+        }, {
+          "name" : "truncate0",
+          "value" : 1
+        }, {
+          "name" : "pread0",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "DatagramDispatcher",
+        "children" : [ {
+          "name" : "writev0",
+          "value" : 1
+        }, {
+          "name" : "readv0",
+          "value" : 1
+        }, {
+          "name" : "write0",
+          "value" : 1
+        }, {
+          "name" : "read0",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "SocketDispatcher",
+        "children" : [ {
+          "name" : "writev0",
+          "value" : 1
+        }, {
+          "name" : "readv0",
+          "value" : 1
+        }, {
+          "name" : "write0",
+          "value" : 1
+        }, {
+          "name" : "close0",
+          "value" : 1
+        }, {
+          "name" : "read0",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WEPoll",
+        "children" : [ {
+          "name" : "wait",
+          "value" : 1
+        }, {
+          "name" : "dataOffset",
+          "value" : 1
+        }, {
+          "name" : "eventSize",
+          "value" : 1
+        }, {
+          "name" : "create",
+          "value" : 1
+        }, {
+          "name" : "ctl",
+          "value" : 1
+        }, {
+          "name" : "close",
+          "value" : 1
+        }, {
+          "name" : "eventsOffset",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "UnixDomainSockets",
+        "children" : [ {
+          "name" : "localAddress0",
+          "value" : 1
+        }, {
+          "name" : "init",
+          "value" : 1
+        }, {
+          "name" : "bind0",
+          "value" : 1
+        }, {
+          "name" : "accept0",
+          "value" : 1
+        }, {
+          "name" : "socket0",
+          "value" : 1
+        }, {
+          "name" : "connect0",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "Iocp",
+        "children" : [ {
+          "name" : "postQueuedCompletionStatus",
+          "value" : 1
+        }, {
+          "name" : "initIDs",
+          "value" : 1
+        }, {
+          "name" : "createIoCompletionPort",
+          "value" : 1
+        }, {
+          "name" : "close0",
+          "value" : 1
+        }, {
+          "name" : "getErrorMessage",
+          "value" : 1
+        }, {
+          "name" : "getQueuedCompletionStatus",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WindowsAsynchronousServerSocketChannelImpl",
+        "children" : [ {
+          "name" : "closesocket0",
+          "value" : 1
+        }, {
+          "name" : "accept0",
+          "value" : 1
+        }, {
+          "name" : "updateAcceptContext",
+          "value" : 1
+        }, {
+          "name" : "initIDs",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "NativeSocketAddress",
+        "children" : [ {
+          "name" : "offsetSin6Port",
+          "value" : 1
+        }, {
+          "name" : "offsetSin6FlowInfo",
+          "value" : 1
+        }, {
+          "name" : "offsetSin4Port",
+          "value" : 1
+        }, {
+          "name" : "sizeofSockAddr4",
+          "value" : 1
+        }, {
+          "name" : "offsetSin6ScopeId",
+          "value" : 1
+        }, {
+          "name" : "sizeofSockAddr6",
+          "value" : 1
+        }, {
+          "name" : "sizeofFamily",
+          "value" : 1
+        }, {
+          "name" : "offsetFamily",
+          "value" : 1
+        }, {
+          "name" : "AFINET6",
+          "value" : 1
+        }, {
+          "name" : "offsetSin6Addr",
+          "value" : 1
+        }, {
+          "name" : "AFINET",
+          "value" : 1
+        }, {
+          "name" : "offsetSin4Addr",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "DatagramChannelImpl",
+        "children" : [ {
+          "name" : "receive0",
+          "value" : 1
+        }, {
+          "name" : "disconnect0",
+          "value" : 1
+        }, {
+          "name" : "send0",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WindowsAsynchronousFileChannelImpl",
+        "children" : [ {
+          "name" : "lockFile",
+          "value" : 1
+        }, {
+          "name" : "readFile",
+          "value" : 1
+        }, {
+          "name" : "writeFile",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WindowsSelectorImpl",
+        "children" : [ {
+          "name" : "setWakeupSocket0",
+          "value" : 1
+        }, {
+          "name" : "resetWakeupSocket0",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WindowsAsynchronousSocketChannelImpl",
+        "children" : [ {
+          "name" : "shutdown0",
+          "value" : 1
+        }, {
+          "name" : "closesocket0",
+          "value" : 1
+        }, {
+          "name" : "initIDs",
+          "value" : 1
+        }, {
+          "name" : "write0",
+          "value" : 1
+        }, {
+          "name" : "updateConnectContext",
+          "value" : 1
+        }, {
+          "name" : "connect0",
+          "value" : 1
+        }, {
+          "name" : "read0",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WindowsSelectorImpl$SubSelector",
+        "children" : [ {
+          "name" : "poll0",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "IOUtil",
+        "children" : [ {
+          "name" : "writevMax",
+          "value" : 1
+        }, {
+          "name" : "drain1",
+          "value" : 1
+        }, {
+          "name" : "makePipe",
+          "value" : 1
+        }, {
+          "name" : "initIDs",
+          "value" : 1
+        }, {
+          "name" : "write1",
+          "value" : 1
+        }, {
+          "name" : "iovMax",
+          "value" : 1
+        }, {
+          "name" : "setfdVal",
+          "value" : 1
+        }, {
+          "name" : "fdLimit",
+          "value" : 1
+        }, {
+          "name" : "drain",
+          "value" : 1
+        }, {
+          "name" : "fdVal",
+          "value" : 1
+        }, {
+          "name" : "configureBlocking",
+          "value" : 1
+        }, {
+          "name" : "randomBytes",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "Net",
+        "children" : [ {
+          "name" : "pollerrValue",
+          "value" : 1
+        }, {
+          "name" : "setInterface4",
+          "value" : 1
+        }, {
+          "name" : "remoteInetAddress",
+          "value" : 1
+        }, {
+          "name" : "setInterface6",
+          "value" : 1
+        }, {
+          "name" : "bind0",
+          "value" : 1
+        }, {
+          "name" : "initIDs",
+          "value" : 1
+        }, {
+          "name" : "available",
+          "value" : 1
+        }, {
+          "name" : "poll",
+          "value" : 1
+        }, {
+          "name" : "blockOrUnblock6",
+          "value" : 1
+        }, {
+          "name" : "blockOrUnblock4",
+          "value" : 1
+        }, {
+          "name" : "listen",
+          "value" : 1
+        }, {
+          "name" : "isIPv6Available0",
+          "value" : 1
+        }, {
+          "name" : "pollhupValue",
+          "value" : 1
+        }, {
+          "name" : "sendOOB",
+          "value" : 1
+        }, {
+          "name" : "pollConnect",
+          "value" : 1
+        }, {
+          "name" : "isReusePortAvailable0",
+          "value" : 1
+        }, {
+          "name" : "connect0",
+          "value" : 1
+        }, {
+          "name" : "joinOrDrop4",
+          "value" : 1
+        }, {
+          "name" : "setIntOption0",
+          "value" : 1
+        }, {
+          "name" : "canUseIPv6OptionsWithIPv4LocalAddress0",
+          "value" : 1
+        }, {
+          "name" : "joinOrDrop6",
+          "value" : 1
+        }, {
+          "name" : "localPort",
+          "value" : 1
+        }, {
+          "name" : "shouldSetBothIPv4AndIPv6Options0",
+          "value" : 1
+        }, {
+          "name" : "socket0",
+          "value" : 1
+        }, {
+          "name" : "discardOOB",
+          "value" : 1
+        }, {
+          "name" : "remotePort",
+          "value" : 1
+        }, {
+          "name" : "getInterface4",
+          "value" : 1
+        }, {
+          "name" : "pollnvalValue",
+          "value" : 1
+        }, {
+          "name" : "getInterface6",
+          "value" : 1
+        }, {
+          "name" : "getIntOption0",
+          "value" : 1
+        }, {
+          "name" : "accept",
+          "value" : 1
+        }, {
+          "name" : "pollconnValue",
+          "value" : 1
+        }, {
+          "name" : "polloutValue",
+          "value" : 1
+        }, {
+          "name" : "canIPv6SocketJoinIPv4Group0",
+          "value" : 1
+        }, {
+          "name" : "localInetAddress",
+          "value" : 1
+        }, {
+          "name" : "isExclusiveBindAvailable",
+          "value" : 1
+        }, {
+          "name" : "canJoin6WithIPv4Group0",
+          "value" : 1
+        }, {
+          "name" : "pollinValue",
+          "value" : 1
+        }, {
+          "name" : "shutdown",
+          "value" : 1
+        } ]
+      } ]
+    }, {
+      "name" : "fs",
+      "children" : [ {
+        "name" : "RegistryFileTypeDetector",
+        "children" : [ {
+          "name" : "queryStringValue",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WindowsNativeDispatcher",
+        "children" : [ {
+          "name" : "GetAce",
+          "value" : 1
+        }, {
+          "name" : "GetAclInformation0",
+          "value" : 1
+        }, {
+          "name" : "SetSecurityDescriptorOwner",
+          "value" : 1
+        }, {
+          "name" : "CreateIoCompletionPort",
+          "value" : 1
+        }, {
+          "name" : "GetFullPathName0",
+          "value" : 1
+        }, {
+          "name" : "initIDs",
+          "value" : 1
+        }, {
+          "name" : "GetTokenInformation",
+          "value" : 1
+        }, {
+          "name" : "GetQueuedCompletionStatus0",
+          "value" : 1
+        }, {
+          "name" : "GetFileAttributesEx0",
+          "value" : 1
+        }, {
+          "name" : "DeleteFile0",
+          "value" : 1
+        }, {
+          "name" : "GetOverlappedResult",
+          "value" : 1
+        }, {
+          "name" : "SetThreadToken",
+          "value" : 1
+        }, {
+          "name" : "GetDriveType0",
+          "value" : 1
+        }, {
+          "name" : "DeviceIoControlGetReparsePoint",
+          "value" : 1
+        }, {
+          "name" : "FindNextFile0",
+          "value" : 1
+        }, {
+          "name" : "OpenProcessToken",
+          "value" : 1
+        }, {
+          "name" : "FindClose",
+          "value" : 1
+        }, {
+          "name" : "GetDiskFreeSpace0",
+          "value" : 1
+        }, {
+          "name" : "SetFileSecurity0",
+          "value" : 1
+        }, {
+          "name" : "FindFirstStream0",
+          "value" : 1
+        }, {
+          "name" : "ConvertSidToStringSid",
+          "value" : 1
+        }, {
+          "name" : "GetDiskFreeSpaceEx0",
+          "value" : 1
+        }, {
+          "name" : "AdjustTokenPrivileges",
+          "value" : 1
+        }, {
+          "name" : "GetCurrentThread",
+          "value" : 1
+        }, {
+          "name" : "GetCurrentProcess",
+          "value" : 1
+        }, {
+          "name" : "InitializeSecurityDescriptor",
+          "value" : 1
+        }, {
+          "name" : "GetFileSizeEx",
+          "value" : 1
+        }, {
+          "name" : "LookupPrivilegeValue0",
+          "value" : 1
+        }, {
+          "name" : "SetFileTime0",
+          "value" : 1
+        }, {
+          "name" : "AccessCheck",
+          "value" : 1
+        }, {
+          "name" : "CreateSymbolicLink0",
+          "value" : 1
+        }, {
+          "name" : "GetSecurityDescriptorDacl",
+          "value" : 1
+        }, {
+          "name" : "CopyFileEx0",
+          "value" : 1
+        }, {
+          "name" : "GetLengthSid",
+          "value" : 1
+        }, {
+          "name" : "LocalFree",
+          "value" : 1
+        }, {
+          "name" : "ReadDirectoryChangesW",
+          "value" : 1
+        }, {
+          "name" : "AddAccessAllowedAceEx",
+          "value" : 1
+        }, {
+          "name" : "SetEndOfFile",
+          "value" : 1
+        }, {
+          "name" : "CloseHandle",
+          "value" : 1
+        }, {
+          "name" : "GetVolumeInformation0",
+          "value" : 1
+        }, {
+          "name" : "CreateEvent",
+          "value" : 1
+        }, {
+          "name" : "GetFileAttributes0",
+          "value" : 1
+        }, {
+          "name" : "LookupAccountSid0",
+          "value" : 1
+        }, {
+          "name" : "SetFileAttributes0",
+          "value" : 1
+        }, {
+          "name" : "MoveFileEx0",
+          "value" : 1
+        }, {
+          "name" : "DeviceIoControlSetSparse",
+          "value" : 1
+        }, {
+          "name" : "PostQueuedCompletionStatus",
+          "value" : 1
+        }, {
+          "name" : "GetSecurityDescriptorOwner",
+          "value" : 1
+        }, {
+          "name" : "FindNextStream0",
+          "value" : 1
+        }, {
+          "name" : "AddAccessDeniedAceEx",
+          "value" : 1
+        }, {
+          "name" : "FormatMessage",
+          "value" : 1
+        }, {
+          "name" : "CreateFile0",
+          "value" : 1
+        }, {
+          "name" : "CancelIo",
+          "value" : 1
+        }, {
+          "name" : "CreateHardLink0",
+          "value" : 1
+        }, {
+          "name" : "GetFileSecurity0",
+          "value" : 1
+        }, {
+          "name" : "InitializeAcl",
+          "value" : 1
+        }, {
+          "name" : "SetSecurityDescriptorDacl",
+          "value" : 1
+        }, {
+          "name" : "CreateDirectory0",
+          "value" : 1
+        }, {
+          "name" : "GetFileInformationByHandle0",
+          "value" : 1
+        }, {
+          "name" : "GetVolumePathName0",
+          "value" : 1
+        }, {
+          "name" : "LookupAccountName0",
+          "value" : 1
+        }, {
+          "name" : "OpenThreadToken",
+          "value" : 1
+        }, {
+          "name" : "GetFinalPathNameByHandle",
+          "value" : 1
+        }, {
+          "name" : "ConvertStringSidToSid0",
+          "value" : 1
+        }, {
+          "name" : "DuplicateTokenEx",
+          "value" : 1
+        }, {
+          "name" : "FindFirstFile0",
+          "value" : 1
+        }, {
+          "name" : "FindFirstFile1",
+          "value" : 1
+        }, {
+          "name" : "GetLogicalDrives",
+          "value" : 1
+        }, {
+          "name" : "RemoveDirectory0",
+          "value" : 1
+        } ]
+      } ]
+    } ]
+  }, {
+    "name" : "management",
+    "children" : [ {
+      "name" : "ThreadImpl",
+      "children" : [ {
+        "name" : "findDeadlockedThreads0",
+        "value" : 1
+      }, {
+        "name" : "setThreadContentionMonitoringEnabled0",
+        "value" : 1
+      }, {
+        "name" : "getThreadUserCpuTime0",
+        "value" : 1
+      }, {
+        "name" : "getThreadUserCpuTime1",
+        "value" : 1
+      }, {
+        "name" : "findMonitorDeadlockedThreads0",
+        "value" : 1
+      }, {
+        "name" : "getThreadTotalCpuTime0",
+        "value" : 1
+      }, {
+        "name" : "dumpThreads0",
+        "value" : 1
+      }, {
+        "name" : "resetContentionTimes0",
+        "value" : 1
+      }, {
+        "name" : "getTotalThreadAllocatedMemory",
+        "value" : 1
+      }, {
+        "name" : "resetPeakThreadCount0",
+        "value" : 1
+      }, {
+        "name" : "getThreadInfo1",
+        "value" : 1
+      }, {
+        "name" : "setThreadAllocatedMemoryEnabled0",
+        "value" : 1
+      }, {
+        "name" : "getThreadTotalCpuTime1",
+        "value" : 1
+      }, {
+        "name" : "setThreadCpuTimeEnabled0",
+        "value" : 1
+      }, {
+        "name" : "getThreadAllocatedMemory1",
+        "value" : 1
+      }, {
+        "name" : "getThreadAllocatedMemory0",
+        "value" : 1
+      }, {
+        "name" : "getThreads",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "HotspotThread",
+      "children" : [ {
+        "name" : "getInternalThreadCount",
+        "value" : 1
+      }, {
+        "name" : "getInternalThreadTimes0",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "ClassLoadingImpl",
+      "children" : [ {
+        "name" : "setVerboseClass",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "GarbageCollectorImpl",
+      "children" : [ {
+        "name" : "getCollectionTime",
+        "value" : 1
+      }, {
+        "name" : "getCollectionCount",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "VMManagementImpl",
+      "children" : [ {
+        "name" : "getSafepointSyncTime",
+        "value" : 1
+      }, {
+        "name" : "isThreadContentionMonitoringEnabled",
+        "value" : 1
+      }, {
+        "name" : "getVersion0",
+        "value" : 1
+      }, {
+        "name" : "getTotalCompileTime",
+        "value" : 1
+      }, {
+        "name" : "getInitializedClassCount",
+        "value" : 1
+      }, {
+        "name" : "isThreadAllocatedMemoryEnabled",
+        "value" : 1
+      }, {
+        "name" : "getVerboseGC",
+        "value" : 1
+      }, {
+        "name" : "getAvailableProcessors",
+        "value" : 1
+      }, {
+        "name" : "getVerboseClass",
+        "value" : 1
+      }, {
+        "name" : "getVmArguments0",
+        "value" : 1
+      }, {
+        "name" : "getTotalThreadCount",
+        "value" : 1
+      }, {
+        "name" : "getProcessId",
+        "value" : 1
+      }, {
+        "name" : "getClassLoadingTime",
+        "value" : 1
+      }, {
+        "name" : "getTotalApplicationNonStoppedTime",
+        "value" : 1
+      }, {
+        "name" : "getDaemonThreadCount",
+        "value" : 1
+      }, {
+        "name" : "getUnloadedClassCount",
+        "value" : 1
+      }, {
+        "name" : "getUptime0",
+        "value" : 1
+      }, {
+        "name" : "getClassInitializationTime",
+        "value" : 1
+      }, {
+        "name" : "getSafepointCount",
+        "value" : 1
+      }, {
+        "name" : "getPeakThreadCount",
+        "value" : 1
+      }, {
+        "name" : "getMethodDataSize",
+        "value" : 1
+      }, {
+        "name" : "getTotalSafepointTime",
+        "value" : 1
+      }, {
+        "name" : "getStartupTime",
+        "value" : 1
+      }, {
+        "name" : "getLoadedClassSize",
+        "value" : 1
+      }, {
+        "name" : "initOptionalSupportFields",
+        "value" : 1
+      }, {
+        "name" : "isThreadCpuTimeEnabled",
+        "value" : 1
+      }, {
+        "name" : "getUnloadedClassSize",
+        "value" : 1
+      }, {
+        "name" : "getClassVerificationTime",
+        "value" : 1
+      }, {
+        "name" : "getLiveThreadCount",
+        "value" : 1
+      }, {
+        "name" : "getTotalClassCount",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "MemoryManagerImpl",
+      "children" : [ {
+        "name" : "getMemoryPools0",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "MemoryPoolImpl",
+      "children" : [ {
+        "name" : "getMemoryManagers0",
+        "value" : 1
+      }, {
+        "name" : "setCollectionThreshold0",
+        "value" : 1
+      }, {
+        "name" : "setPoolCollectionSensor",
+        "value" : 1
+      }, {
+        "name" : "setUsageThreshold0",
+        "value" : 1
+      }, {
+        "name" : "getUsage0",
+        "value" : 1
+      }, {
+        "name" : "getPeakUsage0",
+        "value" : 1
+      }, {
+        "name" : "getCollectionUsage0",
+        "value" : 1
+      }, {
+        "name" : "resetPeakUsage0",
+        "value" : 1
+      }, {
+        "name" : "setPoolUsageSensor",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "MemoryImpl",
+      "children" : [ {
+        "name" : "getMemoryManagers0",
+        "value" : 1
+      }, {
+        "name" : "getMemoryUsage0",
+        "value" : 1
+      }, {
+        "name" : "setVerboseGC",
+        "value" : 1
+      }, {
+        "name" : "getMemoryPools0",
+        "value" : 1
+      } ]
+    } ]
+  }, {
+    "name" : "java2d",
+    "children" : [ {
+      "name" : "cmm",
+      "children" : [ {
+        "name" : "lcms",
+        "children" : [ {
+          "name" : "LCMS",
+          "children" : [ {
+            "name" : "getTagNative",
+            "value" : 1
+          }, {
+            "name" : "getProfileDataNative",
+            "value" : 1
+          }, {
+            "name" : "createNativeTransform",
+            "value" : 1
+          }, {
+            "name" : "colorConvert",
+            "value" : 1
+          }, {
+            "name" : "loadProfileNative",
+            "value" : 1
+          }, {
+            "name" : "setTagDataNative",
+            "value" : 1
+          } ]
+        } ]
+      } ]
+    }, {
+      "name" : "SurfaceData",
+      "children" : [ {
+        "name" : "isOpaqueGray",
+        "value" : 1
+      }, {
+        "name" : "initIDs",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "d3d",
+      "children" : [ {
+        "name" : "D3DTextRenderer",
+        "children" : [ {
+          "name" : "drawGlyphList",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "D3DRenderer",
+        "children" : [ {
+          "name" : "drawPoly",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "D3DRenderQueue",
+        "children" : [ {
+          "name" : "flushBuffer",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "D3DMaskFill",
+        "children" : [ {
+          "name" : "maskFill",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "D3DSurfaceData",
+        "children" : [ {
+          "name" : "initOps",
+          "value" : 1
+        }, {
+          "name" : "dbGetPixelNative",
+          "value" : 1
+        }, {
+          "name" : "initRTSurface",
+          "value" : 1
+        }, {
+          "name" : "getNativeResourceNative",
+          "value" : 1
+        }, {
+          "name" : "dbSetPixelNative",
+          "value" : 1
+        }, {
+          "name" : "initFlipBackbuffer",
+          "value" : 1
+        }, {
+          "name" : "initTexture",
+          "value" : 1
+        }, {
+          "name" : "updateWindowAccelImpl",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "D3DGraphicsDevice",
+        "children" : [ {
+          "name" : "isD3DAvailableOnDeviceNative",
+          "value" : 1
+        }, {
+          "name" : "getDeviceIdNative",
+          "value" : 1
+        }, {
+          "name" : "exitFullScreenExclusiveNative",
+          "value" : 1
+        }, {
+          "name" : "enumDisplayModesNative",
+          "value" : 1
+        }, {
+          "name" : "enterFullScreenExclusiveNative",
+          "value" : 1
+        }, {
+          "name" : "initD3D",
+          "value" : 1
+        }, {
+          "name" : "configDisplayModeNative",
+          "value" : 1
+        }, {
+          "name" : "getDeviceCapsNative",
+          "value" : 1
+        }, {
+          "name" : "getAvailableAcceleratedMemoryNative",
+          "value" : 1
+        }, {
+          "name" : "getCurrentDisplayModeNative",
+          "value" : 1
+        } ]
+      } ]
+    }, {
+      "name" : "DefaultDisposerRecord",
+      "children" : [ {
+        "name" : "invokeNativeDispose",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "loops",
+      "children" : [ {
+        "name" : "TransformBlit",
+        "children" : [ {
+          "name" : "Transform",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "FillSpans",
+        "children" : [ {
+          "name" : "FillSpans",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "FillRect",
+        "children" : [ {
+          "name" : "FillRect",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "DrawPath",
+        "children" : [ {
+          "name" : "DrawPath",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "DrawGlyphListAA",
+        "children" : [ {
+          "name" : "DrawGlyphListAA",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "Blit",
+        "children" : [ {
+          "name" : "Blit",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "FillPath",
+        "children" : [ {
+          "name" : "FillPath",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "TransformHelper",
+        "children" : [ {
+          "name" : "Transform",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "DrawParallelogram",
+        "children" : [ {
+          "name" : "DrawParallelogram",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "DrawLine",
+        "children" : [ {
+          "name" : "DrawLine",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "MaskFill",
+        "children" : [ {
+          "name" : "DrawAAPgram",
+          "value" : 1
+        }, {
+          "name" : "MaskFill",
+          "value" : 1
+        }, {
+          "name" : "FillAAPgram",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "MaskBlit",
+        "children" : [ {
+          "name" : "MaskBlit",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "DrawRect",
+        "children" : [ {
+          "name" : "DrawRect",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "BlitBg",
+        "children" : [ {
+          "name" : "BlitBg",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "DrawGlyphList",
+        "children" : [ {
+          "name" : "DrawGlyphList",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "ScaledBlit",
+        "children" : [ {
+          "name" : "Scale",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "DrawPolygons",
+        "children" : [ {
+          "name" : "DrawPolygons",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "FillParallelogram",
+        "children" : [ {
+          "name" : "FillParallelogram",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "GraphicsPrimitiveMgr",
+        "children" : [ {
+          "name" : "registerNativeLoops",
+          "value" : 1
+        }, {
+          "name" : "initIDs",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "DrawGlyphListLCD",
+        "children" : [ {
+          "name" : "DrawGlyphListLCD",
+          "value" : 1
+        } ]
+      } ]
+    }, {
+      "name" : "Disposer",
+      "children" : [ {
+        "name" : "initIDs",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "pipe",
+      "children" : [ {
+        "name" : "BufferedMaskBlit",
+        "children" : [ {
+          "name" : "enqueueTile",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "ShapeSpanIterator",
+        "children" : [ {
+          "name" : "closePath",
+          "value" : 1
+        }, {
+          "name" : "curveTo",
+          "value" : 1
+        }, {
+          "name" : "initIDs",
+          "value" : 1
+        }, {
+          "name" : "lineTo",
+          "value" : 1
+        }, {
+          "name" : "pathDone",
+          "value" : 1
+        }, {
+          "name" : "getPathBox",
+          "value" : 1
+        }, {
+          "name" : "setNormalize",
+          "value" : 1
+        }, {
+          "name" : "getNativeConsumer",
+          "value" : 1
+        }, {
+          "name" : "setRule",
+          "value" : 1
+        }, {
+          "name" : "quadTo",
+          "value" : 1
+        }, {
+          "name" : "addSegment",
+          "value" : 1
+        }, {
+          "name" : "setOutputAreaXYXY",
+          "value" : 1
+        }, {
+          "name" : "skipDownTo",
+          "value" : 1
+        }, {
+          "name" : "intersectClipBox",
+          "value" : 1
+        }, {
+          "name" : "dispose",
+          "value" : 1
+        }, {
+          "name" : "nextSpan",
+          "value" : 1
+        }, {
+          "name" : "getNativeIterator",
+          "value" : 1
+        }, {
+          "name" : "moveTo",
+          "value" : 1
+        }, {
+          "name" : "appendPoly",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "BufferedRenderPipe",
+        "children" : [ {
+          "name" : "fillSpans",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "SpanClipRenderer",
+        "children" : [ {
+          "name" : "eraseTile",
+          "value" : 1
+        }, {
+          "name" : "initIDs",
+          "value" : 1
+        }, {
+          "name" : "fillTile",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "Region",
+        "children" : [ {
+          "name" : "initIDs",
+          "value" : 1
+        } ]
+      } ]
+    }, {
+      "name" : "windows",
+      "children" : [ {
+        "name" : "GDIRenderer",
+        "children" : [ {
+          "name" : "doDrawPoly",
+          "value" : 1
+        }, {
+          "name" : "doFillRect",
+          "value" : 1
+        }, {
+          "name" : "devCopyArea",
+          "value" : 1
+        }, {
+          "name" : "doFillArc",
+          "value" : 1
+        }, {
+          "name" : "doFillPoly",
+          "value" : 1
+        }, {
+          "name" : "doDrawOval",
+          "value" : 1
+        }, {
+          "name" : "doDrawLine",
+          "value" : 1
+        }, {
+          "name" : "doDrawRoundRect",
+          "value" : 1
+        }, {
+          "name" : "doShape",
+          "value" : 1
+        }, {
+          "name" : "doFillOval",
+          "value" : 1
+        }, {
+          "name" : "doFillRoundRect",
+          "value" : 1
+        }, {
+          "name" : "doDrawArc",
+          "value" : 1
+        }, {
+          "name" : "doDrawRect",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "GDIBlitLoops",
+        "children" : [ {
+          "name" : "nativeBlit",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "GDIWindowSurfaceData",
+        "children" : [ {
+          "name" : "initOps",
+          "value" : 1
+        }, {
+          "name" : "invalidateSD",
+          "value" : 1
+        }, {
+          "name" : "initIDs",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WindowsFlags",
+        "children" : [ {
+          "name" : "initNativeFlags",
+          "value" : 1
+        } ]
+      } ]
+    }, {
+      "name" : "opengl",
+      "children" : [ {
+        "name" : "WGLGraphicsConfig",
+        "children" : [ {
+          "name" : "getWGLConfigInfo",
+          "value" : 1
+        }, {
+          "name" : "getOGLCapabilities",
+          "value" : 1
+        }, {
+          "name" : "getDefaultPixFmt",
+          "value" : 1
+        }, {
+          "name" : "initWGL",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "OGLRenderQueue",
+        "children" : [ {
+          "name" : "flushBuffer",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "OGLContext",
+        "children" : [ {
+          "name" : "getOGLIdString",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "OGLMaskFill",
+        "children" : [ {
+          "name" : "maskFill",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "OGLRenderer",
+        "children" : [ {
+          "name" : "drawPoly",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "OGLTextRenderer",
+        "children" : [ {
+          "name" : "drawGlyphList",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "OGLSurfaceData",
+        "children" : [ {
+          "name" : "getTextureTarget",
+          "value" : 1
+        }, {
+          "name" : "initFlipBackbuffer",
+          "value" : 1
+        }, {
+          "name" : "initTexture",
+          "value" : 1
+        }, {
+          "name" : "getTextureID",
+          "value" : 1
+        }, {
+          "name" : "initFBObject",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WGLSurfaceData",
+        "children" : [ {
+          "name" : "initOps",
+          "value" : 1
+        }, {
+          "name" : "updateWindowAccelImpl",
+          "value" : 1
+        } ]
+      } ]
+    } ]
+  }, {
+    "name" : "net",
+    "children" : [ {
+      "name" : "www",
+      "children" : [ {
+        "name" : "protocol",
+        "children" : [ {
+          "name" : "http",
+          "children" : [ {
+            "name" : "ntlm",
+            "children" : [ {
+              "name" : "NTLMAuthSequence",
+              "children" : [ {
+                "name" : "getCredentialsHandle",
+                "value" : 1
+              }, {
+                "name" : "getNextToken",
+                "value" : 1
+              }, {
+                "name" : "initFirst",
+                "value" : 1
+              } ]
+            }, {
+              "name" : "NTLMAuthentication",
+              "children" : [ {
+                "name" : "isTrustedSiteAvailable",
+                "value" : 1
+              }, {
+                "name" : "isTrustedSite0",
+                "value" : 1
+              } ]
+            } ]
+          } ]
+        } ]
+      } ]
+    }, {
+      "name" : "dns",
+      "children" : [ {
+        "name" : "ResolverConfigurationImpl",
+        "children" : [ {
+          "name" : "notifyAddrChange0",
+          "value" : 1
+        }, {
+          "name" : "init0",
+          "value" : 1
+        }, {
+          "name" : "loadDNSconfig0",
+          "value" : 1
+        } ]
+      } ]
+    }, {
+      "name" : "spi",
+      "children" : [ {
+        "name" : "DefaultProxySelector",
+        "children" : [ {
+          "name" : "init",
+          "value" : 1
+        }, {
+          "name" : "getSystemProxies",
+          "value" : 1
+        } ]
+      } ]
+    }, {
+      "name" : "sdp",
+      "children" : [ {
+        "name" : "SdpSupport",
+        "children" : [ {
+          "name" : "convert0",
+          "value" : 1
+        }, {
+          "name" : "create0",
+          "value" : 1
+        } ]
+      } ]
+    } ]
+  }, {
+    "name" : "font",
+    "children" : [ {
+      "name" : "SunFontManager",
+      "children" : [ {
+        "name" : "initIDs",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "FreetypeFontScaler",
+      "children" : [ {
+        "name" : "getGlyphVectorOutlineNative",
+        "value" : 1
+      }, {
+        "name" : "getGlyphAdvanceNative",
+        "value" : 1
+      }, {
+        "name" : "getFontMetricsNative",
+        "value" : 1
+      }, {
+        "name" : "disposeNativeScaler",
+        "value" : 1
+      }, {
+        "name" : "getGlyphOutlineBoundsNative",
+        "value" : 1
+      }, {
+        "name" : "initIDs",
+        "value" : 1
+      }, {
+        "name" : "getNumGlyphsNative",
+        "value" : 1
+      }, {
+        "name" : "getMissingGlyphCodeNative",
+        "value" : 1
+      }, {
+        "name" : "getGlyphOutlineNative",
+        "value" : 1
+      }, {
+        "name" : "createScalerContextNative",
+        "value" : 1
+      }, {
+        "name" : "getUnitsPerEMNative",
+        "value" : 1
+      }, {
+        "name" : "getGlyphMetricsNative",
+        "value" : 1
+      }, {
+        "name" : "getGlyphImageNative",
+        "value" : 1
+      }, {
+        "name" : "getGlyphPointNative",
+        "value" : 1
+      }, {
+        "name" : "initNativeScaler",
+        "value" : 1
+      }, {
+        "name" : "getGlyphCodeNative",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "FileFontStrike",
+      "children" : [ {
+        "name" : "_getGlyphImageFromWindows",
+        "value" : 1
+      }, {
+        "name" : "initNative",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "StrikeCache",
+      "children" : [ {
+        "name" : "freeLongMemory",
+        "value" : 1
+      }, {
+        "name" : "freeIntMemory",
+        "value" : 1
+      }, {
+        "name" : "freeLongPointer",
+        "value" : 1
+      }, {
+        "name" : "freeIntPointer",
+        "value" : 1
+      }, {
+        "name" : "getGlyphCacheDescription",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "NullFontScaler",
+      "children" : [ {
+        "name" : "getGlyphImage",
+        "value" : 1
+      }, {
+        "name" : "getNullScalerContext",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "SunLayoutEngine",
+      "children" : [ {
+        "name" : "disposeFace",
+        "value" : 1
+      }, {
+        "name" : "shape",
+        "value" : 1
+      }, {
+        "name" : "createFace",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "ColorGlyphSurfaceData",
+      "children" : [ {
+        "name" : "initOps",
+        "value" : 1
+      }, {
+        "name" : "setCurrentGlyph",
+        "value" : 1
+      } ]
+    } ]
+  }, {
+    "name" : "awt",
+    "children" : [ {
+      "name" : "DebugSettings",
+      "children" : [ {
+        "name" : "setCTracingOn",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "image",
+      "children" : [ {
+        "name" : "ShortComponentRaster",
+        "children" : [ {
+          "name" : "initIDs",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "ImageRepresentation",
+        "children" : [ {
+          "name" : "setICMpixels",
+          "value" : 1
+        }, {
+          "name" : "initIDs",
+          "value" : 1
+        }, {
+          "name" : "setDiffICM",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "BufImgSurfaceData",
+        "children" : [ {
+          "name" : "initRaster",
+          "value" : 1
+        }, {
+          "name" : "initIDs",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "BytePackedRaster",
+        "children" : [ {
+          "name" : "initIDs",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "DataBufferNative",
+        "children" : [ {
+          "name" : "setElem",
+          "value" : 1
+        }, {
+          "name" : "getElem",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "GifImageDecoder",
+        "children" : [ {
+          "name" : "initIDs",
+          "value" : 1
+        }, {
+          "name" : "parseImage",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "ByteComponentRaster",
+        "children" : [ {
+          "name" : "initIDs",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "IntegerComponentRaster",
+        "children" : [ {
+          "name" : "initIDs",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "JPEGImageDecoder",
+        "children" : [ {
+          "name" : "initIDs",
+          "value" : 1
+        }, {
+          "name" : "readImage",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "ImagingLib",
+        "children" : [ {
+          "name" : "convolveBI",
+          "value" : 1
+        }, {
+          "name" : "init",
+          "value" : 1
+        }, {
+          "name" : "transformBI",
+          "value" : 1
+        }, {
+          "name" : "transformRaster",
+          "value" : 1
+        }, {
+          "name" : "lookupByteRaster",
+          "value" : 1
+        }, {
+          "name" : "convolveRaster",
+          "value" : 1
+        }, {
+          "name" : "lookupByteBI",
+          "value" : 1
+        } ]
+      } ]
+    }, {
+      "name" : "Win32GraphicsConfig",
+      "children" : [ {
+        "name" : "initIDs",
+        "value" : 1
+      }, {
+        "name" : "getBounds",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "Win32GraphicsEnvironment",
+      "children" : [ {
+        "name" : "initDisplay",
+        "value" : 1
+      }, {
+        "name" : "getXResolution",
+        "value" : 1
+      }, {
+        "name" : "getNumScreens",
+        "value" : 1
+      }, {
+        "name" : "getYResolution",
+        "value" : 1
+      }, {
+        "name" : "getDefaultScreen",
+        "value" : 1
+      }, {
+        "name" : "isVistaOS",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "shell",
+      "children" : [ {
+        "name" : "Win32ShellFolderManager2",
+        "children" : [ {
+          "name" : "uninitializeCom",
+          "value" : 1
+        }, {
+          "name" : "initializeCom",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "Win32ShellFolder2",
+        "children" : [ {
+          "name" : "disposeIcon",
+          "value" : 1
+        }, {
+          "name" : "getDisplayNameOf",
+          "value" : 1
+        }, {
+          "name" : "getLinkLocation",
+          "value" : 1
+        }, {
+          "name" : "doGetColumnValue",
+          "value" : 1
+        }, {
+          "name" : "getIconBits",
+          "value" : 1
+        }, {
+          "name" : "bindToObject",
+          "value" : 1
+        }, {
+          "name" : "getNextPIDLEntry",
+          "value" : 1
+        }, {
+          "name" : "initIDs",
+          "value" : 1
+        }, {
+          "name" : "parseDisplayName0",
+          "value" : 1
+        }, {
+          "name" : "getExecutableType",
+          "value" : 1
+        }, {
+          "name" : "getEnumObjects",
+          "value" : 1
+        }, {
+          "name" : "initDesktop",
+          "value" : 1
+        }, {
+          "name" : "loadKnownFolders",
+          "value" : 1
+        }, {
+          "name" : "getNextChild",
+          "value" : 1
+        }, {
+          "name" : "getFileSystemPath0",
+          "value" : 1
+        }, {
+          "name" : "getIconResource",
+          "value" : 1
+        }, {
+          "name" : "getFolderType",
+          "value" : 1
+        }, {
+          "name" : "compareIDs",
+          "value" : 1
+        }, {
+          "name" : "releaseIShellFolder",
+          "value" : 1
+        }, {
+          "name" : "copyFirstPIDLEntry",
+          "value" : 1
+        }, {
+          "name" : "getAttributes0",
+          "value" : 1
+        }, {
+          "name" : "hiResIconAvailable",
+          "value" : 1
+        }, {
+          "name" : "getIShellIcon",
+          "value" : 1
+        }, {
+          "name" : "getIcon",
+          "value" : 1
+        }, {
+          "name" : "getStandardViewButton0",
+          "value" : 1
+        }, {
+          "name" : "getSystemIcon",
+          "value" : 1
+        }, {
+          "name" : "combinePIDLs",
+          "value" : 1
+        }, {
+          "name" : "doGetColumnInfo",
+          "value" : 1
+        }, {
+          "name" : "getIconIndex",
+          "value" : 1
+        }, {
+          "name" : "extractIcon",
+          "value" : 1
+        }, {
+          "name" : "releaseEnumObjects",
+          "value" : 1
+        }, {
+          "name" : "releasePIDL",
+          "value" : 1
+        }, {
+          "name" : "compareIDsByColumn",
+          "value" : 1
+        }, {
+          "name" : "initSpecial",
+          "value" : 1
+        } ]
+      } ]
+    }, {
+      "name" : "PlatformFont",
+      "children" : [ {
+        "name" : "initIDs",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "SunToolkit",
+      "children" : [ {
+        "name" : "closeSplashScreen",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "Win32GraphicsDevice",
+      "children" : [ {
+        "name" : "configDisplayMode",
+        "value" : 1
+      }, {
+        "name" : "enumDisplayModes",
+        "value" : 1
+      }, {
+        "name" : "initNativeScale",
+        "value" : 1
+      }, {
+        "name" : "initDevice",
+        "value" : 1
+      }, {
+        "name" : "exitFullScreenExclusive",
+        "value" : 1
+      }, {
+        "name" : "initIDs",
+        "value" : 1
+      }, {
+        "name" : "makeColorModel",
+        "value" : 1
+      }, {
+        "name" : "enterFullScreenExclusive",
+        "value" : 1
+      }, {
+        "name" : "getMaxConfigsImpl",
+        "value" : 1
+      }, {
+        "name" : "getNativeScaleX",
+        "value" : 1
+      }, {
+        "name" : "isPixFmtSupported",
+        "value" : 1
+      }, {
+        "name" : "getCurrentDisplayMode",
+        "value" : 1
+      }, {
+        "name" : "getNativeScaleY",
+        "value" : 1
+      }, {
+        "name" : "getDefaultPixIDImpl",
+        "value" : 1
+      }, {
+        "name" : "setNativeScale",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "windows",
+      "children" : [ {
+        "name" : "WMenuItemPeer",
+        "children" : [ {
+          "name" : "_setLabel",
+          "value" : 1
+        }, {
+          "name" : "_dispose",
+          "value" : 1
+        }, {
+          "name" : "enable",
+          "value" : 1
+        }, {
+          "name" : "initIDs",
+          "value" : 1
+        }, {
+          "name" : "create",
+          "value" : 1
+        }, {
+          "name" : "_setFont",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WInputMethod",
+        "children" : [ {
+          "name" : "createNativeContext",
+          "value" : 1
+        }, {
+          "name" : "getNativeLocale",
+          "value" : 1
+        }, {
+          "name" : "endCompositionNative",
+          "value" : 1
+        }, {
+          "name" : "getConversionStatus",
+          "value" : 1
+        }, {
+          "name" : "getNativeIMMDescription",
+          "value" : 1
+        }, {
+          "name" : "openCandidateWindow",
+          "value" : 1
+        }, {
+          "name" : "handleNativeIMEEvent",
+          "value" : 1
+        }, {
+          "name" : "getOpenStatus",
+          "value" : 1
+        }, {
+          "name" : "disableNativeIME",
+          "value" : 1
+        }, {
+          "name" : "enableNativeIME",
+          "value" : 1
+        }, {
+          "name" : "destroyNativeContext",
+          "value" : 1
+        }, {
+          "name" : "setConversionStatus",
+          "value" : 1
+        }, {
+          "name" : "setOpenStatus",
+          "value" : 1
+        }, {
+          "name" : "isCompositionStringAvailable",
+          "value" : 1
+        }, {
+          "name" : "setStatusWindowVisible",
+          "value" : 1
+        }, {
+          "name" : "setNativeLocale",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WPageDialogPeer",
+        "children" : [ {
+          "name" : "_show",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WInputMethodDescriptor",
+        "children" : [ {
+          "name" : "getNativeAvailableLocales",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WButtonPeer",
+        "children" : [ {
+          "name" : "initIDs",
+          "value" : 1
+        }, {
+          "name" : "create",
+          "value" : 1
+        }, {
+          "name" : "setLabel",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "ThemeReader",
+        "children" : [ {
+          "name" : "getPoint",
+          "value" : 1
+        }, {
+          "name" : "getSysBoolean",
+          "value" : 1
+        }, {
+          "name" : "getPartSize",
+          "value" : 1
+        }, {
+          "name" : "getThemeBackgroundContentMargins",
+          "value" : 1
+        }, {
+          "name" : "getEnum",
+          "value" : 1
+        }, {
+          "name" : "getColor",
+          "value" : 1
+        }, {
+          "name" : "paintBackground",
+          "value" : 1
+        }, {
+          "name" : "setWindowTheme",
+          "value" : 1
+        }, {
+          "name" : "closeTheme",
+          "value" : 1
+        }, {
+          "name" : "initThemes",
+          "value" : 1
+        }, {
+          "name" : "getInt",
+          "value" : 1
+        }, {
+          "name" : "getPosition",
+          "value" : 1
+        }, {
+          "name" : "openTheme",
+          "value" : 1
+        }, {
+          "name" : "isThemePartDefined",
+          "value" : 1
+        }, {
+          "name" : "getThemeMargins",
+          "value" : 1
+        }, {
+          "name" : "getBoolean",
+          "value" : 1
+        }, {
+          "name" : "getThemeTransitionDuration",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WEmbeddedFramePeer",
+        "children" : [ {
+          "name" : "getBoundsPrivate",
+          "value" : 1
+        }, {
+          "name" : "create",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WDefaultFontCharset",
+        "children" : [ {
+          "name" : "canConvert",
+          "value" : 1
+        }, {
+          "name" : "initIDs",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WMouseInfoPeer",
+        "children" : [ {
+          "name" : "isWindowUnderMouse",
+          "value" : 1
+        }, {
+          "name" : "fillPointWithCoords",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WMenuBarPeer",
+        "children" : [ {
+          "name" : "delMenu",
+          "value" : 1
+        }, {
+          "name" : "addMenu",
+          "value" : 1
+        }, {
+          "name" : "create",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WScrollbarPeer",
+        "children" : [ {
+          "name" : "setPageIncrement",
+          "value" : 1
+        }, {
+          "name" : "getScrollbarSize",
+          "value" : 1
+        }, {
+          "name" : "setValues",
+          "value" : 1
+        }, {
+          "name" : "create",
+          "value" : 1
+        }, {
+          "name" : "setLineIncrement",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WWindowPeer",
+        "children" : [ {
+          "name" : "getSysSmIconHeight",
+          "value" : 1
+        }, {
+          "name" : "nativeGrab",
+          "value" : 1
+        }, {
+          "name" : "getSysIconWidth",
+          "value" : 1
+        }, {
+          "name" : "getSysSmIconWidth",
+          "value" : 1
+        }, {
+          "name" : "initIDs",
+          "value" : 1
+        }, {
+          "name" : "setIconImagesData",
+          "value" : 1
+        }, {
+          "name" : "updateInsets",
+          "value" : 1
+        }, {
+          "name" : "requestWindowFocus",
+          "value" : 1
+        }, {
+          "name" : "_setTitle",
+          "value" : 1
+        }, {
+          "name" : "setFullScreenExclusiveModeState",
+          "value" : 1
+        }, {
+          "name" : "setAlwaysOnTopNative",
+          "value" : 1
+        }, {
+          "name" : "getSysMinHeight",
+          "value" : 1
+        }, {
+          "name" : "setMinSize",
+          "value" : 1
+        }, {
+          "name" : "setOpaqueImpl",
+          "value" : 1
+        }, {
+          "name" : "nativeUngrab",
+          "value" : 1
+        }, {
+          "name" : "updateWindowImpl",
+          "value" : 1
+        }, {
+          "name" : "getNativeWindowSize",
+          "value" : 1
+        }, {
+          "name" : "_setResizable",
+          "value" : 1
+        }, {
+          "name" : "reshapeFrame",
+          "value" : 1
+        }, {
+          "name" : "repositionSecurityWarning",
+          "value" : 1
+        }, {
+          "name" : "getSysMinWidth",
+          "value" : 1
+        }, {
+          "name" : "toBack",
+          "value" : 1
+        }, {
+          "name" : "modalEnable",
+          "value" : 1
+        }, {
+          "name" : "getSysIconHeight",
+          "value" : 1
+        }, {
+          "name" : "setFocusableWindow",
+          "value" : 1
+        }, {
+          "name" : "_toFront",
+          "value" : 1
+        }, {
+          "name" : "modalDisable",
+          "value" : 1
+        }, {
+          "name" : "createAwtWindow",
+          "value" : 1
+        }, {
+          "name" : "getScreenImOn",
+          "value" : 1
+        }, {
+          "name" : "setOpacity",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WToolkit",
+        "children" : [ {
+          "name" : "beep",
+          "value" : 1
+        }, {
+          "name" : "eventLoop",
+          "value" : 1
+        }, {
+          "name" : "getScreenInsets",
+          "value" : 1
+        }, {
+          "name" : "initIDs",
+          "value" : 1
+        }, {
+          "name" : "getLockingKeyStateNative",
+          "value" : 1
+        }, {
+          "name" : "setDynamicLayoutNative",
+          "value" : 1
+        }, {
+          "name" : "hideTouchKeyboard",
+          "value" : 1
+        }, {
+          "name" : "embeddedInit",
+          "value" : 1
+        }, {
+          "name" : "loadSystemColors",
+          "value" : 1
+        }, {
+          "name" : "startSecondaryEventLoop",
+          "value" : 1
+        }, {
+          "name" : "startToolkitThread",
+          "value" : 1
+        }, {
+          "name" : "postDispose",
+          "value" : 1
+        }, {
+          "name" : "nativeSync",
+          "value" : 1
+        }, {
+          "name" : "embeddedEventLoopIdleProcessing",
+          "value" : 1
+        }, {
+          "name" : "getWindowsVersion",
+          "value" : 1
+        }, {
+          "name" : "init",
+          "value" : 1
+        }, {
+          "name" : "showTouchKeyboard",
+          "value" : 1
+        }, {
+          "name" : "embeddedDispose",
+          "value" : 1
+        }, {
+          "name" : "setExtraMouseButtonsEnabledNative",
+          "value" : 1
+        }, {
+          "name" : "makeColorModel",
+          "value" : 1
+        }, {
+          "name" : "isDynamicLayoutSupportedNative",
+          "value" : 1
+        }, {
+          "name" : "setLockingKeyStateNative",
+          "value" : 1
+        }, {
+          "name" : "quitSecondaryEventLoop",
+          "value" : 1
+        }, {
+          "name" : "getNumberOfButtonsImpl",
+          "value" : 1
+        }, {
+          "name" : "syncNativeQueue",
+          "value" : 1
+        }, {
+          "name" : "getMaximumCursorColors",
+          "value" : 1
+        }, {
+          "name" : "shutdown",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WFontPeer",
+        "children" : [ {
+          "name" : "initIDs",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WChoicePeer",
+        "children" : [ {
+          "name" : "removeAll",
+          "value" : 1
+        }, {
+          "name" : "select",
+          "value" : 1
+        }, {
+          "name" : "create",
+          "value" : 1
+        }, {
+          "name" : "reshape",
+          "value" : 1
+        }, {
+          "name" : "closeList",
+          "value" : 1
+        }, {
+          "name" : "remove",
+          "value" : 1
+        }, {
+          "name" : "addItems",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WCustomCursor",
+        "children" : [ {
+          "name" : "getCursorHeight",
+          "value" : 1
+        }, {
+          "name" : "createCursorIndirect",
+          "value" : 1
+        }, {
+          "name" : "getCursorWidth",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WCheckboxMenuItemPeer",
+        "children" : [ {
+          "name" : "setState",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WTextComponentPeer",
+        "children" : [ {
+          "name" : "getSelectionStart",
+          "value" : 1
+        }, {
+          "name" : "select",
+          "value" : 1
+        }, {
+          "name" : "enableEditing",
+          "value" : 1
+        }, {
+          "name" : "getText",
+          "value" : 1
+        }, {
+          "name" : "initIDs",
+          "value" : 1
+        }, {
+          "name" : "getSelectionEnd",
+          "value" : 1
+        }, {
+          "name" : "setText",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WTaskbarPeer",
+        "children" : [ {
+          "name" : "nativeInit",
+          "value" : 1
+        }, {
+          "name" : "flashWindow",
+          "value" : 1
+        }, {
+          "name" : "setProgressValue",
+          "value" : 1
+        }, {
+          "name" : "setProgressState",
+          "value" : 1
+        }, {
+          "name" : "setOverlayIcon",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WDropTargetContextPeerFileStream",
+        "children" : [ {
+          "name" : "freeStgMedium",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WFramePeer",
+        "children" : [ {
+          "name" : "getSysMenuHeight",
+          "value" : 1
+        }, {
+          "name" : "setMaximizedBounds",
+          "value" : 1
+        }, {
+          "name" : "setMenuBar0",
+          "value" : 1
+        }, {
+          "name" : "getState",
+          "value" : 1
+        }, {
+          "name" : "synthesizeWmActivate",
+          "value" : 1
+        }, {
+          "name" : "pSetIMMOption",
+          "value" : 1
+        }, {
+          "name" : "initIDs",
+          "value" : 1
+        }, {
+          "name" : "setState",
+          "value" : 1
+        }, {
+          "name" : "clearMaximizedBounds",
+          "value" : 1
+        }, {
+          "name" : "createAwtFrame",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WMenuPeer",
+        "children" : [ {
+          "name" : "createMenu",
+          "value" : 1
+        }, {
+          "name" : "delItem",
+          "value" : 1
+        }, {
+          "name" : "createSubMenu",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WScrollPanePeer",
+        "children" : [ {
+          "name" : "setSpans",
+          "value" : 1
+        }, {
+          "name" : "setInsets",
+          "value" : 1
+        }, {
+          "name" : "getOffset",
+          "value" : 1
+        }, {
+          "name" : "initIDs",
+          "value" : 1
+        }, {
+          "name" : "create",
+          "value" : 1
+        }, {
+          "name" : "_getVScrollbarWidth",
+          "value" : 1
+        }, {
+          "name" : "_getHScrollbarHeight",
+          "value" : 1
+        }, {
+          "name" : "setScrollPosition",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WDropTargetContextPeerIStream",
+        "children" : [ {
+          "name" : "Read",
+          "value" : 1
+        }, {
+          "name" : "Close",
+          "value" : 1
+        }, {
+          "name" : "Available",
+          "value" : 1
+        }, {
+          "name" : "ReadBytes",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WDesktopPeer",
+        "children" : [ {
+          "name" : "init",
+          "value" : 1
+        }, {
+          "name" : "moveToTrash",
+          "value" : 1
+        }, {
+          "name" : "setSuddenTerminationEnabled",
+          "value" : 1
+        }, {
+          "name" : "ShellExecute",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WKeyboardFocusManagerPeer",
+        "children" : [ {
+          "name" : "getNativeFocusedWindow",
+          "value" : 1
+        }, {
+          "name" : "getNativeFocusOwner",
+          "value" : 1
+        }, {
+          "name" : "setNativeFocusOwner",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WRobotPeer",
+        "children" : [ {
+          "name" : "keyRelease",
+          "value" : 1
+        }, {
+          "name" : "mousePress",
+          "value" : 1
+        }, {
+          "name" : "mouseRelease",
+          "value" : 1
+        }, {
+          "name" : "mouseMoveImpl",
+          "value" : 1
+        }, {
+          "name" : "getRGBPixels",
+          "value" : 1
+        }, {
+          "name" : "mouseWheel",
+          "value" : 1
+        }, {
+          "name" : "keyPress",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WPrintDialog",
+        "children" : [ {
+          "name" : "initIDs",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WDesktopProperties",
+        "children" : [ {
+          "name" : "init",
+          "value" : 1
+        }, {
+          "name" : "getWindowsParameters",
+          "value" : 1
+        }, {
+          "name" : "initIDs",
+          "value" : 1
+        }, {
+          "name" : "playWindowsSound",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WCanvasPeer",
+        "children" : [ {
+          "name" : "create",
+          "value" : 1
+        }, {
+          "name" : "setNativeBackgroundErase",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WToolkitThreadBlockedHandler",
+        "children" : [ {
+          "name" : "startSecondaryEventLoop",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WPopupMenuPeer",
+        "children" : [ {
+          "name" : "createMenu",
+          "value" : 1
+        }, {
+          "name" : "_show",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WTextAreaPeer",
+        "children" : [ {
+          "name" : "replaceRange",
+          "value" : 1
+        }, {
+          "name" : "create",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WListPeer",
+        "children" : [ {
+          "name" : "setMultipleSelections",
+          "value" : 1
+        }, {
+          "name" : "select",
+          "value" : 1
+        }, {
+          "name" : "updateMaxItemWidth",
+          "value" : 1
+        }, {
+          "name" : "delItems",
+          "value" : 1
+        }, {
+          "name" : "deselect",
+          "value" : 1
+        }, {
+          "name" : "isSelected",
+          "value" : 1
+        }, {
+          "name" : "create",
+          "value" : 1
+        }, {
+          "name" : "makeVisible",
+          "value" : 1
+        }, {
+          "name" : "getMaxWidth",
+          "value" : 1
+        }, {
+          "name" : "addItems",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WDropTargetContextPeer",
+        "children" : [ {
+          "name" : "dropDone",
+          "value" : 1
+        }, {
+          "name" : "getData",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WComponentPeer",
+        "children" : [ {
+          "name" : "removeNativeDropTarget",
+          "value" : 1
+        }, {
+          "name" : "getLocationOnScreen",
+          "value" : 1
+        }, {
+          "name" : "start",
+          "value" : 1
+        }, {
+          "name" : "setRectangularShape",
+          "value" : 1
+        }, {
+          "name" : "_setFont",
+          "value" : 1
+        }, {
+          "name" : "setFocus",
+          "value" : 1
+        }, {
+          "name" : "reshape",
+          "value" : 1
+        }, {
+          "name" : "nativeHandlesWheelScrolling",
+          "value" : 1
+        }, {
+          "name" : "isObscured",
+          "value" : 1
+        }, {
+          "name" : "reshapeNoCheck",
+          "value" : 1
+        }, {
+          "name" : "beginValidate",
+          "value" : 1
+        }, {
+          "name" : "updateWindow",
+          "value" : 1
+        }, {
+          "name" : "hide",
+          "value" : 1
+        }, {
+          "name" : "_dispose",
+          "value" : 1
+        }, {
+          "name" : "pSetParent",
+          "value" : 1
+        }, {
+          "name" : "endValidate",
+          "value" : 1
+        }, {
+          "name" : "disable",
+          "value" : 1
+        }, {
+          "name" : "enable",
+          "value" : 1
+        }, {
+          "name" : "addNativeDropTarget",
+          "value" : 1
+        }, {
+          "name" : "nativeHandleEvent",
+          "value" : 1
+        }, {
+          "name" : "_setBackground",
+          "value" : 1
+        }, {
+          "name" : "createPrintedPixels",
+          "value" : 1
+        }, {
+          "name" : "setZOrder",
+          "value" : 1
+        }, {
+          "name" : "pShow",
+          "value" : 1
+        }, {
+          "name" : "_setForeground",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WPrintDialogPeer",
+        "children" : [ {
+          "name" : "toFront",
+          "value" : 1
+        }, {
+          "name" : "initIDs",
+          "value" : 1
+        }, {
+          "name" : "_show",
+          "value" : 1
+        }, {
+          "name" : "toBack",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WPrinterJob",
+        "children" : [ {
+          "name" : "fillPath",
+          "value" : 1
+        }, {
+          "name" : "selectClipPath",
+          "value" : 1
+        }, {
+          "name" : "selectPen",
+          "value" : 1
+        }, {
+          "name" : "initPrinter",
+          "value" : 1
+        }, {
+          "name" : "initIDs",
+          "value" : 1
+        }, {
+          "name" : "getWorldTransform",
+          "value" : 1
+        }, {
+          "name" : "validatePaper",
+          "value" : 1
+        }, {
+          "name" : "scale",
+          "value" : 1
+        }, {
+          "name" : "lineTo",
+          "value" : 1
+        }, {
+          "name" : "endDoc",
+          "value" : 1
+        }, {
+          "name" : "jobSetup",
+          "value" : 1
+        }, {
+          "name" : "fillRect",
+          "value" : 1
+        }, {
+          "name" : "frameRect",
+          "value" : 1
+        }, {
+          "name" : "setAdvancedGraphicsMode",
+          "value" : 1
+        }, {
+          "name" : "endPath",
+          "value" : 1
+        }, {
+          "name" : "setWorldTransform",
+          "value" : 1
+        }, {
+          "name" : "deviceEndPage",
+          "value" : 1
+        }, {
+          "name" : "getPenY",
+          "value" : 1
+        }, {
+          "name" : "getPenX",
+          "value" : 1
+        }, {
+          "name" : "polyBezierTo",
+          "value" : 1
+        }, {
+          "name" : "getGDIAdvance",
+          "value" : 1
+        }, {
+          "name" : "setNativeCopies",
+          "value" : 1
+        }, {
+          "name" : "setFont",
+          "value" : 1
+        }, {
+          "name" : "textOut",
+          "value" : 1
+        }, {
+          "name" : "selectStylePen",
+          "value" : 1
+        }, {
+          "name" : "printBand",
+          "value" : 1
+        }, {
+          "name" : "setPolyFillMode",
+          "value" : 1
+        }, {
+          "name" : "beginPath",
+          "value" : 1
+        }, {
+          "name" : "getNativePrintService",
+          "value" : 1
+        }, {
+          "name" : "setTextColor",
+          "value" : 1
+        }, {
+          "name" : "drawDIBImage",
+          "value" : 1
+        }, {
+          "name" : "deleteDC",
+          "value" : 1
+        }, {
+          "name" : "setGraphicsMode",
+          "value" : 1
+        }, {
+          "name" : "abortDoc",
+          "value" : 1
+        }, {
+          "name" : "getDefaultPage",
+          "value" : 1
+        }, {
+          "name" : "deviceStartPage",
+          "value" : 1
+        }, {
+          "name" : "_startDoc",
+          "value" : 1
+        }, {
+          "name" : "selectSolidBrush",
+          "value" : 1
+        }, {
+          "name" : "closeFigure",
+          "value" : 1
+        }, {
+          "name" : "showDocProperties",
+          "value" : 1
+        }, {
+          "name" : "moveTo",
+          "value" : 1
+        }, {
+          "name" : "setNativePrintService",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WDragSourceContextPeer",
+        "children" : [ {
+          "name" : "setNativeCursor",
+          "value" : 1
+        }, {
+          "name" : "createDragSource",
+          "value" : 1
+        }, {
+          "name" : "doDragDrop",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WPanelPeer",
+        "children" : [ {
+          "name" : "initIDs",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WObjectPeer",
+        "children" : [ {
+          "name" : "initIDs",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WPageDialog",
+        "children" : [ {
+          "name" : "initIDs",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WTextFieldPeer",
+        "children" : [ {
+          "name" : "create",
+          "value" : 1
+        }, {
+          "name" : "setEchoChar",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WLightweightFramePeer",
+        "children" : [ {
+          "name" : "overrideNativeHandle",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WLabelPeer",
+        "children" : [ {
+          "name" : "setAlignment",
+          "value" : 1
+        }, {
+          "name" : "lazyPaint",
+          "value" : 1
+        }, {
+          "name" : "create",
+          "value" : 1
+        }, {
+          "name" : "setText",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WCheckboxPeer",
+        "children" : [ {
+          "name" : "setCheckboxGroup",
+          "value" : 1
+        }, {
+          "name" : "create",
+          "value" : 1
+        }, {
+          "name" : "setLabel",
+          "value" : 1
+        }, {
+          "name" : "setState",
+          "value" : 1
+        }, {
+          "name" : "getCheckMarkSize",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WEmbeddedFrame",
+        "children" : [ {
+          "name" : "isPrinterDC",
+          "value" : 1
+        }, {
+          "name" : "initIDs",
+          "value" : 1
+        }, {
+          "name" : "notifyModalBlockedImpl",
+          "value" : 1
+        }, {
+          "name" : "printBand",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WTrayIconPeer",
+        "children" : [ {
+          "name" : "setNativeIcon",
+          "value" : 1
+        }, {
+          "name" : "updateNativeIcon",
+          "value" : 1
+        }, {
+          "name" : "_dispose",
+          "value" : 1
+        }, {
+          "name" : "_displayMessage",
+          "value" : 1
+        }, {
+          "name" : "setToolTip",
+          "value" : 1
+        }, {
+          "name" : "create",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WDataTransferer",
+        "children" : [ {
+          "name" : "platformImageBytesToImageData",
+          "value" : 1
+        }, {
+          "name" : "imageDataToPlatformImageBytes",
+          "value" : 1
+        }, {
+          "name" : "dragQueryFile",
+          "value" : 1
+        }, {
+          "name" : "registerClipboardFormat",
+          "value" : 1
+        }, {
+          "name" : "getClipboardFormatName",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WDialogPeer",
+        "children" : [ {
+          "name" : "pSetIMMOption",
+          "value" : 1
+        }, {
+          "name" : "endModal",
+          "value" : 1
+        }, {
+          "name" : "showModal",
+          "value" : 1
+        }, {
+          "name" : "createAwtDialog",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WFontMetrics",
+        "children" : [ {
+          "name" : "init",
+          "value" : 1
+        }, {
+          "name" : "stringWidth",
+          "value" : 1
+        }, {
+          "name" : "bytesWidth",
+          "value" : 1
+        }, {
+          "name" : "initIDs",
+          "value" : 1
+        }, {
+          "name" : "charsWidth",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WClipboard",
+        "children" : [ {
+          "name" : "init",
+          "value" : 1
+        }, {
+          "name" : "registerClipboardViewer",
+          "value" : 1
+        }, {
+          "name" : "openClipboard",
+          "value" : 1
+        }, {
+          "name" : "publishClipboardData",
+          "value" : 1
+        }, {
+          "name" : "closeClipboard",
+          "value" : 1
+        }, {
+          "name" : "getClipboardData",
+          "value" : 1
+        }, {
+          "name" : "getClipboardFormats",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WGlobalCursorManager",
+        "children" : [ {
+          "name" : "getLocationOnScreen",
+          "value" : 1
+        }, {
+          "name" : "findHeavyweightUnderCursor",
+          "value" : 1
+        }, {
+          "name" : "getCursorPos",
+          "value" : 1
+        }, {
+          "name" : "setCursor",
+          "value" : 1
+        } ]
+      }, {
+        "name" : "WFileDialogPeer",
+        "children" : [ {
+          "name" : "toFront",
+          "value" : 1
+        }, {
+          "name" : "_dispose",
+          "value" : 1
+        }, {
+          "name" : "getLocationOnScreen",
+          "value" : 1
+        }, {
+          "name" : "initIDs",
+          "value" : 1
+        }, {
+          "name" : "_hide",
+          "value" : 1
+        }, {
+          "name" : "_show",
+          "value" : 1
+        }, {
+          "name" : "setFilterString",
+          "value" : 1
+        }, {
+          "name" : "toBack",
+          "value" : 1
+        } ]
+      } ]
+    }, {
+      "name" : "Win32FontManager",
+      "children" : [ {
+        "name" : "getEUDCFontFile",
+        "value" : 1
+      }, {
+        "name" : "populateFontFileNameMap0",
+        "value" : 1
+      }, {
+        "name" : "registerFontWithPlatform",
+        "value" : 1
+      }, {
+        "name" : "getFontPath",
+        "value" : 1
+      }, {
+        "name" : "deRegisterFontWithPlatform",
+        "value" : 1
+      } ]
+    }, {
+      "name" : "FontDescriptor",
+      "children" : [ {
+        "name" : "initIDs",
+        "value" : 1
+      } ]
+    } ]
+  } ]
+} ];
+    const dom = document.getElementById("root");
+    const myChart = echarts.init(dom, null, {
+        renderer: "canvas",
+        useDirtyRect: false,
+    });
+    const option = {
+        title: {
+            text: "Native methods OpenJDK 21",
+            left: "leafDepth",
+        },
+        series: [
+            {
+                type: "treemap",
+                label: {
+                    position: "insideTopLeft",
+                    formatter: "{b}\n{c}",
+                },
+                breadcrumb: {
+                    show: true,
+                    left:0
+                },
+                leafDepth:1,
+                width:'100%',
+                height:'90%',
+                data: data,
+            },
+        ],
+    };
+    myChart.setOption(option);
+</script>
+</body>
+</html>
