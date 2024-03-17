@@ -28,7 +28,18 @@ public final class ConstantMethodHandle extends Constant {
 
     @Override
     protected void fillXmlRef(Document document, Element result, ConstantResolver constantResolver) {
-        String referenceKindStr = switch (referenceKind) {
+        result.setAttribute("referenceKind", getReferenceKindStr());
+        XML.constantAttribute(document, result, "reference", constantResolver, referenceIndex);
+    }
+
+    @Override
+    public String toTextDetails(ConstantResolver constantResolver) {
+        String reference = constantResolver.resolve(referenceIndex).toTextDetails(constantResolver);
+        return getTypeName() + "(" + getReferenceKindStr() + "," + reference + ")";
+    }
+
+    private String getReferenceKindStr() {
+        return switch (referenceKind) {
             case 1 -> "getField";
             case 2 -> "getStatic";
             case 3 -> "putField";
@@ -40,8 +51,6 @@ public final class ConstantMethodHandle extends Constant {
             case 9 -> "invokeInterface";
             default -> throw new IllegalStateException("Unexpected reference kind: " + referenceKind);
         };
-        result.setAttribute("referenceKind", referenceKindStr);
-        XML.constantAttribute(document, result, "reference", constantResolver, referenceIndex);
     }
 
 }

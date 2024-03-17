@@ -31,4 +31,11 @@ public final class ConstantInvokeDynamic extends Constant {
         result.appendChild(constantResolver.resolve(nameAndTypeIndex).toXMLRef(document, constantResolver));
     }
 
+    @Override
+    public String toTextDetails(ConstantResolver constantResolver) {
+        String bootstrapMethod = constantResolver.resolveBoostrapMethod(boostrapMethodAttrIndex).toTextDetails(constantResolver);
+        String nameAndType = constantResolver.resolve(nameAndTypeIndex).toTextDetails(constantResolver);
+        return getTypeName() + "(" + bootstrapMethod + "," + nameAndType + ")";
+    }
+
 }

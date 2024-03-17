@@ -8,10 +8,12 @@ public final class TableSwitchInstruction extends Instruction {
     private final int defaultOffset;
     private final int[] offsets;
 
-    public TableSwitchInstruction(int defaultOffset, int[] offsets) {
+    public TableSwitchInstruction(int defaultOffset, int[] offsets, int codeIndex) {
+        super(OpCode.TABLESWITCH, codeIndex);
         this.defaultOffset = defaultOffset;
         this.offsets = offsets;
     }
+
 
     @Override
     public Element toXML(Document document, ConstantResolver constantResolver) {
@@ -22,6 +24,11 @@ public final class TableSwitchInstruction extends Instruction {
             offsetElement.appendChild(document.createTextNode(String.valueOf(offset)));
         }
         return result;
+    }
+
+    @Override
+    public String textDetails(ConstantResolver constantResolver) {
+        return "TODO";
     }
 
 

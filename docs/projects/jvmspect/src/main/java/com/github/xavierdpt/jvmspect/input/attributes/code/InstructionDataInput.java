@@ -7,9 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InstructionDataInput {
-    public static List<Instruction> parse(byte[] bytes) throws IOException {
+    public static List<Instruction> parse(byte[] bytes, int index, int count) throws IOException {
         List<Instruction> result = new ArrayList<>();
+        if (count == 0) {
+            return result;
+        }
         DataInputStream dis = new DataInputStream(new ByteArrayInputStream(bytes));
+        dis.readNBytes(index);
         boolean wide = false;
         int[] codeIndex = {0};
         while (dis.available() > 0) {
@@ -37,13 +41,16 @@ public class InstructionDataInput {
                 }
                 default -> {
                     int size = getSize(opCode, wide);
-                    codeIndex[0] += size;
                     if (wide) {
                         wide = false;
                     }
                     byte[] opCodeBytes = dis.readNBytes(size);
-                    result.add(new SimpleInstruction(opCode, wide, opCodeBytes));
+                    result.add(new SimpleInstruction(opCode, wide, opCodeBytes, codeIndex[0] - 1));
+                    codeIndex[0] += size;
                 }
+            }
+            if (result.size() == count) {
+                break;
             }
         }
         return result;
@@ -79,8 +86,9 @@ public class InstructionDataInput {
             offsets[i] = dis.readInt();
         }
 
+        int thisCodeIndex = codeIndex[0] - 1;
         codeIndex[0] += paddingBytes + 16 + noffsets * 4;
-        return new TableSwitchInstruction(defaultOffset, offsets);
+        return new TableSwitchInstruction(defaultOffset, offsets, thisCodeIndex);
     }
 
     private static Instruction parseLookupSwitch(DataInputStream dis, int[] codeIndex) throws IOException {
@@ -97,8 +105,10 @@ public class InstructionDataInput {
             int second = dis.readInt(); // 4
             pairs.add(new LookupSwitchPair(first, second));
         }
+
+        int thisCodeIndex = codeIndex[0] - 1;
         codeIndex[0] += paddingBytes + 8 + 8 * npairs;
 
-        return new LookupSwitchInstruction(defaultOffset, pairs);
+        return new LookupSwitchInstruction(defaultOffset, pairs, thisCodeIndex);
     }
 }

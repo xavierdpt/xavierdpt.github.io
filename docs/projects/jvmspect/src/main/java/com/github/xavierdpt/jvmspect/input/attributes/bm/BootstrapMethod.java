@@ -24,4 +24,17 @@ public class BootstrapMethod {
         }
         return result;
     }
+
+    public String toTextDetails(ConstantResolver constantResolver) {
+        String bootstrapMethodRef = constantResolver.resolve(boostrapMethodRef).toTextDetails(constantResolver);
+        StringBuilder sb = new StringBuilder();
+        sb.append("boostrapMethod(");
+        sb.append(bootstrapMethodRef);
+        for (int boostrapArgument : boostrapArguments) {
+            sb.append(",");
+            sb.append(constantResolver.resolve(boostrapArgument).toTextDetails(constantResolver));
+        }
+        sb.append(")");
+        return sb.toString();
+    }
 }

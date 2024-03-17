@@ -4,6 +4,7 @@ import com.github.xavierdpt.jvmspect.input.attributes.AttributeInfo;
 import com.github.xavierdpt.jvmspect.input.attributes.bm.BootstrapMethod;
 import com.github.xavierdpt.jvmspect.input.attributes.bm.BootstrapMethodsAttributeInfo;
 import com.github.xavierdpt.jvmspect.input.constants.Constant;
+import com.github.xavierdpt.jvmspect.input.constants.ConstantMissing;
 import com.github.xavierdpt.jvmspect.input.constants.ConstantString;
 import com.github.xavierdpt.jvmspect.input.constants.ConstantUtf8;
 
@@ -29,6 +30,9 @@ public class ConstantResolver {
     }
 
     public Constant resolve(int index) {
+        if (index >= constantObjects.length) {
+            return new ConstantMissing(index);
+        }
         return constantObjects[index - 1];
     }
 

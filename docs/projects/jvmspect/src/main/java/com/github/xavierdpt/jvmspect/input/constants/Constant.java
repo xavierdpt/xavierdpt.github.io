@@ -20,7 +20,7 @@ public abstract class Constant {
         return constant;
     }
 
-    protected abstract void fillXml(Document document, Element constant);
+    protected abstract void fillXml(Document document, Element result);
 
     public final Element toXMLRef(Document document, ConstantResolver constantResolver) {
         Element constant = document.createElement("constant");
@@ -31,4 +31,5 @@ public abstract class Constant {
 
     protected abstract void fillXmlRef(Document document, Element result, ConstantResolver constantResolver);
 
+    public abstract String toTextDetails(ConstantResolver constantResolver);
 }

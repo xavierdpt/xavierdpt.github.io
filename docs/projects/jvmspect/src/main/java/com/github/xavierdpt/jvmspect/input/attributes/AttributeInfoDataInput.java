@@ -84,7 +84,7 @@ public class AttributeInfoDataInput {
         int maxLocals = dis.readUnsignedShort();
         int codeLength = dis.readInt();
         byte[] code = dis.readNBytes(codeLength);
-        List<Instruction> parsedCode = InstructionDataInput.parse(code);
+        List<Instruction> parsedCode = InstructionDataInput.parse(code, 0, -1);
         int exceptionTableLength = dis.readUnsignedShort();
         ExceptionInfo[] exceptionInfos = new ExceptionInfo[exceptionTableLength];
         for (int i = 0; i < exceptionTableLength; i++) {

@@ -32,4 +32,11 @@ public final class ConstantDynamic extends Constant {
         XML.constantAttribute(document, result, "nameAndTypeIndex", constantResolver, nameAndTypeIndex);
     }
 
+    @Override
+    public String toTextDetails(ConstantResolver constantResolver) {
+        String bootstrapMethodAttr = constantResolver.resolve(boostrapMethodAttrIndex).toTextDetails(constantResolver);
+        String nameAndType = constantResolver.resolve(nameAndTypeIndex).toTextDetails(constantResolver);
+        return getTypeName() + "(" + bootstrapMethodAttr + "," + nameAndType + ")";
+    }
+
 }

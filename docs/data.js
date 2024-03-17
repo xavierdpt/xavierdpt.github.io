@@ -1,3 +1,16 @@
+/*
+Java
+- JPDA: Java Platform Debugger Architecture
+  - JDI: Java Debugger Interface
+  - JVMTI: Java Virtual Machine Tools Interface
+  - JDWP: Java Debug Wire Protocol
+- Flight Recorder API
+  https://docs.oracle.com/en/java/javase/21/jfapi/index.html
+- RMI: Java Remote Method Invocation API Guide 
+  https://docs.oracle.com/en/java/javase/21/rmi/index.html
+
+*/
+
 window.xdata = {
   vue: {
     label: "Vue",

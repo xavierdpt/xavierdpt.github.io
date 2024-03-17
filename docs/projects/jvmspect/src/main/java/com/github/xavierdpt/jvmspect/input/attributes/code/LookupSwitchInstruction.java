@@ -11,7 +11,8 @@ public final class LookupSwitchInstruction extends Instruction {
     private final int defaultOffset;
     private final List<LookupSwitchPair> pairs;
 
-    public LookupSwitchInstruction(int defaultOffset, List<LookupSwitchPair> pairs) {
+    public LookupSwitchInstruction(int defaultOffset, List<LookupSwitchPair> pairs, int codeIndex) {
+        super(OpCode.LOOKUPSWITCH, codeIndex);
         this.defaultOffset = defaultOffset;
         this.pairs = pairs;
     }
@@ -24,6 +25,11 @@ public final class LookupSwitchInstruction extends Instruction {
             result.appendChild(pair.toXML(document));
         }
         return result;
+    }
+
+    @Override
+    public String textDetails(ConstantResolver constantResolver) {
+        return "TODO";
     }
 
 

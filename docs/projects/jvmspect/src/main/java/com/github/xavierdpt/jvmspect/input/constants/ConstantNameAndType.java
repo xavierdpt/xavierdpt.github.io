@@ -15,6 +15,14 @@ public final class ConstantNameAndType extends Constant {
         this.descriptorIndex = descriptorIndex;
     }
 
+    public int getNameIndex() {
+        return nameIndex;
+    }
+
+    public int getDescriptorIndex() {
+        return descriptorIndex;
+    }
+
     @Override
     protected String getTypeName() {
         return "NameAndType";
@@ -27,11 +35,17 @@ public final class ConstantNameAndType extends Constant {
     }
 
 
-
     @Override
     protected void fillXmlRef(Document document, Element result, ConstantResolver constantResolver) {
         XML.constantAttribute(document, result, "name", constantResolver, nameIndex);
         XML.constantAttribute(document, result, "descriptor", constantResolver, descriptorIndex);
+    }
+
+    @Override
+    public String toTextDetails(ConstantResolver constantResolver) {
+        String name = constantResolver.resolve(nameIndex).toTextDetails(constantResolver);
+        String descriptor = constantResolver.resolve(descriptorIndex).toTextDetails(constantResolver);
+        return getTypeName() + "(" + name + "," + descriptor + ")";
     }
 
 }

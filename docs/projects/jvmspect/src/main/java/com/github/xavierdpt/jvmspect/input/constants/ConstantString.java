@@ -31,4 +31,10 @@ public final class ConstantString extends Constant {
         result.appendChild(document.createTextNode(constantResolver.resolveString(stringIndex)));
     }
 
+    @Override
+    public String toTextDetails(ConstantResolver constantResolver) {
+        String string = constantResolver.resolve(stringIndex).toTextDetails(constantResolver);
+        return getTypeName() + "(" + string + ")";
+    }
+
 }

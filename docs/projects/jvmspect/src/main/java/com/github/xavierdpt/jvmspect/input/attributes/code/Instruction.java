@@ -5,6 +5,23 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 public abstract class Instruction {
+    protected final OpCode opCode;
+    protected final int codeIndex;
+
+    public Instruction(OpCode opCode, int codeIndex) {
+        this.opCode = opCode;
+
+        this.codeIndex = codeIndex;
+    }
+
+    public final OpCode getOpCode() {
+        return opCode;
+    }
+
+    public final int getCodeIndex() {
+        return codeIndex;
+    }
+
     public abstract Element toXML(Document document, ConstantResolver constantResolver);
 
     public int toUnsignedInt(byte[] bytes, int offset, int count) {
@@ -28,4 +45,6 @@ public abstract class Instruction {
         }
         return result;
     }
+
+    public abstract String textDetails(ConstantResolver constantResolver);
 }

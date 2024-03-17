@@ -27,5 +27,10 @@ public final class ConstantInteger extends Constant {
         result.setAttribute("value", String.valueOf(value));
     }
 
+    @Override
+    public String toTextDetails(ConstantResolver constantResolver) {
+        return getTypeName() + "(" + value + ")";
+    }
+
 
 }

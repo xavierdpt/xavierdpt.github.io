@@ -32,4 +32,9 @@ public final class ConstantLong extends Constant {
         result.setAttribute("value", String.valueOf(value));
     }
 
+    @Override
+    public String toTextDetails(ConstantResolver constantResolver) {
+        return getTypeName() + "(" + value + ")";
+    }
+
 }

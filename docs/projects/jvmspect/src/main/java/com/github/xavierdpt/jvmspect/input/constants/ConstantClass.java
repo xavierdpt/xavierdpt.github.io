@@ -13,6 +13,10 @@ public final class ConstantClass extends Constant {
         this.nameIndex = nameIndex;
     }
 
+    public int getNameIndex() {
+        return nameIndex;
+    }
+
     @Override
     protected String getTypeName() {
         return "Class";
@@ -26,6 +30,12 @@ public final class ConstantClass extends Constant {
     @Override
     protected void fillXmlRef(Document document, Element result, ConstantResolver constantResolver) {
         XML.constantAttribute(document, result, "name", constantResolver, nameIndex);
+    }
+
+    @Override
+    public String toTextDetails(ConstantResolver constantResolver) {
+        String text = constantResolver.resolve(nameIndex).toTextDetails(constantResolver);
+        return getTypeName() + "(" + text + ")";
     }
 
 

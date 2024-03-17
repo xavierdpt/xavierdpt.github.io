@@ -1,8 +1,11 @@
 package com.github.xavierdpt.jvmspect.input.constants;
 
 import com.github.xavierdpt.jvmspect.input.ConstantResolver;
+import org.owasp.encoder.Encode;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+
+import java.nio.charset.StandardCharsets;
 
 public final class ConstantDouble extends Constant {
     private final double value;
@@ -29,6 +32,11 @@ public final class ConstantDouble extends Constant {
     @Override
     protected void fillXmlRef(Document document, Element result, ConstantResolver constantResolver) {
         result.setAttribute("value", String.valueOf(value));
+    }
+
+    @Override
+    public String toTextDetails(ConstantResolver constantResolver) {
+        return getTypeName() + "(" + value + ")";
     }
 
 }

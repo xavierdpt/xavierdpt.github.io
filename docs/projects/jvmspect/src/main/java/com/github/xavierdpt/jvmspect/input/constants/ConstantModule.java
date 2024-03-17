@@ -28,4 +28,10 @@ public final class ConstantModule extends Constant {
         XML.constantAttribute(document, result, "name", constantResolver, nameIndex);
     }
 
+    @Override
+    public String toTextDetails(ConstantResolver constantResolver) {
+        String name = constantResolver.resolve(nameIndex).toTextDetails(constantResolver);
+        return getTypeName() + "(" + name + ")";
+    }
+
 }

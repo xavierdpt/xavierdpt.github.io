@@ -28,4 +28,10 @@ public final class ConstantMethodType extends Constant {
         XML.constantAttribute(document, result, "descriptor", constantResolver, descriptorIndex);
     }
 
+    @Override
+    public String toTextDetails(ConstantResolver constantResolver) {
+        String descriptor = constantResolver.resolve(descriptorIndex).toTextDetails(constantResolver);
+        return getTypeName() + "(" + descriptor + ")";
+    }
+
 }

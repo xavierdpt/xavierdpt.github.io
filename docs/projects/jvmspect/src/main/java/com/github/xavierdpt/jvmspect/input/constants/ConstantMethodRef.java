@@ -32,5 +32,28 @@ public final class ConstantMethodRef extends Constant {
         XML.constantAttribute(document, result, "nameAndType", constantResolver, nameAndTypeIndex);
     }
 
+    @Override
+    public String toTextDetails(ConstantResolver constantResolver) {
+        // Same as FieldRef
+        Constant classA = constantResolver.resolve(classIndex);
+        Constant nameAndTypeA = constantResolver.resolve(nameAndTypeIndex);
+        if (classA instanceof ConstantClass classT && nameAndTypeA instanceof ConstantNameAndType nameAndTypeT) {
+            Constant classNameA = constantResolver.resolve(classT.getNameIndex());
+            int nameIndex = nameAndTypeT.getNameIndex();
+            int descriptorIndex = nameAndTypeT.getDescriptorIndex();
+            Constant methodNameA = constantResolver.resolve(nameIndex);
+            Constant methodDescriptorA = constantResolver.resolve(descriptorIndex);
+            if (classNameA instanceof ConstantUtf8 classNameT &&
+                methodNameA instanceof ConstantUtf8 methodNameT &&
+                methodDescriptorA instanceof ConstantUtf8 methodDescriptorT) {
+                return classNameT.getJavaString() + " " + methodNameT.getJavaString() + " " + methodDescriptorT.getJavaString();
+            }
+        }
+        String clazz = classA.toTextDetails(constantResolver);
+        String nameAndType = nameAndTypeA.toTextDetails(constantResolver);
+        return getTypeName() + "(" + clazz + "," + nameAndType + ")";
+
+    }
+
 
 }

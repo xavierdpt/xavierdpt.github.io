@@ -32,4 +32,11 @@ public final class ConstantInterfaceMethodRef extends Constant {
         XML.constantAttribute(document, result, "nameAndTypeIndex", constantResolver, nameAndTypeIndex);
     }
 
+    @Override
+    public String toTextDetails(ConstantResolver constantResolver) {
+        String clazz = constantResolver.resolve(classIndex).toTextDetails(constantResolver);
+        String nameAndType = constantResolver.resolve(nameAndTypeIndex).toTextDetails(constantResolver);
+        return getTypeName() + "(" + clazz + "," + nameAndType + ")";
+    }
+
 }
