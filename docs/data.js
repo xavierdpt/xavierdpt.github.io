@@ -11,6 +11,10 @@ Java
 
 */
 
+/*
+https://github.com/parubok/awesome-swing
+*/
+
 window.xdata = {
   vue: {
     label: "Vue",

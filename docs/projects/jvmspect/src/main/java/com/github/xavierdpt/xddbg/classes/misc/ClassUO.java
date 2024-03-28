@@ -1,8 +1,8 @@
-package com.github.xavierdpt.xddbg.classes;
+package com.github.xavierdpt.xddbg.classes.misc;
 
 import com.github.xavierdpt.xddbg.tree.BasicUO;
 
-public class ClassUO extends BasicUO {
+public class ClassUO extends BasicUO implements Cloneable {
     private final String fullName;
 
     public ClassUO(String simpleName, String fullName) {
@@ -13,4 +13,10 @@ public class ClassUO extends BasicUO {
     public String getFullName() {
         return fullName;
     }
+
+    @Override
+    public ClassUO clone() {
+        return (ClassUO) super.clone();
+    }
+
 }

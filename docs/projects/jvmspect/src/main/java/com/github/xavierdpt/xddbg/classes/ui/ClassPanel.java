@@ -1,6 +1,8 @@
-package com.github.xavierdpt.xddbg.classes;
+package com.github.xavierdpt.xddbg.classes.ui;
 
 import com.github.xavierdpt.xddbg.XDDBG;
+import com.github.xavierdpt.xddbg.classes.misc.ClassUO;
+import com.github.xavierdpt.xddbg.tree.TreeModelManager;
 import com.github.xavierdpt.xddbg.tree.BetterTreeNode;
 import com.github.xavierdpt.xddbg.utils.SwingHelper;
 
@@ -20,17 +22,24 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
 
-public class XClasses extends JPanel {
+public class ClassPanel extends JPanel {
     private final JTree tree;
     private final XDDBG app;
+    private final ClassSearchPanel searchBox;
+    private final TreeModelManager treeModelManager = new TreeModelManager(
+            new DefaultTreeModel(
+                    new BetterTreeNode("All classes")
+            )
+    );
 
-    public XClasses(XDDBG app) {
+    public ClassPanel(XDDBG app) {
         super(new BorderLayout());
         this.app = app;
         setBorder(BorderFactory.createTitledBorder("Classes"));
-        XClassSearchBox searchBox = new XClassSearchBox(app);
-        tree = new JTree(new DefaultTreeModel(new BetterTreeNode("All classes")));
+        searchBox = new ClassSearchPanel(app);
+        tree = new JTree(treeModelManager.getMainModel());
         tree.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -47,21 +56,24 @@ public class XClasses extends JPanel {
         tree.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_CONTEXT_MENU) {
-                    TreeUI ui = tree.getUI();
-                    if (ui != null) {
-                        TreePath anchorSelectionPath = tree.getAnchorSelectionPath();
-                        if (anchorSelectionPath != null) {
-                            Rectangle pathBounds = ui.getPathBounds(tree, anchorSelectionPath);
-                            createPopup(e.getComponent(), pathBounds.x + pathBounds.width, pathBounds.y + pathBounds.height);
+                switch (e.getKeyCode()) {
+                    case KeyEvent.VK_CONTEXT_MENU -> {
+                        TreeUI ui = tree.getUI();
+                        if (ui != null) {
+                            TreePath anchorSelectionPath = tree.getAnchorSelectionPath();
+                            if (anchorSelectionPath != null) {
+                                Rectangle pathBounds = ui.getPathBounds(tree, anchorSelectionPath);
+                                createPopup(e.getComponent(), pathBounds.x + pathBounds.width, pathBounds.y + pathBounds.height);
+                            }
                         }
-                    }
 
+                    }
+                    case KeyEvent.VK_ENTER -> app.findMethods();
                 }
             }
         });
         add(searchBox, BorderLayout.NORTH);
-        add(SwingHelper.createScrollPane(tree), BorderLayout.CENTER);
+        add(SwingHelper.inScrollPane(tree), BorderLayout.CENTER);
     }
 
     private void createPopup(Component component, int x, int y) {
@@ -84,4 +96,24 @@ public class XClasses extends JPanel {
         return tree;
     }
 
+    public void setClassSearch(String input) {
+        searchBox.setSearchInputText(input);
+    }
+
+    public String getClassSearchText() {
+        return searchBox.getSearchInputText();
+
+    }
+
+    public TreeModelManager getTreeModelManager() {
+        return treeModelManager;
+    }
+
+    public List<String> getClassSearchHistory() {
+        return searchBox.getClassSearchHistory();
+    }
+
+    public void setClassSearchHistory(List<String> classSearchHistoryItems) {
+        searchBox.setClassSearchHistory(classSearchHistoryItems);
+    }
 }

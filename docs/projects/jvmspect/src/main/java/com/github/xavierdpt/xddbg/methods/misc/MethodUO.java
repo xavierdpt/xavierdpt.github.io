@@ -1,4 +1,4 @@
-package com.github.xavierdpt.xddbg.methods;
+package com.github.xavierdpt.xddbg.methods.misc;
 
 public class MethodUO {
     private boolean visible = true;

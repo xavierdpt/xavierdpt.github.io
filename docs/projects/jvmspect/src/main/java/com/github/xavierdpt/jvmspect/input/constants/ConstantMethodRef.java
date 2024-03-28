@@ -35,6 +35,7 @@ public final class ConstantMethodRef extends Constant {
     @Override
     public String toTextDetails(ConstantResolver constantResolver) {
         // Same as FieldRef
+        // TODO: Handle infinite recursive loops
         Constant classA = constantResolver.resolve(classIndex);
         Constant nameAndTypeA = constantResolver.resolve(nameAndTypeIndex);
         if (classA instanceof ConstantClass classT && nameAndTypeA instanceof ConstantNameAndType nameAndTypeT) {

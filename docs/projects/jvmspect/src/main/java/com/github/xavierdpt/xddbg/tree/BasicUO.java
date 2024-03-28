@@ -1,9 +1,9 @@
 package com.github.xavierdpt.xddbg.tree;
 
-public class BasicUO {
-    private boolean visible = true;
+public class BasicUO implements Cloneable {
     protected String name;
     private boolean highlight;
+    private boolean secondary;
 
     public BasicUO(String name) {
         this.name = name;
@@ -11,14 +11,6 @@ public class BasicUO {
 
     public String getName() {
         return name;
-    }
-
-    public boolean isVisible() {
-        return visible;
-    }
-
-    public void setVisible(boolean visible) {
-        this.visible = visible;
     }
 
     public boolean isHighlight() {
@@ -29,8 +21,24 @@ public class BasicUO {
         this.highlight = highlight;
     }
 
+    public boolean isSecondary() {
+        return secondary;
+    }
+
+    public void setSecondary(boolean secondary) {
+        this.secondary = secondary;
+    }
+
     @Override
     public String toString() {
         return name;
+    }
+    @Override
+    public BasicUO clone() {
+        try {
+            return (BasicUO) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
     }
 }

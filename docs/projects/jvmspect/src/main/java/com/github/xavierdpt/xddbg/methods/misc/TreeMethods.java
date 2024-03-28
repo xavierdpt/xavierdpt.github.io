@@ -1,4 +1,4 @@
-package com.github.xavierdpt.xddbg.methods;
+package com.github.xavierdpt.xddbg.methods.misc;
 
 import com.github.xavierdpt.xddbg.TreeHelper;
 import com.github.xavierdpt.xddbg.tree.BasicUO;
@@ -7,12 +7,10 @@ import com.github.xavierdpt.xddbg.tree.BetterTreeNode;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class TreeMethods {
-    public static void fillMethodTree(JTree rightTree, String referenceName, String methodName, String signature, boolean visible) {
-        DefaultTreeModel model = (DefaultTreeModel) rightTree.getModel();
+    public static void fillMethodTree(JTree tree, String referenceName, String methodName, String signature, boolean visible, boolean empty) {
+        DefaultTreeModel model = (DefaultTreeModel) tree.getModel();
         BetterTreeNode root = (BetterTreeNode) model.getRoot();
         DefaultMutableTreeNode classNode = TreeHelper.findNode(root, referenceName);
         if (classNode == null) {
@@ -29,6 +27,10 @@ public class TreeMethods {
             signatureNode = new BetterTreeNode(new BasicUO(signature));
             model.insertNodeInto(signatureNode, methodNode, methodNode.getChildCount());
         }
-        ((BasicUO) signatureNode.getUserObject()).setHighlight(visible);
+        if (signatureNode.getUserObject() instanceof BasicUO basicUO) {
+            basicUO.setHighlight(visible);
+            basicUO.setSecondary(empty);
+        }
+
     }
 }

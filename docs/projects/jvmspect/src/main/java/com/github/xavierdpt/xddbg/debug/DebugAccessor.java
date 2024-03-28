@@ -1,17 +1,15 @@
 package com.github.xavierdpt.xddbg.debug;
 
+import com.github.xavierdpt.xddbg.VMEventHandler;
 import com.github.xavierdpt.xddbg.utils.XDDBGException;
 import com.sun.jdi.Bootstrap;
 import com.sun.jdi.VirtualMachine;
 import com.sun.jdi.VirtualMachineManager;
 import com.sun.jdi.connect.AttachingConnector;
 import com.sun.jdi.connect.IllegalConnectorArgumentsException;
-import com.sun.jdi.event.Event;
 import com.sun.jdi.event.EventSet;
 
 import java.io.IOException;
-import java.util.Objects;
-import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -31,11 +29,10 @@ public class DebugAccessor {
     }
 
 
-    public synchronized void attach(String port, Consumer<VirtualMachine> init, BiConsumer<Event, VirtualMachine> eventConsumer) throws XDDBGException {
+    public synchronized void attach(String port, Consumer<VirtualMachine> init, VMEventHandler vmEventHandler) throws XDDBGException {
         if (isAttached()) {
             throw new XDDBGException("Already attached!");
         }
-        Objects.requireNonNull(eventConsumer, "Null event consumer");
         var virtualMachineManager = Bootstrap.virtualMachineManager();
         var connector = findConnector(virtualMachineManager);
         if (connector == null) {
@@ -66,8 +63,18 @@ public class DebugAccessor {
                             if (eventSet == null) {
                                 break;
                             }
-                            for (var event : eventSet) {
-                                eventConsumer.accept(event, theVm);
+                            if (vmEventHandler != null) {
+                                for (var event : eventSet) {
+                                    try {
+                                        vmEventHandler.handleEvent(event, theVm);
+                                    } catch (Exception e) {
+                                        try {
+                                            vmEventHandler.reportException(e);
+                                        } catch (Exception ex) {
+                                            ex.printStackTrace();
+                                        }
+                                    }
+                                }
                             }
                             eventSet.resume();
                         } catch (InterruptedException e) {
@@ -96,6 +103,7 @@ public class DebugAccessor {
 
     public synchronized void detach() {
         synchronized (monitor) {
+            virtualMachine.eventRequestManager().deleteAllBreakpoints();
             virtualMachine.dispose();
             virtualMachine = null;
         }

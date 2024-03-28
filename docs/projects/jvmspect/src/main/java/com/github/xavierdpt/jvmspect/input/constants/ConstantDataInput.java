@@ -2,15 +2,30 @@ package com.github.xavierdpt.jvmspect.input.constants;
 
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
+import java.io.EOFException;
 import java.io.IOException;
 
 public class ConstantDataInput {
+
+    public static Constant[] readAll(byte[] bytes) throws IOException {
+        DataInputStream dis = new DataInputStream(new ByteArrayInputStream(bytes));
+        int count = dis.readUnsignedShort();
+        Constant[] constants = new Constant[count];
+        for (int i = 0; i < count; i++) {
+            constants[i] = ConstantDataInput.read(dis);
+        }
+        return constants;
+    }
 
     public static Constant[] readAll(byte[] bytes, int count) throws IOException {
         DataInputStream dis = new DataInputStream(new ByteArrayInputStream(bytes));
         Constant[] constants = new Constant[count];
         for (int i = 0; i < count; i++) {
-            constants[i] = ConstantDataInput.read(dis);
+            try {
+                constants[i] = ConstantDataInput.read(dis);
+            } catch (EOFException e) {
+                constants[i] = new ConstantMissing(i);
+            }
         }
         return constants;
     }
